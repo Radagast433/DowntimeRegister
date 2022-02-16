@@ -682,8 +682,8 @@ def SPEED_TEST(wait_time, logbox):
                 vbajada = data['Velocidad_Bajada']
                 vsubida = data['Velocidad_Subida']
                 
-                #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Varianza Bajada: {round(vbajada.var(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Varianza Subida: {round(vsubida.var(), 2)}\n\n Prueba finalizada con exito...\n")
-                logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
+                logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Varianza Bajada: {round(vbajada.var(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Varianza Subida: {round(vsubida.var(), 2)}\n\n Prueba finalizada con exito...\n")
+                #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
                 logbox.see("end")
                 return
             
