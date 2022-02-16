@@ -827,7 +827,7 @@ def GUI():
      
     ##### Buttons and labels for  button_pack_frame_1 #####
     
-    ping_label_1 = ttk.Label(button_pack_frame_1, text = '*Test de ping*\n\n\nSeleccione dirección\npara realizar Ping.', font=("Calibri",font_size), justify = 'center')
+    ping_label_1 = ttk.Label(button_pack_frame_1, text = '*Test de ping*\n\nSeleccione dirección\npara realizar Ping.', font=("Calibri",font_size), justify = 'center')
     ping_label_1.pack(side = 'top')
     
     ping_direction_combobox = ttk.Combobox(button_pack_frame_1, state = 'readonly')
