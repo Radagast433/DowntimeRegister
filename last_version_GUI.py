@@ -746,8 +746,16 @@ def SPEED_TEST_BEGIN(entrybox, logbox):
         speed_thread.start()
         
 def CHECK_RESOURCES(frame, label):
+
+    a = time.time()
     
     while RESOURCES:
+
+        b = time.time()
+
+        print(round((b - a), 0))
+
+        #if round((b - a), 0) % 1 == 0:
     
         # % de utilizacion de cpu
         
@@ -774,7 +782,9 @@ def CHECK_RESOURCES(frame, label):
         
         except: pass
 
-        time.sleep(0.3)
+        print('control')
+
+        #time.sleep(0.3)
         
         #frame.after(1000, CHECK_RESOURCES, frame, label)
         
