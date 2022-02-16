@@ -461,7 +461,7 @@ def PING_TEST_BEGIN(entrybox, logbox, direction_combobox):
         
         logbox.insert(tk.END, '\n Iniciando prueba de Ping a ' + direction_combobox.get() + '...')
         
-        ping_thread = threading.Thread(name = 'ping', target = PING_TEST, daemon=True, args=(logbox, int(entrybox.get()), direction_combobox.get(), ))
+        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox.get()), direction_combobox.get(), ))
         
         ping_thread.start()
 
@@ -595,7 +595,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
         
         logbox.insert(tk.END, '\n Iniciando prueba con ' + entrybox.get() + ' paquetes a ' + combobox.get() + '...\n\n Tiempo aproximado : ' + wait_time + ' Segundos...')
         
-        packet_thread = threading.Thread(name = 'packet_loss', target = PACKET_LOSS_TEST, daemon=True, args=(entrybox.get(), logbox, combobox.get()))
+        packet_thread = threading.Thread(name = 'PacketLossThread', target = PACKET_LOSS_TEST, daemon=True, args=(entrybox.get(), logbox, combobox.get()))
         
         packet_thread.start()
         
@@ -741,7 +741,7 @@ def SPEED_TEST_BEGIN(entrybox, logbox):
         
         logbox.insert(tk.END, '\n Iniciando prueba...\n\n Conectado a : ' + GET_NETWORK_NAME() + '\n')
         
-        speed_thread = threading.Thread(name = 'speed_test', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox,))
+        speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox,))
     
         speed_thread.start()
         
@@ -943,7 +943,7 @@ def GUI():
     
     ##############################################################
     
-    resources_thread = threading.Thread(name = 'resources', target = CHECK_RESOURCES, daemon=True, args=(root, resources_data_label, ))
+    resources_thread = threading.Thread(name = 'Resources', target = CHECK_RESOURCES, daemon=True, args=(root, resources_data_label, ))
     resources_thread.start()
     
     root.focus_force()
