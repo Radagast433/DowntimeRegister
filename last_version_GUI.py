@@ -214,7 +214,7 @@ def GET_JITTER(ping_data, start, finish):
     
     if ping_data.size < 3:
         
-        return 0.0
+        return 0, lost_packets
     
     else:
         
@@ -808,6 +808,9 @@ def GUI():
     
     general_frame_3 = ttk.Frame(root)
     general_frame_3.pack(side = 'top')
+
+    general_frame_4 = ttk.Frame(root)
+    general_frame_4.pack(side = 'top')
     
     ##### Button pack frames #####
     
@@ -850,7 +853,7 @@ def GUI():
     ping_graph_button = ttk.Button(button_pack_frame_1, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping'))
     ping_graph_button.pack(side = 'top')
     
-    ping_begin_button = ttk.Button(button_pack_frame_1, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, log_box, ping_direction_combobox))
+    ping_begin_button = ttk.Button(button_pack_frame_1, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, ping_log_box, ping_direction_combobox))
     ping_begin_button.pack(side = 'top', pady = general_pady)
     
     ping_stop_button = ttk.Button(button_pack_frame_1, text= 'Detener Prueba', command=lambda:PING_TEST_STOP())
@@ -876,7 +879,7 @@ def GUI():
     pl_graph_button = ttk.Button(button_pack_frame_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
     pl_graph_button.pack(side = 'top', pady = general_pady)
     
-    pl_begin_button = ttk.Button(button_pack_frame_2, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, log_box, pl_direction_combobox))
+    pl_begin_button = ttk.Button(button_pack_frame_2, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, ping_log_box, pl_direction_combobox))
     pl_begin_button.pack(side = 'top')
     
     pl_stop_button = ttk.Button(button_pack_frame_2, text= 'Detener Prueba', command=lambda:PACKETLOSS_TEST_STOP())
@@ -896,7 +899,7 @@ def GUI():
     speedtest_graph_button = ttk.Button(button_pack_frame_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
     speedtest_graph_button.pack(side = 'top')
     
-    speedtest_begin_button = ttk.Button(button_pack_frame_3, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, log_box))
+    speedtest_begin_button = ttk.Button(button_pack_frame_3, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, ping_log_box))
     speedtest_begin_button.pack(side = 'top', pady = general_pady)
     
     speedtest_stop_button = ttk.Button(button_pack_frame_3, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
@@ -917,15 +920,21 @@ def GUI():
     
     ############## GENERAL FRAME 2 ##############
     
-    log_label = ttk.Label(general_frame_2, text = '*Log*', font=("Calibri",font_size), justify = 'center')
+    log_label = ttk.Label(general_frame_2, text = '*Ping Log*                                                    *Packet Loss Log*                                         *Speed test Log*', font=("Calibri",font_size), justify = 'center')
     log_label.pack(side = 'top', expand = True)
     
     ############## GENERAL FRAME 3 ##############
     
-    log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 15))
-    log_box.pack(side = 'top', padx = int(general_padx/2), pady = int(general_pady/2))
+    ping_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 45))
+    ping_log_box.pack(side = 'left', padx = int(general_padx/2), pady = int(general_pady/2))
+
+    packet_loss_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 45))
+    packet_loss_log_box.pack(side = 'left', padx = int(general_padx/2), pady = int(general_pady/2))
+
+    speed_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 45))
+    speed_log_box.pack(side = 'left', padx = int(general_padx/2), pady = int(general_pady/2))
     
-    exit_button = ttk.Button(general_frame_3, text= 'SALIR DE LA APLICACION', command=lambda:EXIT_APP(root))
+    exit_button = ttk.Button(general_frame_4, text= 'SALIR DE LA APLICACION', command=lambda:EXIT_APP(root))
     exit_button.pack(side = 'top', pady = general_pady)
     
     ##############################################################
