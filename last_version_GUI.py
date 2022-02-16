@@ -767,7 +767,7 @@ def CHECK_RESOURCES(frame, label):
         c_per = '%.2f%%' % c_info[3]
         
         ##################################
-        
+        # evita que el programa intente insertar texto en label cuando el objeto se destruya
         try:
 
             label.configure(text = '\nPorcentaje de\nuso de CPU: ' + cpu_per + '\n\nPorcentaje de memoria\nutilizada: ' +  mem_per + '\n\nMemoria total: ' +  mem_total + '\n\nMemoria en uso: ' + mem_used + '\n\nEspacio usado en\nDisco: ' + c_per)
