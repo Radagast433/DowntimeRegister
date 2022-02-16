@@ -438,7 +438,7 @@ def PING_TEST_BEGIN(entrybox, logbox, direction_combobox):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_SPEED_TEST or RUNNING_PING_TEST:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
         
         logbox.insert(tk.END, '\n\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
@@ -461,7 +461,7 @@ def PING_TEST_BEGIN(entrybox, logbox, direction_combobox):
         
         logbox.insert(tk.END, '\n Iniciando prueba de Ping a ' + direction_combobox.get() + '...')
         
-        ping_thread = threading.Thread(name = 'ping', target = PING_TEST, daemon=False, args=(logbox, int(entrybox.get()), direction_combobox.get(), ))
+        ping_thread = threading.Thread(name = 'ping', target = PING_TEST, daemon=True, args=(logbox, int(entrybox.get()), direction_combobox.get(), ))
         
         ping_thread.start()
 
@@ -566,7 +566,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_SPEED_TEST or RUNNING_PING_TEST:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
         
         logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
@@ -595,7 +595,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
         
         logbox.insert(tk.END, '\n Iniciando prueba con ' + entrybox.get() + ' paquetes a ' + combobox.get() + '...\n\n Tiempo aproximado : ' + wait_time + ' Segundos...')
         
-        packet_thread = threading.Thread(name = 'packet_loss', target = PACKET_LOSS_TEST, daemon=False, args=(entrybox.get(), logbox, combobox.get()))
+        packet_thread = threading.Thread(name = 'packet_loss', target = PACKET_LOSS_TEST, daemon=True, args=(entrybox.get(), logbox, combobox.get()))
         
         packet_thread.start()
         
@@ -716,11 +716,11 @@ def SPEED_TEST_BEGIN(entrybox, logbox):
     
         return
     
-    elif RUNNING_SPEED_TEST or RUNNING_PING_TEST or RUNNING_PACKET_TEST:
+    #elif RUNNING_SPEED_TEST or RUNNING_PING_TEST or RUNNING_PACKET_TEST:
         
-        logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
+        #logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
-        return
+        #return
     
     else:
         
@@ -741,21 +741,13 @@ def SPEED_TEST_BEGIN(entrybox, logbox):
         
         logbox.insert(tk.END, '\n Iniciando prueba...\n\n Conectado a : ' + GET_NETWORK_NAME() + '\n')
         
-        speed_thread = threading.Thread(name = 'speed_test', target = SPEED_TEST, daemon=False, args=(entrybox.get(), logbox,))
+        speed_thread = threading.Thread(name = 'speed_test', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox,))
     
         speed_thread.start()
         
 def CHECK_RESOURCES(frame, label):
-
-    a = time.time()
     
     while RESOURCES:
-
-        b = time.time()
-
-        print(round((b - a), 0))
-
-        #if round((b - a), 0) % 1 == 0:
     
         # % de utilizacion de cpu
         
@@ -951,7 +943,7 @@ def GUI():
     
     ##############################################################
     
-    resources_thread = threading.Thread(name = 'resources', target = CHECK_RESOURCES, daemon=False, args=(root, resources_data_label, ))
+    resources_thread = threading.Thread(name = 'resources', target = CHECK_RESOURCES, daemon=True, args=(root, resources_data_label, ))
     resources_thread.start()
     
     root.focus_force()
