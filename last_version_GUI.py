@@ -879,7 +879,7 @@ def GUI():
     pl_graph_button = ttk.Button(button_pack_frame_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
     pl_graph_button.pack(side = 'top', pady = general_pady)
     
-    pl_begin_button = ttk.Button(button_pack_frame_2, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, ping_log_box, pl_direction_combobox))
+    pl_begin_button = ttk.Button(button_pack_frame_2, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, packet_loss_log_box, pl_direction_combobox))
     pl_begin_button.pack(side = 'top')
     
     pl_stop_button = ttk.Button(button_pack_frame_2, text= 'Detener Prueba', command=lambda:PACKETLOSS_TEST_STOP())
@@ -899,7 +899,7 @@ def GUI():
     speedtest_graph_button = ttk.Button(button_pack_frame_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
     speedtest_graph_button.pack(side = 'top')
     
-    speedtest_begin_button = ttk.Button(button_pack_frame_3, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, ping_log_box))
+    speedtest_begin_button = ttk.Button(button_pack_frame_3, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box))
     speedtest_begin_button.pack(side = 'top', pady = general_pady)
     
     speedtest_stop_button = ttk.Button(button_pack_frame_3, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
