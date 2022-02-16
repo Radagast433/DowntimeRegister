@@ -1,0 +1,3 @@
+cd C:\Users\test\Documents\DowntimeRegister
+
+pyinstaller --onefile --distpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\lpg\dist --workpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\lpg\build --icon=Icons/LPG.ico ping_live_graph.py

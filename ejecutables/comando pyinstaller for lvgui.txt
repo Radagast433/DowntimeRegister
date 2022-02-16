@@ -1,0 +1,7 @@
+cd C:\Users\test\Documents\DowntimeRegister
+pyinstaller --onefile --noconsole --distpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\dist --workpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\build last_version_GUI.py
+pyinstaller --onefile --windowed --hidden-import speedtest-cli --distpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\dist --workpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\build last_version_GUI.py
+
+
+
+pyinstaller --onefile --distpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\principal\dist --workpath=C:\Users\test\Documents\DowntimeRegister\ejecutables\principal\build --icon=Icons/CM.ico last_version_GUI.py

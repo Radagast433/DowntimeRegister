@@ -1,0 +1,9 @@
+Nombre_de_conexion,Servidor,Duracion_(s),Ping_minimo,Ping_maximo,Ping_Promedio,Jitter,Paquetes_enviados,Paquetes_perdidos
+LaRosa,www.google.com,50,6,52,9.32,3.69,50,0
+LaRosa,www.google.com,1080,6,46,16.0,9.33,1080,0
+LaRosa,www.google.com,3600,0,77,9.36,4.54,3600,9
+LaRosa,www.google.com,1800,0,78,11.15,6.05,1800,13
+LaRosa,www.google.com,10,7,27,14.3,8.44,10,0
+LaRosa,www.google.com,1800,0,60,10.98,6.42,1800,15
+LaRosa,www.google.com,60,7,24,8.33,1.86,60,0
+LaRosa,www.google.com,60,7,76,11.53,6.98,60,0
