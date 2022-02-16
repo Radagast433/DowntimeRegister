@@ -782,7 +782,9 @@ def CHECK_RESOURCES(frame, label):
         
         except: pass
 
-        print('control')
+        if not RESOURCES:
+
+            return
 
         #time.sleep(0.3)
         
