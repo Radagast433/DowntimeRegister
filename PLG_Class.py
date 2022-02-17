@@ -12,7 +12,9 @@ from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 import subprocess
+import threading
 import ctypes
+import time
 import matplotlib.transforms as transforms
 
 class PingLiveGraph():
@@ -95,9 +97,14 @@ class PingLiveGraph():
             
             self.i+= 1
 
+            time.sleep(1)
+
     def ANIMATE(self):
 
-        self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), interval=1000)
+        animation_thread = threading.Thread(name = 'LivePingGraphThread', target = self.ANIMATION(), daemon=True)
+        animation_thread.start()
+
+        #self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), interval=1000)
 
 ''' 
 root = Tk()
