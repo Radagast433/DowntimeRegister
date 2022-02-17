@@ -28,6 +28,8 @@ import psutil
 #import pyspeedtest
 #import ping_live_graph as plg
 
+import PLG_Class
+
 '''
 class DATE_SELECTION():
     
@@ -869,17 +871,37 @@ def GUI():
     
     #9223372036854775807
     
-    inf_ping_button = ttk.Button(button_pack_frame_1, text= 'INF', command=lambda:duration_entrybox.insert(tk.END, '9223372036854775807'))
-    inf_ping_button.pack(side = 'top', pady = general_pady)
+    ########### Sub Buttons for button_pack_frame_1 ################
+
+    sub_1 = ttk.Frame(button_pack_frame_1)
+    sub_1.pack(side = 'top', pady = general_pady)
+
+    sub_2 = ttk.Frame(button_pack_frame_1)
+    sub_2.pack(side = 'top')
+
+    sub_3 = ttk.Frame(button_pack_frame_1)
+    sub_3.pack(side = 'top', pady = general_pady)
+
+    inf_ping_button = ttk.Button(sub_1, text= 'INF', command=lambda:duration_entrybox.insert(tk.END, '9223372036854775807'))
+    inf_ping_button.pack(side = 'top')
     
-    ping_graph_button = ttk.Button(button_pack_frame_1, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping'))
-    ping_graph_button.pack(side = 'top')
+    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, ping_log_box, ping_direction_combobox))
+    ping_begin_button.pack(side = 'left')
+
+    sub_3_label_1 = ttk.Label(sub_2)
+    sub_3_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
     
-    ping_begin_button = ttk.Button(button_pack_frame_1, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, ping_log_box, ping_direction_combobox))
-    ping_begin_button.pack(side = 'top', pady = general_pady)
-    
-    ping_stop_button = ttk.Button(button_pack_frame_1, text= 'Detener Prueba', command=lambda:PING_TEST_STOP())
-    ping_stop_button.pack(side = 'top')
+    ping_stop_button = ttk.Button(sub_2, text= 'Detener Prueba', command=lambda:PING_TEST_STOP())
+    ping_stop_button.pack(side = 'left')
+
+    ping_graph_button = ttk.Button(sub_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping'))
+    ping_graph_button.pack(side = 'left')
+
+    sub_2_label_1 = ttk.Label(sub_3)
+    sub_2_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
+    # aux = PLG_Class.PingLiveGraph() aux.animate()
+    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:PLG_Class.PingLiveGraph().ANIMATE())
+    ping_live_graph_button.pack(side = 'left')
     
     ##### Buttons and labels for  button_pack_frame_2 #####
     

@@ -21,7 +21,7 @@ class PingLiveGraph():
         self.root = Tk()
         self.root.geometry('1200x700+200+100')
         self.root.title('Live Ping Graph')
-        self.root.iconphoto(False, PhotoImage(file = 'Icons/LPG.png'))
+        #self.root.iconphoto(False, PhotoImage(file = 'Icons/LPG.png'))
         self.root.state('zoomed')
         self.root.config(background='#fafafa')
 
@@ -48,9 +48,9 @@ class PingLiveGraph():
 
         self.plotcanvas = FigureCanvasTkAgg(self.fig, self.root)
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
-        self.ani = animation.FuncAnimation(self.fig, self.animate(), interval=1000)
+        #self.ani = animation.FuncAnimation(self.fig, self.animate(), interval=1000)
 
-        ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+        #ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
         self.root.mainloop()
 
@@ -64,7 +64,7 @@ class PingLiveGraph():
         
         #return self.connected_ssid
 
-    def animate(self):
+    def ANIMATION(self):
     
         if not self.PAUSE:
         
@@ -90,10 +90,11 @@ class PingLiveGraph():
                 
                 self.PAUSE = False
             
-            self.i+=1
+            self.i+= 1
 
-#a = PingLiveGraph()
-#a.animate()
+    def ANIMATE(self):
+
+        self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), interval=1000)
 
 ''' 
 root = Tk()
