@@ -28,7 +28,7 @@ class PingLiveGraph():
         style.use('ggplot')
         self.fig = plt.figure(figsize=(14, 6), dpi=100)
         #fig = plt.figure(figsize = (15, 5), dpi = 100)
-        self.ax1 = fig.add_subplot(1, 1, 1)
+        self.ax1 = self.fig.add_subplot(1, 1, 1)
         self.ax1.axhline(y=9.36, color='g', linestyle='-', label = 'Ping Promedio Red: LaRosa')
         self.ax1.legend()
         #ax1.set_ylim(0, 100)
@@ -40,60 +40,62 @@ class PingLiveGraph():
         plt.title("Ping (www.google.com)")
 
         self.i = 0
-        PAUSE = False
+        self.PAUSE = False
+        self.connected_ssid = ''
+        self.data = []
+
+        self.GET_NETWORK_NAME()
 
         self.plotcanvas = FigureCanvasTkAgg(self.fig, self.root)
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
-        ani = animation.FuncAnimation(self.fig, self.animate, interval=1000)
+        self.ani = animation.FuncAnimation(self.fig, self.animate(), interval=1000)
 
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
-        root.mainloop()
+        self.root.mainloop()
 
-def GET_NETWORK_NAME():
+    def GET_NETWORK_NAME(self):
 
-    connected_ssid = str(subprocess.check_output("netsh wlan show interfaces")).strip()
-    start_point = connected_ssid.find('SSID                   : ')
-    end_point = connected_ssid.find('BSSID')
-    
-    connected_ssid = connected_ssid[start_point + 25 : end_point - 8]
-    
-    return connected_ssid
+        self.connected_ssid = str(subprocess.check_output("netsh wlan show interfaces")).strip()
+        self.start_point = self.connected_ssid.find('SSID                   : ')
+        self.end_point = self.connected_ssid.find('BSSID')
+        
+        self.connected_ssid = self.connected_ssid[self.start_point + 25 : self.end_point - 8]
+        
+        #return self.connected_ssid
 
-
-def animate(i):
+    def animate(self):
     
-    global PAUSE
-    #global ax1
-    #global i
-    
-    if not PAUSE:
-    
-        data = pd.read_csv('Data/' + GET_NETWORK_NAME() + '_' + 'ping_data.csv', index_col = None)
+        if not self.PAUSE:
         
-        x = data['Tiempo_Transcurrido_(s)']
-        y = data['Ping_(ms)']
-        
-        line, = ax1.plot(x, y, 'b', marker='o')
-        
-        line.set_data(x, y)
-        #ax1.set_ylim(min(y) - 15, max(y) + 15, 10.0)
-        
-        ax1.set_ylim(0 - 5, max(y) + 15, 10.0)
-        ax1.plot(x, y, linewidth = 0.3)
-        ax1.set_xlim(max(1, x.iloc[-1] - 50), x.iloc[-1] + 50, 30)
-        
-        if x.iloc[-1] == x.iloc[-2]:
+            self.data = pd.read_csv('Data/' + self.connected_ssid + '_' + 'ping_data.csv', index_col = None)
             
-            PAUSE = True
+            self.x = self.data['Tiempo_Transcurrido_(s)']
+            self.y = self.data['Ping_(ms)']
             
-        elif x.iloc[-1] != x.iloc[-2]:
+            line, = self.ax1.plot(self.x, self.y, 'b', marker='o')
             
-            PAUSE = False
-        
-        i+=1
+            line.set_data(self.x, self.y)
+            #ax1.set_ylim(min(y) - 15, max(y) + 15, 10.0)
+            
+            self.ax1.set_ylim(0 - 5, max(self.y) + 15, 10.0)
+            self.ax1.plot(self.x, self.y, linewidth = 0.3)
+            self.ax1.set_xlim(max(1, self.x.iloc[-1] - 50), self.x.iloc[-1] + 50, 30)
+            
+            if self.x.iloc[-1] == self.x.iloc[-2]:
+                
+                self.PAUSE = True
+                
+            elif self.x.iloc[-1] != self.x.iloc[-2]:
+                
+                self.PAUSE = False
+            
+            self.i+=1
 
-    
+#a = PingLiveGraph()
+#a.animate()
+
+''' 
 root = Tk()
 root.geometry('1200x700+200+100')
 root.title('Live Ping Graph')
@@ -125,3 +127,4 @@ ani = animation.FuncAnimation(fig, animate,fargs = (i), interval=1000)
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
 root.mainloop()
+'''

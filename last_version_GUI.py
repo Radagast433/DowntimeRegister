@@ -803,6 +803,8 @@ def EXIT_APP(root):
     global RESOURCES
     
     RESOURCES = False
+
+    plt.close("all")
     
     time.sleep(1.5)
     
