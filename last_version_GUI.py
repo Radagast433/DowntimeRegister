@@ -933,7 +933,7 @@ def GUI():
     resources_data_label = ttk.Label(resources_usage_frame_4, font=("Calibri",int(font_size//1.2)))
     resources_data_label.pack(side = 'top')
     
-    #destroy_button = ttk.Button(resources_usage_frame_4, text = "BOOM", command=lambda:general_frame_1.destroy())
+    #destroy_button = ttk.Button(resources_usage_frame_4, text = "BOOM", command=lambda:resources_usage_frame_4.destroy())
     #destroy_button.pack(side = 'top')
 
     separation_label = ttk.Label(resources_usage_frame_4)
