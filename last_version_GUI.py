@@ -128,12 +128,17 @@ def SELECT_GRAPH(test_type):
         if graph_length < 50:
 
             graph_length = 50
+
+        elif graph_length > 100:
+
+            graph_length = 100
         
+        plt.rcParams['font.size'] = '1.5'
         plt.figure(figsize = (graph_length, 15))
-        plt.xticks(rotation=30, ha="right")
+        plt.xticks(rotation=45, ha="right")
         #plt.plot(x, y, label='download', color='r')
         #plt.scatter(x, y)
-        
+
         plt.margins(0)
         plt.plot(x, y, linewidth = 1.0, color = 'b', label = 'Ping Red: ' + network_name)
         
@@ -146,7 +151,7 @@ def SELECT_GRAPH(test_type):
         plt.title("Ping (www.google.com)")
         plt.axhline(y=9.36, color='green', linestyle='-', label = 'Ping Promedio Red: LaRosa')
         plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
-       
+
         plt.legend()
         graph_route = graphs_route + network_name + '_ping_graph.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
