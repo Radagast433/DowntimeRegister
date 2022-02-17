@@ -1,1 +1,4 @@
 Nombre_de_conexion,Servidor,Duracion_(s),Ping_minimo,Ping_maximo,Ping_Promedio,Jitter,Paquetes_enviados,Paquetes_perdidos
+Ethernet,www.google.com,15,4,6,4.53,0.57,15,0
+Ethernet,www.google.com,2,4,7,5.5,0,2,0
+Ethernet,www.google.com,10,4,7,6.1,1.0,10,0
