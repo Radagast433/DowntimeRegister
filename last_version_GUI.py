@@ -812,6 +812,14 @@ def EXIT_APP(root):
     
     root.destroy()
 
+def PING_LIVE_GRAPH_BEGIN():
+
+    a = PLG_Class.PingLiveGraph()
+    a.ANIMATE()
+
+    #live_ping_graph_thread = threading.Thread(name = 'LivePingGraphThread', target = a.ANIMATE(), daemon=True)
+    #live_ping_graph_thread.start()
+
 def GUI():
     
     root = Tk()
@@ -900,7 +908,7 @@ def GUI():
     sub_2_label_1 = ttk.Label(sub_3)
     sub_2_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
     # aux = PLG_Class.PingLiveGraph() aux.animate()
-    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:PLG_Class.PingLiveGraph().ANIMATE())
+    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:PING_LIVE_GRAPH_BEGIN())
     ping_live_graph_button.pack(side = 'left')
     
     ##### Buttons and labels for  button_pack_frame_2 #####

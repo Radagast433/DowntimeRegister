@@ -50,7 +50,7 @@ class PingLiveGraph():
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
         #self.ani = animation.FuncAnimation(self.fig, self.animate(), interval=1000)
 
-        #ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+        ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
         self.root.mainloop()
 
@@ -73,6 +73,9 @@ class PingLiveGraph():
             self.x = self.data['Tiempo_Transcurrido_(s)']
             self.y = self.data['Ping_(ms)']
             
+            print(self.x)
+            print(self.y)
+
             line, = self.ax1.plot(self.x, self.y, 'b', marker='o')
             
             line.set_data(self.x, self.y)
