@@ -112,22 +112,24 @@ def GET_NETWORK_NAME():
         return 'Ethernet'
         
     
-def SELECT_GRAPH(test_type):
+def SELECT_GRAPH(test_type, graph_length):
+
+    network_name = GET_NETWORK_NAME()
     
     if test_type == 'ping':
     
-        data = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, index_col = None)
+        data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
         
         x = data.index
         y = data['Ping_(ms)']
         
-        plt.figure(figsize = (50, 15))
+        plt.figure(figsize = (50, round(graph_length / 120), 0))
         plt.xticks(rotation=30, ha="right")
         #plt.plot(x, y, label='download', color='r')
         #plt.scatter(x, y)
         
         plt.margins(0)
-        plt.plot(x, y, linewidth = 1.0, color = 'b', label = 'Ping Red: Starlink_Larosa')
+        plt.plot(x, y, linewidth = 1.0, color = 'b', label = 'Ping Red: ' + network_name)
         
         plt.xticks(np.arange(0, max(x) + 1, 10.0))
         
@@ -137,17 +139,17 @@ def SELECT_GRAPH(test_type):
         plt.ylabel('Ping (ms)')
         plt.title("Ping (www.google.com)")
         plt.axhline(y=9.36, color='green', linestyle='-', label = 'Ping Promedio Red: LaRosa')
-        plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: Starlink_Larosa')
+        plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
        
         plt.legend()
-        graph_route = graphs_route + GET_NETWORK_NAME() + '_ping_graph.png'
+        graph_route = graphs_route + network_name + '_ping_graph.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         
         GRAPH_LABEL(graph_route)
         
     elif test_type == 'packetloss':
 
-        data = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route, index_col = None)
+        data = pd.read_csv(data_route + network_name + '_' + packet_loss_csv_route, index_col = None)
         
         sendp_data = data['Cantidad_de_paquetes_enviados'].sum()
         recievedp_data = data['Cantidad_de_paquetes_perdidos'].sum()
@@ -159,7 +161,7 @@ def SELECT_GRAPH(test_type):
         fig = plt.figure(figsize =(10, 7))
         plt.pie(data, labels = description_list)
         
-        graph_route = graphs_route + GET_NETWORK_NAME() + '_packetloss_graph.png'
+        graph_route = graphs_route + network_name + '_packetloss_graph.png'
         
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         
@@ -167,7 +169,7 @@ def SELECT_GRAPH(test_type):
         
     elif test_type == 'speed':
         
-        data = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route, index_col = None)
+        data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
         
         fecha = data['Fecha']
         hora = data['Hora']
@@ -183,7 +185,7 @@ def SELECT_GRAPH(test_type):
         plt.plot(fecha + ' ' + hora, download, label='Bajada', color='r')
         plt.plot(fecha + ' ' + hora, upload, label='Subida', color='b')
         plt.legend()
-        graph_route = graphs_route + GET_NETWORK_NAME() + '_speed_graph.png'
+        graph_route = graphs_route + network_name + '_speed_graph.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         #plt.show()
         
@@ -854,7 +856,7 @@ def GUI():
     inf_ping_button = ttk.Button(button_pack_frame_1, text= 'INF', command=lambda:duration_entrybox.insert(tk.END, '9223372036854775807'))
     inf_ping_button.pack(side = 'top', pady = general_pady)
     
-    ping_graph_button = ttk.Button(button_pack_frame_1, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping'))
+    ping_graph_button = ttk.Button(button_pack_frame_1, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping', int(duration_entrybox.get())))
     ping_graph_button.pack(side = 'top')
     
     ping_begin_button = ttk.Button(button_pack_frame_1, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, ping_log_box, ping_direction_combobox))
@@ -880,7 +882,7 @@ def GUI():
     packet_loss_entrybox = ttk.Entry(button_pack_frame_2)
     packet_loss_entrybox.pack(side = 'top', expand = True)
     
-    pl_graph_button = ttk.Button(button_pack_frame_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
+    pl_graph_button = ttk.Button(button_pack_frame_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss', int(packet_loss_entrybox.get())))
     pl_graph_button.pack(side = 'top', pady = general_pady)
     
     pl_begin_button = ttk.Button(button_pack_frame_2, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, packet_loss_log_box, pl_direction_combobox))
@@ -900,7 +902,7 @@ def GUI():
     inf_speed_button = ttk.Button(button_pack_frame_3, text= 'INF', command=lambda:speedtest_entrybox.insert(tk.END, '9223372036854775807'))
     inf_speed_button.pack(side = 'top', pady = general_pady)
     
-    speedtest_graph_button = ttk.Button(button_pack_frame_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
+    speedtest_graph_button = ttk.Button(button_pack_frame_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed', int(speedtest_entrybox.get())))
     speedtest_graph_button.pack(side = 'top')
     
     speedtest_begin_button = ttk.Button(button_pack_frame_3, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box))
