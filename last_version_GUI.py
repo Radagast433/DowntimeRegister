@@ -123,13 +123,13 @@ def SELECT_GRAPH(test_type):
         x = data.index
         y = data['Ping_(ms)']
 
-        graph_length = round(len(y) / 120, 0)
+        graph_length = round(len(y) / 36, 0)
 
-        if graph_length < 15:
+        if graph_length < 50:
 
-            graph_length = 15
+            graph_length = 50
         
-        plt.figure(figsize = (50, graph_length))
+        plt.figure(figsize = (graph_length, 15))
         plt.xticks(rotation=30, ha="right")
         #plt.plot(x, y, label='download', color='r')
         #plt.scatter(x, y)
