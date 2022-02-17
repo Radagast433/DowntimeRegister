@@ -124,16 +124,19 @@ def SELECT_GRAPH(test_type):
         y = data['Ping_(ms)']
 
         graph_length = round(len(y) / 36, 0)
+        font_size = round((-0.41 * graph_length) + 42.5, 1)
 
         if graph_length < 50:
 
             graph_length = 50
+            font_size = 12
 
         elif graph_length > 100:
 
             graph_length = 100
+            font_size = 1.5
         
-        plt.rcParams['font.size'] = '1.5'
+        plt.rcParams['font.size'] = str(font_size)
         plt.figure(figsize = (graph_length, 15))
         plt.xticks(rotation=45, ha="right")
         #plt.plot(x, y, label='download', color='r')
@@ -930,6 +933,9 @@ def GUI():
     resources_data_label = ttk.Label(resources_usage_frame_4, font=("Calibri",int(font_size//1.2)))
     resources_data_label.pack(side = 'top')
     
+    #destroy_button = ttk.Button(resources_usage_frame_4, text = "BOOM", command=lambda:general_frame_1.destroy())
+    #destroy_button.pack(side = 'top')
+
     separation_label = ttk.Label(resources_usage_frame_4)
     separation_label.pack(side = 'top', pady = general_pady)
     
