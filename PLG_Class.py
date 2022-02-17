@@ -19,7 +19,7 @@ import matplotlib.transforms as transforms
 
 class PingLiveGraph():
 
-    def __init__(self):
+    def __init__(self, network_name):
         self.root = Tk()
         self.root.geometry('1200x700+200+100')
         self.root.title('Live Ping Graph')
@@ -43,10 +43,8 @@ class PingLiveGraph():
 
         self.i = 0
         self.PAUSE = False
-        self.connected_ssid = ''
+        self.connected_ssid = network_name
         self.data = []
-
-        self.GET_NETWORK_NAME()
 
         self.plotcanvas = FigureCanvasTkAgg(self.fig, self.root)
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
@@ -55,16 +53,6 @@ class PingLiveGraph():
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
         self.root.mainloop()
-
-    def GET_NETWORK_NAME(self):
-
-        self.connected_ssid = str(subprocess.check_output("netsh wlan show interfaces")).strip()
-        self.start_point = self.connected_ssid.find('SSID                   : ')
-        self.end_point = self.connected_ssid.find('BSSID')
-        
-        self.connected_ssid = self.connected_ssid[self.start_point + 25 : self.end_point - 8]
-        
-        #return self.connected_ssid
 
     def ANIMATION(self):
     

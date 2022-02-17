@@ -814,7 +814,7 @@ def EXIT_APP(root):
 
 def PING_LIVE_GRAPH_BEGIN():
 
-    a = PLG_Class.PingLiveGraph()
+    a = PLG_Class.PingLiveGraph(GET_NETWORK_NAME())
     a.ANIMATE()
 
     #live_ping_graph_thread = threading.Thread(name = 'LivePingGraphThread', target = a.ANIMATE(), daemon=True)
