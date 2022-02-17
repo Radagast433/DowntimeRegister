@@ -112,7 +112,7 @@ def GET_NETWORK_NAME():
         return 'Ethernet'
         
     
-def SELECT_GRAPH(test_type, graph_length):
+def SELECT_GRAPH(test_type):
 
     network_name = GET_NETWORK_NAME()
     
@@ -122,8 +122,14 @@ def SELECT_GRAPH(test_type, graph_length):
         
         x = data.index
         y = data['Ping_(ms)']
+
+        graph_length = round(len(y) / 120, 0)
+
+        if graph_length < 15:
+
+            graph_length = 15
         
-        plt.figure(figsize = (50, round(graph_length / 120), 0))
+        plt.figure(figsize = (50, graph_length))
         plt.xticks(rotation=30, ha="right")
         #plt.plot(x, y, label='download', color='r')
         #plt.scatter(x, y)
@@ -856,7 +862,7 @@ def GUI():
     inf_ping_button = ttk.Button(button_pack_frame_1, text= 'INF', command=lambda:duration_entrybox.insert(tk.END, '9223372036854775807'))
     inf_ping_button.pack(side = 'top', pady = general_pady)
     
-    ping_graph_button = ttk.Button(button_pack_frame_1, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping', int(duration_entrybox.get())))
+    ping_graph_button = ttk.Button(button_pack_frame_1, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping'))
     ping_graph_button.pack(side = 'top')
     
     ping_begin_button = ttk.Button(button_pack_frame_1, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, ping_log_box, ping_direction_combobox))
@@ -882,7 +888,7 @@ def GUI():
     packet_loss_entrybox = ttk.Entry(button_pack_frame_2)
     packet_loss_entrybox.pack(side = 'top', expand = True)
     
-    pl_graph_button = ttk.Button(button_pack_frame_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss', int(packet_loss_entrybox.get())))
+    pl_graph_button = ttk.Button(button_pack_frame_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
     pl_graph_button.pack(side = 'top', pady = general_pady)
     
     pl_begin_button = ttk.Button(button_pack_frame_2, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, packet_loss_log_box, pl_direction_combobox))
@@ -902,7 +908,7 @@ def GUI():
     inf_speed_button = ttk.Button(button_pack_frame_3, text= 'INF', command=lambda:speedtest_entrybox.insert(tk.END, '9223372036854775807'))
     inf_speed_button.pack(side = 'top', pady = general_pady)
     
-    speedtest_graph_button = ttk.Button(button_pack_frame_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed', int(speedtest_entrybox.get())))
+    speedtest_graph_button = ttk.Button(button_pack_frame_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
     speedtest_graph_button.pack(side = 'top')
     
     speedtest_begin_button = ttk.Button(button_pack_frame_3, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box))
