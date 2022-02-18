@@ -368,9 +368,27 @@ def PING_TEST(logbox, test_time, direction):
         
             csv_writer.writerow(data_info)
         
+        data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+    
+        ping_data = data['Ping_(ms)']
+        
+        #print(ping_data)
+
+        start = 2
+        finish = ping_data.size
+        #print(start, finish)
+        
+        #print(ping_data.size, test_time)
+        
+        #ping_data = ping_data[ping_data.size - elapsed_time:]
+        
+        #print(ping_data)
+        
+        jitter, lost_packets = GET_JITTER(ping_data, start, finish)
+
         try:
             
-            logbox.insert(tk.END, f"\n\n Fecha: {a}, Hora: {b}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}")
+            logbox.insert(tk.END, f"\n\n Fecha: {a}, Hora: {b}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}, Jitter: {jitter}")
             logbox.see("end")
         
         except: pass
@@ -826,7 +844,7 @@ def EXIT_APP(root):
 
 def PING_LIVE_GRAPH_BEGIN(ping_graph_frame):
 
-    a = PLG_Class.PingLiveGraph(ping_graph_frame, GET_NETWORK_NAME())
+    a = PLG_Class.PingLiveGraph(ping_graph_frame, GET_NETWORK_NAME(), RUNNING_PING_TEST)
     a.ANIMATE()
 
 def GUI():
