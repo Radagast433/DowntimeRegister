@@ -26,8 +26,9 @@ import multiprocessing
 import ctypes
 import psutil
 import matplotlib.animation as animation
-#import pyspeedtest
-#import ping_live_graph as plg
+
+from matplotlib import style
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 import PLG_Class
 
@@ -374,8 +375,8 @@ def PING_TEST(logbox, test_time, direction):
         
         #print(ping_data)
 
-        start = 2
-        finish = ping_data.size
+        start = 1
+        finish = ping_data.size 
         #print(start, finish)
         
         #print(ping_data.size, test_time)

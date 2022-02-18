@@ -16,7 +16,7 @@ import time
 
 class PingLiveGraph():
 
-    def __init__(self, frame, network_name, running):
+    def __init__(self, frame, network_name):
         '''
         self.root = Tk()
         self.root.geometry('1200x700+200+100')
@@ -26,7 +26,7 @@ class PingLiveGraph():
         self.root.config(background='#fafafa')
         '''
         self.frame = frame
-        self.is_running = running
+        self.is_running = True
 
         style.use('ggplot')
         self.fig = plt.figure(figsize=(8, 5), dpi=100)
@@ -66,12 +66,9 @@ class PingLiveGraph():
                 return
         
             self.data = pd.read_csv('Data/' + self.connected_ssid + '_' + 'ping_data.csv', index_col = None)
-            
+
             self.x = self.data['Tiempo_Transcurrido_(s)']
             self.y = self.data['Ping_(ms)']
-            
-            print(self.x)
-            print(self.y)
 
             line, = self.ax1.plot(self.x, self.y, 'b', marker='o')
             
@@ -102,11 +99,19 @@ class PingLiveGraph():
 
     def ANIMATE(self):
 
-        plg_thread = threading.Thread(name = 'PLGThread', target = self.ANIMATION, daemon=True)
-        plg_thread.start()
+        #plg_thread = threading.Thread(name = 'PLGThread', target = self.ANIMATION, daemon=True)
+        #plg_thread.start()
 
-        #self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
+        self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
+
+        plt.show()
         #self.frame.after(1000, self.ANIMATION())
+
+    def STOP_ANIMATION(self):
+
+            self.is_running = False
+
+
 
 ''' 
 root = Tk()
