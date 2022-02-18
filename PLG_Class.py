@@ -13,19 +13,19 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 import threading
 import time
+from win32api import GetSystemMetrics
 
 class PingLiveGraph():
 
-    def __init__(self, frame, network_name):
-        '''
-        self.root = Tk()
-        self.root.geometry('1200x700+200+100')
+    def __init__(self, network_name):
+        
+        self.root = Toplevel()
+        self.root.geometry( '+' + str(int(GetSystemMetrics(1) / 2)) + '+' + str(0))
         self.root.title('Live Ping Graph')
         #self.root.iconphoto(False, PhotoImage(file = 'Icons/LPG.png'))
         self.root.state('zoomed')
         self.root.config(background='#fafafa')
-        '''
-        self.frame = frame
+        
         self.is_running = True
 
         style.use('ggplot')
@@ -49,13 +49,12 @@ class PingLiveGraph():
         self.x = 0
         self.y = 0
 
-        self.plotcanvas = FigureCanvasTkAgg(self.fig, self.frame)
+        self.plotcanvas = FigureCanvasTkAgg(self.fig, self.root)
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
-        #self.ani = animation.FuncAnimation(self.fig, self.animate(), interval=1000)
+
+        #self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), interval=1000)
 
         #ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-
-        #self.root.mainloop()
 
     def ANIMATION(self):
     
@@ -89,27 +88,23 @@ class PingLiveGraph():
             
             self.i+= 1
 
-            self.frame.update()
-
-            time.sleep(1)
-
             print('control')
 
-            self.ANIMATION()
+    def ANIMATION_THREAD(self):
+
+        while not self.PAUSE:
+
+            self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), interval=1000)
+            time.sleep(1)
 
     def ANIMATE(self):
 
-        #plg_thread = threading.Thread(name = 'PLGThread', target = self.ANIMATION, daemon=True)
-        #plg_thread.start()
-
-        self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
-
-        plt.show()
-        #self.frame.after(1000, self.ANIMATION())
+        self.graph_thread = threading.Thread(name = 'PingLiveGraphThread', target = self.ANIMATION_THREAD, daemon=True)
+        self.graph_thread.start()
 
     def STOP_ANIMATION(self):
 
-            self.is_running = False
+            self.PAUSE = True
 
 
 

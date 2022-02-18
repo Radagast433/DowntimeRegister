@@ -843,10 +843,10 @@ def EXIT_APP(root):
     
     root.destroy()
 
-def PING_LIVE_GRAPH_BEGIN(ping_graph_frame):
+def PING_LIVE_GRAPH_BEGIN():
 
-    a = PLG_Class.PingLiveGraph(ping_graph_frame, GET_NETWORK_NAME(), RUNNING_PING_TEST)
-    a.ANIMATE()
+    graph_animation = PLG_Class.PingLiveGraph(GET_NETWORK_NAME())
+    graph_animation.ANIMATE()
 
 def GUI():
     
@@ -896,6 +896,9 @@ def GUI():
 
     ping_graph_frame = ttk.Frame(graphs_divition)
     ping_graph_frame.pack(side = 'top')
+
+    ping_graph_label = ttk.Frame(ping_graph_frame)
+    ping_graph_label.pack(side = 'top')
 
     speed_graph_frame = ttk.Frame(graphs_divition)
     speed_graph_frame.pack(side = 'top')
@@ -950,7 +953,7 @@ def GUI():
     sub_2_label_1 = ttk.Label(sub_3)
     sub_2_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
     # aux = PLG_Class.PingLiveGraph() aux.animate()
-    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:PING_LIVE_GRAPH_BEGIN(ping_graph_frame))
+    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:PING_LIVE_GRAPH_BEGIN())
     ping_live_graph_button.pack(side = 'left')
     
     ##### Buttons and labels for  button_pack_frame_2 #####
