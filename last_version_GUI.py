@@ -827,7 +827,7 @@ def EXIT_APP(root):
 def PING_LIVE_GRAPH_BEGIN(ping_graph_frame):
 
     a = PLG_Class.PingLiveGraph(ping_graph_frame, GET_NETWORK_NAME())
-    a.ANIMATE
+    a.ANIMATE()
 
 def GUI():
     

@@ -11,11 +11,8 @@ import matplotlib.animation as animation
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
-#import subprocess
-#import threading
-#import ctypes
-#import time
-#import matplotlib.transforms as transforms
+import threading
+import time
 
 class PingLiveGraph():
 
@@ -48,6 +45,8 @@ class PingLiveGraph():
         self.PAUSE = False
         self.connected_ssid = network_name
         self.data = []
+        self.x = 0
+        self.y = 0
 
         self.plotcanvas = FigureCanvasTkAgg(self.fig, self.frame)
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
@@ -88,13 +87,17 @@ class PingLiveGraph():
             
             self.i+= 1
 
-            #time.sleep(1)
+            time.sleep(1)
 
-            #self.ANIMATION()
+            self.ANIMATION()
 
     def ANIMATE(self):
 
-        self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
+        plg_thread = threading.Thread(name = 'PLGThread', target = self.ANIMATION, daemon=True)
+        plg_thread.start()
+
+        #self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
+        #self.frame.after(1000, self.ANIMATION())
 
 ''' 
 root = Tk()
