@@ -7,28 +7,31 @@ Created on Thu May 13 02:50:07 2021
 
 from tkinter import *
 from matplotlib import pyplot as plt
-import matplotlib.animation as animation
+#import matplotlib.animation as animation
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
-import subprocess
-import threading
+#import subprocess
+#import threading
 import ctypes
-import time
-import matplotlib.transforms as transforms
+#import time
+#import matplotlib.transforms as transforms
 
 class PingLiveGraph():
 
-    def __init__(self, network_name):
+    def __init__(self, frame, network_name):
+        '''
         self.root = Tk()
         self.root.geometry('1200x700+200+100')
         self.root.title('Live Ping Graph')
         #self.root.iconphoto(False, PhotoImage(file = 'Icons/LPG.png'))
         self.root.state('zoomed')
         self.root.config(background='#fafafa')
+        '''
+        self.frame = frame
 
         style.use('ggplot')
-        self.fig = plt.figure(figsize=(14, 6), dpi=100)
+        self.fig = plt.figure(figsize=(8, 5), dpi=100)
         #fig = plt.figure(figsize = (15, 5), dpi = 100)
         self.ax1 = self.fig.add_subplot(1, 1, 1)
         self.ax1.axhline(y=9.36, color='g', linestyle='-', label = 'Ping Promedio Red: LaRosa')
@@ -46,13 +49,13 @@ class PingLiveGraph():
         self.connected_ssid = network_name
         self.data = []
 
-        self.plotcanvas = FigureCanvasTkAgg(self.fig, self.root)
+        self.plotcanvas = FigureCanvasTkAgg(self.fig, self.frame)
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
         #self.ani = animation.FuncAnimation(self.fig, self.animate(), interval=1000)
 
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
-        self.root.mainloop()
+        #self.root.mainloop()
 
     def ANIMATION(self):
     
@@ -63,8 +66,8 @@ class PingLiveGraph():
             self.x = self.data['Tiempo_Transcurrido_(s)']
             self.y = self.data['Ping_(ms)']
             
-            print(self.x)
-            print(self.y)
+            #print(self.x)
+            #print(self.y)
 
             line, = self.ax1.plot(self.x, self.y, 'b', marker='o')
             
@@ -85,14 +88,14 @@ class PingLiveGraph():
             
             self.i+= 1
 
-            time.sleep(1)
+            #time.sleep(1)
 
-    def ANIMATE(self):
+    #def ANIMATE(self):
 
-        animation_thread = threading.Thread(name = 'LivePingGraphThread', target = self.ANIMATION(), daemon=True)
-        animation_thread.start()
+        #animation_thread = threading.Thread(name = 'LivePingGraphThread', target = self.ANIMATION(), daemon=True)
+        #animation_thread.start()
 
-        #self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), interval=1000)
+        #self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
 
 ''' 
 root = Tk()

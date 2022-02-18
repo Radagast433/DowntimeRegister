@@ -25,6 +25,7 @@ import speedtest
 import multiprocessing
 import ctypes
 import psutil
+import matplotlib.animation as animation
 #import pyspeedtest
 #import ping_live_graph as plg
 
@@ -367,9 +368,13 @@ def PING_TEST(logbox, test_time, direction):
         
             csv_writer.writerow(data_info)
         
-        logbox.insert(tk.END, f"\n\n Fecha: {a}, Hora: {b}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}")
-        logbox.see("end")
+        try:
+            
+            logbox.insert(tk.END, f"\n\n Fecha: {a}, Hora: {b}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}")
+            logbox.see("end")
         
+        except: pass
+
         cut_duration = 0
         
         elapsed_time+= ping_test_interval
@@ -803,6 +808,13 @@ def CHECK_RESOURCES(frame, label):
 def EXIT_APP(root):
     
     global RESOURCES
+    global RUNNING_PACKET_TEST
+    global RUNNING_PING_TEST
+    global RUNNING_SPEED_TEST
+
+    RUNNING_PACKET_TEST = False
+    RUNNING_PING_TEST = False
+    RUNNING_SPEED_TEST = False
     
     RESOURCES = False
 
@@ -812,10 +824,12 @@ def EXIT_APP(root):
     
     root.destroy()
 
-def PING_LIVE_GRAPH_BEGIN():
+def PING_LIVE_GRAPH_BEGIN(ping_graph_frame):
 
-    a = PLG_Class.PingLiveGraph(GET_NETWORK_NAME())
-    a.ANIMATE()
+    a = PLG_Class.PingLiveGraph(ping_graph_frame, GET_NETWORK_NAME())
+    #a.ANIMATE()
+
+    ani = animation.FuncAnimation(a.fig, a.ANIMATION(), fargs=(), interval=1000)
 
     #live_ping_graph_thread = threading.Thread(name = 'LivePingGraphThread', target = a.ANIMATE(), daemon=True)
     #live_ping_graph_thread.start()
@@ -825,23 +839,29 @@ def GUI():
     root = Tk()
     root.title("Connection monitor")
     root.iconphoto(False, tk.PhotoImage(file = 'Icons/CM.png'))
-    root.geometry("+200+60")
+    root.geometry("+0+0")
     #root.geometry('300x300')
     
     ########## Frame levels ##############
+
+    info_divition = ttk.Frame(root)
+    info_divition.pack(side = 'left')
     
+    graphs_divition = ttk.Frame(root)
+    graphs_divition.pack(side = 'left')
+
     ##### General Frames #####
     
-    general_frame_1 = ttk.Frame(root)
+    general_frame_1 = ttk.Frame(info_divition)
     general_frame_1.pack(side = 'top')
     
-    general_frame_2 = ttk.Frame(root)
+    general_frame_2 = ttk.Frame(info_divition)
     general_frame_2.pack(side = 'top')
     
-    general_frame_3 = ttk.Frame(root)
+    general_frame_3 = ttk.Frame(info_divition)
     general_frame_3.pack(side = 'top')
 
-    general_frame_4 = ttk.Frame(root)
+    general_frame_4 = ttk.Frame(info_divition)
     general_frame_4.pack(side = 'top')
     
     ##### Button pack frames #####
@@ -857,6 +877,14 @@ def GUI():
     
     resources_usage_frame_4 = ttk.Frame(general_frame_1)
     resources_usage_frame_4.pack(side = 'left', padx = general_padx, pady = general_pady)
+
+    ##### Graphs pack frames #######
+
+    ping_graph_frame = ttk.Frame(graphs_divition)
+    ping_graph_frame.pack(side = 'top')
+
+    speed_graph_frame = ttk.Frame(graphs_divition)
+    speed_graph_frame.pack(side = 'top')
     
     ############## GENERAL FRAME 1 ##############
      
@@ -908,7 +936,7 @@ def GUI():
     sub_2_label_1 = ttk.Label(sub_3)
     sub_2_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
     # aux = PLG_Class.PingLiveGraph() aux.animate()
-    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:PING_LIVE_GRAPH_BEGIN())
+    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:PING_LIVE_GRAPH_BEGIN(ping_graph_frame))
     ping_live_graph_button.pack(side = 'left')
     
     ##### Buttons and labels for  button_pack_frame_2 #####
