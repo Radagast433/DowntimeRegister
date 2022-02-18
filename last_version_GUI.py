@@ -827,12 +827,7 @@ def EXIT_APP(root):
 def PING_LIVE_GRAPH_BEGIN(ping_graph_frame):
 
     a = PLG_Class.PingLiveGraph(ping_graph_frame, GET_NETWORK_NAME())
-    #a.ANIMATE()
-
-    ani = animation.FuncAnimation(a.fig, a.ANIMATION(), fargs=(), interval=1000)
-
-    #live_ping_graph_thread = threading.Thread(name = 'LivePingGraphThread', target = a.ANIMATE(), daemon=True)
-    #live_ping_graph_thread.start()
+    a.ANIMATE
 
 def GUI():
     

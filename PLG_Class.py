@@ -7,13 +7,13 @@ Created on Thu May 13 02:50:07 2021
 
 from tkinter import *
 from matplotlib import pyplot as plt
-#import matplotlib.animation as animation
+import matplotlib.animation as animation
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 #import subprocess
 #import threading
-import ctypes
+#import ctypes
 #import time
 #import matplotlib.transforms as transforms
 
@@ -53,7 +53,7 @@ class PingLiveGraph():
         self.plotcanvas.get_tk_widget().grid(column=1, row=1)
         #self.ani = animation.FuncAnimation(self.fig, self.animate(), interval=1000)
 
-        ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+        #ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
         #self.root.mainloop()
 
@@ -90,12 +90,11 @@ class PingLiveGraph():
 
             #time.sleep(1)
 
-    #def ANIMATE(self):
+            #self.ANIMATION()
 
-        #animation_thread = threading.Thread(name = 'LivePingGraphThread', target = self.ANIMATION(), daemon=True)
-        #animation_thread.start()
+    def ANIMATE(self):
 
-        #self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
+        self.ani = animation.FuncAnimation(self.fig, self.ANIMATION(), fargs=(), interval=1000)
 
 ''' 
 root = Tk()
