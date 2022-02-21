@@ -156,8 +156,8 @@ def SELECT_GRAPH(test_type):
         plt.xlabel('Tiempo Transcurrido (s)')
         plt.ylabel('Ping (ms)')
         plt.title("Ping (www.google.com)")
-        plt.axhline(y=9.36, color='green', linestyle='-', label = 'Ping Promedio Red: LaRosa')
-        plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
+        #plt.axhline(y=9.36, color='green', linestyle='-', label = 'Ping Promedio Red: LaRosa')
+        #plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
 
         plt.legend()
         graph_route = graphs_route + network_name + '_ping_graph.png'
