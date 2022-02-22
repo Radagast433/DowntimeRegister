@@ -298,11 +298,7 @@ def PING_TEST(logbox, test_time, direction):
         
         back_online_time = datetime.datetime.now()
         
-        try:
-
-            ping = os.popen('ping ' + direction + ' -n 1')
-        
-        except: next(i)
+        ping = os.popen('ping ' + direction + ' -n 1')
         #print(ping)
         
         if cut_detector:
@@ -685,7 +681,7 @@ def SPEED_TEST(wait_time, logbox):
             fecha = datetime.datetime.now().strftime("%d-%m-%Y")
             hora = datetime.datetime.now().strftime("%H:%M:%S")
             downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
-            upspeed = round((round(s.upload(threads = thread_count)) / speed_trans_unit), 2)
+            upspeed = round((round(s.upload(threads = thread_count, pre_allocate = False)) / speed_trans_unit), 2)
             
             info = {
                 'Fecha' : fecha,
