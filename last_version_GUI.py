@@ -298,8 +298,11 @@ def PING_TEST(logbox, test_time, direction):
         
         back_online_time = datetime.datetime.now()
         
-        ping = os.popen('ping ' + direction + ' -n 1')
+        try:
+
+            ping = os.popen('ping ' + direction + ' -n 1')
         
+        except: next(i)
         #print(ping)
         
         if cut_detector:
