@@ -681,7 +681,7 @@ def SPEED_TEST(wait_time, logbox):
             fecha = datetime.datetime.now().strftime("%d-%m-%Y")
             hora = datetime.datetime.now().strftime("%H:%M:%S")
             downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
-            upspeed = round((round(s.upload(threads = thread_count, pre_allocate = False)) / speed_trans_unit), 2)
+            upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
             
             info = {
                 'Fecha' : fecha,
