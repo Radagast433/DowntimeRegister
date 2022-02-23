@@ -299,6 +299,7 @@ def PING_TEST(logbox, test_time, direction):
         back_online_time = datetime.datetime.now()
         
         ping = os.popen('ping ' + direction + ' -n 1')
+
         #print(ping)
         
         if cut_detector:
@@ -313,6 +314,13 @@ def PING_TEST(logbox, test_time, direction):
             cut_detector = False
         
         result = ping.readlines()
+
+        if 'Compruebe el nombre' in result[0]:
+
+            logbox.delete('1.0', tk.END)
+            logbox.insert(tk.END, '\n\n La solicitud de ping no pudo encontrar  el host ' + direction + '.\n\n Por Favor revise la dirección e intente nuevamente.')
+            RUNNING_PING_TEST = False
+            return
 
         try:
             packet_loss = result[6].strip()
@@ -491,14 +499,14 @@ def PING_TEST_BEGIN(entrybox, logbox, direction_combobox):
     
     else:
         
-        if os.path.exists(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route):
+        '''if os.path.exists(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route):
             
             os.remove(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route)
         
         with open(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, 'w+', newline = '') as csv_file:
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = ping_data_fieldnames)
-            csv_writer.writeheader()
+            csv_writer.writeheader()'''
  
         RUNNING_PING_TEST = True
         
@@ -522,6 +530,13 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
     pl_test = os.popen('ping ' + direction + ' -n ' + str(n_packets))
     
     result = pl_test.readlines()
+
+    if 'Compruebe el nombre' in result[0]:
+
+            logbox.delete('1.0', tk.END)
+            logbox.insert(tk.END, '\n\n La solicitud de ping no pudo encontrar  el host ' + direction + '.\n\n Por Favor revise la dirección e intente nuevamente.')
+            RUNNING_PACKET_TEST = False
+            return
     
     end_time = time.time()
     
@@ -619,16 +634,16 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
     
     else:
         
-        network_name = GET_NETWORK_NAME()
+        #network_name = GET_NETWORK_NAME()
         
-        if os.path.exists(data_route + network_name + '_' + packet_loss_csv_route):
+        '''if os.path.exists(data_route + network_name + '_' + packet_loss_csv_route):
             
             os.remove(data_route + network_name + '_' + packet_loss_csv_route)
         
         with open(data_route + network_name + '_' + packet_loss_csv_route, 'w+', newline = '') as csv_file:
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_data_fieldnames)
-            csv_writer.writeheader()
+            csv_writer.writeheader()'''
         
         RUNNING_PACKET_TEST = True
         
@@ -644,25 +659,50 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
         
         packet_thread.start()
         
-def SPEED_TEST(wait_time, logbox):
+def SPEED_TEST(wait_time, logbox, combobox):
     
     global RUNNING_SPEED_TEST
     
     #print(dir(speedtest))
     
-    s = speedtest.Speedtest()
+    # listado de servers https://williamyaps.github.io/wlmjavascript/servercli.html
     
-    best_sv = s.get_best_server()
+
+    '''best_sv = s.get_best_server()
+
+    servers = s.get_servers()
+
+    for keys in servers:
+
+        for server in servers[keys]:
+
+            print(server['sponsor'] + ' ' + server['name'] + ' ' + server['id'])
+
+        #print(servers[keys])
+
+    #print(servers)
+
+    RUNNING_SPEED_TEST = False
+
+    return
     
     for key in best_sv:
         logbox.insert(tk.END, '\n ' + str(key) + ' : ' + str(best_sv[key]))
         logbox.see("end")
+    '''
         
     logbox.insert(tk.END, '\n ')
         #print(key, ' : ', best_sv[key])
         
     a = time.time()
     
+    option = combobox.get()
+
+    start = option.find('(')
+    end = option.find(')')
+    server_id = option[start + 1 : end]
+
+    s.get_servers([int(server_id)])
     # Muestra velocidad en Megabytes
     #speed_trans_unit = 1048576
     
@@ -707,7 +747,7 @@ def SPEED_TEST(wait_time, logbox):
             results_info = {
                 speed_test_results_fieldnames[0] : fecha,
                 speed_test_results_fieldnames[1] : hora,
-                speed_test_results_fieldnames[2] : best_sv['host'],
+                speed_test_results_fieldnames[2] : option,
                 speed_test_results_fieldnames[3] : downspeed,
                 speed_test_results_fieldnames[4] : upspeed
                 }
@@ -746,16 +786,40 @@ def SPEEDTEST_TEST_STOP():
         
     else: return
     
+def VALIDATE_COMBOBOX_VALUE(combobox):
 
-def SPEED_TEST_BEGIN(entrybox, logbox):
+    option = combobox.get()
+
+    if len(option) > 0:
+
+        start = option.find('(')
+        end = option.find(')')
+
+        if start > (-1) and end > (-1) and (end - start) > 1:
+
+            return True
+
+        else: 
+
+            return False
+
+    else:
+
+        return False
+        
+        #option = option[start + 1 : end]
+        #print(option[start + 1 : end])
+        #print(option)
+
+def SPEED_TEST_BEGIN(entrybox, logbox, combobox):
     
     global RUNNING_SPEED_TEST
     
-    if not VALIDATE_ENTRY_BOX_VALUE(entrybox.get()):
+    if not VALIDATE_ENTRY_BOX_VALUE(entrybox.get()) or not VALIDATE_COMBOBOX_VALUE(combobox):
         
         logbox.delete('1.0', tk.END)
         
-        logbox.insert(tk.END, '\n Revise el numero Ingresado...')
+        logbox.insert(tk.END, '\n Revise los datos Ingresados...')
         
         logbox.see("end")
     
@@ -769,14 +833,14 @@ def SPEED_TEST_BEGIN(entrybox, logbox):
     
     else:
         
-        if os.path.exists(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route):
+        '''if os.path.exists(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route):
             
             os.remove(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route)
         
         with open(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route, 'w+', newline = '') as csv_file:
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_data_fieldnames)
-            csv_writer.writeheader()
+            csv_writer.writeheader()'''
         
         RUNNING_SPEED_TEST = True
         
@@ -786,11 +850,11 @@ def SPEED_TEST_BEGIN(entrybox, logbox):
         
         logbox.insert(tk.END, '\n Iniciando prueba...\n\n Conectado a : ' + GET_NETWORK_NAME() + '\n')
         
-        speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox,))
+        speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox, combobox,))
     
         speed_thread.start()
         
-def CHECK_RESOURCES(frame, label):
+def CHECK_RESOURCES(label):
     
     while RESOURCES:
     
@@ -815,8 +879,10 @@ def CHECK_RESOURCES(frame, label):
         # evita que el programa intente insertar texto en label cuando el objeto se destruya
         try:
 
-            label.configure(text = '\nPorcentaje de\nuso de CPU: ' + cpu_per + '\n\nPorcentaje de memoria\nutilizada: ' +  mem_per + '\n\nMemoria total: ' +  mem_total + '\n\nMemoria en uso: ' + mem_used + '\n\nEspacio usado en\nDisco: ' + c_per)
-        
+            #label.configure(text = '\nPorcentaje de\nuso de CPU: ' + cpu_per + '\n\nPorcentaje de memoria\nutilizada: ' +  mem_per + '\n\nMemoria total: ' +  mem_total + '\n\nMemoria en uso: ' + mem_used + '\n\nEspacio usado en\nDisco: ' + c_per)
+            #label.configure(text = 'CPU: ' + cpu_per + '  |  RAM: ' +  mem_used + '/' + mem_total + ' (' + mem_per + ')' + '  |  ALM: ' + c_per)
+            label.configure(text = 'CPU: ' + cpu_per + '  |  RAM: ' +  mem_used + '/' + mem_total + ' (' + mem_per + ')')
+
         except: pass
 
         if not RESOURCES:
@@ -850,6 +916,30 @@ def EXIT_APP(root):
 
     #graph_animation = PLG_Class.PingLiveGraph(GET_NETWORK_NAME())
     #graph_animation.ANIMATE()
+
+def SELECT_BEST_SERVER(combobox):
+
+    best_sv = s.get_best_server()
+
+    combobox.set(best_sv['sponsor'] + '-' + best_sv['name'] + '-(' + best_sv['id'] + ')')
+
+def GET_SERVERS_LIST(combobox):
+
+    servers = s.get_servers()
+    
+    servers_norm_list = []
+
+    for keys in servers:
+
+        for server in servers[keys]:
+
+            servers_norm_list.append(server['sponsor'] + '-' + server['name'] + '-(' + server['id'] + ')')
+            #print(server['sponsor'] + ' ' + server['name'] + ' ' + server['id'])
+
+    combobox['values'] = servers_norm_list
+    combobox.set(servers_norm_list[0])
+
+    #print(best_sv['sponsor'] + '-' + best_sv['name'] + ' ' + best_sv['id'])
 
 def GUI():
     
@@ -887,13 +977,13 @@ def GUI():
     button_pack_frame_1.pack(side = 'left', padx = general_padx, pady = general_pady)
     
     button_pack_frame_2 = ttk.Frame(general_frame_1)
-    button_pack_frame_2.pack(side = 'left', padx = general_padx*4, pady = general_pady)
+    button_pack_frame_2.pack(side = 'left', padx = general_padx * 12, pady = general_pady)
     
     button_pack_frame_3 = ttk.Frame(general_frame_1)
     button_pack_frame_3.pack(side = 'left', padx = general_padx, pady = general_pady)
     
-    resources_usage_frame_4 = ttk.Frame(general_frame_1)
-    resources_usage_frame_4.pack(side = 'left', padx = general_padx, pady = general_pady)
+    #resources_usage_frame_4 = ttk.Frame(general_frame_1)
+    #resources_usage_frame_4.pack(side = 'left', padx = general_padx, pady = general_pady)
 
     ##### Graphs pack frames #######
 
@@ -913,11 +1003,12 @@ def GUI():
     ping_label_1 = ttk.Label(button_pack_frame_1, text = '*Test de ping*\n\nSeleccione dirección\npara realizar Ping.', font=("Calibri",font_size), justify = 'center')
     ping_label_1.pack(side = 'top')
     
-    ping_direction_combobox = ttk.Combobox(button_pack_frame_1, state = 'readonly')
+    #ping_direction_combobox = ttk.Combobox(button_pack_frame_1, state = 'readonly')
+    ping_direction_combobox = ttk.Combobox(button_pack_frame_1)
     ping_direction_combobox.pack(side = 'top')
     
     ping_direction_combobox['values'] = directions_list
-    ping_direction_combobox.set(directions_list[0])
+    #ping_direction_combobox.set(directions_list[0])
     
     ping_label_2 = ttk.Label(button_pack_frame_1, text = '\nIngrese tiempo de\nprueba en segundos.', font=("Calibri",font_size), justify = 'center')
     ping_label_2.pack(side = 'top')
@@ -964,11 +1055,12 @@ def GUI():
     packet_loss_label_1 = ttk.Label(button_pack_frame_2, text = '*Test de perdida\nde Paquetes*\n\nSeleccione dirección\npara enviar paquetes.', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_1.pack(side = 'top', expand = True)
     
-    pl_direction_combobox = ttk.Combobox(button_pack_frame_2, state = 'readonly')
+    #pl_direction_combobox = ttk.Combobox(button_pack_frame_2, state = 'readonly')
+    pl_direction_combobox = ttk.Combobox(button_pack_frame_2)
     pl_direction_combobox.pack(side = 'top')
     
     pl_direction_combobox['values'] = directions_list
-    pl_direction_combobox.set(directions_list[0])
+    #pl_direction_combobox.set(directions_list[0])
     
     packet_loss_label_2 = ttk.Label(button_pack_frame_2, text = '\nIngrese cantidad\nde paquetes.', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_2.pack(side = 'top')
@@ -987,37 +1079,62 @@ def GUI():
     
     ##### Buttons and labels for  button_pack_frame_3 #####
     
-    speedtest_label_1 = ttk.Label(button_pack_frame_3, text = '*Test de velocidad*\n\nIngrese cantidad de\npruebas que desea\nrealizar.\n\nEl intervalo entre pruebas\nsera de ' + str(speed_test_time_interval) + ' segundos.', font=("Calibri",font_size), justify = 'center')
+    speedtest_label_1 = ttk.Label(button_pack_frame_3, text = '*Test de velocidad*\n\nIngrese ID del server:', font=("Calibri",font_size), justify = 'center')
     speedtest_label_1.pack(side = 'top', expand = True)
+
+    speedtest_best_server_button = ttk.Button(button_pack_frame_3, text = 'Mejor Server', command=lambda:SELECT_BEST_SERVER(speedtest_servers_combobox))
+    speedtest_best_server_button.pack(side = 'top', pady = general_pady)
+
+    speedtest_servers_update_button = ttk.Button(button_pack_frame_3, text = 'Actualizar Lista', command=lambda:GET_SERVERS_LIST(speedtest_servers_combobox))
+    speedtest_servers_update_button.pack(side = 'top')
+
+    speedtest_servers_combobox = ttk.Combobox(button_pack_frame_3, width = 35)
+    speedtest_servers_combobox.pack(side = 'top', pady = general_pady)
     
+    #speedtest_servers_combobox['values'] = 'list'
+    #ping_direction_combobox.set(directions_list[0])
+
+    speedtest_label_2 = ttk.Label(button_pack_frame_3, text = '\n\nEl intervalo entre pruebas\nsera de ' + str(speed_test_time_interval) + ' segundos.', font=("Calibri",font_size), justify = 'center')
+    speedtest_label_2.pack(side = 'top')
+
     speedtest_entrybox = ttk.Entry(button_pack_frame_3)
     speedtest_entrybox.pack(side = 'top', expand = True)
     
-    inf_speed_button = ttk.Button(button_pack_frame_3, text= 'INF', command=lambda:speedtest_entrybox.insert(tk.END, '9223372036854775807'))
-    inf_speed_button.pack(side = 'top', pady = general_pady)
+    ########## Sub divitions #############
+
+    sub_4 = ttk.Frame(button_pack_frame_3)
+    sub_4.pack(side = 'top')
+
+    sub_5 = ttk.Frame(button_pack_frame_3)
+    sub_5.pack(side = 'top')
+
+    ######################################
+
+    inf_speed_button = ttk.Button(sub_4, text= 'INF', command=lambda:speedtest_entrybox.insert(tk.END, '9223372036854775807'))
+    inf_speed_button.pack(side = 'left', pady = general_pady)
     
-    speedtest_graph_button = ttk.Button(button_pack_frame_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
-    speedtest_graph_button.pack(side = 'top')
+    speedtest_graph_button = ttk.Button(sub_4, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
+    speedtest_graph_button.pack(side = 'left')
     
-    speedtest_begin_button = ttk.Button(button_pack_frame_3, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box))
-    speedtest_begin_button.pack(side = 'top', pady = general_pady)
+    speedtest_begin_button = ttk.Button(sub_5, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox))
+    speedtest_begin_button.pack(side = 'left', pady = general_pady)
     
-    speedtest_stop_button = ttk.Button(button_pack_frame_3, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
-    speedtest_stop_button.pack(side = 'top')
+    speedtest_stop_button = ttk.Button(sub_5, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
+    speedtest_stop_button.pack(side = 'left')
     
     ##### Buttons and labels for  resources_usage_frame_4 #####
     
-    resources_title_label = ttk.Label(resources_usage_frame_4, text = "*Valores de recursos\ndel equipo*", font=("Calibri",font_size), justify = 'center')
+    '''resources_title_label = ttk.Label(resources_usage_frame_4, text = "*Valores de recursos\ndel equipo*", font=("Calibri",font_size), justify = 'center')
     resources_title_label.pack(side = 'top')
     
     resources_data_label = ttk.Label(resources_usage_frame_4, font=("Calibri",int(font_size//1.2)))
-    resources_data_label.pack(side = 'top')
+    resources_data_label.pack(side = 'top')'''
     
     #destroy_button = ttk.Button(resources_usage_frame_4, text = "BOOM", command=lambda:resources_usage_frame_4.destroy())
     #destroy_button.pack(side = 'top')
 
-    separation_label = ttk.Label(resources_usage_frame_4)
-    separation_label.pack(side = 'top', pady = general_pady)
+    #separation_label = ttk.Label(resources_usage_frame_4)
+    #separation_label.pack(side = 'top', pady = general_pady)
     
     #root.after(1000, CHECK_RESOURCES, root, resources_data_label)
     
@@ -1037,12 +1154,20 @@ def GUI():
     speed_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 45))
     speed_log_box.pack(side = 'left', padx = int(general_padx/2), pady = int(general_pady/2))
     
+    ################### general_frame_4 ###################
+
+    gf4_label_1 = ttk.Label(general_frame_4, width = general_padx * 3)
+    gf4_label_1.pack(side = 'left')
+
     exit_button = ttk.Button(general_frame_4, text= 'SALIR DE LA APLICACION', command=lambda:EXIT_APP(root))
-    exit_button.pack(side = 'top', pady = general_pady)
-    
+    exit_button.pack(side = 'left', padx = general_padx * 15, pady = general_pady)
+
+    resources_data_label = ttk.Label(general_frame_4, font=("Calibri",int(font_size//1.6)))
+    resources_data_label.pack(side = 'left')
+
     ##############################################################
     
-    resources_thread = threading.Thread(name = 'Resources', target = CHECK_RESOURCES, daemon=True, args=(root, resources_data_label, ))
+    resources_thread = threading.Thread(name = 'Resources', target = CHECK_RESOURCES, daemon=True, args=(resources_data_label, ))
     resources_thread.start()
     
     root.focus_force()
@@ -1141,6 +1266,8 @@ if __name__ == '__main__':
             csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
             csv_writer.writeheader()
     
+    s = speedtest.Speedtest()
+
     ####################################
     
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
