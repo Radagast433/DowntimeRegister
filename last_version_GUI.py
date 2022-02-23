@@ -1094,7 +1094,7 @@ def GUI():
     #speedtest_servers_combobox['values'] = 'list'
     #ping_direction_combobox.set(directions_list[0])
 
-    speedtest_label_2 = ttk.Label(button_pack_frame_3, text = '\n\nEl intervalo entre pruebas\nsera de ' + str(speed_test_time_interval) + ' segundos.', font=("Calibri",font_size), justify = 'center')
+    speedtest_label_2 = ttk.Label(button_pack_frame_3, text = 'El intervalo entre pruebas\nsera de ' + str(speed_test_time_interval) + ' segundos.', font=("Calibri",font_size), justify = 'center')
     speedtest_label_2.pack(side = 'top')
 
     speedtest_entrybox = ttk.Entry(button_pack_frame_3)
