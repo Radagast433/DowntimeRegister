@@ -313,12 +313,16 @@ def PING_TEST(logbox, test_time, direction):
             cut_detector = False
         
         result = ping.readlines()
-        packet_loss = result[6].strip()
+
+        try:
+            packet_loss = result[6].strip()
+            start_point = packet_loss.find('(')
+            end_point = packet_loss.find('%')
         
-        start_point = packet_loss.find('(')
-        end_point = packet_loss.find('%')
-        
-        packet_loss = packet_loss[start_point + 1 : end_point]
+            packet_loss = packet_loss[start_point + 1 : end_point]
+        except:
+            packet_loss = '100'
+
         msLine = result[-1].strip()
     
         total_ms = msLine[len(msLine) - 4: len(msLine) - 2]
