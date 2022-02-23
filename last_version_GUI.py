@@ -1000,7 +1000,7 @@ def GUI():
      
     ##### Buttons and labels for  button_pack_frame_1 #####
     
-    ping_label_1 = ttk.Label(button_pack_frame_1, text = '*Test de ping*\n\nSeleccione dirección\npara realizar Ping.', font=("Calibri",font_size), justify = 'center')
+    ping_label_1 = ttk.Label(button_pack_frame_1, text = '*Test de ping*\n\nIngrese dirección\npara realizar Ping:', font=("Calibri",font_size), justify = 'center')
     ping_label_1.pack(side = 'top')
     
     #ping_direction_combobox = ttk.Combobox(button_pack_frame_1, state = 'readonly')
@@ -1009,9 +1009,40 @@ def GUI():
     
     ping_direction_combobox['values'] = directions_list
     #ping_direction_combobox.set(directions_list[0])
+
+    #####################################################################################3
+
+    reference_values_text = ttk.Label(button_pack_frame_1, text = '\nValores de referencia (Opt)', font=("Calibri",font_size), justify = 'center')
+    reference_values_text.pack(side = 'top')
+
+    sub_ping_frame_reference = ttk.Frame(button_pack_frame_1)
+    sub_ping_frame_reference.pack(side = 'top')
+
+    sub_1_min_reference_values = ttk.Frame(sub_ping_frame_reference)
+    sub_1_min_reference_values.pack(side = 'left')
+
+    sub_sep_label = ttk.Label(sub_ping_frame_reference, width = 2)
+    sub_sep_label.pack(side = 'left')
+
+    sub_2_max_reference_values = ttk.Frame(sub_ping_frame_reference)
+    sub_2_max_reference_values.pack(side = 'left')
+
+    sub_1_min_label = ttk.Label(sub_1_min_reference_values, text = 'Ping Min:')
+    sub_1_min_label.pack(side = 'top')
+
+    sub_1_min_entry = ttk.Entry(sub_1_min_reference_values, width = 5)
+    sub_1_min_entry.pack(side = 'top')
     
-    ping_label_2 = ttk.Label(button_pack_frame_1, text = '\nIngrese tiempo de\nprueba en segundos.', font=("Calibri",font_size), justify = 'center')
-    ping_label_2.pack(side = 'top')
+    sub_2_max_label = ttk.Label(sub_2_max_reference_values, text = 'Ping Max:')
+    sub_2_max_label.pack(side = 'top')
+
+    sub_2_max_entry = ttk.Entry(sub_2_max_reference_values, width = 5)
+    sub_2_max_entry.pack(side = 'top')
+
+    ##########################################################################################################
+
+    ping_label_3 = ttk.Label(button_pack_frame_1, text = '\nIngrese tiempo de\nprueba en segundos:', font=("Calibri",font_size), justify = 'center')
+    ping_label_3.pack(side = 'top')
     
     duration_entrybox = ttk.Entry(button_pack_frame_1)
     duration_entrybox.pack(side = 'top')
@@ -1020,39 +1051,39 @@ def GUI():
     
     ########### Sub Buttons for button_pack_frame_1 ################
 
-    sub_1 = ttk.Frame(button_pack_frame_1)
-    sub_1.pack(side = 'top', pady = general_pady)
+    #sub_1 = ttk.Frame(button_pack_frame_1)
+    #sub_1.pack(side = 'top', pady = general_pady)
 
     sub_2 = ttk.Frame(button_pack_frame_1)
-    sub_2.pack(side = 'top')
+    sub_2.pack(side = 'top', pady = general_pady)
 
     sub_3 = ttk.Frame(button_pack_frame_1)
     sub_3.pack(side = 'top', pady = general_pady)
-
-    inf_ping_button = ttk.Button(sub_1, text= 'INF', command=lambda:duration_entrybox.insert(tk.END, '9223372036854775807'))
-    inf_ping_button.pack(side = 'top')
     
     ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, ping_log_box, ping_direction_combobox))
     ping_begin_button.pack(side = 'left')
 
-    sub_3_label_1 = ttk.Label(sub_2)
-    sub_3_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
+    #sub_3_label_1 = ttk.Label(sub_2)
+    #sub_3_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
     
     ping_stop_button = ttk.Button(sub_2, text= 'Detener Prueba', command=lambda:PING_TEST_STOP())
     ping_stop_button.pack(side = 'left')
 
+    inf_ping_button = ttk.Button(sub_3, text= 'INF', command=lambda:duration_entrybox.insert(tk.END, '9223372036854775807'))
+    inf_ping_button.pack(side = 'left')
+
     ping_graph_button = ttk.Button(sub_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping'))
     ping_graph_button.pack(side = 'left')
 
-    sub_2_label_1 = ttk.Label(sub_3)
-    sub_2_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
+    #sub_2_label_1 = ttk.Label(sub_3)
+    #sub_2_label_1.pack(side = 'left', padx = round(general_padx * 1.5))
     # aux = PLG_Class.PingLiveGraph() aux.animate()
-    ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:None)
-    ping_live_graph_button.pack(side = 'left')
+    #ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:None)
+    #ping_live_graph_button.pack(side = 'left')
     
     ##### Buttons and labels for  button_pack_frame_2 #####
     
-    packet_loss_label_1 = ttk.Label(button_pack_frame_2, text = '*Test de perdida\nde Paquetes*\n\nSeleccione dirección\npara enviar paquetes.', font=("Calibri",font_size), justify = 'center')
+    packet_loss_label_1 = ttk.Label(button_pack_frame_2, text = '*Test de perdida\nde Paquetes*\n\nIngrese dirección\npara enviar paquetes:', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_1.pack(side = 'top', expand = True)
     
     #pl_direction_combobox = ttk.Combobox(button_pack_frame_2, state = 'readonly')
@@ -1062,7 +1093,7 @@ def GUI():
     pl_direction_combobox['values'] = directions_list
     #pl_direction_combobox.set(directions_list[0])
     
-    packet_loss_label_2 = ttk.Label(button_pack_frame_2, text = '\nIngrese cantidad\nde paquetes.', font=("Calibri",font_size), justify = 'center')
+    packet_loss_label_2 = ttk.Label(button_pack_frame_2, text = '\nIngrese cantidad\nde paquetes:', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_2.pack(side = 'top')
     
     packet_loss_entrybox = ttk.Entry(button_pack_frame_2)
@@ -1082,19 +1113,53 @@ def GUI():
     speedtest_label_1 = ttk.Label(button_pack_frame_3, text = '*Test de velocidad*\n\nIngrese ID del server:', font=("Calibri",font_size), justify = 'center')
     speedtest_label_1.pack(side = 'top', expand = True)
 
-    speedtest_best_server_button = ttk.Button(button_pack_frame_3, text = 'Mejor Server', command=lambda:SELECT_BEST_SERVER(speedtest_servers_combobox))
-    speedtest_best_server_button.pack(side = 'top', pady = general_pady)
+    top_speed_buttons_frame = ttk.Frame(button_pack_frame_3)
+    top_speed_buttons_frame.pack(side = 'top')
+    
+    speedtest_best_server_button = ttk.Button(top_speed_buttons_frame, text = 'Mejor Server', command=lambda:SELECT_BEST_SERVER(speedtest_servers_combobox))
+    speedtest_best_server_button.pack(side = 'left', pady = general_pady)
 
-    speedtest_servers_update_button = ttk.Button(button_pack_frame_3, text = 'Actualizar Lista', command=lambda:GET_SERVERS_LIST(speedtest_servers_combobox))
-    speedtest_servers_update_button.pack(side = 'top')
+    sep_top_speed_buttons_label = ttk.Label(top_speed_buttons_frame, width = 2)
+    sep_top_speed_buttons_label.pack(side = 'left')
+
+    speedtest_servers_update_button = ttk.Button(top_speed_buttons_frame, text = 'Actualizar Lista', command=lambda:GET_SERVERS_LIST(speedtest_servers_combobox))
+    speedtest_servers_update_button.pack(side = 'left')
 
     speedtest_servers_combobox = ttk.Combobox(button_pack_frame_3, width = 35)
     speedtest_servers_combobox.pack(side = 'top', pady = general_pady)
     
-    #speedtest_servers_combobox['values'] = 'list'
-    #ping_direction_combobox.set(directions_list[0])
+    #################################################################################
 
-    speedtest_label_2 = ttk.Label(button_pack_frame_3, text = 'El intervalo entre pruebas\nsera de ' + str(speed_test_time_interval) + ' segundos.', font=("Calibri",font_size), justify = 'center')
+    reference_values_text_speed = ttk.Label(button_pack_frame_3, text = 'Valores de referencia (Opt)', font=("Calibri",font_size), justify = 'center')
+    reference_values_text_speed.pack(side = 'top')
+
+    sub_speed_frame_reference = ttk.Frame(button_pack_frame_3)
+    sub_speed_frame_reference.pack(side = 'top', pady = general_pady - 3)
+
+    sub_1_down_reference_values = ttk.Frame(sub_speed_frame_reference)
+    sub_1_down_reference_values.pack(side = 'left')
+
+    sub_sep_speed_label = ttk.Label(sub_speed_frame_reference, width = 3)
+    sub_sep_speed_label.pack(side = 'left')
+
+    sub_2_up_reference_values = ttk.Frame(sub_speed_frame_reference)
+    sub_2_up_reference_values.pack(side = 'left')
+
+    sub_1_down_label = ttk.Label(sub_1_down_reference_values, text = 'Subida:')
+    sub_1_down_label.pack(side = 'top')
+
+    sub_1_min_entry = ttk.Entry(sub_1_down_reference_values, width = 5)
+    sub_1_min_entry.pack(side = 'top')
+    
+    sub_2_up_label = ttk.Label(sub_2_up_reference_values, text = 'Bajada:')
+    sub_2_up_label.pack(side = 'top')
+
+    sub_2_up_entry = ttk.Entry(sub_2_up_reference_values, width = 5)
+    sub_2_up_entry.pack(side = 'top')
+
+    #################################################################################
+
+    speedtest_label_2 = ttk.Label(button_pack_frame_3, text = 'Ingrese cantidad de pruebas:\n(Intervalos de ' + str(speed_test_time_interval) + ' segundos)', font=("Calibri",font_size), justify = 'center')
     speedtest_label_2.pack(side = 'top')
 
     speedtest_entrybox = ttk.Entry(button_pack_frame_3)
@@ -1110,17 +1175,17 @@ def GUI():
 
     ######################################
 
-    inf_speed_button = ttk.Button(sub_4, text= 'INF', command=lambda:speedtest_entrybox.insert(tk.END, '9223372036854775807'))
-    inf_speed_button.pack(side = 'left', pady = general_pady)
-    
-    speedtest_graph_button = ttk.Button(sub_4, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
-    speedtest_graph_button.pack(side = 'left')
-    
-    speedtest_begin_button = ttk.Button(sub_5, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox))
+    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox))
     speedtest_begin_button.pack(side = 'left', pady = general_pady)
     
-    speedtest_stop_button = ttk.Button(sub_5, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
+    speedtest_stop_button = ttk.Button(sub_4, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
     speedtest_stop_button.pack(side = 'left')
+
+    inf_speed_button = ttk.Button(sub_5, text= 'INF', command=lambda:speedtest_entrybox.insert(tk.END, '9223372036854775807'))
+    inf_speed_button.pack(side = 'left', pady = general_pady)
+    
+    speedtest_graph_button = ttk.Button(sub_5, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
+    speedtest_graph_button.pack(side = 'left')
     
     ##### Buttons and labels for  resources_usage_frame_4 #####
     
@@ -1145,13 +1210,13 @@ def GUI():
     
     ############## GENERAL FRAME 3 ##############
     
-    ping_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 45))
+    ping_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 60), width = int(screen_width / 45))
     ping_log_box.pack(side = 'left', padx = int(general_padx/2), pady = int(general_pady/2))
 
-    packet_loss_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 45))
+    packet_loss_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 60), width = int(screen_width / 45))
     packet_loss_log_box.pack(side = 'left', padx = int(general_padx/2), pady = int(general_pady/2))
 
-    speed_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 50), width = int(screen_width / 45))
+    speed_log_box = scrolledtext.ScrolledText(general_frame_3, wrap="word", height = int(screen_height / 60), width = int(screen_width / 45))
     speed_log_box.pack(side = 'left', padx = int(general_padx/2), pady = int(general_pady/2))
     
     ################### general_frame_4 ###################
