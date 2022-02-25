@@ -241,7 +241,7 @@ def GET_JITTER(ping_data, start, finish):
         iterator = False
         
         for i in range(start, finish):
-            
+
             if ping_data[i] == 0:
                 
                 lost_packets+= 1
@@ -267,8 +267,10 @@ def GET_JITTER(ping_data, start, finish):
                     aux*= (-1)
         
                 dif_sum+= aux
+
+        for_return = round(dif_sum / (ping_data[ping_data > 0].count() - 1), 2)
         
-        return round(dif_sum / (ping_data[ping_data > 0].count() - 1), 2), lost_packets
+        return for_return, lost_packets
 
 def PING_TEST(logbox, test_time, direction):
     
@@ -287,15 +289,11 @@ def PING_TEST(logbox, test_time, direction):
     network_name = GET_NETWORK_NAME()
 
     data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
-    data_last_index = data.index[-1]
-    data = None
-
-    print(data_last_index)
-
-    return
-
-    #while RUNNING_PING_TEST:
     
+    start_cut = data.last_valid_index()
+
+    data = []
+
     start_date = datetime.datetime.now().strftime("%d-%m-%Y")  # date
     start_hour = datetime.datetime.now().strftime("%H-%M-%S") 
 
@@ -392,28 +390,13 @@ def PING_TEST(logbox, test_time, direction):
             csv_writer.writerow(data_info)
         
         data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
-        start = data.index[(data.Fecha == start_date) & (data.Hora == start_hour)].tolist()
-        start 
 
-        print(start)
-
-        return
-
+        end_cut = data.last_valid_index()
 
         ping_data = data['Ping_(ms)']
+        ping_data = ping_data[start_cut + 1 : end_cut + 1]
         
-        #print(ping_data)
-
-        finish = ping_data.size 
-        #print(start, finish)
-        
-        #print(ping_data.size, test_time)
-        
-        #ping_data = ping_data[ping_data.size - elapsed_time:]
-        
-        #print(ping_data)
-        
-        jitter, lost_packets = GET_JITTER(ping_data, start, finish)
+        jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
 
         try:
             
