@@ -702,7 +702,19 @@ def SPEED_TEST(wait_time, logbox, combobox):
     end = option.find(')')
     server_id = option[start + 1 : end]
 
-    s.get_servers([int(server_id)])
+    try:
+
+        s.get_servers([int(server_id)])
+    
+    except:
+
+        logbox.insert(tk.END, '\n Ocurrio un Problema, por favor\n seleccione otro servidor.')
+        logbox.see("end")
+
+        RUNNING_SPEED_TEST = False
+
+        return
+    
     # Muestra velocidad en Megabytes
     #speed_trans_unit = 1048576
     
