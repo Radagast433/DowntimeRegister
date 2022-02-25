@@ -283,10 +283,21 @@ def PING_TEST(logbox, test_time, direction):
     acc_time = 0
     cut_duration = 0
     cut_detector = False
-    
-    #while RUNNING_PING_TEST:
-        
+
     network_name = GET_NETWORK_NAME()
+
+    data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+    data_last_index = data.index[-1]
+    data = None
+
+    print(data_last_index)
+
+    return
+
+    #while RUNNING_PING_TEST:
+    
+    start_date = datetime.datetime.now().strftime("%d-%m-%Y")  # date
+    start_hour = datetime.datetime.now().strftime("%H-%M-%S") 
 
     for i in range(test_time):
         
@@ -381,12 +392,18 @@ def PING_TEST(logbox, test_time, direction):
             csv_writer.writerow(data_info)
         
         data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
-    
+        start = data.index[(data.Fecha == start_date) & (data.Hora == start_hour)].tolist()
+        start 
+
+        print(start)
+
+        return
+
+
         ping_data = data['Ping_(ms)']
         
         #print(ping_data)
 
-        start = 1
         finish = ping_data.size 
         #print(start, finish)
         
