@@ -124,8 +124,10 @@ def SELECT_GRAPH(test_type):
     
         data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
         
-        x = data.index
         y = data['Ping_(ms)']
+        y = y[ping_graph_start + 1 : ]
+            
+        x = [ i for i in range(0 , y.size)]
 
         graph_length = round(len(y) / 36, 0)
         font_size = round((-0.41 * graph_length) + 42.5, 1)
@@ -148,14 +150,29 @@ def SELECT_GRAPH(test_type):
 
         plt.margins(0)
         plt.plot(x, y, linewidth = 1.0, color = 'b', label = 'Ping Red: ' + network_name)
+
+        if VALIDATE_ENTRY_BOX_VALUE(sub_1_min_entry.get()):
+
+            plt.axhline(y=float(sub_1_min_entry.get()), color='r', linestyle='solid', label = 'Ping Minimo Usuario')
+
+        if VALIDATE_ENTRY_BOX_VALUE(sub_2_max_entry.get()):
+
+            plt.axhline(y=float(sub_2_max_entry.get()), color='g', linestyle='solid', label = 'Ping Maximo Usuario')
         
-        plt.xticks(np.arange(0, max(x) + 1, 10.0))
+        x_ticks = 10.0
+
+        if len(x) < 30:
+
+            x_ticks = 1.0
+
+        plt.xticks(np.arange(0, max(x) + 1, x_ticks))
         
         plt.yticks(np.arange(min(y) - 5, max(y) + 5, 5.0))
         
         plt.xlabel('Tiempo Transcurrido (s)')
         plt.ylabel('Ping (ms)')
         plt.title("Ping (www.google.com)")
+
         #plt.axhline(y=9.36, color='green', linestyle='-', label = 'Ping Promedio Red: LaRosa')
         #plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
 
@@ -277,6 +294,7 @@ def PING_TEST(logbox, test_time, direction):
     global elapsed_time
     global acc_time
     global RUNNING_PING_TEST
+    global ping_graph_start
     
     #delta = 0
     
@@ -291,6 +309,7 @@ def PING_TEST(logbox, test_time, direction):
     data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
     
     start_cut = data.last_valid_index()
+    ping_graph_start = start_cut
 
     data = []
 
@@ -955,6 +974,9 @@ def GET_SERVERS_LIST(combobox):
 
 def GUI():
     
+    global sub_1_min_entry
+    global sub_2_max_entry
+
     root = Tk()
     root.title("Connection monitor")
     root.iconphoto(False, tk.PhotoImage(file = 'Icons/CM.png'))
@@ -1160,14 +1182,14 @@ def GUI():
     sub_1_down_label = ttk.Label(sub_1_down_reference_values, text = 'Subida:')
     sub_1_down_label.pack(side = 'top')
 
-    sub_1_min_entry = ttk.Entry(sub_1_down_reference_values, width = 5)
-    sub_1_min_entry.pack(side = 'top')
+    sub_1_min_entry_speed = ttk.Entry(sub_1_down_reference_values, width = 5)
+    sub_1_min_entry_speed.pack(side = 'top')
     
     sub_2_up_label = ttk.Label(sub_2_up_reference_values, text = 'Bajada:')
     sub_2_up_label.pack(side = 'top')
 
-    sub_2_up_entry = ttk.Entry(sub_2_up_reference_values, width = 5)
-    sub_2_up_entry.pack(side = 'top')
+    sub_2_up_entry_speed = ttk.Entry(sub_2_up_reference_values, width = 5)
+    sub_2_up_entry_speed.pack(side = 'top')
 
     #################################################################################
 
@@ -1306,6 +1328,8 @@ if __name__ == '__main__':
     
     elapsed_time = 0
     
+    ping_graph_start = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, index_col = None).last_valid_index()
+
     acc_time = 0
     #print(screen_width, screen_height)
     
@@ -1346,6 +1370,10 @@ if __name__ == '__main__':
     s = speedtest.Speedtest()
 
     ####################################
+
+    sub_1_min_entry = None
+
+    sub_2_max_entry = None
     
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
     
