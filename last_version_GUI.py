@@ -151,13 +151,13 @@ def SELECT_GRAPH(test_type):
         plt.margins(0)
         plt.plot(x, y, linewidth = 1.0, color = 'b', label = 'Ping Red: ' + network_name)
 
-        if VALIDATE_ENTRY_BOX_VALUE(sub_1_min_entry.get()):
+        if VALIDATE_ENTRY_BOX_VALUE(sub_1_ping_min_entry.get()):
 
-            plt.axhline(y=float(sub_1_min_entry.get()), color='r', linestyle='solid', label = 'Ping Minimo Usuario')
+            plt.axhline(y=float(sub_1_ping_min_entry.get()), color='r', linestyle='solid', label = 'Ping Minimo Usuario')
 
-        if VALIDATE_ENTRY_BOX_VALUE(sub_2_max_entry.get()):
+        if VALIDATE_ENTRY_BOX_VALUE(sub_2_ping_max_entry.get()):
 
-            plt.axhline(y=float(sub_2_max_entry.get()), color='g', linestyle='solid', label = 'Ping Maximo Usuario')
+            plt.axhline(y=float(sub_2_ping_max_entry.get()), color='g', linestyle='solid', label = 'Ping Maximo Usuario')
         
         x_ticks = 10.0
 
@@ -216,6 +216,15 @@ def SELECT_GRAPH(test_type):
         plt.ylabel('Velocidad en Mb/s')
         plt.title("Velocidad Internet")
         plt.margins(0)
+
+        if VALIDATE_ENTRY_BOX_VALUE(sub_1_speed_up_entry_speed.get()):
+
+            plt.axhline(y=float(sub_1_speed_up_entry_speed.get()), color='black', linestyle='solid', label = 'Velocidad Subida Usuario')
+
+        if VALIDATE_ENTRY_BOX_VALUE(sub_2_speed_down_entry_speed.get()):
+
+            plt.axhline(y=float(sub_2_speed_down_entry_speed.get()), color='g', linestyle='solid', label = 'Velocidad Bajada Usuario')
+
         plt.xticks(rotation=30, ha="right")
         plt.plot(fecha + ' ' + hora, download, label='Bajada', color='r')
         plt.plot(fecha + ' ' + hora, upload, label='Subida', color='b')
@@ -974,8 +983,10 @@ def GET_SERVERS_LIST(combobox):
 
 def GUI():
     
-    global sub_1_min_entry
-    global sub_2_max_entry
+    global sub_1_ping_min_entry
+    global sub_2_ping_max_entry
+    global sub_1_speed_up_entry_speed
+    global sub_2_speed_down_entry_speed
 
     root = Tk()
     root.title("Connection monitor")
@@ -1044,7 +1055,7 @@ def GUI():
     ping_direction_combobox['values'] = directions_list
     #ping_direction_combobox.set(directions_list[0])
 
-    #####################################################################################3
+    #####################################################################################
 
     reference_values_text = ttk.Label(button_pack_frame_1, text = '\nValores de referencia (Opt)', font=("Calibri",font_size), justify = 'center')
     reference_values_text.pack(side = 'top')
@@ -1064,14 +1075,14 @@ def GUI():
     sub_1_min_label = ttk.Label(sub_1_min_reference_values, text = 'Ping Min:')
     sub_1_min_label.pack(side = 'top')
 
-    sub_1_min_entry = ttk.Entry(sub_1_min_reference_values, width = 5)
-    sub_1_min_entry.pack(side = 'top')
+    sub_1_ping_min_entry = ttk.Entry(sub_1_min_reference_values, width = 5)
+    sub_1_ping_min_entry.pack(side = 'top')
     
     sub_2_max_label = ttk.Label(sub_2_max_reference_values, text = 'Ping Max:')
     sub_2_max_label.pack(side = 'top')
 
-    sub_2_max_entry = ttk.Entry(sub_2_max_reference_values, width = 5)
-    sub_2_max_entry.pack(side = 'top')
+    sub_2_ping_max_entry = ttk.Entry(sub_2_max_reference_values, width = 5)
+    sub_2_ping_max_entry.pack(side = 'top')
 
     ##########################################################################################################
 
@@ -1182,14 +1193,14 @@ def GUI():
     sub_1_down_label = ttk.Label(sub_1_down_reference_values, text = 'Subida:')
     sub_1_down_label.pack(side = 'top')
 
-    sub_1_min_entry_speed = ttk.Entry(sub_1_down_reference_values, width = 5)
-    sub_1_min_entry_speed.pack(side = 'top')
+    sub_1_speed_up_entry_speed = ttk.Entry(sub_1_down_reference_values, width = 5)
+    sub_1_speed_up_entry_speed.pack(side = 'top')
     
     sub_2_up_label = ttk.Label(sub_2_up_reference_values, text = 'Bajada:')
     sub_2_up_label.pack(side = 'top')
 
-    sub_2_up_entry_speed = ttk.Entry(sub_2_up_reference_values, width = 5)
-    sub_2_up_entry_speed.pack(side = 'top')
+    sub_2_speed_down_entry_speed = ttk.Entry(sub_2_up_reference_values, width = 5)
+    sub_2_speed_down_entry_speed.pack(side = 'top')
 
     #################################################################################
 
@@ -1369,11 +1380,17 @@ if __name__ == '__main__':
     
     s = speedtest.Speedtest()
 
-    ####################################
+    ############### Ping Reference values Entry boxes #####################
 
-    sub_1_min_entry = None
+    sub_1_ping_min_entry = None
 
-    sub_2_max_entry = None
+    sub_2_ping_max_entry = None
+
+    ############### Speed Reference values Entry boxes #####################
+
+    sub_1_speed_up_entry_speed = None
+    
+    sub_2_speed_down_entry_speed = None
     
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
     
