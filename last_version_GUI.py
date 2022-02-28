@@ -44,6 +44,9 @@ class PROGRAMTASK():
 
         self.iterator = False
 
+        self.date_hour_start = []
+        self.date_hour_finish = []
+
         self.general_frame_1 = ttk.Frame(self.frame)
         self.general_frame_1.pack(side = 'top', padx = general_padx, pady = general_pady)
 
@@ -154,12 +157,22 @@ class PROGRAMTASK():
         center(self.parent, self.frame)
 
     def ADD(self):
-        
+
+        #print(self.date_hour_start)
+
         if not self.iterator:
 
             self.interval_label.configure(text = 'Ingrese Termino', background = 'red', foreground = 'yellow')
 
             self.iterator = True
+
+            self.date_hour_start.append(self.calendar.get_date().strftime("%d"))
+            self.date_hour_start.append(self.calendar.get_date().strftime("%m"))
+            self.date_hour_start.append(self.calendar.get_date().strftime("%Y"))
+
+            self.date_hour_start.append(self.hours.get())
+            self.date_hour_start.append(self.minutes.get())
+            self.date_hour_start.append(self.seconds.get())
 
             return
 
@@ -168,6 +181,14 @@ class PROGRAMTASK():
             self.interval_label.configure(text = 'Ingrese Inicio', background = 'green', foreground = 'white')
 
             self.iterator = False
+
+            self.date_hour_finish.append(self.calendar.get_date().strftime("%d"))
+            self.date_hour_finish.append(self.calendar.get_date().strftime("%m"))
+            self.date_hour_finish.append(self.calendar.get_date().strftime("%Y"))
+
+            self.date_hour_finish.append(self.hours.get())
+            self.date_hour_finish.append(self.minutes.get())
+            self.date_hour_finish.append(self.seconds.get())
 
             return
 
