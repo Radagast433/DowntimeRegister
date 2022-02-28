@@ -1118,6 +1118,7 @@ def GUI():
     
     #9223372036854775807
     
+    ################################### PING TEST ###################################
     ########### Sub Buttons for button_pack_frame_1 ################
 
     #sub_1 = ttk.Frame(button_pack_frame_1)
@@ -1150,6 +1151,7 @@ def GUI():
     #ping_live_graph_button = ttk.Button(sub_3, text= 'Grafico en Vivo', command=lambda:None)
     #ping_live_graph_button.pack(side = 'left')
     
+    ################################### PACKET LOSS TEST ###################################
     ##### Buttons and labels for  button_pack_frame_2 #####
     
     packet_loss_label_1 = ttk.Label(button_pack_frame_2, text = '*Test de perdida\nde Paquetes*\n\nIngrese dirección\npara enviar paquetes:', font=("Calibri",font_size), justify = 'center')
@@ -1177,6 +1179,7 @@ def GUI():
     pl_stop_button = ttk.Button(button_pack_frame_2, text= 'Detener Prueba', command=lambda:PACKETLOSS_TEST_STOP())
     pl_stop_button.pack(side = 'top', pady = general_pady)
     
+    ################################### SPEED TESTS ###################################
     ##### Buttons and labels for  button_pack_frame_3 #####
     
     speedtest_label_1 = ttk.Label(button_pack_frame_3, text = '*Test de velocidad*\n\nIngrese ID del server:', font=("Calibri",font_size), justify = 'center')
@@ -1290,14 +1293,14 @@ def GUI():
     
     ################### general_frame_4 ###################
 
-    gf4_label_1 = ttk.Label(general_frame_4, width = general_padx * 3)
-    gf4_label_1.pack(side = 'left')
+    gf4_label_1 = ttk.Label(general_frame_4, text = version, font=("Calibri",int(font_size//1.5)), width = general_padx * 3)
+    gf4_label_1.pack(side = 'left', padx = general_padx * 2)
 
     exit_button = ttk.Button(general_frame_4, text= 'SALIR DE LA APLICACION', command=lambda:EXIT_APP(root))
-    exit_button.pack(side = 'left', padx = general_padx * 15, pady = general_pady)
+    exit_button.pack(side = 'left', padx = general_padx * 10, pady = general_pady)
 
-    resources_data_label = ttk.Label(general_frame_4, font=("Calibri",int(font_size//1.6)))
-    resources_data_label.pack(side = 'left')
+    resources_data_label = ttk.Label(general_frame_4, font=("Calibri",int(font_size//1.5)))
+    resources_data_label.pack(side = 'right')
 
     ##############################################################
     
@@ -1310,7 +1313,7 @@ def GUI():
     
 if __name__ == '__main__':
     
-    directions_list = ['www.google.com', 'www.falabella.com', 'www.emol.cl', 'www.bcentral.cl']
+    directions_list = ['www.google.com', 'www.falabella.com', 'www.emol.cl', 'www.bcentral.cl', 'www.bing.com', 'www.facebook.com']
     
     screen_width = GetSystemMetrics(0)
     screen_height = GetSystemMetrics(1)
@@ -1420,4 +1423,6 @@ if __name__ == '__main__':
     
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
     
+    version = 'Connection Monitor V.1.0'
+
     GUI()
