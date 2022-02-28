@@ -124,16 +124,16 @@ def SELECT_GRAPH(test_type):
 
         data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
-        graph_name = data.iloc[[ping_graph_start]]
+        graph_name = data.iloc[-1]
 
         graph_name_p1 = graph_name['Fecha']
-        graph_name_p1.replace('-', '_')
+        #graph_name_p1.replace('-', '_')
 
         graph_name_p2 = graph_name['Hora']
-        graph_name_p2.replace('-', '_')
+        #graph_name_p2.replace('-', '_')
 
         graph_name = graph_name_p1 + '_' + graph_name_p2
-        graph_name = graph_name.to_string(index = False)
+        #graph_name = graph_name.to_string(index = False)
         
         y = data['Ping_(ms)']
         y = y[ping_graph_start + 1 : ]
@@ -200,10 +200,10 @@ def SELECT_GRAPH(test_type):
         graph_name = data.iloc[-1]
 
         graph_name_p1 = graph_name['Fecha']
-        graph_name_p1.replace('-', '_')
+        #graph_name_p1.replace('-', '_')
 
         graph_name_p2 = graph_name['Hora']
-        graph_name_p2.replace('-', '_')
+        #graph_name_p2.replace('-', '_')
 
         graph_name = graph_name_p1 + '_' + graph_name_p2
 
@@ -227,16 +227,16 @@ def SELECT_GRAPH(test_type):
         
         data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
         
-        graph_name = data.iloc[[speed_graph_start]]
+        graph_name = data.iloc[-1]
 
         graph_name_p1 = graph_name['Fecha']
-        graph_name_p1.replace('-', '_')
+        #graph_name_p1.replace('-', '_')
 
         graph_name_p2 = graph_name['Hora']
-        graph_name_p2.replace('-', '_')
+        #graph_name_p2.replace('-', '_')
 
         graph_name = graph_name_p1 + '_' + graph_name_p2
-        graph_name = graph_name.to_string(index = False)
+        #graph_name = graph_name.to_string(index = False)
 
         fecha = data['Fecha']
         fecha = fecha[speed_graph_start + 1 : ]
@@ -798,6 +798,8 @@ def SPEED_TEST(wait_time, logbox, combobox):
     # Muestra velocidad en Megabits
     speed_trans_unit = 10**(6)
 
+    speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
+
     #for i in range(int(wait_time)):
     while RUNNING_SPEED_TEST:
         
@@ -1072,13 +1074,13 @@ def GUI():
     
     ##### Button pack frames #####
     
-    button_pack_frame_1 = ttk.Frame(general_frame_1, borderwidth = frame_line_thickness)
+    button_pack_frame_1 = ttk.Frame(general_frame_1, borderwidth = frame_line_space, relief = RIDGE)
     button_pack_frame_1.pack(side = 'left', padx = general_padx, pady = general_pady)
     
-    button_pack_frame_2 = ttk.Frame(general_frame_1)
+    button_pack_frame_2 = ttk.Frame(general_frame_1, borderwidth = frame_line_space, relief = RIDGE)
     button_pack_frame_2.pack(side = 'left', padx = general_padx * 12, pady = general_pady)
     
-    button_pack_frame_3 = ttk.Frame(general_frame_1)
+    button_pack_frame_3 = ttk.Frame(general_frame_1, borderwidth = frame_line_space, relief = RIDGE)
     button_pack_frame_3.pack(side = 'left', padx = general_padx, pady = general_pady)
     
     #resources_usage_frame_4 = ttk.Frame(general_frame_1)
@@ -1361,7 +1363,9 @@ if __name__ == '__main__':
     general_pady = int(screen_width/136.6)
     
     gui_lines_color = 'black'
-    frame_line_thickness = 2
+    frame_line_space = 4
+
+    frame_line_thickness = 1
     
     font_size = int(screen_height/64)
     
@@ -1451,6 +1455,8 @@ if __name__ == '__main__':
             csv_writer.writeheader()
     
     speed_graph_start = 0
+
+    speed_graph_date = 0
 
     s = speedtest.Speedtest()
 
