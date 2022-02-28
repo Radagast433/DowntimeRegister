@@ -197,6 +197,16 @@ def SELECT_GRAPH(test_type):
 
         data = pd.read_csv(data_route + network_name + '_' + packet_loss_csv_route, index_col = None)
         
+        graph_name = data.iloc[-1]
+
+        graph_name_p1 = graph_name['Fecha']
+        graph_name_p1.replace('-', '_')
+
+        graph_name_p2 = graph_name['Hora']
+        graph_name_p2.replace('-', '_')
+
+        graph_name = graph_name_p1 + '_' + graph_name_p2
+
         sendp_data = data['Cantidad_de_paquetes_enviados'].sum()
         recievedp_data = data['Cantidad_de_paquetes_perdidos'].sum()
         
@@ -207,7 +217,7 @@ def SELECT_GRAPH(test_type):
         fig = plt.figure(figsize =(10, 7))
         plt.pie(data, labels = description_list)
         
-        graph_route = packet_loss_graphs_route + network_name + '_packetloss_graph.png'
+        graph_route = packet_loss_graphs_route + network_name + '_packetloss_graph_' + graph_name + '.png'
         
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         
@@ -217,6 +227,17 @@ def SELECT_GRAPH(test_type):
         
         data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
         
+        graph_name = data.iloc[[speed_graph_start]]
+
+        graph_name_p1 = graph_name['Fecha']
+        graph_name_p1.replace('-', '_')
+
+        graph_name_p2 = graph_name['Hora']
+        graph_name_p2.replace('-', '_')
+
+        graph_name = graph_name_p1 + '_' + graph_name_p2
+        graph_name = graph_name.to_string(index = False)
+
         fecha = data['Fecha']
         fecha = fecha[speed_graph_start + 1 : ]
 
@@ -247,7 +268,7 @@ def SELECT_GRAPH(test_type):
         plt.plot(fecha + ' ' + hora, download, label='Bajada (Mbps)', color='r')
         plt.plot(fecha + ' ' + hora, upload, label='Subida (Mbps)', color='b')
         plt.legend()
-        graph_route = speed_graphs_route + network_name + '_speed_graph.png'
+        graph_route = speed_graphs_route + network_name + '_speed_graph_' + graph_name + '.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         #plt.show()
         
@@ -622,7 +643,7 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
         }
     
     logbox.insert(tk.END, '\n\n Duración del test: ' + str(c) + '\n Cantidad_de_paquetes_enviados: ' + str(d) + '\n Cantidad_de_paquetes_recibidos: ' + str(e) + '\n Cantidad_de_paquetes_perdidos: ' + str(f) + '\n %_de_perdida: ' + str(g) + '%')
-    
+    logbox.see("end")
     #print(info)
     
     with open(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route, 'a', newline = '') as csv_file:
