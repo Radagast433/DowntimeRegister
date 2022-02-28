@@ -1468,6 +1468,6 @@ if __name__ == '__main__':
     
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
     
-    version = 'Connection Monitor V.1.0'
+    version = 'Connection Monitor V1.0'
 
     GUI()
