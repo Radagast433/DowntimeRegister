@@ -1169,15 +1169,24 @@ def GUI():
     
     packet_loss_entrybox = ttk.Entry(button_pack_frame_2)
     packet_loss_entrybox.pack(side = 'top', expand = True)
+
+    ############################################################################################
+    sub_top_buttons_pl_1 = ttk.Frame(button_pack_frame_2)
+    sub_top_buttons_pl_1.pack(side = 'top')
+
+    sub_top_buttons_pl_2 = ttk.Frame(button_pack_frame_2)
+    sub_top_buttons_pl_2.pack(side = 'top', pady = general_pady)
+
+    ################################################################################################
+
+    pl_begin_button = ttk.Button(sub_top_buttons_pl_1, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, packet_loss_log_box, pl_direction_combobox))
+    pl_begin_button.pack(side = 'left')
     
-    pl_graph_button = ttk.Button(button_pack_frame_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
-    pl_graph_button.pack(side = 'top', pady = general_pady)
-    
-    pl_begin_button = ttk.Button(button_pack_frame_2, text= 'Iniciar Prueba', command=lambda:PACKET_LOSS_TEST_BEGIN(packet_loss_entrybox, packet_loss_log_box, pl_direction_combobox))
-    pl_begin_button.pack(side = 'top')
-    
-    pl_stop_button = ttk.Button(button_pack_frame_2, text= 'Detener Prueba', command=lambda:PACKETLOSS_TEST_STOP())
-    pl_stop_button.pack(side = 'top', pady = general_pady)
+    pl_stop_button = ttk.Button(sub_top_buttons_pl_1, text= 'Detener Prueba', command=lambda:PACKETLOSS_TEST_STOP())
+    pl_stop_button.pack(side = 'left', pady = general_pady)
+
+    pl_graph_button = ttk.Button(sub_top_buttons_pl_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
+    pl_graph_button.pack(side = 'left')
     
     ################################### SPEED TESTS ###################################
     ##### Buttons and labels for  button_pack_frame_3 #####
