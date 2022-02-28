@@ -31,45 +31,7 @@ from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from tkcalendar import DateEntry
-#import PLG_Class
 
-'''
-class DATE_SELECTION():
-    
-    def __init__(self, test_type):
-        
-        self.frame = Toplevel()
-        self.frame.geometry("+10+10")
-        
-        self.lvl2_frame_1 = ttk.Frame(self.frame)
-        self.lvl2_frame_1.pack(side = 'top')
-        
-        self.lvl2_frame_2 = ttk.Frame(self.frame)
-        self.lvl2_frame_2.pack(side = 'top')
-        
-        self.start_date_combobox = ttk.Combobox(self.lvl2_frame_1, state = 'readonly')
-        self.start_date_combobox.pack(side = 'left')
-        
-        self.end_date_combobox = ttk.Combobox(self.lvl2_frame_1, state = 'readonly')
-        self.end_date_combobox.pack(side = 'left')
-        
-        self.ok_button = ttk.Button(self.lvl2_frame_2, text= 'Mostrar', command=lambda:self.SHOW())
-        
-        if test_type == 'ping':
-            
-            date_values = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, index_col = None)
-            date_values = date_values['Fecha']
-            
-            self.start_date_combobox['values'] = date_values
-            self.start_date_combobox.set(date_values[0])
-            
-            self.end_date_combobox['values'] = date_values
-            self.end_date_combobox.set(date_values[0])
-            
-        def SHOW(self):
-            
-            self.frame.destroy()
-'''
 
 class PROGRAMTASK():
 
@@ -152,17 +114,17 @@ class PROGRAMTASK():
         self.label_3 = ttk.Label(self.sub_gf2_2_1, text = 'Ingrese Hora:')
         self.label_3.pack(side = 'top')
      
-        self.hours = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 23, wrap = True, width = 2, state = "readonly", justify = CENTER)
+        self.hours = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 23, wrap = True, width = 3, state = "readonly", justify = CENTER)
         self.hours.pack(side = 'left')
 
         self.hours.set(int(self.actual_date_hour))
 
-        self.minutes = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 2, state = "readonly", justify = CENTER)
+        self.minutes = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 3, state = "readonly", justify = CENTER)
         self.minutes.pack(side = 'left')
 
         self.minutes.set(int(self.actual_date_minutes))
 
-        self.seconds = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 2, state = "readonly", justify = CENTER)
+        self.seconds = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 3, state = "readonly", justify = CENTER)
         self.seconds.pack(side = 'left')
 
         self.seconds.set(int(self.actual_date_seconds))
@@ -185,7 +147,7 @@ class PROGRAMTASK():
         self.label_4 = ttk.Label(self.general_frame_4)
         self.label_4.pack(side = 'left', padx = general_padx * 4)
 
-        self.cancel_button = ttk.Button(self.general_frame_4, text = 'Cancelar')
+        self.cancel_button = ttk.Button(self.general_frame_4, text = 'Cancelar', command=lambda:self.CANCEL())
         self.cancel_button.pack(side = 'left')
 
         self.frame.focus_force()
@@ -199,11 +161,19 @@ class PROGRAMTASK():
 
             self.iterator = True
 
+            return
+
         if self.iterator:
 
             self.interval_label.configure(text = 'Ingrese Inicio', background = 'green', foreground = 'white')
 
             self.iterator = False
+
+            return
+
+    def CANCEL(self):
+
+        self.frame.destroy()
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
