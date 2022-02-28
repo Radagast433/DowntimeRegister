@@ -790,7 +790,7 @@ def SPEED_TEST(wait_time, logbox, combobox):
                 csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
                 csv_writer.writerow(info)
             
-            logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+            logbox.insert(tk.END, f"\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
             logbox.see("end")
             
             #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
@@ -821,7 +821,7 @@ def SPEED_TEST(wait_time, logbox, combobox):
                 vsubida = data['Velocidad_Subida']
                 vsubida = vsubida[start_cut + 1 :]
                 
-                logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Varianza Bajada: {round(vbajada.var(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Varianza Subida: {round(vsubida.var(), 2)}\n\n Prueba finalizada con exito...\n")
+                logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n D. Estandar Bajada: {round(vbajada.std(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n D. Estandar Subida: {round(vsubida.std(), 2)}\n\n Prueba finalizada con exito...\n")
                 #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
                 logbox.see("end")
                 return
