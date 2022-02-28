@@ -121,8 +121,19 @@ def SELECT_GRAPH(test_type):
     network_name = GET_NETWORK_NAME()
     
     if test_type == 'ping':
-    
+
         data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+
+        graph_name = data.iloc[[ping_graph_start]]
+
+        graph_name_p1 = graph_name['Fecha']
+        graph_name_p1.replace('-', '_')
+
+        graph_name_p2 = graph_name['Hora']
+        graph_name_p2.replace('-', '_')
+
+        graph_name = graph_name_p1 + '_' + graph_name_p2
+        graph_name = graph_name.to_string(index = False)
         
         y = data['Ping_(ms)']
         y = y[ping_graph_start + 1 : ]
@@ -177,7 +188,7 @@ def SELECT_GRAPH(test_type):
         #plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
 
         plt.legend()
-        graph_route = graphs_route + network_name + '_ping_graph.png'
+        graph_route = ping_graphs_route + network_name + '_ping_graph_' + graph_name + '.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         
         GRAPH_LABEL(graph_route)
@@ -196,7 +207,7 @@ def SELECT_GRAPH(test_type):
         fig = plt.figure(figsize =(10, 7))
         plt.pie(data, labels = description_list)
         
-        graph_route = graphs_route + network_name + '_packetloss_graph.png'
+        graph_route = packet_loss_graphs_route + network_name + '_packetloss_graph.png'
         
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         
@@ -236,7 +247,7 @@ def SELECT_GRAPH(test_type):
         plt.plot(fecha + ' ' + hora, download, label='Bajada (Mbps)', color='r')
         plt.plot(fecha + ' ' + hora, upload, label='Subida (Mbps)', color='b')
         plt.legend()
-        graph_route = graphs_route + network_name + '_speed_graph.png'
+        graph_route = speed_graphs_route + network_name + '_speed_graph.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
         #plt.show()
         
@@ -427,8 +438,6 @@ def PING_TEST(logbox, test_time, direction):
         data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
         end_cut = data.last_valid_index()
-
-        data = []
 
         ping_data = data['Ping_(ms)']
         ping_data = ping_data[start_cut + 1 : end_cut + 1]
@@ -1350,7 +1359,13 @@ if __name__ == '__main__':
     
     data_route = 'Data/'
     
-    graphs_route = 'Graphs/'
+    #graphs_route = 'Graphs/'
+
+    ping_graphs_route = 'Graphs/Ping/'
+
+    packet_loss_graphs_route = 'Graphs/PacketLoss/'
+
+    speed_graphs_route = 'Graphs/Speed/'
     
     thread_count = multiprocessing.cpu_count()
     
