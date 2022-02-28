@@ -207,9 +207,16 @@ def SELECT_GRAPH(test_type):
         data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
         
         fecha = data['Fecha']
+        fecha = fecha[speed_graph_start + 1 : ]
+
         hora = data['Hora']
+        hora = hora[speed_graph_start + 1 : ]
+
         download = data['Velocidad_Bajada']
+        download = download[speed_graph_start + 1 : ]
+
         upload = data['Velocidad_Subida']
+        upload = upload[speed_graph_start +1 : ]
             
         plt.figure(figsize = (50, 15))
         plt.xlabel('Fecha')
@@ -226,8 +233,8 @@ def SELECT_GRAPH(test_type):
             plt.axhline(y=float(sub_2_speed_down_entry_speed.get()), color='g', linestyle='solid', label = 'Velocidad Bajada Usuario')
 
         plt.xticks(rotation=30, ha="right")
-        plt.plot(fecha + ' ' + hora, download, label='Bajada', color='r')
-        plt.plot(fecha + ' ' + hora, upload, label='Subida', color='b')
+        plt.plot(fecha + ' ' + hora, download, label='Bajada (Mbps)', color='r')
+        plt.plot(fecha + ' ' + hora, upload, label='Subida (Mbps)', color='b')
         plt.legend()
         graph_route = graphs_route + network_name + '_speed_graph.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
@@ -692,7 +699,8 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
 def SPEED_TEST(wait_time, logbox, combobox):
     
     global RUNNING_SPEED_TEST
-    
+    global speed_graph_start
+
     #print(dir(speedtest))
     
     # listado de servers https://williamyaps.github.io/wlmjavascript/servercli.html
@@ -790,7 +798,7 @@ def SPEED_TEST(wait_time, logbox, combobox):
                 csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
                 csv_writer.writerow(info)
             
-            logbox.insert(tk.END, f"\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+            logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
             logbox.see("end")
             
             #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
@@ -904,7 +912,7 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox):
         
         #wait_time = int(entrybox.get())
         
-        logbox.insert(tk.END, '\n Iniciando prueba...\n\n Conectado a : ' + GET_NETWORK_NAME() + '\n')
+        logbox.insert(tk.END, '\n Iniciando prueba...\n\n Conectado a : ' + GET_NETWORK_NAME())
         
         speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox, combobox,))
     
@@ -1394,6 +1402,8 @@ if __name__ == '__main__':
             csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
             csv_writer.writeheader()
     
+    speed_graph_start = 0
+
     s = speedtest.Speedtest()
 
     ############### Ping Reference values Entry boxes #####################
