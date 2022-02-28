@@ -862,6 +862,8 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox):
         logbox.insert(tk.END, '\n Revise los datos Ingresados...')
         
         logbox.see("end")
+
+        RUNNING_SPEED_TEST = False
     
         return
     
