@@ -50,6 +50,8 @@ class PROGRAMTASK():
         self.date_finish = ''
         self.time_finish = ''
 
+        self.duration = ''
+
         self.general_frame_1 = ttk.Frame(self.frame)
         self.general_frame_1.pack(side = 'top', padx = general_padx, pady = general_pady)
 
@@ -172,8 +174,6 @@ class PROGRAMTASK():
             self.date_start = self.calendar.get_date().strftime("%d") + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
             self.time_start = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
 
-            print(self.date_hour_start)
-
             return
 
         if self.iterator:
@@ -184,6 +184,8 @@ class PROGRAMTASK():
 
             self.date_finish = self.calendar.get_date().strftime("%d") + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
             self.time_finish = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
+            
+            self.duration = datetime.datetime.strptime(self.date_finish + ' ' + self.time_finish, '%d-%m-%Y %H-%M-%S') - datetime.datetime.strptime(self.date_start + ' ' + self.time_start, '%d-%m-%Y %H-%M-%S')
 
             #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
 
@@ -193,7 +195,7 @@ class PROGRAMTASK():
                 'Fecha_Termino' : self.date_finish,
                 'Hora_Termino' : self.time_finish,
                 'Prueba' : self.test_combobox.get(),
-                'Duracion' : 'Completar'
+                'Duracion' : str(self.duration)
                 }
             
             with open(program_route + program_csv_route, 'a', newline = '') as csv_file:
