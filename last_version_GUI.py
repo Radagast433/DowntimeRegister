@@ -44,8 +44,11 @@ class PROGRAMTASK():
 
         self.iterator = False
 
-        self.date_hour_start = []
-        self.date_hour_finish = []
+        self.date_start = ''
+        self.time_start = ''
+
+        self.date_finish = ''
+        self.time_finish = ''
 
         self.general_frame_1 = ttk.Frame(self.frame)
         self.general_frame_1.pack(side = 'top', padx = general_padx, pady = general_pady)
@@ -166,13 +169,10 @@ class PROGRAMTASK():
 
             self.iterator = True
 
-            self.date_hour_start.append(self.calendar.get_date().strftime("%d"))
-            self.date_hour_start.append(self.calendar.get_date().strftime("%m"))
-            self.date_hour_start.append(self.calendar.get_date().strftime("%Y"))
+            self.date_start = self.calendar.get_date().strftime("%d") + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+            self.time_start = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
 
-            self.date_hour_start.append(self.hours.get())
-            self.date_hour_start.append(self.minutes.get())
-            self.date_hour_start.append(self.seconds.get())
+            print(self.date_hour_start)
 
             return
 
@@ -182,13 +182,24 @@ class PROGRAMTASK():
 
             self.iterator = False
 
-            self.date_hour_finish.append(self.calendar.get_date().strftime("%d"))
-            self.date_hour_finish.append(self.calendar.get_date().strftime("%m"))
-            self.date_hour_finish.append(self.calendar.get_date().strftime("%Y"))
+            self.date_finish = self.calendar.get_date().strftime("%d") + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+            self.time_finish = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
 
-            self.date_hour_finish.append(self.hours.get())
-            self.date_hour_finish.append(self.minutes.get())
-            self.date_hour_finish.append(self.seconds.get())
+            #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
+
+            data_info = {
+                'Fecha_Inicio' : self.date_start,
+                'Hora_Inicio' : self.time_start,
+                'Fecha_Termino' : self.date_finish,
+                'Hora_Termino' : self.time_finish,
+                'Prueba' : self.test_combobox.get(),
+                'Duracion' : 'Completar'
+                }
+            
+            with open(program_route + program_csv_route, 'a', newline = '') as csv_file:
+                
+                csv_writer = csv.DictWriter(csv_file, fieldnames = program_data_fieldnames)
+                csv_writer.writerow(data_info)
 
             return
 
@@ -1525,6 +1536,8 @@ if __name__ == '__main__':
     
     results_route = 'Results/'
     
+    program_route = 'Program/'
+
     data_route = 'Data/'
     
     #graphs_route = 'Graphs/'
@@ -1535,6 +1548,8 @@ if __name__ == '__main__':
 
     speed_graphs_route = 'Graphs/Speed/'
     
+    program_csv_route = 'test_program.csv'
+
     thread_count = multiprocessing.cpu_count()
     
     #infinite = '9223372036854775807'
@@ -1602,6 +1617,17 @@ if __name__ == '__main__':
     speed_graph_date = 0
 
     s = speedtest.Speedtest()
+
+    ################## Program csv data ###########################
+
+    program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
+
+    if not os.path.exists(program_route + program_csv_route):
+    
+        with open(program_route + program_csv_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = program_data_fieldnames)
+            csv_writer.writeheader()
 
     ############### Ping Reference values Entry boxes #####################
 
