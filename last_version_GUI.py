@@ -1075,13 +1075,13 @@ def GUI():
     ##### Button pack frames #####
     
     button_pack_frame_1 = ttk.Frame(general_frame_1, borderwidth = frame_line_space, relief = RIDGE)
-    button_pack_frame_1.pack(side = 'left', padx = general_padx, pady = general_pady)
+    button_pack_frame_1.pack(side = 'left', padx = general_padx)
     
-    button_pack_frame_2 = ttk.Frame(general_frame_1, borderwidth = frame_line_space, relief = RIDGE)
-    button_pack_frame_2.pack(side = 'left', padx = general_padx * 12, pady = general_pady)
+    button_pack_frame_2 = ttk.Frame(general_frame_1)
+    button_pack_frame_2.pack(side = 'left', padx = general_padx * 10, pady = general_pady)
     
     button_pack_frame_3 = ttk.Frame(general_frame_1, borderwidth = frame_line_space, relief = RIDGE)
-    button_pack_frame_3.pack(side = 'left', padx = general_padx, pady = general_pady)
+    button_pack_frame_3.pack(side = 'left', padx = general_padx)
     
     #resources_usage_frame_4 = ttk.Frame(general_frame_1)
     #resources_usage_frame_4.pack(side = 'left', padx = general_padx, pady = general_pady)
@@ -1186,27 +1186,33 @@ def GUI():
     ################################### PACKET LOSS TEST ###################################
     ##### Buttons and labels for  button_pack_frame_2 #####
     
-    packet_loss_label_1 = ttk.Label(button_pack_frame_2, text = '*Test de perdida\nde Paquetes*\n\nIngrese dirección\npara enviar paquetes:', font=("Calibri",font_size), justify = 'center')
+    pl_subdivition_1 = ttk.Frame(button_pack_frame_2, borderwidth = frame_line_space, relief = RIDGE)
+    pl_subdivition_1.pack(side = 'top')
+
+    pl_subdivition_2 = ttk.Frame(button_pack_frame_2)
+    pl_subdivition_2.pack(side = 'top')
+
+    packet_loss_label_1 = ttk.Label(pl_subdivition_1, text = '*Test de perdida\nde Paquetes*\n\nIngrese dirección\npara enviar paquetes:', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_1.pack(side = 'top', expand = True)
     
     #pl_direction_combobox = ttk.Combobox(button_pack_frame_2, state = 'readonly')
-    pl_direction_combobox = ttk.Combobox(button_pack_frame_2)
+    pl_direction_combobox = ttk.Combobox(pl_subdivition_1)
     pl_direction_combobox.pack(side = 'top')
     
     pl_direction_combobox['values'] = directions_list
     #pl_direction_combobox.set(directions_list[0])
     
-    packet_loss_label_2 = ttk.Label(button_pack_frame_2, text = '\nIngrese cantidad\nde paquetes:', font=("Calibri",font_size), justify = 'center')
+    packet_loss_label_2 = ttk.Label(pl_subdivition_1, text = '\nIngrese cantidad\nde paquetes:', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_2.pack(side = 'top')
     
-    packet_loss_entrybox = ttk.Entry(button_pack_frame_2)
+    packet_loss_entrybox = ttk.Entry(pl_subdivition_1)
     packet_loss_entrybox.pack(side = 'top', expand = True)
 
     ############################################################################################
-    sub_top_buttons_pl_1 = ttk.Frame(button_pack_frame_2)
+    sub_top_buttons_pl_1 = ttk.Frame(pl_subdivition_1)
     sub_top_buttons_pl_1.pack(side = 'top')
 
-    sub_top_buttons_pl_2 = ttk.Frame(button_pack_frame_2)
+    sub_top_buttons_pl_2 = ttk.Frame(pl_subdivition_1)
     sub_top_buttons_pl_2.pack(side = 'top', pady = general_pady)
 
     ################################################################################################
@@ -1219,6 +1225,11 @@ def GUI():
 
     pl_graph_button = ttk.Button(sub_top_buttons_pl_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
     pl_graph_button.pack(side = 'left')
+
+    ######################################## Programar Pruebas ########################################
+
+    program_test = ttk.Button(pl_subdivition_2, text = 'Programar Pruebas')
+    program_test.pack(side = 'top', pady = general_pady * 2)
     
     ################################### SPEED TESTS ###################################
     ##### Buttons and labels for  button_pack_frame_3 #####
