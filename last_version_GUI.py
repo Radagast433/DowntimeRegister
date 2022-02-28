@@ -30,6 +30,7 @@ import matplotlib.animation as animation
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+from tkcalendar import DateEntry
 #import PLG_Class
 
 '''
@@ -69,6 +70,146 @@ class DATE_SELECTION():
             
             self.frame.destroy()
 '''
+
+class PROGRAMTASK():
+
+    def __init__(self, parent):
+
+        self.frame = Toplevel()
+        self.frame.geometry("+10+10")
+
+        self.parent = parent
+
+        self.iterator = False
+
+        self.general_frame_1 = ttk.Frame(self.frame)
+        self.general_frame_1.pack(side = 'top', padx = general_padx, pady = general_pady)
+
+        self.general_frame_2 = ttk.Frame(self.frame)
+        self.general_frame_2.pack(side = 'top', padx = general_padx, pady = general_pady)
+
+        self.general_frame_3 = ttk.Frame(self.frame)
+        self.general_frame_3.pack(side = 'top', padx = general_padx, pady = general_pady)
+
+        self.general_frame_4 = ttk.Frame(self.frame)
+        self.general_frame_4.pack(side = 'top', padx = general_padx, pady = general_pady)
+
+        ############################ GENERAL FRAME 1 ################################
+
+        self.label_1 = ttk.Label(self.general_frame_1, text = 'Seleccione Prueba:')
+        self.label_1.pack(side = 'top')
+
+        self.cmbx_values = ['Prueba de Ping', 'Prueba de Perdida de Paquetes', 'Prueba de Velocidad']
+
+        self.test_combobox = ttk.Combobox(self.general_frame_1, width = 30, state = 'readonly')
+        self.test_combobox.pack(side = 'top')
+
+        self.test_combobox['values'] = self.cmbx_values
+        self.test_combobox.set(self.cmbx_values[0])
+
+        #############################################################################
+        ############################ GENERAL FRAME 2 ################################
+
+        ################ Level 1 sub frames ################
+
+        self.sub_gf2_1 = ttk.Frame(self.general_frame_2)
+        self.sub_gf2_1.pack(side = 'left')
+
+        self.sub_gf2_2 = ttk.Frame(self.general_frame_2)
+        self.sub_gf2_2.pack(side = 'left', padx = general_padx * 3)
+
+        self.sub_gf2_3 = ttk.Frame(self.general_frame_2)
+        self.sub_gf2_3.pack(side = 'left')
+
+        #####################################################
+
+        ################ Level 2 sub frames #################
+
+        self.sub_gf2_2_1 = ttk.Frame(self.sub_gf2_2)
+        self.sub_gf2_2_1.pack(side = 'top')
+
+        self.sub_gf2_2_2 = ttk.Frame(self.sub_gf2_2)
+        self.sub_gf2_2_2.pack(side = 'top')
+
+        ##############################################################################
+
+        self.actual_date_year = datetime.datetime.now().strftime("%Y")
+        self.actual_date_month = datetime.datetime.now().strftime("%m")
+        self.actual_date_day = datetime.datetime.now().strftime("%d")
+
+        self.actual_date_hour = datetime.datetime.now().strftime("%H")
+        self.actual_date_minutes = datetime.datetime.now().strftime("%M")
+        self.actual_date_seconds = datetime.datetime.now().strftime("%S")
+
+        self.label_2 = ttk.Label(self.sub_gf2_1, text = 'Ingrese Fecha:')
+        self.label_2.pack(side = 'top')
+
+        self.calendar = DateEntry(self.sub_gf2_1, width = 12, year = int(self.actual_date_year), month = int(self.actual_date_month), day = int(self.actual_date_day), background = 'darkblue', foreground = 'white', borderwidth = 2, state = "readonly")
+        self.calendar.pack(side = 'top')
+
+        ###################################################################################
+
+        self.label_3 = ttk.Label(self.sub_gf2_2_1, text = 'Ingrese Hora:')
+        self.label_3.pack(side = 'top')
+     
+        self.hours = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 23, wrap = True, width = 2, state = "readonly", justify = CENTER)
+        self.hours.pack(side = 'left')
+
+        self.hours.set(int(self.actual_date_hour))
+
+        self.minutes = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 2, state = "readonly", justify = CENTER)
+        self.minutes.pack(side = 'left')
+
+        self.minutes.set(int(self.actual_date_minutes))
+
+        self.seconds = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 2, state = "readonly", justify = CENTER)
+        self.seconds.pack(side = 'left')
+
+        self.seconds.set(int(self.actual_date_seconds))
+
+        ##############################################################################################
+
+        self.add_button = ttk.Button(self.sub_gf2_3, text = 'Agregar', command=lambda:self.ADD())
+        self.add_button.pack(side = 'top')
+
+        ##############################################################################################
+
+        self.interval_label = ttk.Label(self.general_frame_3, text = 'Ingrese Inicio', background = 'green', foreground = 'white')
+        self.interval_label.pack(side = 'top')
+
+        ###############################################################################################
+
+        self.program_button = ttk.Button(self.general_frame_4, text = 'Programar')
+        self.program_button.pack(side = 'left')
+
+        self.label_4 = ttk.Label(self.general_frame_4)
+        self.label_4.pack(side = 'left', padx = general_padx * 4)
+
+        self.cancel_button = ttk.Button(self.general_frame_4, text = 'Cancelar')
+        self.cancel_button.pack(side = 'left')
+
+        self.frame.focus_force()
+        center(self.parent, self.frame)
+
+    def ADD(self):
+        
+        if not self.iterator:
+
+            self.interval_label.configure(text = 'Ingrese Termino', background = 'red', foreground = 'yellow')
+
+            self.iterator = True
+
+        if self.iterator:
+
+            self.interval_label.configure(text = 'Ingrese Inicio', background = 'green', foreground = 'white')
+
+            self.iterator = False
+
+def center(parent, actual):                     # Funcion para centrar ventanas
+    
+    actual.update()
+    actual_pos = "+" + str(((parent.winfo_width()-actual.winfo_width())//2)+parent.winfo_x()) + "+" + str(((parent.winfo_height()-actual.winfo_height())//2)+parent.winfo_y())
+    actual.geometry(actual_pos)
 
 class GRAPH_LABEL():
     
@@ -361,8 +502,8 @@ def PING_TEST(logbox, test_time, direction):
 
     data = []
 
-    start_date = datetime.datetime.now().strftime("%d-%m-%Y")  # date
-    start_hour = datetime.datetime.now().strftime("%H-%M-%S") 
+    #start_date = datetime.datetime.now().strftime("%d-%m-%Y")  # date
+    #start_hour = datetime.datetime.now().strftime("%H-%M-%S") 
 
     for i in range(test_time):
         
@@ -1228,7 +1369,7 @@ def GUI():
 
     ######################################## Programar Pruebas ########################################
 
-    program_test = ttk.Button(pl_subdivition_2, text = 'Programar Pruebas')
+    program_test = ttk.Button(pl_subdivition_2, text = 'Programar Pruebas', command=lambda:PROGRAMTASK(root))
     program_test.pack(side = 'top', pady = general_pady * 2)
     
     ################################### SPEED TESTS ###################################
@@ -1483,6 +1624,16 @@ if __name__ == '__main__':
     
     sub_2_speed_down_entry_speed = None
     
+    ################################# Programmed tasks (Bool) #####################################
+
+    ping_programmed = False
+
+    packet_loss_programmed = False
+
+    speed_programmed = False
+
+    ######################################################################
+
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
     
     version = 'Connection Monitor V1.0'
