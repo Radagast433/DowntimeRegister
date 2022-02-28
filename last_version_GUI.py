@@ -718,6 +718,8 @@ def SPEED_TEST(wait_time, logbox, combobox):
         logbox.insert(tk.END, '\n ' + str(key) + ' : ' + str(best_sv[key]))
         logbox.see("end")
     '''
+
+    network_name = GET_NETWORK_NAME()
         
     logbox.insert(tk.END, '\n ')
         #print(key, ' : ', best_sv[key])
@@ -742,6 +744,13 @@ def SPEED_TEST(wait_time, logbox, combobox):
         RUNNING_SPEED_TEST = False
 
         return
+
+    data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
+    
+    start_cut = data.last_valid_index()
+    speed_graph_start = start_cut
+
+    data = []
     
     # Muestra velocidad en Megabytes
     #speed_trans_unit = 1048576
@@ -774,7 +783,7 @@ def SPEED_TEST(wait_time, logbox, combobox):
                 'Velocidad_Subida' : upspeed
                 }
             
-            with open(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
+            with open(data_route + network_name + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
                 
                 csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
                 csv_writer.writerow(info)
@@ -792,7 +801,7 @@ def SPEED_TEST(wait_time, logbox, combobox):
                 speed_test_results_fieldnames[4] : upspeed
                 }
             
-            with open(results_route + GET_NETWORK_NAME() + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
+            with open(results_route + network_name + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
                 
                 csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
             
@@ -802,7 +811,7 @@ def SPEED_TEST(wait_time, logbox, combobox):
                 
                 RUNNING_SPEED_TEST = False
 
-                data = pd.read_csv('Data/' + GET_NETWORK_NAME() + '_' + speed_test_csv_route, index_col = None)
+                data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
         
                 vbajada = data['Velocidad_Bajada']
                 vsubida = data['Velocidad_Subida']
