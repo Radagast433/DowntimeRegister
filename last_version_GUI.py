@@ -421,6 +421,8 @@ def PING_TEST(logbox, test_time, direction):
 
         end_cut = data.last_valid_index()
 
+        data = []
+
         ping_data = data['Ping_(ms)']
         ping_data = ping_data[start_cut + 1 : end_cut + 1]
         
@@ -814,7 +816,10 @@ def SPEED_TEST(wait_time, logbox, combobox):
                 data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
         
                 vbajada = data['Velocidad_Bajada']
+                vbajada = vbajada[start_cut + 1 :]
+
                 vsubida = data['Velocidad_Subida']
+                vsubida = vsubida[start_cut + 1 :]
                 
                 logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Varianza Bajada: {round(vbajada.var(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Varianza Subida: {round(vsubida.var(), 2)}\n\n Prueba finalizada con exito...\n")
                 #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
