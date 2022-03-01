@@ -65,6 +65,17 @@ class PROGRAMTASK():
         self.general_frame_4 = ttk.Frame(self.frame)
         self.general_frame_4.pack(side = 'top', padx = general_padx, pady = general_pady)
 
+        ############################ GENERAL FRAME 4 SUBDIVITIONS ###########################
+
+        self.gf4_sub_1 = ttk.Frame(self.general_frame_4)
+        self.gf4_sub_1.pack(side = 'left')
+
+        self.gf4_sub_2 = ttk.Frame(self.general_frame_4)
+        self.gf4_sub_2.pack(side = 'left', padx = general_padx * 3)
+
+        self.gf4_sub_3 = ttk.Frame(self.general_frame_4)
+        self.gf4_sub_3.pack(side = 'left')
+
         ############################ GENERAL FRAME 1 ################################
 
         self.label_1 = ttk.Label(self.general_frame_1, text = 'Seleccione Prueba:')
@@ -150,14 +161,17 @@ class PROGRAMTASK():
 
         ###############################################################################################
 
-        self.program_button = ttk.Button(self.general_frame_4, text = 'Programar', command=lambda:self.PROGRAM())
-        self.program_button.pack(side = 'left')
+        self.program_button = ttk.Button(self.gf4_sub_1, text = 'Programar', command=lambda:self.PROGRAM())
+        self.program_button.pack(side = 'top')
 
-        self.delete_button = ttk.Button(self.general_frame_4, text = 'Borrar Pruebas\n Programadas', command=lambda:self.DELETE())
-        self.delete_button.pack(side = 'left', padx = general_padx * 2)
+        self.delete_button = ttk.Button(self.gf4_sub_1, text = 'Borrar Pruebas\n Programadas', command=lambda:self.DELETE())
+        self.delete_button.pack(side = 'top', padx = general_padx * 2)
 
-        self.cancel_button = ttk.Button(self.general_frame_4, text = 'Cerrar', command=lambda:self.CANCEL())
-        self.cancel_button.pack(side = 'left')
+        self.cancel_program_button = ttk.Button(self.gf4_sub_3, text = 'Detener Pruebas\nProgramadas', command=lambda:self.STOPALL())
+        self.cancel_program_button.pack(side = 'top')
+
+        self.cancel_button = ttk.Button(self.gf4_sub_3, text = 'Cerrar', command=lambda:self.CANCEL())
+        self.cancel_button.pack(side = 'top')
 
         self.frame.focus_force()
         center(self.parent, self.frame)
@@ -206,6 +220,18 @@ class PROGRAMTASK():
                 csv_writer.writerow(data_info)
 
             return
+
+    def STOPALL(self):
+
+        global RUNNING_PACKET_TEST
+        global RUNNING_PING_TEST
+        global RUNNING_SPEED_TEST
+        
+        RUNNING_PACKET_TEST = False
+        RUNNING_PING_TEST = False
+        RUNNING_SPEED_TEST = False
+
+        messagebox.showinfo(message = 'TODAS LAS PRUEBAS FUERON\nDETENIDAS EXITOSAMENTE', title = 'Detencion de Pruebas...')
 
     def CANCEL(self):
 
@@ -269,7 +295,7 @@ class PROGRAMTASK():
 
         self.scrolled_info.insert(tk.END, self.data)
 
-        self.accept_button = ttk.Button(self.general_frame_7, text = 'Aceptar', command=lambda:(self.info_frame.destroy(), self.frame.destroy()))
+        self.accept_button = ttk.Button(self.general_frame_7, text = 'Aceptar', command=lambda:(self.info_frame.destroy(), self.frame.destroy(), self.START_PROGRAM()))
         self.accept_button.pack(side = 'left')
 
         self.label_8 = ttk.Label(self.general_frame_7)
@@ -282,6 +308,32 @@ class PROGRAMTASK():
 
         center(self.frame, self.info_frame)
 
+    def START_PROGRAM(self):
+
+        self.programmed_thread = threading.Thread(name = 'ProgramThread', target = TEST_PROGRAMMER, daemon=True, args=())
+        self.programmed_thread.start()
+
+def TEST_PROGRAMMER():
+    #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
+    #self.cmbx_values = ['Prueba de Ping', 'Prueba de Perdida de Paquetes', 'Prueba de Velocidad']
+    test = pd.read_csv(program_route + program_csv_route, index_col = None)
+
+    date_start = test['Fecha_Inicio']
+    time_start = test['Hora_Inicio']
+    test_type = test['Prueba']
+    duration = test['Duracion']
+
+    while RUNNING_PROGRAMMER:
+
+        for i in range(len(test_type)):
+
+            if test_type.iloc(i) == 'Prueba de Ping' and not RUNNING_PING_TEST:
+
+                PING_TEST_BEGIN(duration.iloc(i), ping_log_box, ping_direction_combobox))
+
+
+
+    print(date_start, time_start, test_type, duration)
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
@@ -763,11 +815,11 @@ def PING_TEST_STOP():
         
     else: return
 
-def PING_TEST_BEGIN(entrybox, logbox, direction_combobox):
+def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
     
     global RUNNING_PING_TEST
     
-    if not VALIDATE_ENTRY_BOX_VALUE(entrybox.get()):
+    if not VALIDATE_ENTRY_BOX_VALUE(entrybox_value):
         
         logbox.delete('1.0', tk.END)
         
@@ -800,7 +852,7 @@ def PING_TEST_BEGIN(entrybox, logbox, direction_combobox):
         
         logbox.insert(tk.END, '\n Iniciando prueba de Ping a ' + direction_combobox.get() + '...')
         
-        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox.get()), direction_combobox.get(), ))
+        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(), ))
         
         ping_thread.start()
 
@@ -1262,6 +1314,8 @@ def GUI():
     global sub_2_ping_max_entry
     global sub_1_speed_up_entry_speed
     global sub_2_speed_down_entry_speed
+    global ping_log_box
+    global ping_direction_combobox
 
     root = Tk()
     root.title("Connection monitor")
@@ -1328,7 +1382,7 @@ def GUI():
     ping_direction_combobox.pack(side = 'top')
     
     ping_direction_combobox['values'] = directions_list
-    #ping_direction_combobox.set(directions_list[0])
+    ping_direction_combobox.set(directions_list[0])
 
     #####################################################################################
 
@@ -1381,7 +1435,7 @@ def GUI():
     sub_3 = ttk.Frame(button_pack_frame_1)
     sub_3.pack(side = 'top', pady = general_pady)
     
-    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox, ping_log_box, ping_direction_combobox))
+    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox.get(), ping_log_box, ping_direction_combobox))
     ping_begin_button.pack(side = 'left')
 
     #sub_3_label_1 = ttk.Label(sub_2)
@@ -1602,6 +1656,7 @@ if __name__ == '__main__':
     RUNNING_PING_TEST = False
     RUNNING_PACKET_TEST = False
     RUNNING_SPEED_TEST = False
+    RUNNING_PROGRAMMER = False
     RESOURCES = True
     
     name = ''
@@ -1724,6 +1779,11 @@ if __name__ == '__main__':
     packet_loss_programmed = False
 
     speed_programmed = False
+
+    ######################################################################
+
+    ping_log_box = None
+    ping_direction_combobox = None
 
     ######################################################################
 
