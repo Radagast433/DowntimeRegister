@@ -187,7 +187,8 @@ class PROGRAMTASK():
             self.time_finish = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
             
             self.duration = datetime.datetime.strptime(self.date_finish + ' ' + self.time_finish, '%d-%m-%Y %H-%M-%S') - datetime.datetime.strptime(self.date_start + ' ' + self.time_start, '%d-%m-%Y %H-%M-%S')
-
+            self.duration = int(round(self.duration / datetime.timedelta(minutes = 1)))
+    
             #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
 
             data_info = {
