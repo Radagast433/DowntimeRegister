@@ -27,6 +27,7 @@ import ctypes
 import psutil
 import matplotlib.animation as animation
 from tkinter import messagebox
+import sched
 
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -81,7 +82,7 @@ class PROGRAMTASK():
         self.label_1 = ttk.Label(self.general_frame_1, text = 'Seleccione Prueba:')
         self.label_1.pack(side = 'top')
 
-        self.cmbx_values = ['Prueba de Ping', 'Prueba de Perdida de Paquetes', 'Prueba de Velocidad']
+        self.cmbx_values = ['Prueba_de_Ping', 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
 
         self.test_combobox = ttk.Combobox(self.general_frame_1, width = 30, state = 'readonly')
         self.test_combobox.pack(side = 'top')
@@ -309,31 +310,47 @@ class PROGRAMTASK():
         center(self.frame, self.info_frame)
 
     def START_PROGRAM(self):
-
-        self.programmed_thread = threading.Thread(name = 'ProgramThread', target = TEST_PROGRAMMER, daemon=True, args=())
+        #print('START_PROGRAM Control')
+        self.programmed_thread = threading.Thread(name = 'ProgramThread', target = TEST_PROGRAMMER, daemon=True)
         self.programmed_thread.start()
 
 def TEST_PROGRAMMER():
+    
+    global RUNNING_PROGRAMMER
+    
     #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
     #self.cmbx_values = ['Prueba de Ping', 'Prueba de Perdida de Paquetes', 'Prueba de Velocidad']
-    test = pd.read_csv(program_route + program_csv_route, index_col = None)
+    test = pd.read_csv(program_route + program_csv_route)
+    rows_list = test.values.tolist()
 
-    date_start = test['Fecha_Inicio']
+    global i
+
+    i = 0
+
+    while i < len(rows_list):
+
+        if not RUNNING_PING_TEST:
+
+            event = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1]), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+
+            tasks_scheduler.run()
+
+            RUNNING_PROGRAMMER = True
+
+    RUNNING_PROGRAMMER = False
+
+
+    '''date_start = test['Fecha_Inicio']
     time_start = test['Hora_Inicio']
     test_type = test['Prueba']
     duration = test['Duracion']
+    RUNNING_PROGRAMMER = True
 
-    while RUNNING_PROGRAMMER:
-
-        for i in range(len(test_type)):
-
-            if test_type.iloc(i) == 'Prueba de Ping' and not RUNNING_PING_TEST:
-
-                PING_TEST_BEGIN(duration.iloc(i), ping_log_box, ping_direction_combobox))
+    print(test_type.iloc(0))'''
 
 
 
-    print(date_start, time_start, test_type, duration)
+    #print(date_start, time_start, test_type, duration)
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
@@ -387,7 +404,7 @@ def GET_NETWORK_NAME():
         return 'Ethernet'
         
     
-def SELECT_GRAPH(test_type):
+def SELECT_GRAPH(test_type, is_task):
 
     network_name = GET_NETWORK_NAME()
     
@@ -461,6 +478,10 @@ def SELECT_GRAPH(test_type):
         plt.legend()
         graph_route = ping_graphs_route + network_name + '_ping_graph_' + graph_name + '.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
+
+        if is_task == 'task':
+
+            return
         
         GRAPH_LABEL(graph_route)
         
@@ -608,7 +629,7 @@ def GET_JITTER(ping_data, start, finish):
         
         return for_return, lost_packets
 
-def PING_TEST(logbox, test_time, direction):
+def PING_TEST(logbox, test_time, direction, is_task):
     
     global elapsed_time
     global acc_time
@@ -804,6 +825,8 @@ def PING_TEST(logbox, test_time, direction):
     elapsed_time = 0
         
     RUNNING_PING_TEST = False
+
+    SELECT_GRAPH('ping', is_task)
     
 def PING_TEST_STOP():
     
@@ -815,11 +838,11 @@ def PING_TEST_STOP():
         
     else: return
 
-def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
+def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
     
     global RUNNING_PING_TEST
     
-    if not VALIDATE_ENTRY_BOX_VALUE(entrybox_value):
+    if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox_value)):
         
         logbox.delete('1.0', tk.END)
         
@@ -845,14 +868,14 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = ping_data_fieldnames)
             csv_writer.writeheader()'''
- 
+
         RUNNING_PING_TEST = True
         
         logbox.delete('1.0', tk.END)
         
         logbox.insert(tk.END, '\n Iniciando prueba de Ping a ' + direction_combobox.get() + '...')
         
-        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(), ))
+        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(), is_task,))
         
         ping_thread.start()
 
@@ -1266,11 +1289,12 @@ def EXIT_APP(root):
     global RUNNING_PACKET_TEST
     global RUNNING_PING_TEST
     global RUNNING_SPEED_TEST
+    global RUNNING_PROGRAMMER
 
     RUNNING_PACKET_TEST = False
     RUNNING_PING_TEST = False
     RUNNING_SPEED_TEST = False
-    
+    RUNNING_PROGRAMMER = False
     RESOURCES = False
 
     plt.close("all")
@@ -1435,7 +1459,7 @@ def GUI():
     sub_3 = ttk.Frame(button_pack_frame_1)
     sub_3.pack(side = 'top', pady = general_pady)
     
-    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox.get(), ping_log_box, ping_direction_combobox))
+    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox.get(), ping_log_box, ping_direction_combobox, 'normal'))
     ping_begin_button.pack(side = 'left')
 
     #sub_3_label_1 = ttk.Label(sub_2)
@@ -1447,7 +1471,7 @@ def GUI():
     inf_ping_button = ttk.Button(sub_3, text= 'INF', command=lambda:duration_entrybox.insert(tk.END, '9223372036854775807'))
     inf_ping_button.pack(side = 'left')
 
-    ping_graph_button = ttk.Button(sub_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping'))
+    ping_graph_button = ttk.Button(sub_3, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('ping', 'normal'))
     ping_graph_button.pack(side = 'left')
 
     #sub_2_label_1 = ttk.Label(sub_3)
@@ -1496,7 +1520,7 @@ def GUI():
     pl_stop_button = ttk.Button(sub_top_buttons_pl_1, text= 'Detener Prueba', command=lambda:PACKETLOSS_TEST_STOP())
     pl_stop_button.pack(side = 'left', pady = general_pady)
 
-    pl_graph_button = ttk.Button(sub_top_buttons_pl_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss'))
+    pl_graph_button = ttk.Button(sub_top_buttons_pl_2, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('packetloss', 'normal'))
     pl_graph_button.pack(side = 'left')
 
     ######################################## Programar Pruebas ########################################
@@ -1581,7 +1605,7 @@ def GUI():
     inf_speed_button = ttk.Button(sub_5, text= 'INF', command=lambda:speedtest_entrybox.insert(tk.END, '9223372036854775807'))
     inf_speed_button.pack(side = 'left', pady = general_pady)
     
-    speedtest_graph_button = ttk.Button(sub_5, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed'))
+    speedtest_graph_button = ttk.Button(sub_5, text= 'Mostrar Grafico', command=lambda:SELECT_GRAPH('speed', 'normal'))
     speedtest_graph_button.pack(side = 'left')
     
     ##### Buttons and labels for  resources_usage_frame_4 #####
@@ -1643,8 +1667,10 @@ if __name__ == '__main__':
     screen_width = GetSystemMetrics(0)
     screen_height = GetSystemMetrics(1)
     
-    general_padx = int(screen_width/153.6)
-    general_pady = int(screen_width/136.6)
+    general_padx = int(screen_width / 153.6)
+    general_pady = int(screen_width / 136.6)
+
+    tasks_scheduler = sched.scheduler(time.localtime, time.sleep)
     
     gui_lines_color = 'black'
     frame_line_space = 4
@@ -1784,6 +1810,10 @@ if __name__ == '__main__':
 
     ping_log_box = None
     ping_direction_combobox = None
+    
+    ######################################################################
+
+    i = 0
 
     ######################################################################
 
