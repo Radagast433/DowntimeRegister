@@ -331,7 +331,7 @@ def TEST_PROGRAMMER():
 
         if not RUNNING_PING_TEST:
 
-            event = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1]), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+            event = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
 
             tasks_scheduler.run()
 
