@@ -26,6 +26,7 @@ import multiprocessing
 import ctypes
 import psutil
 import matplotlib.animation as animation
+from tkinter import messagebox
 
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -38,7 +39,7 @@ class PROGRAMTASK():
     def __init__(self, parent):
 
         self.frame = Toplevel()
-        self.frame.geometry("+10+10")
+        #self.frame.geometry("+10+10")
 
         self.parent = parent
 
@@ -149,7 +150,7 @@ class PROGRAMTASK():
 
         ###############################################################################################
 
-        self.program_button = ttk.Button(self.general_frame_4, text = 'Programar')
+        self.program_button = ttk.Button(self.general_frame_4, text = 'Programar', command=lambda:self.PROGRAM())
         self.program_button.pack(side = 'left')
 
         self.label_4 = ttk.Label(self.general_frame_4)
@@ -208,6 +209,20 @@ class PROGRAMTASK():
     def CANCEL(self):
 
         self.frame.destroy()
+        
+    def PROGRAM(self):
+
+        if self.iterator:
+
+            self.option = messagebox.askretrycancel(message = "Por Favor, Ingrese Fecha de Termino", title = "Revise los datos ingresados...", parent = self.frame)
+
+            if not self.option:
+
+                self.CANCEL()
+
+        self.info_frame = Toplevel()
+
+
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
