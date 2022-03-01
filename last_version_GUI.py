@@ -222,12 +222,53 @@ class PROGRAMTASK():
 
         self.info_frame = Toplevel()
 
+        self.general_frame_5 = ttk.Frame(self.info_frame)
+        self.general_frame_5.pack(side = 'top')
+
+        self.general_frame_6 = ttk.Frame(self.info_frame)
+        self.general_frame_6.pack(side = 'top')
+
+        self.general_frame_7 = ttk.Frame(self.info_frame)
+        self.general_frame_7.pack(side = 'top')
+
+        ################################################################
+
+        self.label_5 = ttk.Label(self.general_frame_5, text = '### Resumen ###')
+        self.label_5.pack(side = 'top')
+
+        self.label_6 = ttk.Label(self.general_frame_6, text = 'Prueba: ' + self.test_combobox.get())
+        self.label_6.pack(side = 'top')
+
+        self.label_7 = ttk.Label(self.general_frame_6, text = 'Horarios:')
+        self.label_7.pack(side = 'top')
+
+        self.data = pd.read_csv(program_route + program_csv_route, index_col = None)
+
+        self.scrolled_info = scrolledtext.ScrolledText(self.general_frame_6, width = int(round(GetSystemMetrics(0) / 21.33, 0)))
+        self.scrolled_info.pack(side = 'top')
+        
+        self.scrolled_info.delete('1.0', tk.END)
+
+        self.scrolled_info.insert(tk.END, '\n')
+
+        self.scrolled_info.insert(tk.END, self.data)
+
+        self.accept_button = ttk.Button(self.general_frame_7, text = 'Aceptar', command=lambda:(self.info_frame.destroy(), self.frame.destroy()))
+        self.accept_button.pack(side = 'left')
+
+        self.label_8 = ttk.Label(self.general_frame_7)
+        self.label_8.pack(side = 'left', padx = general_padx * 3)
+
+        self.accept_button = ttk.Button(self.general_frame_7, text = 'Cancelar', command=lambda:self.info_frame.destroy())
+        self.accept_button.pack(side = 'left')
+
+        center(self.frame, self.info_frame)
 
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
     actual.update()
-    actual_pos = "+" + str(((parent.winfo_width()-actual.winfo_width())//2)+parent.winfo_x()) + "+" + str(((parent.winfo_height()-actual.winfo_height())//2)+parent.winfo_y())
+    actual_pos = "+" + str(((parent.winfo_width() - actual.winfo_width()) // 2) + parent.winfo_x()) + "+" + str(((parent.winfo_height() - actual.winfo_height()) // 2) + parent.winfo_y())
     actual.geometry(actual_pos)
 
 class GRAPH_LABEL():
