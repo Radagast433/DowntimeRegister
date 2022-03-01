@@ -153,10 +153,10 @@ class PROGRAMTASK():
         self.program_button = ttk.Button(self.general_frame_4, text = 'Programar', command=lambda:self.PROGRAM())
         self.program_button.pack(side = 'left')
 
-        self.label_4 = ttk.Label(self.general_frame_4)
-        self.label_4.pack(side = 'left', padx = general_padx * 4)
+        self.delete_button = ttk.Button(self.general_frame_4, text = 'Borrar Pruebas\n Programadas', command=lambda:self.DELETE())
+        self.delete_button.pack(side = 'left', padx = general_padx * 2)
 
-        self.cancel_button = ttk.Button(self.general_frame_4, text = 'Cancelar', command=lambda:self.CANCEL())
+        self.cancel_button = ttk.Button(self.general_frame_4, text = 'Cerrar', command=lambda:self.CANCEL())
         self.cancel_button.pack(side = 'left')
 
         self.frame.focus_force()
@@ -209,6 +209,16 @@ class PROGRAMTASK():
     def CANCEL(self):
 
         self.frame.destroy()
+
+    def DELETE(self):
+
+        sysfile = open(program_route + program_csv_route, 'w+')
+        sysfile.close()
+
+        with open(program_route + program_csv_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = program_data_fieldnames)
+            csv_writer.writeheader()
         
     def PROGRAM(self):
 
@@ -219,6 +229,10 @@ class PROGRAMTASK():
             if not self.option:
 
                 self.CANCEL()
+
+            elif self.option:
+
+                return
 
         self.info_frame = Toplevel()
 
@@ -243,8 +257,9 @@ class PROGRAMTASK():
         self.label_7.pack(side = 'top')
 
         self.data = pd.read_csv(program_route + program_csv_route, index_col = None)
-
-        self.scrolled_info = scrolledtext.ScrolledText(self.general_frame_6, width = int(round(GetSystemMetrics(0) / 21.33, 0)))
+        
+        #self.scrolled_info = scrolledtext.ScrolledText(self.general_frame_6, width = int(round(GetSystemMetrics(0) / 21.33, 0)))
+        self.scrolled_info = scrolledtext.ScrolledText(self.general_frame_6, width = 90)
         self.scrolled_info.pack(side = 'top')
         
         self.scrolled_info.delete('1.0', tk.END)
@@ -261,6 +276,8 @@ class PROGRAMTASK():
 
         self.accept_button = ttk.Button(self.general_frame_7, text = 'Cancelar', command=lambda:self.info_frame.destroy())
         self.accept_button.pack(side = 'left')
+
+        self.info_frame.focus_force()
 
         center(self.frame, self.info_frame)
 
