@@ -327,27 +327,29 @@ def TEST_PROGRAMMER():
 
         if rows_list[i][4] == 'Prueba_de_Ping' and not RUNNING_PING_TEST:#, 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
 
-            event1 = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+            date_list = rows_list[i][0].split('-')
 
-            tasks_scheduler.run()
+            print(date_list)
+
+            event1 = tasks_scheduler.enterabs(time.strptime(date_list[2] + '-' + date_list[1] + '-' + date_list[0] + ' ' + rows_list[i][1], '%Y-%m-%d %H-%M-%S'), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+
+            print(event1)
 
             RUNNING_PROGRAMMER = True
 
         elif rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
 
-            event2 = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, PACKET_LOSS_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
-
-            tasks_scheduler.run()
-
+            event2 = tasks_scheduler.enterabs(time.strptime(date_list[2] + '-' + date_list[1] + '-' + date_list[0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
+        
             RUNNING_PROGRAMMER = True
 
         elif rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
 
-            event3 = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, SPEED_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
-
-            tasks_scheduler.run()
+            event3 = tasks_scheduler.enterabs(datetime.datetime.strptime(date_list[2] + '-' + date_list[1] + '-' + date_list[0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 3, SPEED_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
 
             RUNNING_PROGRAMMER = True
+
+        tasks_scheduler.run()
 
 
 
@@ -1684,7 +1686,7 @@ if __name__ == '__main__':
     general_padx = int(screen_width / 153.6)
     general_pady = int(screen_width / 136.6)
 
-    tasks_scheduler = sched.scheduler(time.localtime, time.sleep)
+    tasks_scheduler = sched.scheduler(time.time, time.sleep)
     
     gui_lines_color = 'black'
     frame_line_space = 4
