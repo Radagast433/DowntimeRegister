@@ -35,7 +35,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkcalendar import DateEntry
 
 
-class PROGRAMTASK():
+'''class PROGRAMTASK():
 
     def __init__(self, parent):
 
@@ -340,17 +340,17 @@ def TEST_PROGRAMMER():
     RUNNING_PROGRAMMER = False
 
 
-    '''date_start = test['Fecha_Inicio']
-    time_start = test['Hora_Inicio']
-    test_type = test['Prueba']
-    duration = test['Duracion']
-    RUNNING_PROGRAMMER = True
+    #date_start = test['Fecha_Inicio']
+    #time_start = test['Hora_Inicio']
+    #test_type = test['Prueba']
+    #duration = test['Duracion']
+    #RUNNING_PROGRAMMER = True
 
-    print(test_type.iloc(0))'''
+    print(test_type.iloc(0))
 
 
 
-    #print(date_start, time_start, test_type, duration)
+    #print(date_start, time_start, test_type, duration)'''
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
@@ -404,7 +404,7 @@ def GET_NETWORK_NAME():
         return 'Ethernet'
         
     
-def SELECT_GRAPH(test_type, is_task):
+def SELECT_GRAPH(test_type):
 
     network_name = GET_NETWORK_NAME()
     
@@ -478,10 +478,6 @@ def SELECT_GRAPH(test_type, is_task):
         plt.legend()
         graph_route = ping_graphs_route + network_name + '_ping_graph_' + graph_name + '.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
-
-        if is_task == 'task':
-
-            return
         
         GRAPH_LABEL(graph_route)
         
@@ -629,7 +625,7 @@ def GET_JITTER(ping_data, start, finish):
         
         return for_return, lost_packets
 
-def PING_TEST(logbox, test_time, direction, is_task):
+def PING_TEST(logbox, test_time, direction):
     
     global elapsed_time
     global acc_time
@@ -826,7 +822,7 @@ def PING_TEST(logbox, test_time, direction, is_task):
         
     RUNNING_PING_TEST = False
 
-    SELECT_GRAPH('ping', is_task)
+    SELECT_GRAPH('ping')
     
 def PING_TEST_STOP():
     
@@ -838,7 +834,7 @@ def PING_TEST_STOP():
         
     else: return
 
-def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
+def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
     
     global RUNNING_PING_TEST
     
@@ -875,7 +871,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
         
         logbox.insert(tk.END, '\n Iniciando prueba de Ping a ' + direction_combobox.get() + '...')
         
-        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(), is_task,))
+        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(),))
         
         ping_thread.start()
 
@@ -1525,8 +1521,8 @@ def GUI():
 
     ######################################## Programar Pruebas ########################################
 
-    program_test = ttk.Button(pl_subdivition_2, text = 'Programar Pruebas', command=lambda:PROGRAMTASK(root))
-    program_test.pack(side = 'top', pady = general_pady * 2)
+    #program_test = ttk.Button(pl_subdivition_2, text = 'Programar Pruebas', command=lambda:PROGRAMTASK(root))
+    #program_test.pack(side = 'top', pady = general_pady * 2)
     
     ################################### SPEED TESTS ###################################
     ##### Buttons and labels for  button_pack_frame_3 #####
