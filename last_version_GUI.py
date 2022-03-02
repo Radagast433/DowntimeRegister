@@ -323,19 +323,33 @@ def TEST_PROGRAMMER():
     test = pd.read_csv(program_route + program_csv_route)
     rows_list = test.values.tolist()
 
-    global i
+    for i in range(len(rows_list)):
 
-    i = 0
+        if rows_list[i][4] == 'Prueba_de_Ping' and not RUNNING_PING_TEST:#, 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
 
-    while i < len(rows_list):
-
-        if not RUNNING_PING_TEST:
-
-            event = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+            event1 = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
 
             tasks_scheduler.run()
 
             RUNNING_PROGRAMMER = True
+
+        elif rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
+
+            event2 = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, PACKET_LOSS_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
+
+            tasks_scheduler.run()
+
+            RUNNING_PROGRAMMER = True
+
+        elif rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
+
+            event3 = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, SPEED_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
+
+            tasks_scheduler.run()
+
+            RUNNING_PROGRAMMER = True
+
+
 
     RUNNING_PROGRAMMER = False
 
@@ -1812,8 +1826,6 @@ if __name__ == '__main__':
     ping_direction_combobox = None
     
     ######################################################################
-
-    i = 0
 
     ######################################################################
 
