@@ -166,13 +166,13 @@ class PROGRAMTASK():
         self.program_button.pack(side = 'top')
 
         self.delete_button = ttk.Button(self.gf4_sub_1, text = 'Borrar Pruebas\n Programadas', command=lambda:self.DELETE())
-        self.delete_button.pack(side = 'top', padx = general_padx * 2)
-
-        self.cancel_program_button = ttk.Button(self.gf4_sub_3, text = 'Detener Pruebas\nProgramadas', command=lambda:self.STOPALL())
-        self.cancel_program_button.pack(side = 'top')
+        self.delete_button.pack(side = 'top', padx = general_padx * 2, pady = general_pady)
 
         self.cancel_button = ttk.Button(self.gf4_sub_3, text = 'Cerrar', command=lambda:self.CANCEL())
         self.cancel_button.pack(side = 'top')
+
+        self.cancel_program_button = ttk.Button(self.gf4_sub_3, text = 'Detener Pruebas\nProgramadas', command=lambda:self.STOPALL())
+        self.cancel_program_button.pack(side = 'top', pady = general_pady)
 
         self.frame.focus_force()
         center(self.parent, self.frame)
@@ -352,7 +352,7 @@ class PROGRAMTASK():
     def RUN_PROGRAM(self):
 
         tasks_scheduler.run()
-        
+
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
