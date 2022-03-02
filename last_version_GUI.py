@@ -311,10 +311,49 @@ class PROGRAMTASK():
 
     def START_PROGRAM(self):
         #print('START_PROGRAM Control')
-        self.programmed_thread = threading.Thread(name = 'ProgramThread', target = TEST_PROGRAMMER, daemon=True)
-        self.programmed_thread.start()
+        #self.programmed_thread = threading.Thread(name = 'ProgramThread', target = TEST_PROGRAMMER, daemon=True)
+        #self.programmed_thread.start()
 
-def TEST_PROGRAMMER():
+        global RUNNING_PROGRAMMER
+    
+        #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
+        #self.cmbx_values = ['Prueba de Ping', 'Prueba de Perdida de Paquetes', 'Prueba de Velocidad']
+        self.test = pd.read_csv(program_route + program_csv_route)
+        self.rows_list = self.test.values.tolist()
+
+        for i in range(len(self.rows_list)):
+
+            self.date_list = self.rows_list[i][0].split('-')
+            self.time_list = self.rows_list[i][1].split('-')
+
+            if self.rows_list[i][4] == 'Prueba_de_Ping' and not RUNNING_PING_TEST:#, 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
+
+                self.event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
+
+                RUNNING_PROGRAMMER = True
+
+            elif self.rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
+
+                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round((int(self.rows_list[i][5]) + 0.9084) / 1.0123, 0)), ping_log_box, ping_direction_combobox, 'task'))
+            
+                RUNNING_PROGRAMMER = True
+
+            elif self.rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
+
+                self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+            
+                RUNNING_PROGRAMMER = True
+
+            self.programmed_thread = threading.Thread(name = 'ProgramThread', target = self.RUN_PROGRAM, daemon=True)
+            self.programmed_thread.start()
+
+        RUNNING_PROGRAMMER = False
+
+    def RUN_PROGRAM(self):
+
+        tasks_scheduler.run()
+
+'''def TEST_PROGRAMMER():
     
     global RUNNING_PROGRAMMER
     
@@ -328,10 +367,11 @@ def TEST_PROGRAMMER():
         if rows_list[i][4] == 'Prueba_de_Ping' and not RUNNING_PING_TEST:#, 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
 
             date_list = rows_list[i][0].split('-')
+            time_list = rows_list[i][1].split('-')
 
             print(date_list)
 
-            event1 = tasks_scheduler.enterabs(time.strptime(date_list[2] + '-' + date_list[1] + '-' + date_list[0] + ' ' + rows_list[i][1], '%Y-%m-%d %H-%M-%S'), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+            event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(date_list[2] + '/' + date_list[1] + '/' + date_list[0] + ' ' + time_list[0] + ':' + time_list[1] + ':' + time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
 
             print(event1)
 
@@ -345,8 +385,8 @@ def TEST_PROGRAMMER():
 
         elif rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
 
-            event3 = tasks_scheduler.enterabs(datetime.datetime.strptime(date_list[2] + '-' + date_list[1] + '-' + date_list[0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 3, SPEED_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
-
+            event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(date_list[2] + '-' + date_list[1] + '-' + date_list[0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox))
+        
             RUNNING_PROGRAMMER = True
 
         tasks_scheduler.run()
@@ -356,17 +396,17 @@ def TEST_PROGRAMMER():
     RUNNING_PROGRAMMER = False
 
 
-    '''date_start = test['Fecha_Inicio']
+    date_start = test['Fecha_Inicio']
     time_start = test['Hora_Inicio']
     test_type = test['Prueba']
     duration = test['Duracion']
     RUNNING_PROGRAMMER = True
 
-    print(test_type.iloc(0))'''
+    print(test_type.iloc(0))
 
 
 
-    #print(date_start, time_start, test_type, duration)
+    #print(date_start, time_start, test_type, duration)'''
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
@@ -842,6 +882,10 @@ def PING_TEST(logbox, test_time, direction, is_task):
         
     RUNNING_PING_TEST = False
 
+    if is_task == 'task':
+
+        return
+
     SELECT_GRAPH('ping', is_task)
     
 def PING_TEST_STOP():
@@ -1027,6 +1071,8 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
         logbox.delete('1.0', tk.END)
         
         wait_time = 1.0123 * int(entrybox.get()) - 0.9084
+
+        #packets_in_time = int(round((time + 0.9084) / 1.0123, 0))
         
         wait_time = str(round(wait_time, 2))
         
@@ -1307,10 +1353,15 @@ def EXIT_APP(root):
     global RUNNING_SPEED_TEST
     global RUNNING_PROGRAMMER
 
+    if RUNNING_PROGRAMMER:
+
+        messagebox.showinfo(message = 'Hay tareas Programadas, Por Favor\nEspere hasta que finalicen.', title = '¡ADVERTENCIA!')
+        return
+
     RUNNING_PACKET_TEST = False
     RUNNING_PING_TEST = False
     RUNNING_SPEED_TEST = False
-    RUNNING_PROGRAMMER = False
+    #RUNNING_PROGRAMMER = False
     RESOURCES = False
 
     plt.close("all")
