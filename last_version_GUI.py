@@ -761,7 +761,9 @@ def PING_TEST(logbox, test_time, direction, is_task):
         ping_data = data['Ping_(ms)']
         ping_data = ping_data[start_cut + 1 : end_cut + 1]
         
-        jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
+        #jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
+        jitter = 'Null'
+        lost_packets = 'Null'
 
         try:
             
