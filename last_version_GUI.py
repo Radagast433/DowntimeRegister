@@ -334,7 +334,7 @@ class PROGRAMTASK():
 
             elif self.rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
 
-                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round((int(self.rows_list[i][5]) + 0.9084) / 1.0123, 0)), ping_log_box, ping_direction_combobox, 'task'))
+                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), ping_log_box, ping_direction_combobox, 'task'))
             
                 RUNNING_PROGRAMMER = True
 
