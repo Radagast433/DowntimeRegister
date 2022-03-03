@@ -399,6 +399,7 @@ def GET_NETWORK_NAME():
     end_point = connected_ssid.find('BSSID')
     
     connected_ssid = connected_ssid[start_point + 25 : end_point - 8]
+    connected_ssid.replace(' ', '_')
     
     if len(connected_ssid) < 30:
     
@@ -1050,54 +1051,33 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
     # listado de servers https://williamyaps.github.io/wlmjavascript/servercli.html
     
 
-    '''best_sv = s.get_best_server()
-
-    servers = s.get_servers()
-
-    for keys in servers:
-
-        for server in servers[keys]:
-
-            print(server['sponsor'] + ' ' + server['name'] + ' ' + server['id'])
-
-        #print(servers[keys])
-
-    #print(servers)
-
-    RUNNING_SPEED_TEST = False
-
-    return
-    
-    for key in best_sv:
-        logbox.insert(tk.END, '\n ' + str(key) + ' : ' + str(best_sv[key]))
-        logbox.see("end")
-    '''
-
     network_name = GET_NETWORK_NAME()
         
     logbox.insert(tk.END, '\n ')
         #print(key, ' : ', best_sv[key])
         
     a = time.time()
-    
-    option = combobox.get()
 
-    start = option.find('(')
-    end = option.find(')')
-    server_id = option[start + 1 : end]
+    if is_task == 'normal':
 
-    try:
+        option = combobox.get()
 
-        s.get_servers([int(server_id)])
-    
-    except:
+        start = option.find('(')
+        end = option.find(')')
+        server_id = option[start + 1 : end]
 
-        logbox.insert(tk.END, '\n Ocurrio un Problema, por favor\n seleccione otro servidor.')
-        logbox.see("end")
+        try:
 
-        RUNNING_SPEED_TEST = False
+            s.get_servers([int(server_id)])
+        
+        except:
 
-        return
+            logbox.insert(tk.END, '\n Ocurrio un Problema, por favor\n seleccione otro servidor.')
+            logbox.see("end")
+
+            RUNNING_SPEED_TEST = False
+
+            return
 
     data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
     
@@ -1114,10 +1094,6 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
 
     speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
 
-    if is_task == 'task':
-
-        s.get_best_server()
-
     #for i in range(int(wait_time)):
     while RUNNING_SPEED_TEST:
         
@@ -1128,8 +1104,11 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         b = time.time()
         
         if round((b - a), 0) % 60 == 0:
+
+            if is_task == 'task':
             
-            #s.get_best_server()
+                best_sv = s.get_best_server()
+                option = best_sv['host']
             
             fecha = datetime.datetime.now().strftime("%d-%m-%Y")
             hora = datetime.datetime.now().strftime("%H-%M-%S")
@@ -1226,8 +1205,8 @@ def VALIDATE_COMBOBOX_VALUE(combobox):
 def SPEED_TEST_BEGIN(entrybox, logbox, combobox, is_task):
     
     global RUNNING_SPEED_TEST
-    
-    if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox)) or not VALIDATE_COMBOBOX_VALUE(combobox):
+
+    if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox)) or not VALIDATE_COMBOBOX_VALUE(combobox) and is_task == 'normal':
         
         logbox.delete('1.0', tk.END)
         
@@ -1270,7 +1249,7 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox, is_task):
         
         logbox.insert(tk.END, '\n Iniciando prueba...\n\n Conectado a : ' + GET_NETWORK_NAME())
         
-        speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox, combobox, is_task,))
+        speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox, logbox, combobox, is_task,))
     
         speed_thread.start()
         
@@ -1323,7 +1302,8 @@ def EXIT_APP(root):
 
     if RUNNING_PROGRAMMER:
 
-        messagebox.showinfo(message = 'Hay tareas Programadas, Por Favor\nEspere hasta que finalicen.', title = '¡ADVERTENCIA!')
+        exit_alert = messagebox.showinfo(message = 'Hay tareas Programadas, Por Favor\nEspere hasta que finalicen.', title = '¡ADVERTENCIA!')
+        center(root, exit_alert)
         return
 
     RUNNING_PACKET_TEST = False
