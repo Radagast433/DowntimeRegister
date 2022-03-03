@@ -228,10 +228,12 @@ class PROGRAMTASK():
         global RUNNING_PACKET_TEST
         global RUNNING_PING_TEST
         global RUNNING_SPEED_TEST
+        global RUNNING_PROGRAMMER
         
         RUNNING_PACKET_TEST = False
         RUNNING_PING_TEST = False
         RUNNING_SPEED_TEST = False
+        RUNNING_PROGRAMMER = False
 
         messagebox.showinfo(message = 'TODAS LAS PRUEBAS FUERON\nDETENIDAS EXITOSAMENTE', title = 'Detencion de Pruebas...')
 
