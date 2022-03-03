@@ -337,13 +337,13 @@ class PROGRAMTASK():
 
             elif self.rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
 
-                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), ping_log_box, ping_direction_combobox, 'task'))
+                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
             
                 RUNNING_PROGRAMMER = True
 
             elif self.rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
 
-                self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+                self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
             
                 RUNNING_PROGRAMMER = True
 
@@ -1227,7 +1227,7 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox, is_task):
     
     global RUNNING_SPEED_TEST
     
-    if not VALIDATE_ENTRY_BOX_VALUE(entrybox.get()) or not VALIDATE_COMBOBOX_VALUE(combobox):
+    if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox)) or not VALIDATE_COMBOBOX_VALUE(combobox):
         
         logbox.delete('1.0', tk.END)
         
@@ -1375,6 +1375,8 @@ def GUI():
     global sub_2_speed_down_entry_speed
     global ping_log_box
     global ping_direction_combobox
+    global packet_loss_log_box
+    global speed_log_box
 
     root = Tk()
     root.title("Connection monitor")
@@ -1845,6 +1847,10 @@ if __name__ == '__main__':
 
     ping_log_box = None
     ping_direction_combobox = None
+
+    packet_loss_log_box = None
+
+    speed_log_box = None
     
     ######################################################################
 
