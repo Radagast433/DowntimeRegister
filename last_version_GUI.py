@@ -1746,6 +1746,13 @@ if __name__ == '__main__':
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
             csv_writer.writeheader()
+
+    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route):
+    
+        with open(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
+            csv_writer.writeheader()
     
     elapsed_time = 0
     
@@ -1770,6 +1777,13 @@ if __name__ == '__main__':
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_results_fieldnames)
             csv_writer.writeheader()
+
+    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route):
+    
+        with open(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_results_fieldnames)
+            csv_writer.writeheader()
     
     ########## SPEEDTEST INFO ##########
     
@@ -1784,6 +1798,13 @@ if __name__ == '__main__':
     if not os.path.exists(results_route + GET_NETWORK_NAME() + '_' + speed_test_csv_results_route):
     
         with open(results_route + GET_NETWORK_NAME() + '_' + speed_test_csv_results_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
+            csv_writer.writeheader()
+
+    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route):
+    
+        with open(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route, 'w+', newline = '') as csv_file:
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
             csv_writer.writeheader()
