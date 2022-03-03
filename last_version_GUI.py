@@ -833,7 +833,7 @@ def PING_TEST(logbox, test_time, direction, is_task):
 
         return
 
-    SELECT_GRAPH('ping', is_task)
+    #SELECT_GRAPH('ping', is_task)
     
 def PING_TEST_STOP():
     
@@ -1038,7 +1038,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
         
         packet_thread.start()
         
-def SPEED_TEST(wait_time, logbox, combobox):
+def SPEED_TEST(wait_time, logbox, combobox, is_task):
     
     global RUNNING_SPEED_TEST
     global speed_graph_start
@@ -1625,7 +1625,7 @@ def GUI():
 
     ######################################
 
-    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox))
+    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox, 'normal'))
     speedtest_begin_button.pack(side = 'left', pady = general_pady)
     
     speedtest_stop_button = ttk.Button(sub_4, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
