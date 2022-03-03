@@ -1455,7 +1455,7 @@ def GUI():
     sub_3 = ttk.Frame(button_pack_frame_1)
     sub_3.pack(side = 'top', pady = general_pady)
     
-    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox.get(), ping_log_box, ping_direction_combobox, 'normal'))
+    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox.get(), ping_log_box, ping_direction_combobox))
     ping_begin_button.pack(side = 'left')
 
     #sub_3_label_1 = ttk.Label(sub_2)
