@@ -28,6 +28,7 @@ import psutil
 import matplotlib.animation as animation
 from tkinter import messagebox
 import sched
+#import pyautogui
 
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -889,6 +890,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
 def PACKET_LOSS_TEST(n_packets, logbox, direction):
     
     global RUNNING_PACKET_TEST
+    global pl_test
     
     #print(n_packets, direction)
     
@@ -972,7 +974,15 @@ def PACKETLOSS_TEST_STOP():
     
     global RUNNING_PACKET_TEST
     
-    if RUNNING_PACKET_TEST: 
+    if RUNNING_PACKET_TEST:
+
+        '''# Holds down the alt key
+        pyautogui.keyDown("alt")
+        # Presses the tab key once
+        pyautogui.press("tab")
+
+        # Lets go of the alt key
+        pyautogui.keyUp("alt")'''
         
         RUNNING_PACKET_TEST = False
         
@@ -1516,7 +1526,7 @@ def GUI():
     pl_direction_combobox.pack(side = 'top')
     
     pl_direction_combobox['values'] = directions_list
-    #pl_direction_combobox.set(directions_list[0])
+    pl_direction_combobox.set(directions_list[0])
     
     packet_loss_label_2 = ttk.Label(pl_subdivition_1, text = '\nIngrese cantidad\nde paquetes:', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_2.pack(side = 'top')
@@ -1831,6 +1841,8 @@ if __name__ == '__main__':
     ping_direction_combobox = None
     
     ######################################################################
+
+    pl_test = None
 
     ######################################################################
 
