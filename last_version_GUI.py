@@ -858,7 +858,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST or RUNNING_PROGRAMMER:
         
         logbox.insert(tk.END, '\n\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
@@ -993,7 +993,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST or RUNNING_PROGRAMMER:
         
         logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
@@ -1228,6 +1228,12 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox):
         #logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
         #return
+
+    elif RUNNING_PROGRAMMER or RUNNING_SPEED_TEST:
+
+            logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
+    
+            return
     
     else:
         
