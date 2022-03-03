@@ -1112,6 +1112,10 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
 
     speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
 
+    if is_task == 'task':
+
+        s.get_best_server()
+
     #for i in range(int(wait_time)):
     while RUNNING_SPEED_TEST:
         
@@ -1123,7 +1127,7 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         
         if round((b - a), 0) % 60 == 0:
             
-            s.get_best_server()
+            #s.get_best_server()
             
             fecha = datetime.datetime.now().strftime("%d-%m-%Y")
             hora = datetime.datetime.now().strftime("%H-%M-%S")
