@@ -394,7 +394,7 @@ def GET_NETWORK_NAME():
     end_point = connected_ssid.find('BSSID')
     
     connected_ssid = connected_ssid[start_point + 25 : end_point - 8]
-    connected_ssid.replace(' ', '_')
+    connected_ssid = connected_ssid.replace(' ', '_')
     
     if len(connected_ssid) < 30:
     
