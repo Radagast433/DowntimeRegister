@@ -1057,8 +1057,6 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         
     logbox.insert(tk.END, '\n ')
         #print(key, ' : ', best_sv[key])
-        
-    a = time.time()
 
     if is_task == 'normal':
 
@@ -1097,73 +1095,78 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
     speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
 
     #for i in range(int(wait_time)):
+
+    a = time.time()
+
     while RUNNING_SPEED_TEST:
         
         if not RUNNING_SPEED_TEST:
             
             break
         
+        #if round((b - a), 0) % 60 == 0:
+
+        if is_task == 'task':
+        
+            best_sv = s.get_best_server()
+            option = best_sv['host']
+        
+        fecha = datetime.datetime.now().strftime("%d-%m-%Y")
+        hora = datetime.datetime.now().strftime("%H-%M-%S")
+        downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
+        upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
+        
+        info = {
+            'Fecha' : fecha,
+            'Hora' : hora,
+            'Velocidad_Bajada' : downspeed,
+            'Velocidad_Subida' : upspeed
+            }
+        
+        with open(data_route + network_name + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
+            
+            csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
+            csv_writer.writerow(info)
+        
+        logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+        logbox.see("end")
+        
+        #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
+        
+        results_info = {
+            speed_test_results_fieldnames[0] : fecha,
+            speed_test_results_fieldnames[1] : hora,
+            speed_test_results_fieldnames[2] : option,
+            speed_test_results_fieldnames[3] : downspeed,
+            speed_test_results_fieldnames[4] : upspeed
+            }
+        
+        with open(results_route + network_name + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
+        
+            csv_writer.writerow(results_info)
+
         b = time.time()
+            
+        time.sleep(60)
         
-        if round((b - a), 0) % 60 == 0:
+        if int(round((b - a), 0) // 60) == (int(wait_time) - 1):
+            
+            RUNNING_SPEED_TEST = False
 
-            if is_task == 'task':
+            data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
+    
+            vbajada = data['Velocidad_Bajada']
+            vbajada = vbajada[start_cut + 1 :]
+
+            vsubida = data['Velocidad_Subida']
+            vsubida = vsubida[start_cut + 1 :]
             
-                best_sv = s.get_best_server()
-                option = best_sv['host']
-            
-            fecha = datetime.datetime.now().strftime("%d-%m-%Y")
-            hora = datetime.datetime.now().strftime("%H-%M-%S")
-            downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
-            upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
-            
-            info = {
-                'Fecha' : fecha,
-                'Hora' : hora,
-                'Velocidad_Bajada' : downspeed,
-                'Velocidad_Subida' : upspeed
-                }
-            
-            with open(data_route + network_name + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
-                
-                csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
-                csv_writer.writerow(info)
-            
-            logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+            logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n D. Estandar Bajada: {round(vbajada.std(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n D. Estandar Subida: {round(vsubida.std(), 2)}\n\n Prueba finalizada con exito...\n")
+            #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
             logbox.see("end")
-            
-            #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
-            
-            results_info = {
-                speed_test_results_fieldnames[0] : fecha,
-                speed_test_results_fieldnames[1] : hora,
-                speed_test_results_fieldnames[2] : option,
-                speed_test_results_fieldnames[3] : downspeed,
-                speed_test_results_fieldnames[4] : upspeed
-                }
-            
-            with open(results_route + network_name + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
-                
-                csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
-            
-                csv_writer.writerow(results_info)
-            
-            if int(round((b - a), 0) // 60) == (int(wait_time) - 1):
-                
-                RUNNING_SPEED_TEST = False
-
-                data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
-        
-                vbajada = data['Velocidad_Bajada']
-                vbajada = vbajada[start_cut + 1 :]
-
-                vsubida = data['Velocidad_Subida']
-                vsubida = vsubida[start_cut + 1 :]
-                
-                logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n D. Estandar Bajada: {round(vbajada.std(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n D. Estandar Subida: {round(vsubida.std(), 2)}\n\n Prueba finalizada con exito...\n")
-                #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
-                logbox.see("end")
-                return
+            return
             
     logbox.insert(tk.END, "\n\n Prueba finalizada con exito...\n")
     logbox.see("end")         
