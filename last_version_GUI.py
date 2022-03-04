@@ -1052,6 +1052,7 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
     
     # listado de servers https://williamyaps.github.io/wlmjavascript/servercli.html
     
+    run_cont = 0
 
     network_name = GET_NETWORK_NAME()
         
@@ -1151,7 +1152,7 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
             
         time.sleep(60)
         
-        if int(round((b - a), 0) // 60) == (int(wait_time) - 1):
+        if run_cont == (int(wait_time) - 1):
             
             RUNNING_SPEED_TEST = False
 
@@ -1167,6 +1168,8 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
             #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
             logbox.see("end")
             return
+
+        run_cont+= 1
             
     logbox.insert(tk.END, "\n\n Prueba finalizada con exito...\n")
     logbox.see("end")         
