@@ -1615,7 +1615,7 @@ def GUI():
 
     ######################################
 
-    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox, 'normal'))
+    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(int(speedtest_entrybox.get()), speed_log_box, speedtest_servers_combobox, 'normal'))
     speedtest_begin_button.pack(side = 'left', pady = general_pady)
     
     speedtest_stop_button = ttk.Button(sub_4, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
@@ -1680,6 +1680,8 @@ def GUI():
     root.mainloop()
     
 if __name__ == '__main__':
+
+    threading.stack_size(32768)
     
     directions_list = ['www.google.com', 'www.falabella.com', 'www.emol.cl', 'www.bcentral.cl', 'www.bing.com', 'www.facebook.com']
     
