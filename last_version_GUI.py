@@ -1658,6 +1658,8 @@ def GUI():
     root.mainloop()
     
 if __name__ == '__main__':
+
+    threading.stack_size(32768)
     
     directions_list = ['www.google.com', 'www.falabella.com', 'www.emol.cl', 'www.bcentral.cl', 'www.bing.com', 'www.facebook.com']
     
