@@ -1339,7 +1339,7 @@ def GUI():
     global ping_direction_combobox
 
     root = Tk()
-    root.title("Connection monitor")
+    root.title("Connection Monitor V1.0")
     root.iconphoto(False, tk.PhotoImage(file = 'Icons/CM.png'))
     root.geometry("+0+0")
     #root.geometry('300x300')
