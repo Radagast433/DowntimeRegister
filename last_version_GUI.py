@@ -886,7 +886,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
         logbox.delete('1.0', tk.END)
         
         logbox.insert(tk.END, '\n Iniciando prueba de Ping a ' + direction_combobox.get() + '...')
-        
+
         ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(), is_task,))
         
         ping_thread.start()
@@ -1114,8 +1114,8 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
             
             fecha = datetime.datetime.now().strftime("%d-%m-%Y")
             hora = datetime.datetime.now().strftime("%H-%M-%S")
-            downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
-            upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
+            downspeed = round((round(s.download()) / speed_trans_unit), 2)
+            upspeed = round((round(s.upload(pre_allocate=False)) / speed_trans_unit), 2)
             
             info = {
                 'Fecha' : fecha,
@@ -1615,7 +1615,7 @@ def GUI():
 
     ######################################
 
-    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox, 'normal'))
+    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(int(speedtest_entrybox.get()), speed_log_box, speedtest_servers_combobox, 'normal'))
     speedtest_begin_button.pack(side = 'left', pady = general_pady)
     
     speedtest_stop_button = ttk.Button(sub_4, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
@@ -1727,6 +1727,7 @@ if __name__ == '__main__':
     program_csv_route = 'test_program.csv'
 
     thread_count = multiprocessing.cpu_count()
+    #pool = multiprocessing.Pool(thread_count)
     
     #infinite = '9223372036854775807'
     
