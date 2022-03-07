@@ -1098,8 +1098,6 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
 
     #for i in range(int(wait_time)):
 
-    a = time.time()
-
     while RUNNING_SPEED_TEST:
         
         if not RUNNING_SPEED_TEST:
@@ -1112,6 +1110,8 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         
             best_sv = s.get_best_server()
             option = best_sv['host']
+
+        a = time.time()
         
         fecha = datetime.datetime.now().strftime("%d-%m-%Y")
         hora = datetime.datetime.now().strftime("%H-%M-%S")
@@ -1150,8 +1150,9 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
             csv_writer.writerow(results_info)
 
         b = time.time()
-            
-        time.sleep(60)
+        sleep_time = round(60 - (b - a), 2)
+        
+        time.sleep(sleep_time)
         
         if run_cont == (int(wait_time) - 1):
             
@@ -1368,7 +1369,7 @@ def GUI():
     global speed_log_box
 
     root = Tk()
-    root.title("Connection monitor")
+    root.title('Connection Monitor V1.0')
     root.iconphoto(False, tk.PhotoImage(file = 'Icons/CM.png'))
     root.geometry("+0+0")
     #root.geometry('300x300')
