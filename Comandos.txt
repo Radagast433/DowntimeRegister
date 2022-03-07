@@ -2,4 +2,4 @@ cd C:\Users\soporte\Documents\GitHub
 
 #pyinstaller --onefile --distpath=C:\Users\soporte\Desktop\ejecutables\principal\dist --workpath=C:\Users\soporte\Desktop\ejecutables\principal\build --icon=Icons/CM.ico last_version_GUI.py
 
-py -m PyInstaller --onefile --distpath=C:\Users\soporte\Desktop\ejecutables\principal\dist --workpath=C:\Users\soporte\Desktop\ejecutables\principal\build --icon=Icons/CM.ico last_version_GUI.py
+py -m PyInstaller --onefile --hidden-import babel.numbers --distpath=C:\Users\soporte\Desktop\ejecutables\principal\dist --workpath=C:\Users\soporte\Desktop\ejecutables\principal\build --icon=Icons/CM.ico last_version_GUI.py
