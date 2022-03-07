@@ -28,6 +28,7 @@ import psutil
 import matplotlib.animation as animation
 from tkinter import messagebox
 import sched
+#import pyautogui
 
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -35,7 +36,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkcalendar import DateEntry
 
 
-'''class PROGRAMTASK():
+class PROGRAMTASK():
 
     def __init__(self, parent):
 
@@ -166,13 +167,13 @@ from tkcalendar import DateEntry
         self.program_button.pack(side = 'top')
 
         self.delete_button = ttk.Button(self.gf4_sub_1, text = 'Borrar Pruebas\n Programadas', command=lambda:self.DELETE())
-        self.delete_button.pack(side = 'top', padx = general_padx * 2)
-
-        self.cancel_program_button = ttk.Button(self.gf4_sub_3, text = 'Detener Pruebas\nProgramadas', command=lambda:self.STOPALL())
-        self.cancel_program_button.pack(side = 'top')
+        self.delete_button.pack(side = 'top', padx = general_padx * 2, pady = general_pady)
 
         self.cancel_button = ttk.Button(self.gf4_sub_3, text = 'Cerrar', command=lambda:self.CANCEL())
         self.cancel_button.pack(side = 'top')
+
+        self.cancel_program_button = ttk.Button(self.gf4_sub_3, text = 'Detener Pruebas\nProgramadas', command=lambda:self.STOPALL())
+        self.cancel_program_button.pack(side = 'top', pady = general_pady)
 
         self.frame.focus_force()
         center(self.parent, self.frame)
@@ -227,10 +228,12 @@ from tkcalendar import DateEntry
         global RUNNING_PACKET_TEST
         global RUNNING_PING_TEST
         global RUNNING_SPEED_TEST
+        global RUNNING_PROGRAMMER
         
         RUNNING_PACKET_TEST = False
         RUNNING_PING_TEST = False
         RUNNING_SPEED_TEST = False
+        RUNNING_PROGRAMMER = False
 
         messagebox.showinfo(message = 'TODAS LAS PRUEBAS FUERON\nDETENIDAS EXITOSAMENTE', title = 'Detencion de Pruebas...')
 
@@ -311,46 +314,48 @@ from tkcalendar import DateEntry
 
     def START_PROGRAM(self):
         #print('START_PROGRAM Control')
-        self.programmed_thread = threading.Thread(name = 'ProgramThread', target = TEST_PROGRAMMER, daemon=True)
-        self.programmed_thread.start()
+        #self.programmed_thread = threading.Thread(name = 'ProgramThread', target = TEST_PROGRAMMER, daemon=True)
+        #self.programmed_thread.start()
 
-def TEST_PROGRAMMER():
+        global RUNNING_PROGRAMMER
     
-    global RUNNING_PROGRAMMER
-    
-    #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
-    #self.cmbx_values = ['Prueba de Ping', 'Prueba de Perdida de Paquetes', 'Prueba de Velocidad']
-    test = pd.read_csv(program_route + program_csv_route)
-    rows_list = test.values.tolist()
+        #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
+        #self.cmbx_values = ['Prueba de Ping', 'Prueba de Perdida de Paquetes', 'Prueba de Velocidad']
+        self.test = pd.read_csv(program_route + program_csv_route)
+        self.rows_list = self.test.values.tolist()
 
-    global i
+        for i in range(len(self.rows_list)):
 
-    i = 0
+            self.date_list = self.rows_list[i][0].split('-')
+            self.time_list = self.rows_list[i][1].split('-')
 
-    while i < len(rows_list):
+            if self.rows_list[i][4] == 'Prueba_de_Ping' and not RUNNING_PING_TEST:#, 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
 
-        if not RUNNING_PING_TEST:
+                self.event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
 
-            event = tasks_scheduler.enterabs(time.strptime(rows_list[i][0] + ' ' + rows_list[i][1], '%d-%m-%Y %H-%M-%S'), 1, PING_TEST_BEGIN, argument = (int(rows_list[i][5]), ping_log_box, ping_direction_combobox, 'task'))
+                RUNNING_PROGRAMMER = True
 
-            tasks_scheduler.run()
+            elif self.rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
 
-            RUNNING_PROGRAMMER = True
+                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
+            
+                RUNNING_PROGRAMMER = True
 
-    RUNNING_PROGRAMMER = False
+            elif self.rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
 
+                self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
+            
+                RUNNING_PROGRAMMER = True
 
-    #date_start = test['Fecha_Inicio']
-    #time_start = test['Hora_Inicio']
-    #test_type = test['Prueba']
-    #duration = test['Duracion']
-    #RUNNING_PROGRAMMER = True
+            self.programmed_thread = threading.Thread(name = 'ProgramThread', target = self.RUN_PROGRAM, daemon=True)
+            self.programmed_thread.start()
 
-    print(test_type.iloc(0))
+        RUNNING_PROGRAMMER = False
 
+    def RUN_PROGRAM(self):
 
+        tasks_scheduler.run()
 
-    #print(date_start, time_start, test_type, duration)'''
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     
@@ -405,7 +410,7 @@ def GET_NETWORK_NAME():
         return 'Ethernet'
         
     
-def SELECT_GRAPH(test_type):
+def SELECT_GRAPH(test_type, is_task):
 
     network_name = GET_NETWORK_NAME()
     
@@ -479,6 +484,10 @@ def SELECT_GRAPH(test_type):
         plt.legend()
         graph_route = ping_graphs_route + network_name + '_ping_graph_' + graph_name + '.png'
         plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
+
+        if is_task == 'task':
+
+            return
         
         GRAPH_LABEL(graph_route)
         
@@ -626,7 +635,7 @@ def GET_JITTER(ping_data, start, finish):
         
         return for_return, lost_packets
 
-def PING_TEST(logbox, test_time, direction):
+def PING_TEST(logbox, test_time, direction, is_task):
     
     global elapsed_time
     global acc_time
@@ -745,14 +754,16 @@ def PING_TEST(logbox, test_time, direction):
         
             csv_writer.writerow(data_info)
         
-        data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+        #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
-        end_cut = data.last_valid_index()
+        #end_cut = data.last_valid_index()
 
-        ping_data = data['Ping_(ms)']
-        ping_data = ping_data[start_cut + 1 : end_cut + 1]
+        #ping_data = data['Ping_(ms)']
+        #ping_data = ping_data[start_cut + 1 : end_cut + 1]
         
-        jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
+        #jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
+        jitter = 'Null'
+        lost_packets = 'Null'
 
         try:
             
@@ -812,6 +823,7 @@ def PING_TEST(logbox, test_time, direction):
         csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
     
         csv_writer.writerow(results_info)
+
     
     logbox.insert(tk.END, '\n\n Ping mínimo: ' + str(min(ping_data)) + ' ms.\n\n Ping máximo: ' + str(max(ping_data)) +' ms.\n\n Ping Promedio: ' + str(round(ping_data.mean(), 2)) + ' ms.\n\n Jitter: ' + str(jitter) + ' ms.\n\n Paquetes perdidos: ' + str(lost_packets) + '/' + str(finish - start + 1) +  '.')
     logbox.see("end")
@@ -823,7 +835,11 @@ def PING_TEST(logbox, test_time, direction):
         
     RUNNING_PING_TEST = False
 
-    SELECT_GRAPH('ping')
+    if is_task == 'task':
+
+        return
+
+    #SELECT_GRAPH('ping', is_task)
     
 def PING_TEST_STOP():
     
@@ -835,7 +851,7 @@ def PING_TEST_STOP():
         
     else: return
 
-def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
+def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
     
     global RUNNING_PING_TEST
     
@@ -849,7 +865,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST or RUNNING_PROGRAMMER:
         
         logbox.insert(tk.END, '\n\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
@@ -872,7 +888,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
         
         logbox.insert(tk.END, '\n Iniciando prueba de Ping a ' + direction_combobox.get() + '...')
         
-        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(),))
+        ping_thread = threading.Thread(name = 'PingThread', target = PING_TEST, daemon=True, args=(logbox, int(entrybox_value), direction_combobox.get(), is_task,))
         
         ping_thread.start()
 
@@ -880,6 +896,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox):
 def PACKET_LOSS_TEST(n_packets, logbox, direction):
     
     global RUNNING_PACKET_TEST
+    global pl_test
     
     #print(n_packets, direction)
     
@@ -963,7 +980,15 @@ def PACKETLOSS_TEST_STOP():
     
     global RUNNING_PACKET_TEST
     
-    if RUNNING_PACKET_TEST: 
+    if RUNNING_PACKET_TEST:
+
+        '''# Holds down the alt key
+        pyautogui.keyDown("alt")
+        # Presses the tab key once
+        pyautogui.press("tab")
+
+        # Lets go of the alt key
+        pyautogui.keyUp("alt")'''
         
         RUNNING_PACKET_TEST = False
         
@@ -984,7 +1009,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST or RUNNING_PROGRAMMER:
         
         logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
@@ -1008,6 +1033,8 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
         logbox.delete('1.0', tk.END)
         
         wait_time = 1.0123 * int(entrybox.get()) - 0.9084
+
+        #packets_in_time = int(round((time + 0.9084) / 1.0123, 0))
         
         wait_time = str(round(wait_time, 2))
         
@@ -1017,7 +1044,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
         
         packet_thread.start()
         
-def SPEED_TEST(wait_time, logbox, combobox):
+def SPEED_TEST(wait_time, logbox, combobox, is_task):
     
     global RUNNING_SPEED_TEST
     global speed_graph_start
@@ -1026,55 +1053,33 @@ def SPEED_TEST(wait_time, logbox, combobox):
     
     # listado de servers https://williamyaps.github.io/wlmjavascript/servercli.html
     
-
-    '''best_sv = s.get_best_server()
-
-    servers = s.get_servers()
-
-    for keys in servers:
-
-        for server in servers[keys]:
-
-            print(server['sponsor'] + ' ' + server['name'] + ' ' + server['id'])
-
-        #print(servers[keys])
-
-    #print(servers)
-
-    RUNNING_SPEED_TEST = False
-
-    return
-    
-    for key in best_sv:
-        logbox.insert(tk.END, '\n ' + str(key) + ' : ' + str(best_sv[key]))
-        logbox.see("end")
-    '''
+    run_cont = 0
 
     network_name = GET_NETWORK_NAME()
         
     logbox.insert(tk.END, '\n ')
         #print(key, ' : ', best_sv[key])
+
+    if is_task == 'normal':
+
+        option = combobox.get()
+
+        start = option.find('(')
+        end = option.find(')')
+        server_id = option[start + 1 : end]
+
+        try:
+
+            s.get_servers([int(server_id)])
         
-    a = time.time()
-    
-    option = combobox.get()
+        except:
 
-    start = option.find('(')
-    end = option.find(')')
-    server_id = option[start + 1 : end]
+            logbox.insert(tk.END, '\n Ocurrio un Problema, por favor\n seleccione otro servidor.')
+            logbox.see("end")
 
-    try:
+            RUNNING_SPEED_TEST = False
 
-        s.get_servers([int(server_id)])
-    
-    except:
-
-        logbox.insert(tk.END, '\n Ocurrio un Problema, por favor\n seleccione otro servidor.')
-        logbox.see("end")
-
-        RUNNING_SPEED_TEST = False
-
-        return
+            return
 
     data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
     
@@ -1092,70 +1097,80 @@ def SPEED_TEST(wait_time, logbox, combobox):
     speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
 
     #for i in range(int(wait_time)):
+
+    a = time.time()
+
     while RUNNING_SPEED_TEST:
         
         if not RUNNING_SPEED_TEST:
             
             break
         
+        #if round((b - a), 0) % 60 == 0:
+
+        if is_task == 'task':
+        
+            best_sv = s.get_best_server()
+            option = best_sv['host']
+        
+        fecha = datetime.datetime.now().strftime("%d-%m-%Y")
+        hora = datetime.datetime.now().strftime("%H-%M-%S")
+        downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
+        upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
+        
+        info = {
+            'Fecha' : fecha,
+            'Hora' : hora,
+            'Velocidad_Bajada' : downspeed,
+            'Velocidad_Subida' : upspeed
+            }
+        
+        with open(data_route + network_name + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
+            
+            csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
+            csv_writer.writerow(info)
+        
+        logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+        logbox.see("end")
+        
+        #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
+        
+        results_info = {
+            speed_test_results_fieldnames[0] : fecha,
+            speed_test_results_fieldnames[1] : hora,
+            speed_test_results_fieldnames[2] : option,
+            speed_test_results_fieldnames[3] : downspeed,
+            speed_test_results_fieldnames[4] : upspeed
+            }
+        
+        with open(results_route + network_name + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
+        
+            csv_writer.writerow(results_info)
+
         b = time.time()
+            
+        time.sleep(60)
         
-        if round((b - a), 0) % 60 == 0:
+        if run_cont == (int(wait_time) - 1):
             
-            s.get_best_server()
+            RUNNING_SPEED_TEST = False
+
+            data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
+    
+            vbajada = data['Velocidad_Bajada']
+            vbajada = vbajada[start_cut + 1 :]
+
+            vsubida = data['Velocidad_Subida']
+            vsubida = vsubida[start_cut + 1 :]
             
-            fecha = datetime.datetime.now().strftime("%d-%m-%Y")
-            hora = datetime.datetime.now().strftime("%H-%M-%S")
-            downspeed = round((round(s.download()) / speed_trans_unit), 2)
-            upspeed = round((round(s.upload(pre_allocate=False)) / speed_trans_unit), 2)
-            
-            info = {
-                'Fecha' : fecha,
-                'Hora' : hora,
-                'Velocidad_Bajada' : downspeed,
-                'Velocidad_Subida' : upspeed
-                }
-            
-            with open(data_route + network_name + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
-                
-                csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
-                csv_writer.writerow(info)
-            
-            logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+            logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n D. Estandar Bajada: {round(vbajada.std(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n D. Estandar Subida: {round(vsubida.std(), 2)}\n\n Prueba finalizada con exito...\n")
+            #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
             logbox.see("end")
-            
-            #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
-            
-            results_info = {
-                speed_test_results_fieldnames[0] : fecha,
-                speed_test_results_fieldnames[1] : hora,
-                speed_test_results_fieldnames[2] : option,
-                speed_test_results_fieldnames[3] : downspeed,
-                speed_test_results_fieldnames[4] : upspeed
-                }
-            
-            with open(results_route + network_name + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
-                
-                csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
-            
-                csv_writer.writerow(results_info)
-            
-            if int(round((b - a), 0) // 60) == (int(wait_time) - 1):
-                
-                RUNNING_SPEED_TEST = False
+            return
 
-                data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
-        
-                vbajada = data['Velocidad_Bajada']
-                vbajada = vbajada[start_cut + 1 :]
-
-                vsubida = data['Velocidad_Subida']
-                vsubida = vsubida[start_cut + 1 :]
-                
-                logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n D. Estandar Bajada: {round(vbajada.std(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n D. Estandar Subida: {round(vsubida.std(), 2)}\n\n Prueba finalizada con exito...\n")
-                #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
-                logbox.see("end")
-                return
+        run_cont+= 1
             
     logbox.insert(tk.END, "\n\n Prueba finalizada con exito...\n")
     logbox.see("end")         
@@ -1196,11 +1211,11 @@ def VALIDATE_COMBOBOX_VALUE(combobox):
         #print(option[start + 1 : end])
         #print(option)
 
-def SPEED_TEST_BEGIN(entrybox, logbox, combobox):
+def SPEED_TEST_BEGIN(entrybox, logbox, combobox, is_task):
     
     global RUNNING_SPEED_TEST
-    
-    if not VALIDATE_ENTRY_BOX_VALUE(entrybox.get()) or not VALIDATE_COMBOBOX_VALUE(combobox):
+
+    if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox)) or not VALIDATE_COMBOBOX_VALUE(combobox) and is_task == 'normal':
         
         logbox.delete('1.0', tk.END)
         
@@ -1217,6 +1232,12 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox):
         #logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
         #return
+
+    elif RUNNING_PROGRAMMER or RUNNING_SPEED_TEST:
+
+            logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
+    
+            return
     
     else:
         
@@ -1237,7 +1258,7 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox):
         
         logbox.insert(tk.END, '\n Iniciando prueba...\n\n Conectado a : ' + GET_NETWORK_NAME())
         
-        speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox.get(), logbox, combobox,))
+        speed_thread = threading.Thread(name = 'SpeedTestThread', target = SPEED_TEST, daemon=True, args=(entrybox, logbox, combobox, is_task,))
     
         speed_thread.start()
         
@@ -1288,10 +1309,16 @@ def EXIT_APP(root):
     global RUNNING_SPEED_TEST
     global RUNNING_PROGRAMMER
 
+    if RUNNING_PROGRAMMER:
+
+        exit_alert = messagebox.showinfo(message = 'Hay tareas Programadas, Por Favor\nEspere hasta que finalicen.', title = '¡ADVERTENCIA!')
+        center(root, exit_alert)
+        return
+
     RUNNING_PACKET_TEST = False
     RUNNING_PING_TEST = False
     RUNNING_SPEED_TEST = False
-    RUNNING_PROGRAMMER = False
+    #RUNNING_PROGRAMMER = False
     RESOURCES = False
 
     plt.close("all")
@@ -1337,6 +1364,8 @@ def GUI():
     global sub_2_speed_down_entry_speed
     global ping_log_box
     global ping_direction_combobox
+    global packet_loss_log_box
+    global speed_log_box
 
     root = Tk()
     root.title("Connection monitor")
@@ -1456,7 +1485,7 @@ def GUI():
     sub_3 = ttk.Frame(button_pack_frame_1)
     sub_3.pack(side = 'top', pady = general_pady)
     
-    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox.get(), ping_log_box, ping_direction_combobox))
+    ping_begin_button = ttk.Button(sub_2, text= 'Iniciar Prueba', command=lambda:PING_TEST_BEGIN(duration_entrybox.get(), ping_log_box, ping_direction_combobox, 'normal'))
     ping_begin_button.pack(side = 'left')
 
     #sub_3_label_1 = ttk.Label(sub_2)
@@ -1494,7 +1523,7 @@ def GUI():
     pl_direction_combobox.pack(side = 'top')
     
     pl_direction_combobox['values'] = directions_list
-    #pl_direction_combobox.set(directions_list[0])
+    pl_direction_combobox.set(directions_list[0])
     
     packet_loss_label_2 = ttk.Label(pl_subdivition_1, text = '\nIngrese cantidad\nde paquetes:', font=("Calibri",font_size), justify = 'center')
     packet_loss_label_2.pack(side = 'top')
@@ -1522,8 +1551,8 @@ def GUI():
 
     ######################################## Programar Pruebas ########################################
 
-    #program_test = ttk.Button(pl_subdivition_2, text = 'Programar Pruebas', command=lambda:PROGRAMTASK(root))
-    #program_test.pack(side = 'top', pady = general_pady * 2)
+    program_test = ttk.Button(pl_subdivition_2, text = 'Programar Pruebas', command=lambda:PROGRAMTASK(root))
+    program_test.pack(side = 'top', pady = general_pady * 2)
     
     ################################### SPEED TESTS ###################################
     ##### Buttons and labels for  button_pack_frame_3 #####
@@ -1593,7 +1622,7 @@ def GUI():
 
     ######################################
 
-    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(speedtest_entrybox, speed_log_box, speedtest_servers_combobox))
+    speedtest_begin_button = ttk.Button(sub_4, text= 'Iniciar Prueba', command=lambda:SPEED_TEST_BEGIN(int(speedtest_entrybox.get()), speed_log_box, speedtest_servers_combobox, 'normal'))
     speedtest_begin_button.pack(side = 'left', pady = general_pady)
     
     speedtest_stop_button = ttk.Button(sub_4, text= 'Detener Prueba', command=lambda:SPEEDTEST_TEST_STOP())
@@ -1669,7 +1698,7 @@ if __name__ == '__main__':
     general_padx = int(screen_width / 153.6)
     general_pady = int(screen_width / 136.6)
 
-    tasks_scheduler = sched.scheduler(time.localtime, time.sleep)
+    tasks_scheduler = sched.scheduler(time.time, time.sleep)
     
     gui_lines_color = 'black'
     frame_line_space = 4
@@ -1706,7 +1735,8 @@ if __name__ == '__main__':
     
     program_csv_route = 'test_program.csv'
 
-    thread_count = multiprocessing.cpu_count()
+    #thread_count = multiprocessing.cpu_count()
+    thread_count = 2
     
     #infinite = '9223372036854775807'
     
@@ -1723,6 +1753,13 @@ if __name__ == '__main__':
     if not os.path.exists(results_route + GET_NETWORK_NAME() + '_' + ping_csv_results_route):
     
         with open(results_route + GET_NETWORK_NAME() + '_' + ping_csv_results_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
+            csv_writer.writeheader()
+
+    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route):
+    
+        with open(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, 'w+', newline = '') as csv_file:
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
             csv_writer.writeheader()
@@ -1750,6 +1787,13 @@ if __name__ == '__main__':
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_results_fieldnames)
             csv_writer.writeheader()
+
+    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route):
+    
+        with open(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_results_fieldnames)
+            csv_writer.writeheader()
     
     ########## SPEEDTEST INFO ##########
     
@@ -1764,6 +1808,13 @@ if __name__ == '__main__':
     if not os.path.exists(results_route + GET_NETWORK_NAME() + '_' + speed_test_csv_results_route):
     
         with open(results_route + GET_NETWORK_NAME() + '_' + speed_test_csv_results_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
+            csv_writer.writeheader()
+
+    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route):
+    
+        with open(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route, 'w+', newline = '') as csv_file:
             
             csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
             csv_writer.writeheader()
@@ -1809,10 +1860,14 @@ if __name__ == '__main__':
 
     ping_log_box = None
     ping_direction_combobox = None
+
+    packet_loss_log_box = None
+
+    speed_log_box = None
     
     ######################################################################
 
-    i = 0
+    pl_test = None
 
     ######################################################################
 

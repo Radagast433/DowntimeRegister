@@ -1252,751 +1252,646 @@ Fecha,Hora,Host,Bajada,Subida
 02-03-2022,01-40-58,Movistar Chile-Recoleta-(34641),51.8,48.58
 02-03-2022,01-41-59,Movistar Chile-Recoleta-(34641),74.68,17.13
 02-03-2022,01-42-59,Movistar Chile-Recoleta-(34641),74.2,21.36
-02-03-2022,12-18-11,Mi Internet SpA-Santiago-(18027),117.35,14.35
-02-03-2022,12-19-10,Mi Internet SpA-Santiago-(18027),118.71,3.08
-02-03-2022,12-20-10,Mi Internet SpA-Santiago-(18027),89.99,27.83
-02-03-2022,12-21-10,Mi Internet SpA-Santiago-(18027),112.87,15.07
-02-03-2022,12-22-39,Mi Internet SpA-Santiago-(18027),97.79,44.64
-02-03-2022,12-23-36,Mi Internet SpA-Santiago-(18027),130.06,13.62
-02-03-2022,12-24-10,Mi Internet SpA-Santiago-(18027),104.13,16.45
-02-03-2022,12-25-10,Mi Internet SpA-Santiago-(18027),110.95,20.09
-02-03-2022,12-26-10,Mi Internet SpA-Santiago-(18027),93.27,11.53
-02-03-2022,12-27-10,Mi Internet SpA-Santiago-(18027),145.31,37.89
-02-03-2022,12-28-10,Mi Internet SpA-Santiago-(18027),66.53,17.34
-02-03-2022,12-29-39,Mi Internet SpA-Santiago-(18027),103.13,26.31
-02-03-2022,12-30-10,Mi Internet SpA-Santiago-(18027),108.65,13.02
-02-03-2022,12-31-10,Mi Internet SpA-Santiago-(18027),141.41,32.29
-02-03-2022,12-32-39,Mi Internet SpA-Santiago-(18027),105.04,45.35
-02-03-2022,12-33-20,Mi Internet SpA-Santiago-(18027),88.14,32.08
-02-03-2022,12-34-10,Mi Internet SpA-Santiago-(18027),83.2,18.06
-02-03-2022,12-35-10,Mi Internet SpA-Santiago-(18027),103.84,14.67
-02-03-2022,12-36-20,Mi Internet SpA-Santiago-(18027),134.45,13.64
-02-03-2022,12-37-10,Mi Internet SpA-Santiago-(18027),127.59,28.48
-02-03-2022,12-38-11,Mi Internet SpA-Santiago-(18027),114.76,13.5
-02-03-2022,12-39-10,Mi Internet SpA-Santiago-(18027),75.32,11.78
-02-03-2022,12-40-10,Mi Internet SpA-Santiago-(18027),68.61,14.94
-02-03-2022,12-41-10,Mi Internet SpA-Santiago-(18027),123.71,35.85
-02-03-2022,12-42-10,Mi Internet SpA-Santiago-(18027),110.05,18.96
-02-03-2022,12-43-10,Mi Internet SpA-Santiago-(18027),107.06,17.57
-02-03-2022,12-44-10,Mi Internet SpA-Santiago-(18027),130.99,17.35
-02-03-2022,12-45-10,Mi Internet SpA-Santiago-(18027),108.25,16.03
-02-03-2022,12-46-10,Mi Internet SpA-Santiago-(18027),89.24,27.66
-02-03-2022,12-47-10,Mi Internet SpA-Santiago-(18027),100.49,32.48
-02-03-2022,12-48-33,Mi Internet SpA-Santiago-(18027),103.49,35.71
-02-03-2022,12-49-10,Mi Internet SpA-Santiago-(18027),86.17,8.64
-02-03-2022,12-50-39,Mi Internet SpA-Santiago-(18027),125.67,21.54
-02-03-2022,12-51-10,Mi Internet SpA-Santiago-(18027),77.43,13.15
-02-03-2022,12-52-10,Mi Internet SpA-Santiago-(18027),124.28,46.65
-02-03-2022,12-53-10,Mi Internet SpA-Santiago-(18027),87.72,24.94
-02-03-2022,12-54-39,Mi Internet SpA-Santiago-(18027),78.41,10.84
-02-03-2022,12-55-10,Mi Internet SpA-Santiago-(18027),114.71,17.21
-02-03-2022,12-56-10,Mi Internet SpA-Santiago-(18027),96.33,21.88
-02-03-2022,12-57-39,Mi Internet SpA-Santiago-(18027),136.36,12.1
-02-03-2022,12-58-39,Mi Internet SpA-Santiago-(18027),135.98,9.99
-02-03-2022,12-59-10,Mi Internet SpA-Santiago-(18027),91.23,14.76
-02-03-2022,13-00-10,Mi Internet SpA-Santiago-(18027),89.39,11.81
-02-03-2022,13-01-10,Mi Internet SpA-Santiago-(18027),112.58,13.78
-02-03-2022,13-02-10,Mi Internet SpA-Santiago-(18027),96.02,21.66
-02-03-2022,13-03-10,Mi Internet SpA-Santiago-(18027),109.61,22.57
-02-03-2022,13-04-10,Mi Internet SpA-Santiago-(18027),117.7,35.75
-02-03-2022,13-05-33,Mi Internet SpA-Santiago-(18027),62.69,19.34
-02-03-2022,13-06-10,Mi Internet SpA-Santiago-(18027),21.13,10.69
-02-03-2022,13-07-27,Mi Internet SpA-Santiago-(18027),69.1,11.22
-02-03-2022,13-08-10,Mi Internet SpA-Santiago-(18027),117.55,31.47
-02-03-2022,13-09-10,Mi Internet SpA-Santiago-(18027),150.65,29.88
-02-03-2022,13-10-30,Mi Internet SpA-Santiago-(18027),96.89,16.39
-02-03-2022,13-11-10,Mi Internet SpA-Santiago-(18027),102.71,29.41
-02-03-2022,13-12-10,Mi Internet SpA-Santiago-(18027),143.56,36.17
-02-03-2022,13-13-39,Mi Internet SpA-Santiago-(18027),102.39,12.62
-02-03-2022,13-14-10,Mi Internet SpA-Santiago-(18027),144.96,16.78
-02-03-2022,13-15-11,Mi Internet SpA-Santiago-(18027),117.71,48.24
-02-03-2022,13-16-10,Mi Internet SpA-Santiago-(18027),114.97,39.01
-02-03-2022,13-17-39,Mi Internet SpA-Santiago-(18027),111.65,30.61
-02-03-2022,13-18-10,Mi Internet SpA-Santiago-(18027),152.5,22.22
-02-03-2022,13-19-10,Mi Internet SpA-Santiago-(18027),109.11,36.3
-02-03-2022,13-20-10,Mi Internet SpA-Santiago-(18027),130.65,19.92
-02-03-2022,13-21-10,Mi Internet SpA-Santiago-(18027),99.35,15.98
-02-03-2022,13-22-10,Mi Internet SpA-Santiago-(18027),116.2,17.43
-02-03-2022,13-23-23,Mi Internet SpA-Santiago-(18027),102.6,14.64
-02-03-2022,13-24-10,Mi Internet SpA-Santiago-(18027),91.93,14.48
-02-03-2022,13-25-36,Mi Internet SpA-Santiago-(18027),111.47,17.32
-02-03-2022,13-26-10,Mi Internet SpA-Santiago-(18027),88.9,16.78
-02-03-2022,13-27-10,Mi Internet SpA-Santiago-(18027),128.83,16.96
-02-03-2022,13-28-39,Mi Internet SpA-Santiago-(18027),98.23,19.54
-02-03-2022,13-29-39,Mi Internet SpA-Santiago-(18027),136.5,14.06
-02-03-2022,13-30-10,Mi Internet SpA-Santiago-(18027),114.78,18.15
-02-03-2022,13-31-10,Mi Internet SpA-Santiago-(18027),144.82,33.59
-02-03-2022,13-32-10,Mi Internet SpA-Santiago-(18027),83.25,25.95
-02-03-2022,13-33-10,Mi Internet SpA-Santiago-(18027),133.53,25.76
-02-03-2022,13-34-39,Mi Internet SpA-Santiago-(18027),77.0,12.23
-02-03-2022,13-35-10,Mi Internet SpA-Santiago-(18027),107.23,19.57
-02-03-2022,13-36-39,Mi Internet SpA-Santiago-(18027),107.59,31.74
-02-03-2022,13-37-12,Mi Internet SpA-Santiago-(18027),76.48,20.57
-02-03-2022,13-38-10,Mi Internet SpA-Santiago-(18027),105.87,14.91
-02-03-2022,13-39-39,Mi Internet SpA-Santiago-(18027),81.94,14.56
-02-03-2022,13-40-10,Mi Internet SpA-Santiago-(18027),85.19,14.57
-02-03-2022,13-41-10,Mi Internet SpA-Santiago-(18027),116.76,19.68
-02-03-2022,13-42-11,Mi Internet SpA-Santiago-(18027),128.2,34.76
-02-03-2022,13-43-39,Mi Internet SpA-Santiago-(18027),62.72,28.29
-02-03-2022,13-44-39,Mi Internet SpA-Santiago-(18027),99.1,25.92
-02-03-2022,13-45-10,Mi Internet SpA-Santiago-(18027),107.66,44.46
-02-03-2022,13-46-10,Mi Internet SpA-Santiago-(18027),104.91,14.1
-02-03-2022,13-47-10,Mi Internet SpA-Santiago-(18027),121.3,19.91
-02-03-2022,13-48-10,Mi Internet SpA-Santiago-(18027),147.57,16.82
-02-03-2022,13-49-11,Mi Internet SpA-Santiago-(18027),102.2,42.54
-02-03-2022,13-50-10,Mi Internet SpA-Santiago-(18027),110.13,27.74
-02-03-2022,13-51-10,Mi Internet SpA-Santiago-(18027),78.54,26.35
-02-03-2022,13-52-10,Mi Internet SpA-Santiago-(18027),93.09,19.8
-02-03-2022,13-53-10,Mi Internet SpA-Santiago-(18027),85.7,36.83
-02-03-2022,13-54-10,Mi Internet SpA-Santiago-(18027),76.04,17.03
-02-03-2022,13-55-10,Mi Internet SpA-Santiago-(18027),86.42,3.31
-02-03-2022,13-56-39,Mi Internet SpA-Santiago-(18027),77.36,12.42
-02-03-2022,13-57-10,Mi Internet SpA-Santiago-(18027),63.31,27.91
-02-03-2022,13-58-39,Mi Internet SpA-Santiago-(18027),97.76,14.81
-02-03-2022,13-59-39,Mi Internet SpA-Santiago-(18027),112.05,16.12
-02-03-2022,14-00-10,Mi Internet SpA-Santiago-(18027),94.51,12.69
-02-03-2022,14-01-10,Mi Internet SpA-Santiago-(18027),114.12,12.91
-02-03-2022,14-02-10,Mi Internet SpA-Santiago-(18027),156.75,27.19
-02-03-2022,14-03-39,Mi Internet SpA-Santiago-(18027),125.75,35.87
-02-03-2022,14-04-13,Mi Internet SpA-Santiago-(18027),110.69,17.59
-02-03-2022,14-05-39,Mi Internet SpA-Santiago-(18027),86.59,13.39
-02-03-2022,14-06-29,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-07-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-07-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-07-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-07-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-07-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-07-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-07-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-08-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-08-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-08-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-08-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-08-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-08-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-08-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-09-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-09-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-09-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-09-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-09-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-09-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-09-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-10-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-10-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-10-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-10-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-10-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-10-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-10-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-11-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-11-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-11-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-11-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-11-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-12-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-12-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-12-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-12-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-12-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-12-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-12-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-13-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-13-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-13-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-13-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-13-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-13-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-13-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-14-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-14-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-14-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-14-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-14-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-14-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-14-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-15-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-15-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-15-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-15-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-15-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-15-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-15-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-16-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-16-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-16-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-16-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-16-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-16-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-16-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-17-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-17-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-17-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-17-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-17-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-17-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-18-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-18-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-18-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-18-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-18-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-18-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-18-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-19-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-19-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-19-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-19-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-19-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-19-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-19-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-20-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-20-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-20-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-20-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-20-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-20-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-20-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-21-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-21-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-21-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-21-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-21-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-21-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-22-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-22-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-22-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-22-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-22-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-22-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-22-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-23-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-23-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-23-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-23-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-23-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-23-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-23-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-24-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-24-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-24-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-24-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-24-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-24-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-25-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-25-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-25-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-25-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-25-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-25-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-25-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-26-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-26-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-26-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-26-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-26-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-26-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-26-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-27-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-27-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-27-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-27-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-27-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-27-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-27-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-28-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-28-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-28-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-28-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-28-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-28-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-28-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-29-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-29-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-29-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-29-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-29-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-29-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-29-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-30-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-30-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-30-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-30-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-30-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-30-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-31-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-31-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-31-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-31-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-31-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-31-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-32-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-32-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-32-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-32-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-32-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-32-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-32-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-33-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-33-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-33-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-33-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-33-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-33-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-33-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-34-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-34-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-34-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-34-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-34-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-34-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-34-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-35-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-35-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-35-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-35-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-35-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-35-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-35-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-36-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-36-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-36-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-36-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-36-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-36-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-36-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-37-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-37-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-37-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-37-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-37-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-37-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-37-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-38-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-38-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-38-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-38-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-38-08,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-38-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-38-09,Mi Internet SpA-Santiago-(18027),0.0,0.0
-02-03-2022,14-39-27,Mi Internet SpA-Santiago-(18027),15.87,0.0
-02-03-2022,14-40-10,Mi Internet SpA-Santiago-(18027),117.23,21.33
-02-03-2022,14-41-39,Mi Internet SpA-Santiago-(18027),137.62,15.52
-02-03-2022,14-42-13,Mi Internet SpA-Santiago-(18027),87.14,14.96
-02-03-2022,14-43-33,Mi Internet SpA-Santiago-(18027),112.01,17.34
-02-03-2022,14-44-10,Mi Internet SpA-Santiago-(18027),94.88,21.09
-02-03-2022,14-45-39,Mi Internet SpA-Santiago-(18027),58.94,9.93
-02-03-2022,14-46-10,Mi Internet SpA-Santiago-(18027),80.14,14.57
-02-03-2022,14-47-23,Mi Internet SpA-Santiago-(18027),69.31,9.17
-02-03-2022,14-48-29,Mi Internet SpA-Santiago-(18027),88.75,13.42
-02-03-2022,14-49-10,Mi Internet SpA-Santiago-(18027),133.17,27.67
-02-03-2022,14-50-10,Mi Internet SpA-Santiago-(18027),81.29,17.45
-02-03-2022,14-51-10,Mi Internet SpA-Santiago-(18027),153.95,34.62
-02-03-2022,14-52-10,Mi Internet SpA-Santiago-(18027),114.1,30.38
-02-03-2022,14-53-10,Mi Internet SpA-Santiago-(18027),90.9,32.55
-02-03-2022,14-54-10,Mi Internet SpA-Santiago-(18027),92.34,42.7
-02-03-2022,14-55-39,Mi Internet SpA-Santiago-(18027),90.51,20.73
-02-03-2022,14-56-10,Mi Internet SpA-Santiago-(18027),84.64,41.12
-02-03-2022,14-57-39,Mi Internet SpA-Santiago-(18027),83.3,14.99
-02-03-2022,14-58-10,Mi Internet SpA-Santiago-(18027),123.32,27.72
-02-03-2022,14-59-10,Mi Internet SpA-Santiago-(18027),96.03,36.25
-02-03-2022,15-00-39,Mi Internet SpA-Santiago-(18027),103.66,28.25
-02-03-2022,15-01-11,Mi Internet SpA-Santiago-(18027),100.07,16.71
-02-03-2022,15-02-10,Mi Internet SpA-Santiago-(18027),124.99,13.12
-02-03-2022,15-03-21,Mi Internet SpA-Santiago-(18027),91.39,18.13
-02-03-2022,15-04-22,Mi Internet SpA-Santiago-(18027),108.22,16.75
-02-03-2022,15-05-39,Mi Internet SpA-Santiago-(18027),115.88,22.69
-02-03-2022,15-06-11,Mi Internet SpA-Santiago-(18027),94.5,34.28
-02-03-2022,15-07-10,Mi Internet SpA-Santiago-(18027),98.33,28.06
-02-03-2022,15-08-39,Mi Internet SpA-Santiago-(18027),124.25,31.78
-02-03-2022,15-09-10,Mi Internet SpA-Santiago-(18027),98.62,32.15
-02-03-2022,15-10-39,Mi Internet SpA-Santiago-(18027),93.16,6.36
-02-03-2022,15-11-27,Mi Internet SpA-Santiago-(18027),96.29,13.51
-02-03-2022,15-12-39,Mi Internet SpA-Santiago-(18027),85.38,10.01
-02-03-2022,15-13-39,Mi Internet SpA-Santiago-(18027),125.57,10.49
-02-03-2022,15-14-27,Mi Internet SpA-Santiago-(18027),111.05,11.02
-02-03-2022,15-15-39,Mi Internet SpA-Santiago-(18027),123.96,12.11
-02-03-2022,15-16-10,Mi Internet SpA-Santiago-(18027),97.9,13.05
-02-03-2022,15-17-39,Mi Internet SpA-Santiago-(18027),98.44,12.98
-02-03-2022,15-18-10,Mi Internet SpA-Santiago-(18027),94.63,4.36
-02-03-2022,15-19-10,Mi Internet SpA-Santiago-(18027),127.75,37.71
-02-03-2022,15-20-29,Mi Internet SpA-Santiago-(18027),117.48,36.63
-02-03-2022,15-21-40,Mi Internet SpA-Santiago-(18027),19.59,11.64
-02-03-2022,15-22-10,Mi Internet SpA-Santiago-(18027),120.59,35.09
-02-03-2022,15-23-39,Mi Internet SpA-Santiago-(18027),81.16,16.77
-02-03-2022,15-24-40,Mi Internet SpA-Santiago-(18027),105.95,18.34
-02-03-2022,15-25-10,Mi Internet SpA-Santiago-(18027),105.38,29.34
-02-03-2022,15-26-10,Mi Internet SpA-Santiago-(18027),146.53,22.66
-02-03-2022,15-27-10,Mi Internet SpA-Santiago-(18027),82.21,25.56
-02-03-2022,15-28-20,Mi Internet SpA-Santiago-(18027),80.87,25.48
-02-03-2022,15-29-10,Mi Internet SpA-Santiago-(18027),78.06,18.01
-02-03-2022,15-30-10,Mi Internet SpA-Santiago-(18027),84.71,14.38
-02-03-2022,15-31-10,Mi Internet SpA-Santiago-(18027),97.89,15.44
-02-03-2022,15-32-39,Mi Internet SpA-Santiago-(18027),105.41,10.71
-02-03-2022,15-33-10,Mi Internet SpA-Santiago-(18027),85.29,32.74
-02-03-2022,15-34-10,Mi Internet SpA-Santiago-(18027),85.58,18.58
-02-03-2022,15-35-39,Mi Internet SpA-Santiago-(18027),77.36,23.4
-02-03-2022,15-36-11,Mi Internet SpA-Santiago-(18027),69.22,13.66
-02-03-2022,15-37-10,Mi Internet SpA-Santiago-(18027),103.85,25.09
-02-03-2022,15-38-10,Mi Internet SpA-Santiago-(18027),115.79,18.24
-02-03-2022,15-39-33,Mi Internet SpA-Santiago-(18027),95.75,10.81
-02-03-2022,15-40-39,Mi Internet SpA-Santiago-(18027),83.49,26.94
-02-03-2022,15-41-39,Mi Internet SpA-Santiago-(18027),105.03,16.32
-02-03-2022,15-42-10,Mi Internet SpA-Santiago-(18027),35.88,24.5
-02-03-2022,15-43-18,Mi Internet SpA-Santiago-(18027),81.92,14.81
-02-03-2022,15-44-39,Mi Internet SpA-Santiago-(18027),78.18,27.52
-02-03-2022,15-45-10,Mi Internet SpA-Santiago-(18027),110.57,10.28
-02-03-2022,15-46-10,Mi Internet SpA-Santiago-(18027),99.93,12.48
-02-03-2022,15-47-10,Mi Internet SpA-Santiago-(18027),113.35,14.95
-02-03-2022,15-48-17,Mi Internet SpA-Santiago-(18027),117.66,16.51
-02-03-2022,15-49-39,Mi Internet SpA-Santiago-(18027),115.46,18.21
-02-03-2022,15-50-10,Mi Internet SpA-Santiago-(18027),86.49,23.24
-02-03-2022,15-51-11,Mi Internet SpA-Santiago-(18027),75.76,17.0
-02-03-2022,15-52-27,Mi Internet SpA-Santiago-(18027),69.81,31.78
-02-03-2022,15-53-10,Mi Internet SpA-Santiago-(18027),77.36,15.63
-02-03-2022,15-54-10,Mi Internet SpA-Santiago-(18027),116.12,37.51
-02-03-2022,15-55-39,Mi Internet SpA-Santiago-(18027),102.8,39.15
-02-03-2022,15-56-10,Mi Internet SpA-Santiago-(18027),114.89,17.25
-02-03-2022,15-57-11,Mi Internet SpA-Santiago-(18027),90.2,12.97
-02-03-2022,15-58-10,Mi Internet SpA-Santiago-(18027),147.68,31.97
-02-03-2022,15-59-10,Mi Internet SpA-Santiago-(18027),82.78,12.26
-02-03-2022,16-00-10,Mi Internet SpA-Santiago-(18027),86.17,18.85
-02-03-2022,16-01-10,Mi Internet SpA-Santiago-(18027),109.54,23.05
-02-03-2022,16-02-11,Mi Internet SpA-Santiago-(18027),107.01,15.2
-02-03-2022,16-03-39,Mi Internet SpA-Santiago-(18027),104.01,28.55
-02-03-2022,16-04-10,Mi Internet SpA-Santiago-(18027),87.96,14.88
-02-03-2022,16-05-39,Mi Internet SpA-Santiago-(18027),92.44,23.45
-02-03-2022,16-06-11,Mi Internet SpA-Santiago-(18027),4.86,22.48
-02-03-2022,16-07-39,Mi Internet SpA-Santiago-(18027),116.21,19.58
-02-03-2022,16-09-39,Mi Internet SpA-Santiago-(18027),91.42,17.01
-02-03-2022,16-10-10,Mi Internet SpA-Santiago-(18027),80.34,17.82
-02-03-2022,16-11-39,Mi Internet SpA-Santiago-(18027),122.59,25.53
-02-03-2022,16-12-21,Mi Internet SpA-Santiago-(18027),71.98,15.72
-02-03-2022,16-13-10,Mi Internet SpA-Santiago-(18027),119.43,17.22
-02-03-2022,16-14-20,Mi Internet SpA-Santiago-(18027),138.85,14.91
-02-03-2022,16-15-10,Mi Internet SpA-Santiago-(18027),101.15,4.8
-02-03-2022,16-16-27,Mi Internet SpA-Santiago-(18027),105.28,14.07
-02-03-2022,16-17-39,Mi Internet SpA-Santiago-(18027),105.38,17.31
-02-03-2022,16-18-13,Mi Internet SpA-Santiago-(18027),97.76,19.9
-02-03-2022,16-19-20,Mi Internet SpA-Santiago-(18027),93.7,36.83
-02-03-2022,16-20-27,Mi Internet SpA-Santiago-(18027),98.62,15.72
-02-03-2022,16-21-10,Mi Internet SpA-Santiago-(18027),61.58,15.99
-02-03-2022,16-22-21,Mi Internet SpA-Santiago-(18027),70.43,13.89
-02-03-2022,16-23-39,Mi Internet SpA-Santiago-(18027),83.91,28.89
-02-03-2022,16-24-39,Mi Internet SpA-Santiago-(18027),87.86,22.11
-02-03-2022,16-25-10,Mi Internet SpA-Santiago-(18027),100.66,13.66
-02-03-2022,16-26-39,Mi Internet SpA-Santiago-(18027),118.01,9.88
-02-03-2022,16-27-10,Mi Internet SpA-Santiago-(18027),89.15,13.8
-02-03-2022,16-28-10,Mi Internet SpA-Santiago-(18027),115.4,27.85
-02-03-2022,16-29-10,Mi Internet SpA-Santiago-(18027),141.05,21.03
-02-03-2022,16-30-10,Mi Internet SpA-Santiago-(18027),79.71,12.14
-02-03-2022,16-31-18,Mi Internet SpA-Santiago-(18027),108.14,13.59
-02-03-2022,16-32-37,Mi Internet SpA-Santiago-(18027),117.15,36.63
-02-03-2022,16-33-11,Mi Internet SpA-Santiago-(18027),86.59,13.54
-02-03-2022,16-34-10,Mi Internet SpA-Santiago-(18027),115.62,23.05
-02-03-2022,16-35-30,Mi Internet SpA-Santiago-(18027),86.77,16.29
-02-03-2022,16-36-39,Mi Internet SpA-Santiago-(18027),106.63,11.12
-02-03-2022,16-37-22,Mi Internet SpA-Santiago-(18027),129.38,16.92
-02-03-2022,16-38-10,Mi Internet SpA-Santiago-(18027),10.19,12.6
-02-03-2022,16-39-10,Mi Internet SpA-Santiago-(18027),78.0,16.36
-02-03-2022,16-40-39,Mi Internet SpA-Santiago-(18027),81.06,11.5
-02-03-2022,16-41-19,Mi Internet SpA-Santiago-(18027),85.63,17.51
-02-03-2022,16-42-23,Mi Internet SpA-Santiago-(18027),150.52,28.86
-02-03-2022,16-43-39,Mi Internet SpA-Santiago-(18027),111.59,14.95
-02-03-2022,16-44-10,Mi Internet SpA-Santiago-(18027),94.13,40.94
-02-03-2022,16-45-10,Mi Internet SpA-Santiago-(18027),82.41,28.65
-02-03-2022,16-46-10,Mi Internet SpA-Santiago-(18027),94.79,9.84
-02-03-2022,16-47-10,Mi Internet SpA-Santiago-(18027),122.1,35.47
-02-03-2022,16-48-17,Mi Internet SpA-Santiago-(18027),142.39,13.98
-02-03-2022,16-49-10,Mi Internet SpA-Santiago-(18027),35.15,14.36
-02-03-2022,16-50-10,Mi Internet SpA-Santiago-(18027),135.68,36.1
-02-03-2022,16-51-10,Mi Internet SpA-Santiago-(18027),107.64,16.59
-02-03-2022,16-52-18,Mi Internet SpA-Santiago-(18027),65.37,2.41
-02-03-2022,16-53-10,Mi Internet SpA-Santiago-(18027),90.28,24.12
-02-03-2022,16-54-10,Mi Internet SpA-Santiago-(18027),117.01,25.69
-02-03-2022,16-55-10,Mi Internet SpA-Santiago-(18027),73.06,42.4
-02-03-2022,16-56-10,Mi Internet SpA-Santiago-(18027),119.57,11.22
-02-03-2022,16-57-10,Mi Internet SpA-Santiago-(18027),98.16,31.53
-02-03-2022,16-58-10,Mi Internet SpA-Santiago-(18027),121.78,26.74
-02-03-2022,16-59-23,Mi Internet SpA-Santiago-(18027),118.99,14.56
-02-03-2022,17-00-20,Mi Internet SpA-Santiago-(18027),138.25,20.66
-02-03-2022,17-01-37,Mi Internet SpA-Santiago-(18027),74.44,16.12
-02-03-2022,17-02-39,Mi Internet SpA-Santiago-(18027),66.25,27.44
-02-03-2022,17-03-12,Mi Internet SpA-Santiago-(18027),90.28,12.37
-02-03-2022,17-04-10,Mi Internet SpA-Santiago-(18027),72.79,19.26
-02-03-2022,17-05-39,Mi Internet SpA-Santiago-(18027),76.29,13.35
-02-03-2022,17-06-10,Mi Internet SpA-Santiago-(18027),80.41,35.87
-02-03-2022,17-07-39,Mi Internet SpA-Santiago-(18027),65.62,16.14
-02-03-2022,17-08-10,Mi Internet SpA-Santiago-(18027),64.9,12.01
-02-03-2022,17-09-10,Mi Internet SpA-Santiago-(18027),87.06,16.79
-02-03-2022,17-10-36,Mi Internet SpA-Santiago-(18027),129.78,14.0
-02-03-2022,17-11-10,Mi Internet SpA-Santiago-(18027),133.78,34.79
-02-03-2022,17-12-10,Mi Internet SpA-Santiago-(18027),120.4,17.11
-02-03-2022,17-13-10,Mi Internet SpA-Santiago-(18027),103.72,17.67
-02-03-2022,17-14-10,Mi Internet SpA-Santiago-(18027),137.6,28.42
-02-03-2022,17-15-17,Mi Internet SpA-Santiago-(18027),93.06,16.15
-02-03-2022,17-16-39,Mi Internet SpA-Santiago-(18027),83.57,16.95
-02-03-2022,17-17-11,Mi Internet SpA-Santiago-(18027),72.85,20.59
-02-03-2022,17-18-10,Mi Internet SpA-Santiago-(18027),35.11,50.5
-02-03-2022,17-19-20,Mi Internet SpA-Santiago-(18027),167.57,14.02
-02-03-2022,17-20-10,Mi Internet SpA-Santiago-(18027),97.24,16.51
-02-03-2022,17-21-39,Mi Internet SpA-Santiago-(18027),108.4,14.47
-02-03-2022,17-22-10,Mi Internet SpA-Santiago-(18027),78.73,15.26
-02-03-2022,17-23-10,Mi Internet SpA-Santiago-(18027),117.25,23.58
-02-03-2022,17-24-10,Mi Internet SpA-Santiago-(18027),115.85,31.33
-02-03-2022,17-25-10,Mi Internet SpA-Santiago-(18027),78.56,16.75
-02-03-2022,17-26-39,Mi Internet SpA-Santiago-(18027),91.62,14.36
-02-03-2022,17-27-39,Mi Internet SpA-Santiago-(18027),92.77,19.72
-02-03-2022,17-28-40,Mi Internet SpA-Santiago-(18027),139.85,15.71
-02-03-2022,17-29-10,Mi Internet SpA-Santiago-(18027),101.85,17.68
-02-03-2022,17-30-10,Mi Internet SpA-Santiago-(18027),97.58,31.85
-02-03-2022,17-31-10,Mi Internet SpA-Santiago-(18027),93.92,16.15
-02-03-2022,17-32-10,Mi Internet SpA-Santiago-(18027),113.01,12.76
-02-03-2022,17-33-39,Mi Internet SpA-Santiago-(18027),77.24,14.6
-02-03-2022,17-34-10,Mi Internet SpA-Santiago-(18027),72.93,13.87
-02-03-2022,17-35-39,Mi Internet SpA-Santiago-(18027),91.27,34.49
-02-03-2022,17-36-40,Mi Internet SpA-Santiago-(18027),81.87,11.07
-02-03-2022,17-37-39,Mi Internet SpA-Santiago-(18027),108.88,14.46
-02-03-2022,17-38-10,Mi Internet SpA-Santiago-(18027),105.86,15.97
-02-03-2022,17-39-32,Mi Internet SpA-Santiago-(18027),146.29,35.29
-02-03-2022,17-40-10,Mi Internet SpA-Santiago-(18027),151.4,19.97
-02-03-2022,17-41-23,Mi Internet SpA-Santiago-(18027),99.01,36.36
-02-03-2022,17-42-39,Mi Internet SpA-Santiago-(18027),108.94,11.93
-02-03-2022,17-43-10,Mi Internet SpA-Santiago-(18027),98.42,19.82
-02-03-2022,17-44-13,Mi Internet SpA-Santiago-(18027),75.04,20.3
-02-03-2022,17-45-39,Mi Internet SpA-Santiago-(18027),102.06,41.04
-02-03-2022,17-46-10,Mi Internet SpA-Santiago-(18027),121.43,16.5
-02-03-2022,17-47-10,Mi Internet SpA-Santiago-(18027),101.91,18.15
-02-03-2022,17-48-17,Mi Internet SpA-Santiago-(18027),85.55,17.81
-02-03-2022,17-49-10,Mi Internet SpA-Santiago-(18027),134.08,19.35
-02-03-2022,17-50-10,Mi Internet SpA-Santiago-(18027),114.34,18.3
-02-03-2022,17-51-10,Mi Internet SpA-Santiago-(18027),119.32,25.03
-02-03-2022,17-52-39,Mi Internet SpA-Santiago-(18027),50.61,22.36
-04-03-2022,14-45-07,Insacom-Santiago-(37488),110.72,33.79
-04-03-2022,14-46-07,Insacom-Santiago-(37488),83.09,33.72
-04-03-2022,14-47-07,Insacom-Santiago-(37488),35.85,27.15
-04-03-2022,14-48-08,Insacom-Santiago-(37488),48.06,30.93
-04-03-2022,14-49-07,Insacom-Santiago-(37488),78.35,29.08
-04-03-2022,14-50-08,Insacom-Santiago-(37488),65.21,10.18
-04-03-2022,14-51-07,Insacom-Santiago-(37488),71.38,14.24
-04-03-2022,14-52-07,Insacom-Santiago-(37488),18.92,25.5
-04-03-2022,14-53-07,Insacom-Santiago-(37488),48.31,30.75
-04-03-2022,14-54-07,Insacom-Santiago-(37488),76.27,26.45
-04-03-2022,14-55-06,Insacom-Santiago-(37488),73.44,18.94
-04-03-2022,14-56-08,Insacom-Santiago-(37488),64.59,10.07
-04-03-2022,14-57-07,Insacom-Santiago-(37488),82.41,61.29
-04-03-2022,14-58-06,Insacom-Santiago-(37488),46.72,37.55
-04-03-2022,14-59-07,Insacom-Santiago-(37488),69.98,21.21
-04-03-2022,15-00-06,Insacom-Santiago-(37488),41.98,30.0
-04-03-2022,15-01-07,Insacom-Santiago-(37488),83.6,15.74
-04-03-2022,15-02-08,Insacom-Santiago-(37488),90.1,21.82
-04-03-2022,15-03-08,Insacom-Santiago-(37488),76.48,16.84
-04-03-2022,15-04-07,Insacom-Santiago-(37488),74.41,19.5
-04-03-2022,15-05-06,Insacom-Santiago-(37488),68.88,25.78
-04-03-2022,15-06-07,Insacom-Santiago-(37488),69.94,22.5
-04-03-2022,15-07-06,Insacom-Santiago-(37488),66.02,16.83
-04-03-2022,15-08-07,Insacom-Santiago-(37488),65.94,14.24
-04-03-2022,15-09-06,Insacom-Santiago-(37488),46.82,33.84
-04-03-2022,15-10-08,Insacom-Santiago-(37488),61.33,52.98
-04-03-2022,15-11-07,Insacom-Santiago-(37488),80.87,25.82
-04-03-2022,15-12-07,Insacom-Santiago-(37488),45.88,14.19
-04-03-2022,15-13-08,Insacom-Santiago-(37488),88.67,11.02
-04-03-2022,15-14-07,Insacom-Santiago-(37488),52.81,14.17
-04-03-2022,15-15-07,Insacom-Santiago-(37488),65.28,14.87
-04-03-2022,15-16-07,Insacom-Santiago-(37488),38.87,12.28
-04-03-2022,15-17-08,Insacom-Santiago-(37488),54.46,13.89
-04-03-2022,15-18-08,Insacom-Santiago-(37488),46.72,11.2
-04-03-2022,15-19-07,Insacom-Santiago-(37488),40.95,19.91
-04-03-2022,15-20-08,Insacom-Santiago-(37488),66.68,17.13
-04-03-2022,15-21-07,Insacom-Santiago-(37488),41.44,6.6
-04-03-2022,15-22-09,Insacom-Santiago-(37488),76.2,10.93
-04-03-2022,15-23-07,Insacom-Santiago-(37488),50.65,49.88
-04-03-2022,15-24-07,Insacom-Santiago-(37488),56.71,17.19
-04-03-2022,15-25-07,Insacom-Santiago-(37488),79.39,22.9
-04-03-2022,15-26-06,Insacom-Santiago-(37488),48.53,30.99
-04-03-2022,15-27-06,Insacom-Santiago-(37488),76.48,29.76
-04-03-2022,15-28-07,Insacom-Santiago-(37488),79.22,14.29
-04-03-2022,15-29-07,Insacom-Santiago-(37488),47.58,13.76
-04-03-2022,15-30-06,Insacom-Santiago-(37488),36.55,28.98
-04-03-2022,15-31-06,Insacom-Santiago-(37488),64.1,16.83
-04-03-2022,15-32-07,Insacom-Santiago-(37488),60.65,16.29
-04-03-2022,15-33-07,Insacom-Santiago-(37488),57.29,13.62
-04-03-2022,15-34-07,Insacom-Santiago-(37488),44.48,22.46
-04-03-2022,15-35-07,Insacom-Santiago-(37488),42.3,11.2
-04-03-2022,15-36-06,Insacom-Santiago-(37488),73.04,24.04
-04-03-2022,15-37-07,Insacom-Santiago-(37488),73.72,15.12
-04-03-2022,15-38-07,Insacom-Santiago-(37488),41.67,15.9
-04-03-2022,15-39-08,Insacom-Santiago-(37488),51.81,11.9
-04-03-2022,15-40-07,Insacom-Santiago-(37488),92.92,17.36
-04-03-2022,15-41-08,Insacom-Santiago-(37488),34.03,16.64
-04-03-2022,15-42-06,Insacom-Santiago-(37488),89.39,29.67
-04-03-2022,15-43-07,Insacom-Santiago-(37488),46.4,16.85
-04-03-2022,15-44-08,Insacom-Santiago-(37488),47.29,21.43
-04-03-2022,15-45-08,Insacom-Santiago-(37488),109.77,15.45
-04-03-2022,15-46-07,Insacom-Santiago-(37488),48.95,31.3
-04-03-2022,15-47-07,Insacom-Santiago-(37488),45.92,33.59
-04-03-2022,15-48-06,Insacom-Santiago-(37488),76.24,16.67
-04-03-2022,15-49-07,Insacom-Santiago-(37488),41.34,16.16
-04-03-2022,15-50-06,Insacom-Santiago-(37488),92.12,13.94
-04-03-2022,15-51-08,Insacom-Santiago-(37488),44.49,27.25
-04-03-2022,15-52-07,Insacom-Santiago-(37488),79.89,25.48
-04-03-2022,15-53-06,Insacom-Santiago-(37488),81.81,11.14
-04-03-2022,15-54-07,Insacom-Santiago-(37488),118.73,14.12
-04-03-2022,15-55-07,Insacom-Santiago-(37488),86.83,15.26
-04-03-2022,15-56-07,Insacom-Santiago-(37488),83.37,37.16
-04-03-2022,15-57-08,Insacom-Santiago-(37488),98.91,14.52
-04-03-2022,15-58-08,Insacom-Santiago-(37488),102.23,28.98
-04-03-2022,15-59-07,Insacom-Santiago-(37488),100.24,14.85
-04-03-2022,16-00-07,Insacom-Santiago-(37488),66.64,14.53
-04-03-2022,16-01-08,Insacom-Santiago-(37488),63.31,26.36
-04-03-2022,16-02-07,Insacom-Santiago-(37488),91.61,14.13
-04-03-2022,16-03-07,Insacom-Santiago-(37488),57.62,15.34
-04-03-2022,16-04-07,Insacom-Santiago-(37488),55.73,15.12
-04-03-2022,16-05-07,Insacom-Santiago-(37488),45.18,12.4
-04-03-2022,16-06-07,Insacom-Santiago-(37488),40.16,9.39
-04-03-2022,16-07-07,Insacom-Santiago-(37488),54.48,16.28
-04-03-2022,16-08-07,Insacom-Santiago-(37488),78.4,32.68
-04-03-2022,16-09-07,Insacom-Santiago-(37488),99.28,18.68
-04-03-2022,16-10-07,Insacom-Santiago-(37488),65.63,10.7
-04-03-2022,16-11-06,Insacom-Santiago-(37488),72.62,14.2
-04-03-2022,16-12-06,Insacom-Santiago-(37488),81.86,14.24
-04-03-2022,16-13-07,Insacom-Santiago-(37488),64.32,12.36
-04-03-2022,16-14-08,Insacom-Santiago-(37488),84.18,20.69
-04-03-2022,16-15-07,Insacom-Santiago-(37488),86.97,13.79
-04-03-2022,16-16-07,Insacom-Santiago-(37488),56.24,19.59
-04-03-2022,16-17-07,Insacom-Santiago-(37488),61.8,14.35
-04-03-2022,16-18-06,Insacom-Santiago-(37488),70.91,23.33
-04-03-2022,16-19-08,Insacom-Santiago-(37488),58.28,15.98
-04-03-2022,16-20-07,Insacom-Santiago-(37488),108.49,16.58
-04-03-2022,16-21-07,Insacom-Santiago-(37488),74.92,11.01
-04-03-2022,16-22-07,Insacom-Santiago-(37488),38.2,26.9
-04-03-2022,16-23-07,Insacom-Santiago-(37488),41.11,13.9
-04-03-2022,16-24-08,Insacom-Santiago-(37488),45.38,37.6
-04-03-2022,16-25-07,Insacom-Santiago-(37488),58.27,12.77
-04-03-2022,16-26-06,Insacom-Santiago-(37488),93.59,22.06
-04-03-2022,16-27-07,Insacom-Santiago-(37488),44.25,32.43
-04-03-2022,16-28-08,Insacom-Santiago-(37488),84.46,17.67
-04-03-2022,16-29-07,Insacom-Santiago-(37488),44.96,30.77
-04-03-2022,16-30-06,Insacom-Santiago-(37488),63.64,32.7
-04-03-2022,16-31-06,Insacom-Santiago-(37488),91.44,38.99
-04-03-2022,16-32-07,Insacom-Santiago-(37488),46.48,24.65
-04-03-2022,16-33-07,Insacom-Santiago-(37488),52.89,16.42
-04-03-2022,16-34-07,Insacom-Santiago-(37488),75.47,25.65
-04-03-2022,16-35-08,Insacom-Santiago-(37488),45.25,17.51
-04-03-2022,16-36-07,Insacom-Santiago-(37488),108.21,15.32
-04-03-2022,16-37-08,Insacom-Santiago-(37488),109.44,16.77
-04-03-2022,16-38-06,Insacom-Santiago-(37488),44.61,15.29
-04-03-2022,16-39-08,Insacom-Santiago-(37488),69.22,17.22
-04-03-2022,16-40-07,Insacom-Santiago-(37488),61.79,18.53
-04-03-2022,16-41-07,Insacom-Santiago-(37488),74.48,28.12
-04-03-2022,16-42-07,Insacom-Santiago-(37488),65.06,17.55
-04-03-2022,16-43-08,Insacom-Santiago-(37488),46.73,29.55
-04-03-2022,16-44-07,Insacom-Santiago-(37488),46.23,19.76
-04-03-2022,16-45-08,Insacom-Santiago-(37488),69.11,18.0
-04-03-2022,16-46-06,Insacom-Santiago-(37488),53.04,15.5
-04-03-2022,16-47-07,Insacom-Santiago-(37488),46.47,18.94
-04-03-2022,16-48-06,Insacom-Santiago-(37488),108.68,17.62
-04-03-2022,16-49-07,Insacom-Santiago-(37488),53.99,19.74
-04-03-2022,16-50-07,Insacom-Santiago-(37488),69.91,9.7
-04-03-2022,16-51-08,Insacom-Santiago-(37488),69.78,55.82
-04-03-2022,16-52-07,Insacom-Santiago-(37488),68.28,14.81
-04-03-2022,16-53-06,Insacom-Santiago-(37488),45.93,29.57
-04-03-2022,16-54-07,Insacom-Santiago-(37488),86.11,13.0
-04-03-2022,16-55-08,Insacom-Santiago-(37488),45.95,20.55
-04-03-2022,16-56-07,Insacom-Santiago-(37488),46.23,15.0
-04-03-2022,16-57-07,Insacom-Santiago-(37488),67.87,16.97
-04-03-2022,16-58-07,Insacom-Santiago-(37488),85.31,15.87
-04-03-2022,16-59-06,Insacom-Santiago-(37488),48.4,39.0
-04-03-2022,17-00-06,Insacom-Santiago-(37488),107.72,12.44
-04-03-2022,17-01-06,Insacom-Santiago-(37488),45.92,14.02
-04-03-2022,17-02-07,Insacom-Santiago-(37488),72.93,17.24
-04-03-2022,17-03-07,Insacom-Santiago-(37488),43.37,18.63
-04-03-2022,17-04-07,Insacom-Santiago-(37488),88.51,16.32
-04-03-2022,17-05-08,Insacom-Santiago-(37488),43.38,48.3
-04-03-2022,17-06-06,Insacom-Santiago-(37488),56.69,20.02
-04-03-2022,17-07-07,Insacom-Santiago-(37488),49.85,10.29
-04-03-2022,17-08-08,Insacom-Santiago-(37488),45.24,8.18
-04-03-2022,17-09-07,Insacom-Santiago-(37488),75.79,20.26
-04-03-2022,17-10-07,Insacom-Santiago-(37488),46.23,42.68
-04-03-2022,17-11-07,Insacom-Santiago-(37488),72.44,11.12
-04-03-2022,17-12-08,Insacom-Santiago-(37488),73.65,15.91
-04-03-2022,17-13-07,Insacom-Santiago-(37488),81.05,11.0
-04-03-2022,17-14-07,Insacom-Santiago-(37488),45.09,18.81
-04-03-2022,17-15-07,Insacom-Santiago-(37488),65.38,11.22
-04-03-2022,17-16-07,Insacom-Santiago-(37488),44.25,24.69
-04-03-2022,17-17-06,Insacom-Santiago-(37488),66.67,10.44
-04-03-2022,17-18-07,Insacom-Santiago-(37488),55.28,12.24
-04-03-2022,17-19-07,Insacom-Santiago-(37488),22.1,16.72
-04-03-2022,17-20-07,Insacom-Santiago-(37488),78.7,17.07
-04-03-2022,17-21-07,Insacom-Santiago-(37488),49.13,17.01
-04-03-2022,17-22-07,Insacom-Santiago-(37488),40.34,16.56
-04-03-2022,17-23-07,Insacom-Santiago-(37488),73.43,11.61
-04-03-2022,17-24-07,Insacom-Santiago-(37488),54.44,13.34
-04-03-2022,17-25-06,Insacom-Santiago-(37488),43.28,26.5
-04-03-2022,17-26-07,Insacom-Santiago-(37488),53.39,13.4
-04-03-2022,17-27-07,Insacom-Santiago-(37488),77.36,30.47
-04-03-2022,17-28-06,Insacom-Santiago-(37488),46.32,18.48
-04-03-2022,17-29-07,Insacom-Santiago-(37488),66.42,31.11
-04-03-2022,17-30-06,Insacom-Santiago-(37488),86.25,16.33
-04-03-2022,17-31-08,Insacom-Santiago-(37488),70.02,35.48
-04-03-2022,17-32-07,Insacom-Santiago-(37488),43.51,14.79
-04-03-2022,17-33-07,Insacom-Santiago-(37488),76.53,30.93
-04-03-2022,17-34-06,Insacom-Santiago-(37488),103.82,25.63
-04-03-2022,17-35-08,Insacom-Santiago-(37488),70.75,15.74
-04-03-2022,17-36-08,Insacom-Santiago-(37488),118.22,9.05
-04-03-2022,17-37-07,Insacom-Santiago-(37488),55.33,13.33
-04-03-2022,17-38-06,Insacom-Santiago-(37488),47.8,31.66
-04-03-2022,17-39-07,Insacom-Santiago-(37488),71.25,33.01
-04-03-2022,17-40-07,Insacom-Santiago-(37488),46.48,40.95
-04-03-2022,17-41-08,Insacom-Santiago-(37488),81.64,13.16
-04-03-2022,17-42-08,Insacom-Santiago-(37488),70.71,16.17
-04-03-2022,17-43-07,Insacom-Santiago-(37488),45.6,40.93
-04-03-2022,17-44-07,Insacom-Santiago-(37488),45.46,26.24
-04-03-2022,17-45-06,Insacom-Santiago-(37488),85.86,12.83
-04-03-2022,17-46-07,Insacom-Santiago-(37488),44.27,36.54
-04-03-2022,17-47-07,Insacom-Santiago-(37488),42.93,11.16
-04-03-2022,17-48-06,Insacom-Santiago-(37488),91.09,23.55
-04-03-2022,17-49-07,Insacom-Santiago-(37488),82.04,10.58
-04-03-2022,17-50-07,Insacom-Santiago-(37488),49.38,24.83
-04-03-2022,17-51-07,Insacom-Santiago-(37488),44.95,18.01
-04-03-2022,17-52-07,Insacom-Santiago-(37488),42.04,13.7
-04-03-2022,17-53-06,Insacom-Santiago-(37488),89.97,15.55
-04-03-2022,17-54-08,Insacom-Santiago-(37488),109.83,26.21
-04-03-2022,17-55-06,Insacom-Santiago-(37488),52.2,11.61
-04-03-2022,17-56-07,Insacom-Santiago-(37488),83.91,12.28
-04-03-2022,17-57-07,Insacom-Santiago-(37488),48.74,17.55
-04-03-2022,17-58-07,Insacom-Santiago-(37488),66.76,15.28
-04-03-2022,17-59-07,Insacom-Santiago-(37488),49.18,12.91
-04-03-2022,18-00-07,Insacom-Santiago-(37488),44.04,15.06
-04-03-2022,18-01-06,Insacom-Santiago-(37488),45.42,13.71
-04-03-2022,18-02-07,Insacom-Santiago-(37488),88.14,13.3
-04-03-2022,18-03-07,Insacom-Santiago-(37488),91.69,15.27
-04-03-2022,18-04-07,Insacom-Santiago-(37488),71.85,13.35
-04-03-2022,18-05-06,Insacom-Santiago-(37488),48.79,34.33
-04-03-2022,18-06-08,Insacom-Santiago-(37488),70.42,15.33
-04-03-2022,18-07-06,Insacom-Santiago-(37488),46.38,34.59
-04-03-2022,18-08-07,Insacom-Santiago-(37488),43.77,14.39
-04-03-2022,18-09-07,Insacom-Santiago-(37488),72.58,14.74
-04-03-2022,18-10-06,Insacom-Santiago-(37488),88.38,39.48
-04-03-2022,18-11-08,Insacom-Santiago-(37488),55.12,17.56
-04-03-2022,18-12-07,Insacom-Santiago-(37488),88.86,12.13
-04-03-2022,18-13-07,Insacom-Santiago-(37488),65.94,13.27
-04-03-2022,18-14-07,Insacom-Santiago-(37488),68.18,14.25
-04-03-2022,18-15-07,Insacom-Santiago-(37488),71.43,20.02
-04-03-2022,18-16-06,Insacom-Santiago-(37488),107.19,37.28
-04-03-2022,18-17-08,Insacom-Santiago-(37488),76.68,14.47
-04-03-2022,18-18-08,Insacom-Santiago-(37488),57.01,13.24
-04-03-2022,18-19-06,Insacom-Santiago-(37488),47.83,29.34
-04-03-2022,18-20-08,Insacom-Santiago-(37488),65.18,11.87
-04-03-2022,18-21-07,Insacom-Santiago-(37488),61.06,30.8
-04-03-2022,18-22-07,Insacom-Santiago-(37488),65.64,16.92
-04-03-2022,18-23-07,Insacom-Santiago-(37488),70.6,13.72
-04-03-2022,18-24-06,Insacom-Santiago-(37488),82.95,17.31
-04-03-2022,18-25-07,Insacom-Santiago-(37488),47.33,14.32
-04-03-2022,18-26-06,Insacom-Santiago-(37488),104.06,36.25
-04-03-2022,18-27-07,Insacom-Santiago-(37488),68.05,16.66
-04-03-2022,18-28-07,Insacom-Santiago-(37488),73.85,20.1
-04-03-2022,18-29-07,Insacom-Santiago-(37488),48.03,30.93
-04-03-2022,18-30-06,Insacom-Santiago-(37488),57.54,14.82
-04-03-2022,18-31-06,Insacom-Santiago-(37488),31.13,13.76
-04-03-2022,18-32-07,Insacom-Santiago-(37488),30.87,48.58
-04-03-2022,18-33-07,Insacom-Santiago-(37488),112.51,44.01
+03-03-2022,15-34-57,lanproject.cl:8080,24.02,5.96
+03-03-2022,15-35-54,lanproject.cl:8080,30.18,11.6
+04-03-2022,18-35-18,Orbyta S.A.-Santiago-(12732),43.75,27.68
+04-03-2022,18-36-46,Orbyta S.A.-Santiago-(12732),46.18,33.7
+04-03-2022,18-38-16,Orbyta S.A.-Santiago-(12732),35.46,22.26
+04-03-2022,18-39-38,Orbyta S.A.-Santiago-(12732),44.19,32.71
+04-03-2022,18-41-06,Orbyta S.A.-Santiago-(12732),47.04,15.56
+04-03-2022,18-42-27,Orbyta S.A.-Santiago-(12732),43.39,31.34
+04-03-2022,18-43-55,Orbyta S.A.-Santiago-(12732),47.46,42.91
+04-03-2022,18-45-21,Orbyta S.A.-Santiago-(12732),48.74,19.98
+04-03-2022,18-46-42,Orbyta S.A.-Santiago-(12732),41.36,33.46
+04-03-2022,18-48-12,Orbyta S.A.-Santiago-(12732),33.53,5.63
+04-03-2022,18-49-35,Orbyta S.A.-Santiago-(12732),43.02,38.79
+04-03-2022,18-51-02,Orbyta S.A.-Santiago-(12732),45.1,16.63
+04-03-2022,18-52-29,Orbyta S.A.-Santiago-(12732),40.05,52.75
+04-03-2022,18-53-49,Orbyta S.A.-Santiago-(12732),43.34,21.1
+04-03-2022,18-55-10,Orbyta S.A.-Santiago-(12732),46.02,12.05
+04-03-2022,18-56-33,Orbyta S.A.-Santiago-(12732),39.74,17.39
+04-03-2022,18-57-54,Orbyta S.A.-Santiago-(12732),44.01,20.25
+04-03-2022,18-59-18,Orbyta S.A.-Santiago-(12732),45.41,16.03
+04-03-2022,19-00-45,Orbyta S.A.-Santiago-(12732),42.11,33.71
+04-03-2022,19-02-13,Orbyta S.A.-Santiago-(12732),41.37,24.89
+04-03-2022,19-03-41,Orbyta S.A.-Santiago-(12732),43.4,17.51
+04-03-2022,19-05-10,Orbyta S.A.-Santiago-(12732),44.31,13.39
+04-03-2022,19-06-32,Orbyta S.A.-Santiago-(12732),45.73,30.88
+04-03-2022,19-08-00,Orbyta S.A.-Santiago-(12732),41.42,19.15
+04-03-2022,19-09-24,Orbyta S.A.-Santiago-(12732),43.31,30.56
+04-03-2022,19-10-53,Orbyta S.A.-Santiago-(12732),44.09,24.78
+04-03-2022,19-12-23,Orbyta S.A.-Santiago-(12732),42.84,27.42
+04-03-2022,19-13-51,Orbyta S.A.-Santiago-(12732),47.81,33.74
+04-03-2022,19-15-19,Orbyta S.A.-Santiago-(12732),36.94,13.15
+04-03-2022,19-16-40,Orbyta S.A.-Santiago-(12732),45.09,29.84
+04-03-2022,19-18-10,Orbyta S.A.-Santiago-(12732),40.27,38.74
+04-03-2022,19-19-38,Orbyta S.A.-Santiago-(12732),43.09,33.68
+04-03-2022,19-21-05,Orbyta S.A.-Santiago-(12732),32.16,36.55
+04-03-2022,19-22-31,Orbyta S.A.-Santiago-(12732),45.8,35.43
+04-03-2022,19-23-57,Orbyta S.A.-Santiago-(12732),44.24,33.52
+04-03-2022,19-25-24,Orbyta S.A.-Santiago-(12732),44.55,25.93
+04-03-2022,19-26-53,Orbyta S.A.-Santiago-(12732),44.53,34.36
+04-03-2022,19-28-20,Orbyta S.A.-Santiago-(12732),47.38,33.09
+04-03-2022,19-29-47,Orbyta S.A.-Santiago-(12732),42.81,32.87
+04-03-2022,19-31-17,Orbyta S.A.-Santiago-(12732),42.92,13.76
+04-03-2022,19-32-38,Orbyta S.A.-Santiago-(12732),46.86,28.59
+04-03-2022,19-34-08,Orbyta S.A.-Santiago-(12732),46.4,29.1
+04-03-2022,19-35-36,Orbyta S.A.-Santiago-(12732),48.0,25.85
+04-03-2022,19-37-05,Orbyta S.A.-Santiago-(12732),40.75,28.8
+04-03-2022,19-38-34,Orbyta S.A.-Santiago-(12732),46.56,31.29
+04-03-2022,19-40-03,Orbyta S.A.-Santiago-(12732),41.93,20.92
+04-03-2022,19-41-23,Orbyta S.A.-Santiago-(12732),45.41,16.7
+04-03-2022,19-42-44,Orbyta S.A.-Santiago-(12732),43.26,20.56
+04-03-2022,19-44-11,Orbyta S.A.-Santiago-(12732),45.9,22.98
+04-03-2022,19-45-40,Orbyta S.A.-Santiago-(12732),45.26,25.76
+04-03-2022,19-47-08,Orbyta S.A.-Santiago-(12732),42.83,31.72
+04-03-2022,19-48-34,Orbyta S.A.-Santiago-(12732),44.18,40.61
+04-03-2022,19-50-01,Orbyta S.A.-Santiago-(12732),45.08,31.31
+04-03-2022,19-51-28,Orbyta S.A.-Santiago-(12732),43.26,31.55
+04-03-2022,19-52-58,Orbyta S.A.-Santiago-(12732),40.66,32.17
+04-03-2022,19-54-27,Orbyta S.A.-Santiago-(12732),47.96,17.98
+04-03-2022,19-55-48,Orbyta S.A.-Santiago-(12732),41.14,18.98
+04-03-2022,19-57-09,Orbyta S.A.-Santiago-(12732),46.66,28.34
+04-03-2022,19-58-38,Orbyta S.A.-Santiago-(12732),44.31,20.24
+04-03-2022,19-59-59,Orbyta S.A.-Santiago-(12732),42.13,31.22
+04-03-2022,20-01-26,Orbyta S.A.-Santiago-(12732),37.16,17.02
+04-03-2022,20-02-56,Orbyta S.A.-Santiago-(12732),40.05,11.65
+04-03-2022,20-04-19,Orbyta S.A.-Santiago-(12732),46.64,26.38
+04-03-2022,20-05-46,Orbyta S.A.-Santiago-(12732),44.59,22.36
+04-03-2022,20-07-14,Orbyta S.A.-Santiago-(12732),40.02,16.25
+04-03-2022,20-08-37,Orbyta S.A.-Santiago-(12732),46.77,33.39
+04-03-2022,20-10-05,Orbyta S.A.-Santiago-(12732),43.45,19.15
+04-03-2022,20-11-26,Orbyta S.A.-Santiago-(12732),44.93,33.62
+04-03-2022,20-12-55,Orbyta S.A.-Santiago-(12732),47.73,44.39
+04-03-2022,20-14-16,Orbyta S.A.-Santiago-(12732),43.6,13.19
+04-03-2022,20-15-38,Orbyta S.A.-Santiago-(12732),46.01,35.1
+04-03-2022,20-17-05,Orbyta S.A.-Santiago-(12732),45.02,40.19
+04-03-2022,20-18-31,Orbyta S.A.-Santiago-(12732),40.23,16.74
+04-03-2022,20-19-58,Orbyta S.A.-Santiago-(12732),47.19,16.28
+04-03-2022,20-21-21,Orbyta S.A.-Santiago-(12732),44.95,19.54
+04-03-2022,20-22-48,Orbyta S.A.-Santiago-(12732),47.6,15.93
+04-03-2022,20-24-09,Orbyta S.A.-Santiago-(12732),48.47,45.94
+04-03-2022,20-25-34,Orbyta S.A.-Santiago-(12732),41.21,33.02
+04-03-2022,20-27-01,Orbyta S.A.-Santiago-(12732),41.49,26.68
+04-03-2022,20-28-29,Orbyta S.A.-Santiago-(12732),45.21,33.2
+04-03-2022,20-29-57,Orbyta S.A.-Santiago-(12732),41.23,29.94
+04-03-2022,20-31-25,Orbyta S.A.-Santiago-(12732),44.54,14.73
+04-03-2022,20-32-47,Orbyta S.A.-Santiago-(12732),40.57,33.12
+04-03-2022,20-34-14,Orbyta S.A.-Santiago-(12732),41.85,30.21
+04-03-2022,20-35-42,Orbyta S.A.-Santiago-(12732),40.73,23.98
+04-03-2022,20-37-11,Orbyta S.A.-Santiago-(12732),38.04,13.18
+04-03-2022,20-38-36,Orbyta S.A.-Santiago-(12732),43.54,23.16
+04-03-2022,20-40-00,Orbyta S.A.-Santiago-(12732),40.51,11.83
+04-03-2022,20-41-22,Orbyta S.A.-Santiago-(12732),45.28,21.32
+04-03-2022,20-42-50,Orbyta S.A.-Santiago-(12732),35.6,17.65
+04-03-2022,20-44-12,Orbyta S.A.-Santiago-(12732),42.64,34.95
+04-03-2022,20-45-41,Orbyta S.A.-Santiago-(12732),43.06,20.21
+04-03-2022,20-47-08,Orbyta S.A.-Santiago-(12732),48.25,31.17
+04-03-2022,20-48-36,Orbyta S.A.-Santiago-(12732),44.59,14.18
+04-03-2022,20-49-57,Orbyta S.A.-Santiago-(12732),43.13,27.62
+04-03-2022,20-51-26,Orbyta S.A.-Santiago-(12732),42.4,9.7
+04-03-2022,20-52-51,Orbyta S.A.-Santiago-(12732),40.05,16.46
+04-03-2022,20-54-14,Orbyta S.A.-Santiago-(12732),46.7,20.89
+04-03-2022,20-55-34,Orbyta S.A.-Santiago-(12732),43.79,28.77
+04-03-2022,20-57-03,Orbyta S.A.-Santiago-(12732),39.6,15.57
+04-03-2022,20-58-24,Orbyta S.A.-Santiago-(12732),43.14,15.86
+04-03-2022,20-59-45,Orbyta S.A.-Santiago-(12732),45.9,28.7
+04-03-2022,21-01-13,Orbyta S.A.-Santiago-(12732),41.41,29.81
+04-03-2022,21-02-41,Orbyta S.A.-Santiago-(12732),38.05,30.1
+04-03-2022,21-04-09,Orbyta S.A.-Santiago-(12732),44.4,14.59
+04-03-2022,21-05-31,Orbyta S.A.-Santiago-(12732),48.01,38.11
+04-03-2022,21-06-59,Orbyta S.A.-Santiago-(12732),46.19,30.99
+04-03-2022,21-08-27,Orbyta S.A.-Santiago-(12732),43.16,13.86
+04-03-2022,21-09-50,Orbyta S.A.-Santiago-(12732),45.41,40.56
+04-03-2022,21-11-12,Orbyta S.A.-Santiago-(12732),39.3,33.45
+04-03-2022,21-12-42,Orbyta S.A.-Santiago-(12732),45.39,17.8
+04-03-2022,21-14-03,Orbyta S.A.-Santiago-(12732),46.22,38.68
+04-03-2022,21-15-30,Orbyta S.A.-Santiago-(12732),42.05,18.42
+04-03-2022,21-16-55,Orbyta S.A.-Santiago-(12732),45.03,18.5
+04-03-2022,21-18-16,Orbyta S.A.-Santiago-(12732),41.84,22.23
+04-03-2022,21-19-41,Orbyta S.A.-Santiago-(12732),47.58,30.69
+04-03-2022,21-21-08,Orbyta S.A.-Santiago-(12732),44.31,39.69
+04-03-2022,21-22-34,Orbyta S.A.-Santiago-(12732),47.29,31.0
+04-03-2022,21-24-02,Orbyta S.A.-Santiago-(12732),43.49,11.17
+04-03-2022,21-25-24,Orbyta S.A.-Santiago-(12732),47.66,17.4
+04-03-2022,21-26-53,Orbyta S.A.-Santiago-(12732),43.96,12.91
+04-03-2022,21-28-14,Orbyta S.A.-Santiago-(12732),43.01,23.89
+04-03-2022,21-29-40,Orbyta S.A.-Santiago-(12732),43.06,27.73
+04-03-2022,21-31-10,Orbyta S.A.-Santiago-(12732),46.64,18.7
+04-03-2022,21-32-31,Orbyta S.A.-Santiago-(12732),27.67,9.99
+04-03-2022,21-33-54,Orbyta S.A.-Santiago-(12732),43.98,33.52
+04-03-2022,21-35-23,Orbyta S.A.-Santiago-(12732),42.32,20.44
+04-03-2022,21-36-44,Orbyta S.A.-Santiago-(12732),42.32,26.76
+04-03-2022,21-38-13,Orbyta S.A.-Santiago-(12732),43.5,14.1
+04-03-2022,21-39-36,Orbyta S.A.-Santiago-(12732),47.62,27.48
+04-03-2022,21-41-05,Orbyta S.A.-Santiago-(12732),44.81,30.84
+04-03-2022,21-42-34,Orbyta S.A.-Santiago-(12732),35.21,24.15
+04-03-2022,21-44-03,Orbyta S.A.-Santiago-(12732),48.18,34.05
+04-03-2022,21-45-30,Orbyta S.A.-Santiago-(12732),40.68,12.97
+04-03-2022,21-46-54,Orbyta S.A.-Santiago-(12732),47.65,21.99
+04-03-2022,21-48-22,Orbyta S.A.-Santiago-(12732),46.83,10.6
+04-03-2022,21-49-46,Orbyta S.A.-Santiago-(12732),46.78,13.42
+04-03-2022,21-51-08,Orbyta S.A.-Santiago-(12732),47.67,18.82
+04-03-2022,21-52-29,Orbyta S.A.-Santiago-(12732),43.08,20.45
+04-03-2022,21-53-55,Orbyta S.A.-Santiago-(12732),45.39,18.54
+04-03-2022,21-55-20,Orbyta S.A.-Santiago-(12732),43.04,29.36
+04-03-2022,21-56-48,Orbyta S.A.-Santiago-(12732),41.89,12.78
+04-03-2022,21-58-10,Orbyta S.A.-Santiago-(12732),42.75,12.48
+04-03-2022,21-59-31,Orbyta S.A.-Santiago-(12732),44.7,27.06
+04-03-2022,22-01-01,Orbyta S.A.-Santiago-(12732),43.43,16.68
+04-03-2022,22-02-21,Orbyta S.A.-Santiago-(12732),44.91,39.2
+04-03-2022,22-03-43,Orbyta S.A.-Santiago-(12732),46.13,39.69
+04-03-2022,22-05-10,Orbyta S.A.-Santiago-(12732),44.74,9.78
+04-03-2022,22-06-33,Orbyta S.A.-Santiago-(12732),40.94,15.06
+04-03-2022,22-07-54,Orbyta S.A.-Santiago-(12732),41.12,26.86
+04-03-2022,22-09-24,Orbyta S.A.-Santiago-(12732),46.07,25.92
+04-03-2022,22-10-53,Orbyta S.A.-Santiago-(12732),47.56,20.28
+04-03-2022,22-12-20,Orbyta S.A.-Santiago-(12732),44.59,25.09
+04-03-2022,22-13-45,Orbyta S.A.-Santiago-(12732),39.25,23.5
+04-03-2022,22-15-10,Orbyta S.A.-Santiago-(12732),46.89,56.04
+04-03-2022,22-16-30,Orbyta S.A.-Santiago-(12732),47.57,18.37
+04-03-2022,22-17-58,Orbyta S.A.-Santiago-(12732),40.72,18.01
+04-03-2022,22-19-19,Orbyta S.A.-Santiago-(12732),46.03,20.51
+04-03-2022,22-20-46,Orbyta S.A.-Santiago-(12732),33.24,18.69
+04-03-2022,22-22-07,Orbyta S.A.-Santiago-(12732),45.86,32.52
+04-03-2022,22-23-32,Orbyta S.A.-Santiago-(12732),46.71,24.28
+04-03-2022,22-25-01,Orbyta S.A.-Santiago-(12732),46.22,51.76
+04-03-2022,22-26-21,Orbyta S.A.-Santiago-(12732),40.88,18.78
+04-03-2022,22-27-49,Orbyta S.A.-Santiago-(12732),46.14,18.27
+04-03-2022,22-29-11,Orbyta S.A.-Santiago-(12732),45.76,38.84
+04-03-2022,22-30-37,Orbyta S.A.-Santiago-(12732),42.76,48.06
+04-03-2022,22-31-58,Orbyta S.A.-Santiago-(12732),48.33,33.35
+04-03-2022,22-33-25,Orbyta S.A.-Santiago-(12732),41.57,18.24
+04-03-2022,22-34-47,Orbyta S.A.-Santiago-(12732),43.85,8.44
+04-03-2022,22-36-14,Orbyta S.A.-Santiago-(12732),47.73,36.64
+04-03-2022,22-37-40,Orbyta S.A.-Santiago-(12732),46.08,36.2
+04-03-2022,22-39-09,Orbyta S.A.-Santiago-(12732),45.75,19.42
+04-03-2022,22-40-30,Orbyta S.A.-Santiago-(12732),46.19,31.78
+04-03-2022,22-42-00,Orbyta S.A.-Santiago-(12732),46.36,27.8
+04-03-2022,22-43-29,Orbyta S.A.-Santiago-(12732),44.35,18.23
+04-03-2022,22-44-51,Orbyta S.A.-Santiago-(12732),12.3,37.48
+04-03-2022,22-46-18,Orbyta S.A.-Santiago-(12732),44.74,32.5
+04-03-2022,22-47-44,Orbyta S.A.-Santiago-(12732),44.22,30.5
+04-03-2022,22-49-12,Orbyta S.A.-Santiago-(12732),40.06,9.15
+04-03-2022,22-50-38,Orbyta S.A.-Santiago-(12732),46.44,24.14
+04-03-2022,22-52-06,Orbyta S.A.-Santiago-(12732),45.52,16.22
+04-03-2022,22-53-29,Orbyta S.A.-Santiago-(12732),43.8,41.09
+04-03-2022,22-54-56,Orbyta S.A.-Santiago-(12732),44.51,19.14
+04-03-2022,22-56-20,Orbyta S.A.-Santiago-(12732),43.73,27.99
+04-03-2022,22-57-48,Orbyta S.A.-Santiago-(12732),39.08,16.22
+04-03-2022,22-59-11,Orbyta S.A.-Santiago-(12732),47.63,19.74
+04-03-2022,23-00-32,Orbyta S.A.-Santiago-(12732),48.75,29.05
+04-03-2022,23-02-00,Orbyta S.A.-Santiago-(12732),42.65,31.57
+04-03-2022,23-03-30,Orbyta S.A.-Santiago-(12732),39.97,39.49
+04-03-2022,23-04-57,Orbyta S.A.-Santiago-(12732),46.46,38.62
+04-03-2022,23-06-25,Orbyta S.A.-Santiago-(12732),46.46,37.72
+04-03-2022,23-07-52,Orbyta S.A.-Santiago-(12732),46.29,17.67
+04-03-2022,23-09-18,Orbyta S.A.-Santiago-(12732),44.65,33.99
+04-03-2022,23-10-46,Orbyta S.A.-Santiago-(12732),46.45,31.6
+04-03-2022,23-12-14,Orbyta S.A.-Santiago-(12732),38.78,19.39
+04-03-2022,23-13-41,Orbyta S.A.-Santiago-(12732),43.59,28.1
+04-03-2022,23-15-11,Orbyta S.A.-Santiago-(12732),46.67,42.98
+04-03-2022,23-16-38,Orbyta S.A.-Santiago-(12732),45.79,13.97
+04-03-2022,23-18-02,Orbyta S.A.-Santiago-(12732),7.15,41.21
+04-03-2022,23-19-39,Orbyta S.A.-Santiago-(12732),45.5,17.42
+04-03-2022,23-21-00,Orbyta S.A.-Santiago-(12732),43.41,19.57
+04-03-2022,23-22-21,Orbyta S.A.-Santiago-(12732),46.65,33.96
+04-03-2022,23-23-49,Orbyta S.A.-Santiago-(12732),45.28,40.74
+04-03-2022,23-25-16,Orbyta S.A.-Santiago-(12732),42.77,12.87
+04-03-2022,23-26-40,Orbyta S.A.-Santiago-(12732),43.87,16.47
+04-03-2022,23-28-07,Orbyta S.A.-Santiago-(12732),46.23,31.1
+04-03-2022,23-29-34,Orbyta S.A.-Santiago-(12732),43.86,32.88
+04-03-2022,23-31-02,Orbyta S.A.-Santiago-(12732),43.5,17.22
+04-03-2022,23-32-24,Orbyta S.A.-Santiago-(12732),46.46,29.04
+04-03-2022,23-33-52,Orbyta S.A.-Santiago-(12732),45.77,27.91
+04-03-2022,23-35-21,Orbyta S.A.-Santiago-(12732),45.31,23.59
+04-03-2022,23-36-50,Orbyta S.A.-Santiago-(12732),44.37,43.16
+04-03-2022,23-38-16,Orbyta S.A.-Santiago-(12732),44.85,27.17
+04-03-2022,23-39-44,Orbyta S.A.-Santiago-(12732),37.91,15.14
+04-03-2022,23-41-06,Orbyta S.A.-Santiago-(12732),47.94,18.28
+04-03-2022,23-42-34,Orbyta S.A.-Santiago-(12732),41.81,31.76
+04-03-2022,23-44-02,Orbyta S.A.-Santiago-(12732),48.53,28.48
+04-03-2022,23-45-31,Orbyta S.A.-Santiago-(12732),38.39,29.61
+04-03-2022,23-46-59,Orbyta S.A.-Santiago-(12732),45.9,35.5
+04-03-2022,23-48-28,Orbyta S.A.-Santiago-(12732),39.57,35.8
+04-03-2022,23-49-57,Orbyta S.A.-Santiago-(12732),45.77,33.1
+04-03-2022,23-51-26,Orbyta S.A.-Santiago-(12732),47.68,36.74
+04-03-2022,23-52-53,Orbyta S.A.-Santiago-(12732),43.93,26.88
+04-03-2022,23-54-22,Orbyta S.A.-Santiago-(12732),46.0,36.76
+04-03-2022,23-55-49,Orbyta S.A.-Santiago-(12732),39.39,35.54
+04-03-2022,23-57-16,Orbyta S.A.-Santiago-(12732),39.33,17.19
+04-03-2022,23-58-37,Orbyta S.A.-Santiago-(12732),44.63,4.0
+05-03-2022,00-00-05,Orbyta S.A.-Santiago-(12732),33.97,27.16
+05-03-2022,00-01-35,Orbyta S.A.-Santiago-(12732),44.06,34.26
+05-03-2022,00-03-01,Orbyta S.A.-Santiago-(12732),34.58,19.08
+05-03-2022,00-04-23,Orbyta S.A.-Santiago-(12732),48.37,34.66
+05-03-2022,00-05-52,Orbyta S.A.-Santiago-(12732),45.93,51.36
+05-03-2022,00-07-12,Orbyta S.A.-Santiago-(12732),47.48,40.38
+05-03-2022,00-08-39,Orbyta S.A.-Santiago-(12732),43.47,28.5
+05-03-2022,00-10-07,Orbyta S.A.-Santiago-(12732),48.9,28.78
+05-03-2022,00-11-37,Orbyta S.A.-Santiago-(12732),42.57,31.06
+05-03-2022,00-13-05,Orbyta S.A.-Santiago-(12732),41.49,36.22
+05-03-2022,00-14-30,Orbyta S.A.-Santiago-(12732),40.28,44.21
+05-03-2022,00-15-52,Orbyta S.A.-Santiago-(12732),43.56,33.4
+05-03-2022,00-17-22,Orbyta S.A.-Santiago-(12732),48.01,30.97
+05-03-2022,00-18-49,Orbyta S.A.-Santiago-(12732),35.07,17.07
+05-03-2022,00-20-12,Orbyta S.A.-Santiago-(12732),44.99,22.38
+05-03-2022,00-21-37,Orbyta S.A.-Santiago-(12732),41.34,15.55
+05-03-2022,00-23-00,Orbyta S.A.-Santiago-(12732),45.0,42.16
+05-03-2022,00-24-26,Orbyta S.A.-Santiago-(12732),37.8,49.49
+05-03-2022,00-25-47,Orbyta S.A.-Santiago-(12732),42.2,38.53
+05-03-2022,00-27-13,Orbyta S.A.-Santiago-(12732),40.51,25.51
+05-03-2022,00-28-43,Orbyta S.A.-Santiago-(12732),40.43,10.51
+05-03-2022,00-30-06,Orbyta S.A.-Santiago-(12732),42.7,27.86
+05-03-2022,00-31-35,Orbyta S.A.-Santiago-(12732),46.62,12.61
+05-03-2022,00-32-57,Orbyta S.A.-Santiago-(12732),46.0,37.44
+05-03-2022,00-34-23,Orbyta S.A.-Santiago-(12732),47.08,22.66
+05-03-2022,00-35-53,Orbyta S.A.-Santiago-(12732),47.84,17.97
+05-03-2022,00-37-21,Orbyta S.A.-Santiago-(12732),44.14,35.0
+05-03-2022,00-38-49,Orbyta S.A.-Santiago-(12732),41.95,38.41
+05-03-2022,00-40-12,Orbyta S.A.-Santiago-(12732),45.47,29.67
+05-03-2022,00-41-40,Orbyta S.A.-Santiago-(12732),43.03,12.96
+05-03-2022,00-43-03,Orbyta S.A.-Santiago-(12732),45.61,18.56
+05-03-2022,00-44-25,Orbyta S.A.-Santiago-(12732),43.41,41.57
+05-03-2022,00-45-51,Orbyta S.A.-Santiago-(12732),46.16,40.14
+05-03-2022,00-47-18,Orbyta S.A.-Santiago-(12732),43.04,12.24
+05-03-2022,00-48-40,Orbyta S.A.-Santiago-(12732),44.33,12.97
+05-03-2022,00-50-02,Orbyta S.A.-Santiago-(12732),47.41,40.44
+05-03-2022,00-51-29,Orbyta S.A.-Santiago-(12732),39.79,20.61
+05-03-2022,00-52-58,Orbyta S.A.-Santiago-(12732),46.98,23.62
+05-03-2022,00-54-27,Orbyta S.A.-Santiago-(12732),41.7,14.19
+05-03-2022,00-55-48,Orbyta S.A.-Santiago-(12732),44.36,34.2
+05-03-2022,00-57-15,Orbyta S.A.-Santiago-(12732),29.23,54.1
+05-03-2022,00-58-35,Orbyta S.A.-Santiago-(12732),30.24,16.39
+05-03-2022,01-00-02,Orbyta S.A.-Santiago-(12732),46.55,30.67
+05-03-2022,01-01-29,Orbyta S.A.-Santiago-(12732),45.93,35.39
+05-03-2022,01-02-58,Orbyta S.A.-Santiago-(12732),41.61,23.51
+05-03-2022,01-04-27,Orbyta S.A.-Santiago-(12732),48.06,31.61
+05-03-2022,01-05-56,Orbyta S.A.-Santiago-(12732),43.43,12.31
+05-03-2022,01-07-18,Orbyta S.A.-Santiago-(12732),48.58,31.61
+05-03-2022,01-08-48,Orbyta S.A.-Santiago-(12732),46.76,35.19
+05-03-2022,01-10-14,Orbyta S.A.-Santiago-(12732),37.81,34.71
+05-03-2022,01-11-43,Orbyta S.A.-Santiago-(12732),41.69,13.83
+05-03-2022,01-13-05,Orbyta S.A.-Santiago-(12732),47.86,34.96
+05-03-2022,01-14-31,Orbyta S.A.-Santiago-(12732),44.25,35.42
+05-03-2022,01-15-56,Orbyta S.A.-Santiago-(12732),44.69,3.97
+05-03-2022,01-17-23,Orbyta S.A.-Santiago-(12732),49.34,41.57
+05-03-2022,01-18-50,Orbyta S.A.-Santiago-(12732),44.66,40.95
+05-03-2022,01-20-17,Orbyta S.A.-Santiago-(12732),47.4,39.6
+05-03-2022,01-21-44,Orbyta S.A.-Santiago-(12732),39.84,20.32
+05-03-2022,01-23-04,Orbyta S.A.-Santiago-(12732),46.47,18.24
+05-03-2022,01-24-29,Orbyta S.A.-Santiago-(12732),43.11,13.63
+05-03-2022,01-25-53,Orbyta S.A.-Santiago-(12732),37.43,15.78
+05-03-2022,01-27-13,Orbyta S.A.-Santiago-(12732),44.33,13.23
+05-03-2022,01-28-37,Orbyta S.A.-Santiago-(12732),48.15,28.9
+05-03-2022,01-30-05,Orbyta S.A.-Santiago-(12732),46.84,26.43
+05-03-2022,01-31-34,Orbyta S.A.-Santiago-(12732),43.72,30.52
+05-03-2022,01-33-04,Orbyta S.A.-Santiago-(12732),44.13,51.71
+05-03-2022,01-34-24,Orbyta S.A.-Santiago-(12732),41.46,31.73
+05-03-2022,01-35-52,Orbyta S.A.-Santiago-(12732),45.07,34.88
+05-03-2022,01-37-19,Orbyta S.A.-Santiago-(12732),46.52,47.15
+05-03-2022,01-38-44,Orbyta S.A.-Santiago-(12732),44.48,26.65
+05-03-2022,01-40-13,Orbyta S.A.-Santiago-(12732),42.52,27.16
+05-03-2022,01-41-42,Orbyta S.A.-Santiago-(12732),37.3,16.46
+05-03-2022,01-43-05,Orbyta S.A.-Santiago-(12732),47.44,35.88
+05-03-2022,01-44-32,Orbyta S.A.-Santiago-(12732),39.9,18.39
+05-03-2022,01-46-01,Orbyta S.A.-Santiago-(12732),41.13,13.21
+05-03-2022,01-47-27,Orbyta S.A.-Santiago-(12732),44.8,19.97
+05-03-2022,01-48-56,Orbyta S.A.-Santiago-(12732),47.99,42.76
+05-03-2022,01-50-22,Orbyta S.A.-Santiago-(12732),43.95,26.5
+05-03-2022,01-51-52,Orbyta S.A.-Santiago-(12732),31.67,42.24
+05-03-2022,01-53-20,Orbyta S.A.-Santiago-(12732),44.08,20.28
+05-03-2022,01-54-41,Orbyta S.A.-Santiago-(12732),43.59,42.38
+05-03-2022,01-56-09,Orbyta S.A.-Santiago-(12732),47.53,26.89
+05-03-2022,01-57-38,Orbyta S.A.-Santiago-(12732),46.9,31.13
+05-03-2022,01-59-05,Orbyta S.A.-Santiago-(12732),37.57,14.41
+05-03-2022,02-00-29,Orbyta S.A.-Santiago-(12732),41.43,22.46
+05-03-2022,02-01-59,Orbyta S.A.-Santiago-(12732),37.11,25.81
+05-03-2022,02-03-28,Orbyta S.A.-Santiago-(12732),46.36,36.46
+05-03-2022,02-04-56,Orbyta S.A.-Santiago-(12732),41.63,15.98
+05-03-2022,20-00-57,Convergia Telecom S.A.-Santiago-(8793),132.4,31.28
+05-03-2022,20-02-24,Convergia Telecom S.A.-Santiago-(8793),119.0,15.67
+05-03-2022,20-03-52,Convergia Telecom S.A.-Santiago-(8793),134.51,39.07
+05-03-2022,20-05-14,Convergia Telecom S.A.-Santiago-(8793),108.37,42.51
+05-03-2022,20-06-37,Convergia Telecom S.A.-Santiago-(8793),121.5,41.5
+05-03-2022,20-08-04,Convergia Telecom S.A.-Santiago-(8793),122.14,28.15
+05-03-2022,20-09-32,Convergia Telecom S.A.-Santiago-(8793),92.36,13.13
+05-03-2022,20-10-53,Convergia Telecom S.A.-Santiago-(8793),83.41,13.81
+05-03-2022,20-12-16,Convergia Telecom S.A.-Santiago-(8793),103.97,15.61
+05-03-2022,20-13-40,Convergia Telecom S.A.-Santiago-(8793),117.94,22.69
+05-03-2022,20-15-10,Convergia Telecom S.A.-Santiago-(8793),140.53,52.3
+05-03-2022,20-16-32,Convergia Telecom S.A.-Santiago-(8793),140.23,23.63
+05-03-2022,20-17-58,Convergia Telecom S.A.-Santiago-(8793),122.44,24.3
+05-03-2022,20-19-24,Convergia Telecom S.A.-Santiago-(8793),132.26,33.47
+05-03-2022,20-20-53,Convergia Telecom S.A.-Santiago-(8793),92.75,35.79
+05-03-2022,20-22-21,Convergia Telecom S.A.-Santiago-(8793),76.19,40.84
+05-03-2022,20-23-47,Convergia Telecom S.A.-Santiago-(8793),132.03,29.26
+05-03-2022,20-25-17,Convergia Telecom S.A.-Santiago-(8793),137.65,38.36
+05-03-2022,20-26-44,Convergia Telecom S.A.-Santiago-(8793),113.57,27.96
+05-03-2022,20-28-12,Convergia Telecom S.A.-Santiago-(8793),137.92,21.63
+05-03-2022,20-29-40,Convergia Telecom S.A.-Santiago-(8793),116.69,30.24
+05-03-2022,20-31-09,Convergia Telecom S.A.-Santiago-(8793),138.61,17.22
+05-03-2022,20-32-34,Convergia Telecom S.A.-Santiago-(8793),117.54,27.14
+05-03-2022,20-34-04,Convergia Telecom S.A.-Santiago-(8793),165.83,42.78
+05-03-2022,20-35-29,Convergia Telecom S.A.-Santiago-(8793),132.7,30.62
+05-03-2022,20-36-57,Convergia Telecom S.A.-Santiago-(8793),128.23,12.98
+05-03-2022,20-38-22,Convergia Telecom S.A.-Santiago-(8793),148.48,39.08
+05-03-2022,20-39-49,Convergia Telecom S.A.-Santiago-(8793),106.13,12.84
+05-03-2022,20-41-10,Convergia Telecom S.A.-Santiago-(8793),63.88,17.03
+05-03-2022,20-42-40,Convergia Telecom S.A.-Santiago-(8793),126.53,32.88
+05-03-2022,20-44-07,Convergia Telecom S.A.-Santiago-(8793),109.04,28.44
+05-03-2022,20-45-36,Convergia Telecom S.A.-Santiago-(8793),154.31,12.76
+05-03-2022,20-46-57,Convergia Telecom S.A.-Santiago-(8793),97.67,40.57
+05-03-2022,20-48-19,Convergia Telecom S.A.-Santiago-(8793),158.9,45.71
+05-03-2022,20-49-44,Convergia Telecom S.A.-Santiago-(8793),109.36,16.37
+05-03-2022,20-51-05,Convergia Telecom S.A.-Santiago-(8793),78.33,29.05
+05-03-2022,20-52-33,Convergia Telecom S.A.-Santiago-(8793),102.11,26.56
+05-03-2022,20-53-58,Convergia Telecom S.A.-Santiago-(8793),99.15,23.99
+05-03-2022,20-55-21,Convergia Telecom S.A.-Santiago-(8793),109.7,14.97
+05-03-2022,20-56-43,Convergia Telecom S.A.-Santiago-(8793),109.48,14.11
+05-03-2022,20-58-04,Convergia Telecom S.A.-Santiago-(8793),134.77,17.02
+05-03-2022,20-59-26,Convergia Telecom S.A.-Santiago-(8793),89.31,26.37
+05-03-2022,21-00-55,Convergia Telecom S.A.-Santiago-(8793),113.11,17.8
+05-03-2022,21-02-21,Convergia Telecom S.A.-Santiago-(8793),108.75,33.63
+05-03-2022,21-03-47,Convergia Telecom S.A.-Santiago-(8793),102.35,13.48
+05-03-2022,21-05-10,Convergia Telecom S.A.-Santiago-(8793),101.91,26.7
+05-03-2022,21-06-37,Convergia Telecom S.A.-Santiago-(8793),106.23,38.52
+05-03-2022,21-07-59,Convergia Telecom S.A.-Santiago-(8793),87.63,15.5
+05-03-2022,21-09-22,Convergia Telecom S.A.-Santiago-(8793),78.54,24.28
+05-03-2022,21-10-52,Convergia Telecom S.A.-Santiago-(8793),141.44,24.54
+05-03-2022,21-12-20,Convergia Telecom S.A.-Santiago-(8793),135.12,37.76
+05-03-2022,21-13-46,Convergia Telecom S.A.-Santiago-(8793),110.16,16.19
+05-03-2022,21-15-07,Convergia Telecom S.A.-Santiago-(8793),119.77,30.78
+05-03-2022,21-16-35,Convergia Telecom S.A.-Santiago-(8793),108.37,36.58
+05-03-2022,21-18-02,Convergia Telecom S.A.-Santiago-(8793),68.97,19.89
+05-03-2022,21-19-23,Convergia Telecom S.A.-Santiago-(8793),76.05,10.37
+05-03-2022,21-20-50,Convergia Telecom S.A.-Santiago-(8793),72.79,17.27
+05-03-2022,21-22-11,Convergia Telecom S.A.-Santiago-(8793),129.98,14.94
+05-03-2022,21-23-35,Convergia Telecom S.A.-Santiago-(8793),101.11,19.92
+05-03-2022,21-25-02,Convergia Telecom S.A.-Santiago-(8793),120.36,34.74
+05-03-2022,21-26-29,Convergia Telecom S.A.-Santiago-(8793),146.6,14.1
+05-03-2022,21-27-58,Convergia Telecom S.A.-Santiago-(8793),71.25,9.18
+05-03-2022,21-29-20,Convergia Telecom S.A.-Santiago-(8793),155.96,39.2
+05-03-2022,21-30-47,Convergia Telecom S.A.-Santiago-(8793),117.68,30.91
+05-03-2022,21-32-16,Convergia Telecom S.A.-Santiago-(8793),147.49,29.12
+05-03-2022,21-33-44,Convergia Telecom S.A.-Santiago-(8793),115.23,44.57
+05-03-2022,21-35-09,Convergia Telecom S.A.-Santiago-(8793),130.99,38.11
+05-03-2022,21-36-32,Convergia Telecom S.A.-Santiago-(8793),70.72,12.81
+05-03-2022,21-37-53,Convergia Telecom S.A.-Santiago-(8793),179.4,37.48
+05-03-2022,21-39-21,Convergia Telecom S.A.-Santiago-(8793),166.56,23.25
+05-03-2022,21-40-51,Convergia Telecom S.A.-Santiago-(8793),140.65,13.73
+05-03-2022,21-42-14,Convergia Telecom S.A.-Santiago-(8793),115.58,31.08
+05-03-2022,21-43-44,Convergia Telecom S.A.-Santiago-(8793),137.67,34.8
+05-03-2022,21-45-12,Convergia Telecom S.A.-Santiago-(8793),77.38,10.73
+05-03-2022,21-46-35,Convergia Telecom S.A.-Santiago-(8793),147.49,37.27
+05-03-2022,21-48-02,Convergia Telecom S.A.-Santiago-(8793),75.44,21.02
+05-03-2022,21-49-31,Convergia Telecom S.A.-Santiago-(8793),69.83,13.71
+05-03-2022,21-50-52,Convergia Telecom S.A.-Santiago-(8793),109.2,19.63
+05-03-2022,21-52-19,Convergia Telecom S.A.-Santiago-(8793),119.71,33.0
+05-03-2022,21-53-45,Convergia Telecom S.A.-Santiago-(8793),139.89,27.17
+05-03-2022,21-55-13,Convergia Telecom S.A.-Santiago-(8793),131.21,34.15
+05-03-2022,21-56-41,Convergia Telecom S.A.-Santiago-(8793),94.96,42.94
+05-03-2022,21-58-08,Convergia Telecom S.A.-Santiago-(8793),153.76,19.67
+05-03-2022,21-59-35,Convergia Telecom S.A.-Santiago-(8793),89.67,28.69
+05-03-2022,22-01-04,Convergia Telecom S.A.-Santiago-(8793),80.34,22.54
+05-03-2022,22-02-34,Convergia Telecom S.A.-Santiago-(8793),72.75,29.03
+05-03-2022,22-04-03,Convergia Telecom S.A.-Santiago-(8793),160.81,35.52
+05-03-2022,22-05-29,Convergia Telecom S.A.-Santiago-(8793),93.0,27.8
+05-03-2022,22-06-55,Convergia Telecom S.A.-Santiago-(8793),123.56,31.54
+05-03-2022,22-08-23,Convergia Telecom S.A.-Santiago-(8793),118.23,13.38
+05-03-2022,22-09-45,Convergia Telecom S.A.-Santiago-(8793),129.58,28.85
+05-03-2022,22-11-13,Convergia Telecom S.A.-Santiago-(8793),97.04,34.16
+05-03-2022,22-12-39,Convergia Telecom S.A.-Santiago-(8793),122.41,41.05
+05-03-2022,22-14-06,Convergia Telecom S.A.-Santiago-(8793),106.3,29.93
+05-03-2022,22-15-34,Convergia Telecom S.A.-Santiago-(8793),115.24,33.11
+05-03-2022,22-17-02,Convergia Telecom S.A.-Santiago-(8793),132.64,53.46
+05-03-2022,22-18-22,Convergia Telecom S.A.-Santiago-(8793),75.77,14.55
+05-03-2022,22-19-43,Convergia Telecom S.A.-Santiago-(8793),127.28,30.99
+05-03-2022,22-21-13,Convergia Telecom S.A.-Santiago-(8793),94.35,19.48
+05-03-2022,22-22-37,Convergia Telecom S.A.-Santiago-(8793),155.99,31.27
+05-03-2022,22-24-04,Convergia Telecom S.A.-Santiago-(8793),165.69,25.72
+05-03-2022,22-25-34,Convergia Telecom S.A.-Santiago-(8793),121.31,17.57
+05-03-2022,22-27-03,Convergia Telecom S.A.-Santiago-(8793),91.43,11.11
+05-03-2022,22-28-27,Convergia Telecom S.A.-Santiago-(8793),91.2,16.93
+05-03-2022,22-29-57,Convergia Telecom S.A.-Santiago-(8793),126.29,16.64
+05-03-2022,22-31-23,Convergia Telecom S.A.-Santiago-(8793),122.04,28.5
+05-03-2022,22-32-53,Convergia Telecom S.A.-Santiago-(8793),138.96,32.69
+05-03-2022,22-34-20,Convergia Telecom S.A.-Santiago-(8793),86.0,19.5
+05-03-2022,22-35-50,Convergia Telecom S.A.-Santiago-(8793),128.33,41.23
+05-03-2022,22-37-16,Convergia Telecom S.A.-Santiago-(8793),95.54,35.34
+05-03-2022,22-38-42,Convergia Telecom S.A.-Santiago-(8793),101.36,35.05
+05-03-2022,22-40-12,Convergia Telecom S.A.-Santiago-(8793),109.47,36.67
+05-03-2022,22-41-38,Convergia Telecom S.A.-Santiago-(8793),136.33,46.31
+05-03-2022,22-43-03,Convergia Telecom S.A.-Santiago-(8793),161.55,34.57
+05-03-2022,22-44-30,Convergia Telecom S.A.-Santiago-(8793),120.39,24.85
+05-03-2022,22-45-56,Convergia Telecom S.A.-Santiago-(8793),148.65,54.31
+05-03-2022,22-47-16,Convergia Telecom S.A.-Santiago-(8793),143.8,39.58
+05-03-2022,22-48-43,Convergia Telecom S.A.-Santiago-(8793),118.18,32.01
+05-03-2022,22-50-11,Convergia Telecom S.A.-Santiago-(8793),133.09,17.52
+05-03-2022,22-51-33,Convergia Telecom S.A.-Santiago-(8793),158.2,32.65
+05-03-2022,22-53-00,Convergia Telecom S.A.-Santiago-(8793),130.19,36.01
+05-03-2022,22-54-27,Convergia Telecom S.A.-Santiago-(8793),127.36,37.03
+05-03-2022,22-55-55,Convergia Telecom S.A.-Santiago-(8793),97.95,12.94
+05-03-2022,22-57-21,Convergia Telecom S.A.-Santiago-(8793),136.17,37.09
+05-03-2022,22-58-49,Convergia Telecom S.A.-Santiago-(8793),83.86,29.2
+05-03-2022,23-00-18,Convergia Telecom S.A.-Santiago-(8793),87.34,29.97
+05-03-2022,23-01-46,Convergia Telecom S.A.-Santiago-(8793),98.21,36.17
+05-03-2022,23-03-13,Convergia Telecom S.A.-Santiago-(8793),86.26,18.33
+05-03-2022,23-04-38,Convergia Telecom S.A.-Santiago-(8793),83.85,42.61
+05-03-2022,23-06-00,Convergia Telecom S.A.-Santiago-(8793),86.64,20.55
+05-03-2022,23-07-20,Convergia Telecom S.A.-Santiago-(8793),85.79,16.62
+05-03-2022,23-08-43,Convergia Telecom S.A.-Santiago-(8793),117.6,13.37
+05-03-2022,23-10-04,Convergia Telecom S.A.-Santiago-(8793),141.89,42.47
+05-03-2022,23-11-29,Convergia Telecom S.A.-Santiago-(8793),114.79,17.67
+05-03-2022,23-12-51,Convergia Telecom S.A.-Santiago-(8793),158.87,32.78
+05-03-2022,23-14-19,Convergia Telecom S.A.-Santiago-(8793),129.39,18.41
+05-03-2022,23-15-47,Convergia Telecom S.A.-Santiago-(8793),143.82,38.12
+05-03-2022,23-17-13,Convergia Telecom S.A.-Santiago-(8793),81.83,17.03
+05-03-2022,23-18-35,Convergia Telecom S.A.-Santiago-(8793),124.48,5.88
+05-03-2022,23-19-58,Convergia Telecom S.A.-Santiago-(8793),82.04,15.12
+05-03-2022,23-21-26,Convergia Telecom S.A.-Santiago-(8793),103.04,39.55
+05-03-2022,23-22-54,Convergia Telecom S.A.-Santiago-(8793),114.84,35.12
+05-03-2022,23-24-23,Convergia Telecom S.A.-Santiago-(8793),133.98,12.58
+05-03-2022,23-25-44,Convergia Telecom S.A.-Santiago-(8793),113.01,14.14
+05-03-2022,23-27-05,Convergia Telecom S.A.-Santiago-(8793),128.69,34.92
+05-03-2022,23-28-29,Convergia Telecom S.A.-Santiago-(8793),125.23,26.87
+05-03-2022,23-29-57,Convergia Telecom S.A.-Santiago-(8793),139.42,15.45
+05-03-2022,23-31-17,Convergia Telecom S.A.-Santiago-(8793),59.06,15.71
+05-03-2022,23-32-38,Convergia Telecom S.A.-Santiago-(8793),132.63,19.78
+05-03-2022,23-34-02,Convergia Telecom S.A.-Santiago-(8793),109.5,30.54
+05-03-2022,23-35-29,Convergia Telecom S.A.-Santiago-(8793),99.41,14.58
+05-03-2022,23-36-51,Convergia Telecom S.A.-Santiago-(8793),140.21,31.99
+05-03-2022,23-38-18,Convergia Telecom S.A.-Santiago-(8793),99.31,12.07
+05-03-2022,23-39-42,Convergia Telecom S.A.-Santiago-(8793),111.53,36.93
+05-03-2022,23-41-11,Convergia Telecom S.A.-Santiago-(8793),105.74,33.2
+05-03-2022,23-42-37,Convergia Telecom S.A.-Santiago-(8793),92.69,48.32
+05-03-2022,23-44-01,Convergia Telecom S.A.-Santiago-(8793),97.73,22.44
+05-03-2022,23-45-31,Convergia Telecom S.A.-Santiago-(8793),118.41,38.76
+05-03-2022,23-46-58,Convergia Telecom S.A.-Santiago-(8793),78.79,17.27
+05-03-2022,23-48-19,Convergia Telecom S.A.-Santiago-(8793),81.46,29.96
+05-03-2022,23-49-47,Convergia Telecom S.A.-Santiago-(8793),91.24,37.21
+05-03-2022,23-51-13,Convergia Telecom S.A.-Santiago-(8793),78.23,14.4
+05-03-2022,23-52-34,Convergia Telecom S.A.-Santiago-(8793),125.04,36.29
+05-03-2022,23-53-57,Convergia Telecom S.A.-Santiago-(8793),113.3,49.24
+05-03-2022,23-55-18,Convergia Telecom S.A.-Santiago-(8793),77.68,12.92
+05-03-2022,23-56-39,Convergia Telecom S.A.-Santiago-(8793),102.71,34.05
+05-03-2022,23-58-07,Convergia Telecom S.A.-Santiago-(8793),139.13,29.37
+05-03-2022,23-59-35,Convergia Telecom S.A.-Santiago-(8793),158.25,40.29
+06-03-2022,00-01-02,Convergia Telecom S.A.-Santiago-(8793),119.97,13.64
+06-03-2022,00-02-32,Convergia Telecom S.A.-Santiago-(8793),129.21,35.63
+06-03-2022,00-03-58,Convergia Telecom S.A.-Santiago-(8793),108.39,21.15
+06-03-2022,00-05-21,Convergia Telecom S.A.-Santiago-(8793),87.43,16.19
+06-03-2022,00-06-44,Convergia Telecom S.A.-Santiago-(8793),84.33,15.94
+06-03-2022,00-08-07,Convergia Telecom S.A.-Santiago-(8793),108.41,25.86
+06-03-2022,00-09-37,Convergia Telecom S.A.-Santiago-(8793),140.87,48.35
+06-03-2022,00-10-58,Convergia Telecom S.A.-Santiago-(8793),126.64,25.23
+06-03-2022,00-12-26,Convergia Telecom S.A.-Santiago-(8793),85.88,15.29
+06-03-2022,00-13-54,Convergia Telecom S.A.-Santiago-(8793),157.29,33.03
+06-03-2022,00-15-22,Convergia Telecom S.A.-Santiago-(8793),143.27,10.12
+06-03-2022,00-16-44,Convergia Telecom S.A.-Santiago-(8793),90.47,16.5
+06-03-2022,00-18-05,Convergia Telecom S.A.-Santiago-(8793),148.0,16.1
+06-03-2022,00-19-28,Convergia Telecom S.A.-Santiago-(8793),100.86,16.29
+06-03-2022,00-20-50,Convergia Telecom S.A.-Santiago-(8793),93.7,42.36
+06-03-2022,00-22-11,Convergia Telecom S.A.-Santiago-(8793),109.44,27.08
+06-03-2022,00-23-40,Convergia Telecom S.A.-Santiago-(8793),135.24,16.48
+06-03-2022,00-25-02,Convergia Telecom S.A.-Santiago-(8793),87.94,30.88
+06-03-2022,00-26-28,Convergia Telecom S.A.-Santiago-(8793),75.74,17.39
+06-03-2022,00-27-51,Convergia Telecom S.A.-Santiago-(8793),145.66,25.62
+06-03-2022,00-29-20,Convergia Telecom S.A.-Santiago-(8793),133.13,37.31
+06-03-2022,00-30-47,Convergia Telecom S.A.-Santiago-(8793),133.35,20.68
+06-03-2022,00-32-16,Convergia Telecom S.A.-Santiago-(8793),154.59,52.0
+06-03-2022,00-33-36,Convergia Telecom S.A.-Santiago-(8793),75.99,10.36
+06-03-2022,00-35-01,Convergia Telecom S.A.-Santiago-(8793),107.36,31.02
+06-03-2022,00-36-30,Convergia Telecom S.A.-Santiago-(8793),115.37,24.38
+06-03-2022,00-37-53,Convergia Telecom S.A.-Santiago-(8793),4.12,45.27
+06-03-2022,00-39-19,Convergia Telecom S.A.-Santiago-(8793),66.59,11.77
+06-03-2022,00-40-40,Convergia Telecom S.A.-Santiago-(8793),109.94,34.1
+06-03-2022,00-42-07,Convergia Telecom S.A.-Santiago-(8793),139.93,35.64
+06-03-2022,00-43-35,Convergia Telecom S.A.-Santiago-(8793),154.17,36.17
+06-03-2022,00-45-02,Convergia Telecom S.A.-Santiago-(8793),89.9,38.67
+06-03-2022,00-46-28,Convergia Telecom S.A.-Santiago-(8793),118.67,29.01
+06-03-2022,00-47-56,Convergia Telecom S.A.-Santiago-(8793),66.43,15.63
+06-03-2022,00-49-19,Convergia Telecom S.A.-Santiago-(8793),84.57,15.47
+06-03-2022,00-50-41,Convergia Telecom S.A.-Santiago-(8793),99.29,29.47
+06-03-2022,00-52-10,Convergia Telecom S.A.-Santiago-(8793),123.1,16.08
+06-03-2022,00-53-37,Convergia Telecom S.A.-Santiago-(8793),156.55,40.74
+06-03-2022,00-55-04,Convergia Telecom S.A.-Santiago-(8793),143.82,18.68
+06-03-2022,00-56-25,Convergia Telecom S.A.-Santiago-(8793),127.43,18.16
+06-03-2022,00-57-46,Convergia Telecom S.A.-Santiago-(8793),161.16,23.61
+06-03-2022,00-59-16,Convergia Telecom S.A.-Santiago-(8793),105.86,29.99
+06-03-2022,01-00-44,Convergia Telecom S.A.-Santiago-(8793),97.12,18.56
+06-03-2022,01-02-06,Convergia Telecom S.A.-Santiago-(8793),145.89,22.19
+06-03-2022,01-03-31,Convergia Telecom S.A.-Santiago-(8793),132.21,30.34
+06-03-2022,01-04-58,Convergia Telecom S.A.-Santiago-(8793),102.24,9.67
+06-03-2022,01-06-22,Convergia Telecom S.A.-Santiago-(8793),125.37,24.53
+06-03-2022,01-07-50,Convergia Telecom S.A.-Santiago-(8793),154.83,37.71
+06-03-2022,01-09-14,Convergia Telecom S.A.-Santiago-(8793),103.93,36.0
+06-03-2022,01-10-40,Convergia Telecom S.A.-Santiago-(8793),107.3,26.61
+06-03-2022,01-12-09,Convergia Telecom S.A.-Santiago-(8793),74.47,50.07
+06-03-2022,01-13-30,Convergia Telecom S.A.-Santiago-(8793),65.02,15.1
+06-03-2022,01-14-52,Convergia Telecom S.A.-Santiago-(8793),100.08,43.38
+06-03-2022,01-16-17,Convergia Telecom S.A.-Santiago-(8793),117.77,49.34
+06-03-2022,01-17-38,Convergia Telecom S.A.-Santiago-(8793),131.48,13.23
+06-03-2022,01-19-03,Convergia Telecom S.A.-Santiago-(8793),122.29,21.54
+06-03-2022,01-20-29,Convergia Telecom S.A.-Santiago-(8793),91.66,23.62
+06-03-2022,01-21-53,Convergia Telecom S.A.-Santiago-(8793),88.74,28.07
+06-03-2022,01-23-23,Convergia Telecom S.A.-Santiago-(8793),76.1,31.2
+06-03-2022,01-24-53,Convergia Telecom S.A.-Santiago-(8793),86.0,20.88
+06-03-2022,01-26-20,Convergia Telecom S.A.-Santiago-(8793),100.05,41.9
+06-03-2022,01-27-46,Convergia Telecom S.A.-Santiago-(8793),77.82,40.56
+06-03-2022,01-29-08,Convergia Telecom S.A.-Santiago-(8793),117.87,29.06
+06-03-2022,01-30-36,Convergia Telecom S.A.-Santiago-(8793),90.58,26.33
+06-03-2022,01-32-06,Convergia Telecom S.A.-Santiago-(8793),142.05,34.08
+06-03-2022,01-33-32,Convergia Telecom S.A.-Santiago-(8793),104.33,18.42
+06-03-2022,01-34-57,Convergia Telecom S.A.-Santiago-(8793),67.3,18.77
+06-03-2022,01-36-18,Convergia Telecom S.A.-Santiago-(8793),153.13,52.78
+06-03-2022,01-37-39,Convergia Telecom S.A.-Santiago-(8793),85.11,31.24
+06-03-2022,01-39-06,Convergia Telecom S.A.-Santiago-(8793),160.86,17.22
+06-03-2022,01-40-28,Convergia Telecom S.A.-Santiago-(8793),123.06,17.09
+06-03-2022,01-41-50,Convergia Telecom S.A.-Santiago-(8793),79.55,36.1
+06-03-2022,01-43-16,Convergia Telecom S.A.-Santiago-(8793),128.44,27.11
+06-03-2022,01-44-45,Convergia Telecom S.A.-Santiago-(8793),115.15,14.92
+06-03-2022,01-46-05,Convergia Telecom S.A.-Santiago-(8793),88.74,17.17
+06-03-2022,01-47-28,Convergia Telecom S.A.-Santiago-(8793),126.15,31.58
+06-03-2022,01-48-56,Convergia Telecom S.A.-Santiago-(8793),110.23,16.5
+06-03-2022,01-50-19,Convergia Telecom S.A.-Santiago-(8793),142.25,41.54
+06-03-2022,01-51-45,Convergia Telecom S.A.-Santiago-(8793),120.07,30.44
+06-03-2022,01-53-13,Convergia Telecom S.A.-Santiago-(8793),105.26,34.4
+06-03-2022,01-54-42,Convergia Telecom S.A.-Santiago-(8793),129.08,45.46
+06-03-2022,01-56-07,Convergia Telecom S.A.-Santiago-(8793),96.69,15.41
+06-03-2022,01-57-27,Convergia Telecom S.A.-Santiago-(8793),71.66,17.23
+06-03-2022,01-58-50,Convergia Telecom S.A.-Santiago-(8793),132.73,27.99
+06-03-2022,02-00-18,Convergia Telecom S.A.-Santiago-(8793),138.63,16.05
+06-03-2022,02-01-40,Convergia Telecom S.A.-Santiago-(8793),143.97,33.09
+06-03-2022,02-03-07,Convergia Telecom S.A.-Santiago-(8793),156.09,36.63
+06-03-2022,02-04-34,Convergia Telecom S.A.-Santiago-(8793),143.43,13.27
+06-03-2022,02-05-58,Convergia Telecom S.A.-Santiago-(8793),117.94,41.99
+06-03-2022,02-07-24,Convergia Telecom S.A.-Santiago-(8793),119.21,30.95
+06-03-2022,02-08-52,Convergia Telecom S.A.-Santiago-(8793),87.37,27.52
+06-03-2022,02-10-21,Convergia Telecom S.A.-Santiago-(8793),92.07,25.69
+06-03-2022,02-11-50,Convergia Telecom S.A.-Santiago-(8793),177.73,25.98
+06-03-2022,02-13-19,Convergia Telecom S.A.-Santiago-(8793),146.07,39.67
+06-03-2022,02-14-41,Convergia Telecom S.A.-Santiago-(8793),144.13,41.32
+06-03-2022,02-16-08,Convergia Telecom S.A.-Santiago-(8793),87.24,16.88
+06-03-2022,02-17-30,Convergia Telecom S.A.-Santiago-(8793),102.87,15.85
+06-03-2022,02-18-53,Convergia Telecom S.A.-Santiago-(8793),145.85,43.08
+06-03-2022,02-20-19,Convergia Telecom S.A.-Santiago-(8793),116.21,35.5
+06-03-2022,02-21-45,Convergia Telecom S.A.-Santiago-(8793),46.43,48.95
+06-03-2022,02-23-05,Convergia Telecom S.A.-Santiago-(8793),176.04,17.62
+06-03-2022,02-24-25,Convergia Telecom S.A.-Santiago-(8793),100.28,49.68
+06-03-2022,02-25-49,Convergia Telecom S.A.-Santiago-(8793),151.78,25.31
+06-03-2022,02-27-17,Convergia Telecom S.A.-Santiago-(8793),111.44,15.9
+06-03-2022,02-28-39,Convergia Telecom S.A.-Santiago-(8793),91.64,28.61
+06-03-2022,02-30-07,Convergia Telecom S.A.-Santiago-(8793),166.75,12.48
+06-03-2022,02-31-29,Convergia Telecom S.A.-Santiago-(8793),117.37,37.81
+06-03-2022,02-32-55,Convergia Telecom S.A.-Santiago-(8793),119.77,36.61
+06-03-2022,02-34-22,Convergia Telecom S.A.-Santiago-(8793),101.6,17.09
+06-03-2022,02-35-44,Convergia Telecom S.A.-Santiago-(8793),148.04,29.48
+06-03-2022,02-37-12,Convergia Telecom S.A.-Santiago-(8793),97.49,14.09
+06-03-2022,02-38-37,Convergia Telecom S.A.-Santiago-(8793),91.86,27.81
+06-03-2022,02-39-59,Convergia Telecom S.A.-Santiago-(8793),115.59,14.72
+06-03-2022,02-41-20,Convergia Telecom S.A.-Santiago-(8793),71.87,15.38
+06-03-2022,02-42-41,Convergia Telecom S.A.-Santiago-(8793),90.42,30.25
+06-03-2022,02-44-09,Convergia Telecom S.A.-Santiago-(8793),128.76,19.67
+06-03-2022,02-45-30,Convergia Telecom S.A.-Santiago-(8793),70.61,17.26
+06-03-2022,02-46-50,Convergia Telecom S.A.-Santiago-(8793),126.68,24.74
+06-03-2022,02-48-16,Convergia Telecom S.A.-Santiago-(8793),81.76,29.76
+06-03-2022,02-49-38,Convergia Telecom S.A.-Santiago-(8793),134.05,25.05
+06-03-2022,02-51-08,Convergia Telecom S.A.-Santiago-(8793),137.13,13.83
+06-03-2022,02-52-30,Convergia Telecom S.A.-Santiago-(8793),102.31,35.5
+06-03-2022,02-54-00,Convergia Telecom S.A.-Santiago-(8793),103.74,30.68
+06-03-2022,02-55-26,Convergia Telecom S.A.-Santiago-(8793),124.02,26.86
+06-03-2022,02-56-55,Convergia Telecom S.A.-Santiago-(8793),150.04,36.97
+06-03-2022,02-58-21,Convergia Telecom S.A.-Santiago-(8793),72.58,20.17
+06-03-2022,02-59-48,Convergia Telecom S.A.-Santiago-(8793),122.14,38.67
+06-03-2022,03-01-14,Convergia Telecom S.A.-Santiago-(8793),143.66,49.13
+06-03-2022,03-02-38,Convergia Telecom S.A.-Santiago-(8793),98.3,15.71
+06-03-2022,03-04-01,Convergia Telecom S.A.-Santiago-(8793),103.63,21.3
+06-03-2022,03-05-29,Convergia Telecom S.A.-Santiago-(8793),78.36,15.38
+06-03-2022,03-06-50,Convergia Telecom S.A.-Santiago-(8793),85.86,31.77
+06-03-2022,03-08-20,Convergia Telecom S.A.-Santiago-(8793),149.68,43.01
+06-03-2022,03-09-46,Convergia Telecom S.A.-Santiago-(8793),88.82,27.49
+06-03-2022,03-11-15,Convergia Telecom S.A.-Santiago-(8793),52.42,20.69
+06-03-2022,03-12-41,Convergia Telecom S.A.-Santiago-(8793),98.65,34.28
+06-03-2022,03-14-11,Convergia Telecom S.A.-Santiago-(8793),122.79,49.15
+06-03-2022,03-15-35,Convergia Telecom S.A.-Santiago-(8793),124.11,44.65
+06-03-2022,03-17-01,Convergia Telecom S.A.-Santiago-(8793),103.89,15.92
+06-03-2022,03-18-24,Convergia Telecom S.A.-Santiago-(8793),152.55,42.64
+06-03-2022,03-19-46,Convergia Telecom S.A.-Santiago-(8793),139.28,37.2
+06-03-2022,03-21-12,Convergia Telecom S.A.-Santiago-(8793),131.23,38.43
+06-03-2022,03-22-38,Convergia Telecom S.A.-Santiago-(8793),138.96,19.67
+06-03-2022,03-24-02,Convergia Telecom S.A.-Santiago-(8793),86.32,33.96
+06-03-2022,03-25-29,Convergia Telecom S.A.-Santiago-(8793),104.59,18.85
+06-03-2022,03-26-51,Convergia Telecom S.A.-Santiago-(8793),73.86,15.17
+06-03-2022,03-28-13,Convergia Telecom S.A.-Santiago-(8793),78.58,22.52
+06-03-2022,03-29-43,Convergia Telecom S.A.-Santiago-(8793),106.24,35.12
+06-03-2022,03-31-11,Convergia Telecom S.A.-Santiago-(8793),153.98,4.98
+06-03-2022,03-32-36,Convergia Telecom S.A.-Santiago-(8793),73.47,16.29
+06-03-2022,03-33-57,Convergia Telecom S.A.-Santiago-(8793),102.27,24.06
+06-03-2022,03-35-26,Convergia Telecom S.A.-Santiago-(8793),109.26,36.26
+06-03-2022,03-36-53,Convergia Telecom S.A.-Santiago-(8793),127.02,15.21
+06-03-2022,03-38-16,Convergia Telecom S.A.-Santiago-(8793),136.38,31.43
+06-03-2022,03-39-42,Convergia Telecom S.A.-Santiago-(8793),110.85,26.92
+06-03-2022,03-41-12,Convergia Telecom S.A.-Santiago-(8793),104.02,38.43
+06-03-2022,03-42-39,Convergia Telecom S.A.-Santiago-(8793),83.96,34.37
+06-03-2022,03-44-09,Convergia Telecom S.A.-Santiago-(8793),127.7,21.89
