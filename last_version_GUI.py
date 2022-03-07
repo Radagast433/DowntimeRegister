@@ -1150,6 +1150,7 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
             csv_writer.writerow(results_info)
 
         b = time.time()
+        
         sleep_time = round(60 - (b - a), 2)
         
         time.sleep(sleep_time)
