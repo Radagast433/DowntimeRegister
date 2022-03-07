@@ -1735,7 +1735,8 @@ if __name__ == '__main__':
     
     program_csv_route = 'test_program.csv'
 
-    thread_count = multiprocessing.cpu_count()
+    #thread_count = multiprocessing.cpu_count()
+    thread_count = 2
     
     #infinite = '9223372036854775807'
     
