@@ -754,12 +754,12 @@ def PING_TEST(logbox, test_time, direction, is_task):
         
             csv_writer.writerow(data_info)
         
-        data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+        #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
-        end_cut = data.last_valid_index()
+        #end_cut = data.last_valid_index()
 
-        ping_data = data['Ping_(ms)']
-        ping_data = ping_data[start_cut + 1 : end_cut + 1]
+        #ping_data = data['Ping_(ms)']
+        #ping_data = ping_data[start_cut + 1 : end_cut + 1]
         
         #jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
         jitter = 'Null'
@@ -823,6 +823,7 @@ def PING_TEST(logbox, test_time, direction, is_task):
         csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
     
         csv_writer.writerow(results_info)
+
     
     logbox.insert(tk.END, '\n\n Ping mínimo: ' + str(min(ping_data)) + ' ms.\n\n Ping máximo: ' + str(max(ping_data)) +' ms.\n\n Ping Promedio: ' + str(round(ping_data.mean(), 2)) + ' ms.\n\n Jitter: ' + str(jitter) + ' ms.\n\n Paquetes perdidos: ' + str(lost_packets) + '/' + str(finish - start + 1) +  '.')
     logbox.see("end")
