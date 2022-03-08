@@ -35,21 +35,27 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from tkcalendar import DateEntry
 
-import MySQLdb
+import mysql.connector
 
 
 class DBLOGIN():
 
     def __init__(self, parent):
 
-        self.frame = Toplevel()
-        self.frame.title(' DataBase')
-
-        self.parent = parent
-
         self.is_verified = False
 
         self.entry_boxes_width = 20
+
+        #self.MySQL_db = None
+
+        #self.cursor = None
+
+        self.parent = parent
+
+    def DB_GUI(self):
+
+        self.frame = Toplevel()
+        self.frame.title(' DataBase')
 
         self.data_login_frame = ttk.Frame(self.frame)
         self.data_login_frame.pack(side = 'top', pady = general_pady)
@@ -65,7 +71,7 @@ class DBLOGIN():
 
         ################# TEXT #################
 
-        self.label_1 = ttk.Label(self.text_column, text = 'Ingrese Direccion IP: ')
+        self.label_1 = ttk.Label(self.text_column, text = 'Ingrese Host: ')
         self.label_1.pack(side = 'top', pady = general_pady)
 
         self.label_2 = ttk.Label(self.text_column, text = 'Ingrese Usuario: ')
@@ -94,12 +100,15 @@ class DBLOGIN():
         ################# BOTTOM BUTTONS #################
 
         self.close_button = ttk.Button(self.bottom_buttons_frame, text = 'Cerrar', command=lambda: self.__destroy__())
-        self.close_button.pack(side = 'left')
+        self.close_button.pack(side = 'left', padx = general_padx)
 
-        self.verify_button = ttk.Button(self.bottom_buttons_frame, text = 'Verificar\nConexión')
+        self.dc_button = ttk.Button(self.bottom_buttons_frame, text = 'Desconectar', command=lambda: self.DB_DISCONNECT())
+        self.dc_button.pack(side = 'left')
+
+        self.verify_button = ttk.Button(self.bottom_buttons_frame, text = 'Verificar\nConexión', command=lambda: self.CHECK_CONNECTION())
         self.verify_button.pack(side = 'left', padx = general_padx)
 
-        self.connect_button = ttk.Button(self.bottom_buttons_frame, text = 'Conectar')
+        self.connect_button = ttk.Button(self.bottom_buttons_frame, text = 'Conectar', command=lambda: self.DB_CONNECT())
         self.connect_button.pack(side = 'left')
 
         if not self.is_verified:
@@ -118,15 +127,41 @@ class DBLOGIN():
 
         try:
             
-            self.MySQL_db = MySQLdb.connect(host = self.DB_IP, user = self.DB_ID, password = self.DB_PW, db = self.DB_NAME, charset = 'utf8mb4', cursorclass = cursors.DictCursor)
+            # DB_IP = localhost || DB_ID = root || DB_PW = Globetrotter123 || DB_NAME = NetworkData
+
+            self.MySQL_db = mysql.connector.connect(host = self.DB_IP, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
+
+            self.cursor = self.MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
 
         except:
 
-            return False
+            self.is_verified = False
         
         self.connect_button["state"] = ACTIVE
         
-        return True
+        self.is_verified = True
+
+    def DB_CONNECT(self):
+
+        self.MySQL_db = mysql.connector.connect(host = self.DB_IP, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
+
+        self.cursor = self.MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
+
+        self.__destroy__()
+
+    def DB_DISCONNECT(self):
+
+        self.MySQL_db.close()
+        self.cursor.close()
+
+        self.connect_button["state"] = DISABLED
+
+        self.__destroy__()
+
+    def COMMIT_DATA(self, sql, data):
+
+        self.cursor.execute(sql, data)
+        self.MySQL_db.commit()
 
     def __destroy__(self):
 
@@ -499,7 +534,7 @@ def GET_NETWORK_NAME():
     connected_ssid = connected_ssid.replace(' ', '_')
     
     if len(connected_ssid) < 30:
-    
+
         return connected_ssid
     
     else:
@@ -844,6 +879,22 @@ def PING_TEST(logbox, test_time, direction, is_task):
             }
 
         #data = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, index_col = None)
+
+        try: 
+
+            if network_name != 'Ethernet':
+
+                sql = 'INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)'
+                data = (network_name, 'WiFi')
+
+            else:
+
+                sql = 'INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)'
+                data = ('Ethernet', 'Ethernet')
+
+            DBLOGIN(None).COMMIT_DATA(sql, data)
+
+        except: pass
         
         with open(data_route + network_name + '_' + ping_csv_route, 'a', newline = '') as csv_file:
             
@@ -1655,7 +1706,7 @@ def GUI():
 
     ######################################## Conectar a Base de Datos ########################################
 
-    db_connection = ttk.Button(pl_subdivition_2, text = 'Conexión a BD', command=lambda:DBLOGIN(root))
+    db_connection = ttk.Button(pl_subdivition_2, text = 'Conexión a BD', command=lambda:DBLOGIN(root).DB_GUI())
     db_connection.pack(side = 'top')
     
     ################################### SPEED TESTS ###################################
