@@ -35,6 +35,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from tkcalendar import DateEntry
 
+import MySQLdb
+
 
 class DBLOGIN():
 
@@ -116,7 +118,7 @@ class DBLOGIN():
 
         try:
             
-            self.MySQL_db = connect(host = self.DB_IP, user = self.DB_ID, password = self.DB_PW, db = self.DB_NAME, charset = 'utf8mb4', cursorclass = cursors.DictCursor)
+            self.MySQL_db = MySQLdb.connect(host = self.DB_IP, user = self.DB_ID, password = self.DB_PW, db = self.DB_NAME, charset = 'utf8mb4', cursorclass = cursors.DictCursor)
 
         except:
 
