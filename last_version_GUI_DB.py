@@ -931,9 +931,6 @@ def PING_TEST(logbox, test_time, direction, is_task):
         else:
         
             time.sleep(ping_test_interval)
-        
-    logbox.insert(tk.END, '\n\n Ping mínimo: ' + str(min(ping_data)) + ' ms.\n\n Ping máximo: ' + str(max(ping_data)) +' ms.\n\n Ping Promedio: ' + str(round(ping_data.mean(), 2)) + ' ms.\n\n Jitter: ' + str(jitter) + ' ms.\n\n Paquetes perdidos: ' + str(lost_packets) + '/' + str(finish - start + 1) +  '.')
-    logbox.see("end")
     
     logbox.insert(tk.END, '\n\n Prueba finalizada con exito...')
     logbox.see("end")
