@@ -74,14 +74,17 @@ class DBLOGIN():
         self.label_1 = ttk.Label(self.text_column, text = 'Ingrese Host: ')
         self.label_1.pack(side = 'top', pady = general_pady)
 
-        self.label_2 = ttk.Label(self.text_column, text = 'Ingrese Usuario: ')
+        self.label_2 = ttk.Label(self.text_column, text = 'Ingrese Puerto: ')
         self.label_2.pack(side = 'top')
 
-        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Contraseña: ')
+        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Usuario: ')
         self.label_3.pack(side = 'top', pady = general_pady)
+
+        self.label_4 = ttk.Label(self.text_column, text = 'Ingrese Contraseña: ')
+        self.label_4.pack(side = 'top')
         
-        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Nombre de la DB: ')
-        self.label_3.pack(side = 'top')
+        self.label_5 = ttk.Label(self.text_column, text = 'Ingrese Nombre de la DB: ')
+        self.label_5.pack(side = 'top', pady = general_pady)
 
         ################# ENTRY BOXES #################
 
@@ -91,11 +94,14 @@ class DBLOGIN():
         self.entry_2 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
         self.entry_2.pack(side = 'top')
 
-        self.entry_3 = ttk.Entry(self.entry_column, show = '*', width = self.entry_boxes_width)
+        self.entry_3 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
         self.entry_3.pack(side = 'top', pady = general_pady)
 
-        self.entry_4 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_4 = ttk.Entry(self.entry_column, show = '*', width = self.entry_boxes_width)
         self.entry_4.pack(side = 'top')
+
+        self.entry_5 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_5.pack(side = 'top', pady = general_pady)
 
         ################# BOTTOM BUTTONS #################
 
@@ -115,23 +121,37 @@ class DBLOGIN():
 
             self.connect_button["state"] = DISABLED
 
+        ################################################## TEST ########################################################
+
+        self.entry_1.insert(tk.END, 'localhost')
+        self.entry_2.insert(tk.END, '3307')
+        self.entry_3.insert(tk.END, 'radagast')
+        self.entry_4.insert(tk.END, 'Globetrotter123')
+        self.entry_5.insert(tk.END, 'networkdata')
+
+        ################################################################################################################
+
         center(self.parent, self.frame)
         self.frame.focus_force()
 
     def CHECK_CONNECTION(self):
 
+        global MySQL_db
+        global cursor
+
         self.DB_IP = self.entry_1.get()
-        self.DB_ID = self.entry_2.get()
-        self.DB_PW = self.entry_3.get()
-        self.DB_NAME = self.entry_4.get()
+        self.DB_PORT = int(self.entry_2.get())
+        self.DB_ID = self.entry_3.get()
+        self.DB_PW = self.entry_4.get()
+        self.DB_NAME = self.entry_5.get()
 
         try:
             
             # DB_IP = localhost || DB_ID = root || DB_PW = Globetrotter123 || DB_NAME = NetworkData
 
-            self.MySQL_db = mysql.connector.connect(host = self.DB_IP, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
+            MySQL_db = mysql.connector.connect(host = self.DB_IP, port = self.DB_PORT, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
 
-            self.cursor = self.MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
+            cursor = self.MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
 
         except:
 
@@ -143,25 +163,23 @@ class DBLOGIN():
 
     def DB_CONNECT(self):
 
-        self.MySQL_db = mysql.connector.connect(host = self.DB_IP, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
+        global MySQL_db
+        global cursor
 
-        self.cursor = self.MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
+        MySQL_db = mysql.connector.connect(host = self.DB_IP, port = self.DB_PORT, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
+
+        cursor = MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
 
         self.__destroy__()
 
     def DB_DISCONNECT(self):
 
-        self.MySQL_db.close()
-        self.cursor.close()
+        MySQL_db.close()
+        cursor.close()
 
         self.connect_button["state"] = DISABLED
 
         self.__destroy__()
-
-    def COMMIT_DATA(self, sql, data):
-
-        self.cursor.execute(sql, data)
-        self.MySQL_db.commit()
 
     def __destroy__(self):
 
@@ -784,16 +802,6 @@ def PING_TEST(logbox, test_time, direction, is_task):
 
     network_name = GET_NETWORK_NAME()
 
-    data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
-    
-    start_cut = data.last_valid_index()
-    ping_graph_start = start_cut
-
-    data = []
-
-    #start_date = datetime.datetime.now().strftime("%d-%m-%Y")  # date
-    #start_hour = datetime.datetime.now().strftime("%H-%M-%S") 
-
     for i in range(test_time):
         
         function_start_time = time.time()
@@ -852,9 +860,9 @@ def PING_TEST(logbox, test_time, direction, is_task):
         #cut_duration = cut_duration * 10**(-3)
         #acc_time+= cut_duration
             
-        a = datetime.datetime.now().strftime("%d-%m-%Y")  # date
+        a = datetime.datetime.now()  # date
         
-        b = datetime.datetime.now().strftime("%H-%M-%S")  # time
+        b = datetime.datetime.now()  # time
         
         c = round(elapsed_time + 1, 1)     # float
         
@@ -867,55 +875,43 @@ def PING_TEST(logbox, test_time, direction, is_task):
         g = round(acc_time, 2)       # float
         
         #ping_data_fieldnames = ['Fecha', 'Hora', 'Tiempo_Transcurrido_(s)', 'Ping_(ms)', '%_Paquetes_perdidos', 'Tiempo_Corte_(ms)', 'Tiempo_de_Fallo_Acumulado_(ms)']
-        
-        data_info = {
-            ping_data_fieldnames[0] : a,
-            ping_data_fieldnames[1] : b,
-            ping_data_fieldnames[2] : c,
-            ping_data_fieldnames[3] : d,
-            ping_data_fieldnames[4] : e,
-            ping_data_fieldnames[5] : f,
-            ping_data_fieldnames[6] : g
-            }
 
-        #data = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, index_col = None)
+        if network_name != 'Ethernet':
 
-        try: 
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = (network_name, 'WiFi')
 
-            if network_name != 'Ethernet':
+        else:
 
-                sql = 'INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)'
-                data = (network_name, 'WiFi')
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = ('Ethernet', 'Ethernet')
 
-            else:
+        try:
 
-                sql = 'INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)'
-                data = ('Ethernet', 'Ethernet')
-
-            DBLOGIN(None).COMMIT_DATA(sql, data)
+            cursor.execute(sql, data)
+            MySQL_db.commit()
 
         except: pass
-        
-        with open(data_route + network_name + '_' + ping_csv_route, 'a', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = ping_data_fieldnames)
-        
-            csv_writer.writerow(data_info)
-        
-        #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
-        #end_cut = data.last_valid_index()
+        cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
+        aux = cursor.fetchall()
+        network_name_id = int(aux[0][0])
 
-        #ping_data = data['Ping_(ms)']
-        #ping_data = ping_data[start_cut + 1 : end_cut + 1]
-        
-        #jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
+        sql = "INSERT INTO ping_data (`PING_DATE`, `PING_TIME`, `PING_ELAPSED_TIME`, `PING_VALUE`, `PING_PACKET_LOSS`, `PING_CUT_DURATION`, `PING_ACC_FAILURE_TIME`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, network_name_id)
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
         jitter = 'Null'
         lost_packets = 'Null'
 
         try:
             
-            logbox.insert(tk.END, f"\n\n Fecha: {a}, Hora: {b}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}, Jitter: {jitter}")
+            date_aux = a.strftime("%Y-%m-%d")
+            time_aux = b.strftime("%H:%M:%S")
+
+            logbox.insert(tk.END, f"\n\n Fecha: {date_aux}, Hora: {time_aux}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}, Jitter: {jitter}")
             logbox.see("end")
         
         except: pass
@@ -936,43 +932,6 @@ def PING_TEST(logbox, test_time, direction, is_task):
         
             time.sleep(ping_test_interval)
         
-    data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
-    
-    ping_data = data['Ping_(ms)']
-    
-    start = ping_data.size - elapsed_time + 1
-    finish = ping_data.size
-    #print(start, finish)
-    
-    #print(ping_data.size, test_time)
-    
-    ping_data = ping_data[ping_data.size - elapsed_time:]
-    
-    #print(ping_data)
-    
-    jitter, lost_packets = GET_JITTER(ping_data, start, finish)
-    
-    #ping_results_fieldnames = ['Nombre_de_conexion', 'Servidor', 'Duracion_(s)', 'Ping_minimo', 'Ping_maximo', 'Ping_Promedio', 'Jitter', 'Paquetes_enviados', 'Paquetes_perdidos']
-    
-    results_info = {
-        ping_results_fieldnames[0] : network_name,
-        ping_results_fieldnames[1] : direction,
-        ping_results_fieldnames[2] : test_time,
-        ping_results_fieldnames[3] : min(ping_data),
-        ping_results_fieldnames[4] : max(ping_data),
-        ping_results_fieldnames[5] : round(ping_data.mean(), 2),
-        ping_results_fieldnames[6] : jitter,
-        ping_results_fieldnames[7] : test_time,
-        ping_results_fieldnames[8] : lost_packets
-        }
-    
-    with open(results_route + network_name + '_' + ping_csv_results_route, 'a', newline = '') as csv_file:
-        
-        csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
-    
-        csv_writer.writerow(results_info)
-
-    
     logbox.insert(tk.END, '\n\n Ping mínimo: ' + str(min(ping_data)) + ' ms.\n\n Ping máximo: ' + str(max(ping_data)) +' ms.\n\n Ping Promedio: ' + str(round(ping_data.mean(), 2)) + ' ms.\n\n Jitter: ' + str(jitter) + ' ms.\n\n Paquetes perdidos: ' + str(lost_packets) + '/' + str(finish - start + 1) +  '.')
     logbox.see("end")
     
@@ -1470,6 +1429,13 @@ def EXIT_APP(root):
     RUNNING_SPEED_TEST = False
     #RUNNING_PROGRAMMER = False
     RESOURCES = False
+
+    try:
+
+        MySQL_db.close()
+        cursor.close()
+
+    except: pass
 
     plt.close("all")
     
@@ -2023,6 +1989,14 @@ if __name__ == '__main__':
     ######################################################################
 
     pl_test = None
+
+    ######################################################################
+
+    ################################# SQL ################################
+
+    MySQL_db = None
+
+    cursor = None
 
     ######################################################################
 
