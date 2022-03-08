@@ -876,6 +876,12 @@ def PING_TEST(logbox, test_time, direction, is_task):
         
         #ping_data_fieldnames = ['Fecha', 'Hora', 'Tiempo_Transcurrido_(s)', 'Ping_(ms)', '%_Paquetes_perdidos', 'Tiempo_Corte_(ms)', 'Tiempo_de_Fallo_Acumulado_(ms)']
 
+        cursor.execute("SELECT * FROM network_name")
+        aux = cursor.fetchall()
+        last_auto_increment = len(aux)
+
+        cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
+
         if network_name != 'Ethernet':
 
             sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
@@ -1184,21 +1190,12 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
             RUNNING_SPEED_TEST = False
 
             return
-
-    data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
-    
-    start_cut = data.last_valid_index()
-    speed_graph_start = start_cut
-
-    data = []
     
     # Muestra velocidad en Megabytes
     #speed_trans_unit = 1048576
     
     # Muestra velocidad en Megabits
     speed_trans_unit = 10**(6)
-
-    speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
 
     #for i in range(int(wait_time)):
 
@@ -1217,66 +1214,63 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
 
         a = time.time()
         
-        fecha = datetime.datetime.now().strftime("%d-%m-%Y")
-        hora = datetime.datetime.now().strftime("%H-%M-%S")
+        fecha = datetime.datetime.now()
+        hora = datetime.datetime.now()
         downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
         upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
         
-        info = {
-            'Fecha' : fecha,
-            'Hora' : hora,
-            'Velocidad_Bajada' : downspeed,
-            'Velocidad_Subida' : upspeed
-            }
+        cursor.execute("SELECT * FROM network_name")
+        aux = cursor.fetchall()
+        last_auto_increment = len(aux)
+
+        cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
+
+        if network_name != 'Ethernet':
+
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = (network_name, 'WiFi')
+
+        else:
+
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = ('Ethernet', 'Ethernet')
+
+        try:
+
+            cursor.execute(sql, data)
+            MySQL_db.commit()
+
+        except: pass
+
+        cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
+        aux = cursor.fetchall()
+        network_name_id = int(aux[0][0])
+
+        sql = "INSERT INTO speed_data (`SPEED_DATE`, `SPEED_TIME`, `SPEED_DOWNLOAD`, `SPEED_UPLOAD`, `SPEED_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s)"
+        data = (fecha.strftime("%Y-%m-%d"), hora.strftime("%H:%M:%S"), downspeed, upspeed, network_name_id)
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
+        date_aux = fecha.strftime("%d-%m-%Y")
+        time_aux = hora.strftime("%H-%M-%S")
         
-        with open(data_route + network_name + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
-            
-            csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
-            csv_writer.writerow(info)
-        
-        logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+        logbox.insert(tk.END, f"\n\n Fecha: {date_aux}, Hora: {time_aux}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
         logbox.see("end")
-        
-        #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
-        
-        results_info = {
-            speed_test_results_fieldnames[0] : fecha,
-            speed_test_results_fieldnames[1] : hora,
-            speed_test_results_fieldnames[2] : option,
-            speed_test_results_fieldnames[3] : downspeed,
-            speed_test_results_fieldnames[4] : upspeed
-            }
-        
-        with open(results_route + network_name + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
-        
-            csv_writer.writerow(results_info)
 
         b = time.time()
 
         sleep_time = round(60 - (b - a), 2)
         
-        time.sleep(sleep_time)
-        
         if run_cont == (int(wait_time) - 1):
             
             RUNNING_SPEED_TEST = False
 
-            data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
-    
-            vbajada = data['Velocidad_Bajada']
-            vbajada = vbajada[start_cut + 1 :]
-
-            vsubida = data['Velocidad_Subida']
-            vsubida = vsubida[start_cut + 1 :]
-            
-            logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n D. Estandar Bajada: {round(vbajada.std(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n D. Estandar Subida: {round(vsubida.std(), 2)}\n\n Prueba finalizada con exito...\n")
-            #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
-            logbox.see("end")
-            return
+            break
 
         run_cont+= 1
+
+        time.sleep(sleep_time)
             
     logbox.insert(tk.END, "\n\n Prueba finalizada con exito...\n")
     logbox.see("end")         
