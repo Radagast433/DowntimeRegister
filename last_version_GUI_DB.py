@@ -964,6 +964,12 @@ def PING_TEST_STOP():
 def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
     
     global RUNNING_PING_TEST
+
+    if MySQL_db == None or cursor == None:
+
+        db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+
+        return
     
     if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox_value)):
         
@@ -1108,6 +1114,12 @@ def PACKETLOSS_TEST_STOP():
 def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
     
     global RUNNING_PACKET_TEST
+
+    if MySQL_db == None or cursor == None:
+
+        db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+        
+        return
     
     if not VALIDATE_ENTRY_BOX_VALUE(entrybox.get()):
         
@@ -1315,6 +1327,12 @@ def SPEED_TEST_BEGIN(entrybox, logbox, combobox, is_task):
     
     global RUNNING_SPEED_TEST
 
+    if MySQL_db == None or cursor == None:
+
+        db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+    
+        return
+
     if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox)) or not VALIDATE_COMBOBOX_VALUE(combobox) and is_task == 'normal':
         
         logbox.delete('1.0', tk.END)
@@ -1473,6 +1491,7 @@ def GUI():
     global ping_direction_combobox
     global packet_loss_log_box
     global speed_log_box
+    global root
 
     root = Tk()
     root.title('Connection Monitor V1.0')
@@ -1577,6 +1596,8 @@ def GUI():
     
     duration_entrybox = ttk.Entry(button_pack_frame_1)
     duration_entrybox.pack(side = 'top')
+
+    duration_entrybox.insert(tk.END, '0')
     
     #9223372036854775807
     
@@ -1637,6 +1658,8 @@ def GUI():
     
     packet_loss_entrybox = ttk.Entry(pl_subdivition_1)
     packet_loss_entrybox.pack(side = 'top', expand = True)
+
+    packet_loss_entrybox.insert(tk.END, '0')
 
     ############################################################################################
     sub_top_buttons_pl_1 = ttk.Frame(pl_subdivition_1)
@@ -1723,6 +1746,8 @@ def GUI():
 
     speedtest_entrybox = ttk.Entry(button_pack_frame_3)
     speedtest_entrybox.pack(side = 'top', expand = True)
+
+    speedtest_entrybox.insert(tk.END, '0')
     
     ########## Sub divitions #############
 
@@ -1990,6 +2015,8 @@ if __name__ == '__main__':
     cursor = None
 
     ######################################################################
+
+    root = None
 
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
     
