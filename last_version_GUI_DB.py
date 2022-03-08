@@ -35,6 +35,103 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from tkcalendar import DateEntry
 
+import MySQLdb
+
+
+class DBLOGIN():
+
+    def __init__(self, parent):
+
+        self.frame = Toplevel()
+        self.frame.title(' DataBase')
+
+        self.parent = parent
+
+        self.is_verified = False
+
+        self.entry_boxes_width = 20
+
+        self.data_login_frame = ttk.Frame(self.frame)
+        self.data_login_frame.pack(side = 'top', pady = general_pady)
+
+        self.bottom_buttons_frame = ttk.Frame(self.frame)
+        self.bottom_buttons_frame.pack(side = 'top')
+
+        self.text_column = ttk.Frame(self.data_login_frame)
+        self.text_column.pack(side = 'left')
+
+        self.entry_column = ttk.Frame(self.data_login_frame)
+        self.entry_column.pack(side = 'left')
+
+        ################# TEXT #################
+
+        self.label_1 = ttk.Label(self.text_column, text = 'Ingrese Direccion IP: ')
+        self.label_1.pack(side = 'top', pady = general_pady)
+
+        self.label_2 = ttk.Label(self.text_column, text = 'Ingrese Usuario: ')
+        self.label_2.pack(side = 'top')
+
+        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Contraseña: ')
+        self.label_3.pack(side = 'top', pady = general_pady)
+        
+        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Nombre de la DB: ')
+        self.label_3.pack(side = 'top')
+
+        ################# ENTRY BOXES #################
+
+        self.entry_1 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_1.pack(side = 'top', pady = general_pady)
+
+        self.entry_2 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_2.pack(side = 'top')
+
+        self.entry_3 = ttk.Entry(self.entry_column, show = '*', width = self.entry_boxes_width)
+        self.entry_3.pack(side = 'top', pady = general_pady)
+
+        self.entry_4 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_4.pack(side = 'top')
+
+        ################# BOTTOM BUTTONS #################
+
+        self.close_button = ttk.Button(self.bottom_buttons_frame, text = 'Cerrar', command=lambda: self.__destroy__())
+        self.close_button.pack(side = 'left')
+
+        self.verify_button = ttk.Button(self.bottom_buttons_frame, text = 'Verificar\nConexión')
+        self.verify_button.pack(side = 'left', padx = general_padx)
+
+        self.connect_button = ttk.Button(self.bottom_buttons_frame, text = 'Conectar')
+        self.connect_button.pack(side = 'left')
+
+        if not self.is_verified:
+
+            self.connect_button["state"] = DISABLED
+
+        center(self.parent, self.frame)
+        self.frame.focus_force()
+
+    def CHECK_CONNECTION(self):
+
+        self.DB_IP = self.entry_1.get()
+        self.DB_ID = self.entry_2.get()
+        self.DB_PW = self.entry_3.get()
+        self.DB_NAME = self.entry_4.get()
+
+        try:
+            
+            self.MySQL_db = MySQLdb.connect(host = self.DB_IP, user = self.DB_ID, password = self.DB_PW, db = self.DB_NAME, charset = 'utf8mb4', cursorclass = cursors.DictCursor)
+
+        except:
+
+            return False
+        
+        self.connect_button["state"] = ACTIVE
+        
+        return True
+
+    def __destroy__(self):
+
+        self.frame.destroy()
+
 
 class PROGRAMTASK():
 
@@ -1558,8 +1655,8 @@ def GUI():
 
     ######################################## Conectar a Base de Datos ########################################
 
-    #db_connection = ttk.Button(pl_subdivition_2, text = 'Conexión a BD', command=lambda:DBLOGIN(root))
-    #db_connection.pack(side = 'top')
+    db_connection = ttk.Button(pl_subdivition_2, text = 'Conexión a BD', command=lambda:DBLOGIN(root))
+    db_connection.pack(side = 'top')
     
     ################################### SPEED TESTS ###################################
     ##### Buttons and labels for  button_pack_frame_3 #####
