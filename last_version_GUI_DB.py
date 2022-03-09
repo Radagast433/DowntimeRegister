@@ -1244,14 +1244,8 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         #if round((b - a), 0) % 60 == 0:
 
         if is_task == 'task':
-            
-            try:
 
-                best_sv = SELECT_BEST_SERVER_LOOP()
-
-            except:
-
-                best_sv = SELECT_BEST_SERVER_LOOP()
+            best_sv = SELECT_BEST_SERVER_LOOP()
             
             option = best_sv['host']
 
@@ -1494,7 +1488,13 @@ def SELECT_BEST_SERVER(combobox):
 
 def SELECT_BEST_SERVER_LOOP():
 
-    best_sv = s.get_best_server()
+    try:
+
+        best_sv = s.get_best_server()
+
+    except:
+        
+        SELECT_BEST_SERVER_LOOP()
 
     return best_sv
 
