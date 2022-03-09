@@ -71,20 +71,20 @@ class DBLOGIN():
 
         ################# TEXT #################
 
-        self.label_1 = ttk.Label(self.text_column, text = 'Ingrese Host: ')
-        self.label_1.pack(side = 'top', pady = general_pady)
+        self.label_1 = ttk.Label(self.text_column, text = 'Ingrese Host: ', anchor = 'e')
+        self.label_1.pack(side = 'top', pady = general_pady, expand = True)
 
-        self.label_2 = ttk.Label(self.text_column, text = 'Ingrese Puerto: ')
-        self.label_2.pack(side = 'top')
+        self.label_2 = ttk.Label(self.text_column, text = 'Ingrese Puerto: ', anchor = 'e')
+        self.label_2.pack(side = 'top', expand = True)
 
-        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Usuario: ')
-        self.label_3.pack(side = 'top', pady = general_pady)
+        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Usuario: ', anchor = 'e')
+        self.label_3.pack(side = 'top', pady = general_pady, expand = True)
 
-        self.label_4 = ttk.Label(self.text_column, text = 'Ingrese Contraseña: ')
-        self.label_4.pack(side = 'top')
+        self.label_4 = ttk.Label(self.text_column, text = 'Ingrese Contraseña: ', anchor = 'e')
+        self.label_4.pack(side = 'top', expand = True)
         
-        self.label_5 = ttk.Label(self.text_column, text = 'Ingrese Nombre de la DB: ')
-        self.label_5.pack(side = 'top', pady = general_pady)
+        self.label_5 = ttk.Label(self.text_column, text = 'Ingrese Nombre de la DB: ', anchor = 'e')
+        self.label_5.pack(side = 'top', pady = general_pady, expand = True)
 
         ################# ENTRY BOXES #################
 
@@ -117,9 +117,13 @@ class DBLOGIN():
         self.connect_button = ttk.Button(self.bottom_buttons_frame, text = 'Conectar', command=lambda: self.DB_CONNECT())
         self.connect_button.pack(side = 'left')
 
-        if not self.is_verified:
+        if not self.is_verified or MySQL_db != None or cursor != None:
 
             self.connect_button["state"] = DISABLED
+
+        if MySQL_db != None or cursor != None:
+
+            self.verify_button["state"] = DISABLED
 
         ################################################## TEST ########################################################
 
@@ -156,6 +160,8 @@ class DBLOGIN():
         except:
 
             self.is_verified = False
+
+            db_alert_1 = messagebox.showinfo(message = 'La conexión fallo,\nPor Favor verifique las credenciales.', title = '¡ADVERTENCIA!')
         
         self.connect_button["state"] = ACTIVE
         
@@ -170,14 +176,24 @@ class DBLOGIN():
 
         cursor = MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
 
+        self.verify_button["state"] = DISABLED
+
         self.__destroy__()
 
     def DB_DISCONNECT(self):
+
+        global MySQL_db
+        global cursor
 
         MySQL_db.close()
         cursor.close()
 
         self.connect_button["state"] = DISABLED
+
+        self.verify_button["state"] = ACTIVE
+
+        MySQL_db = None
+        cursor = None
 
         self.__destroy__()
 
