@@ -35,6 +35,156 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from tkcalendar import DateEntry
 
+import mysql.connector
+
+
+class DBLOGIN():
+
+    def __init__(self, parent):
+
+        self.is_verified = False
+
+        self.entry_boxes_width = 20
+
+        #self.MySQL_db = None
+
+        #self.cursor = None
+
+        self.parent = parent
+
+    def DB_GUI(self):
+
+        self.frame = Toplevel()
+        self.frame.title(' DataBase')
+
+        self.data_login_frame = ttk.Frame(self.frame)
+        self.data_login_frame.pack(side = 'top', pady = general_pady)
+
+        self.bottom_buttons_frame = ttk.Frame(self.frame)
+        self.bottom_buttons_frame.pack(side = 'top')
+
+        self.text_column = ttk.Frame(self.data_login_frame)
+        self.text_column.pack(side = 'left')
+
+        self.entry_column = ttk.Frame(self.data_login_frame)
+        self.entry_column.pack(side = 'left')
+
+        ################# TEXT #################
+
+        self.label_1 = ttk.Label(self.text_column, text = 'Ingrese Host: ')
+        self.label_1.pack(side = 'top', pady = general_pady)
+
+        self.label_2 = ttk.Label(self.text_column, text = 'Ingrese Puerto: ')
+        self.label_2.pack(side = 'top')
+
+        self.label_3 = ttk.Label(self.text_column, text = 'Ingrese Usuario: ')
+        self.label_3.pack(side = 'top', pady = general_pady)
+
+        self.label_4 = ttk.Label(self.text_column, text = 'Ingrese Contraseña: ')
+        self.label_4.pack(side = 'top')
+        
+        self.label_5 = ttk.Label(self.text_column, text = 'Ingrese Nombre de la DB: ')
+        self.label_5.pack(side = 'top', pady = general_pady)
+
+        ################# ENTRY BOXES #################
+
+        self.entry_1 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_1.pack(side = 'top', pady = general_pady)
+
+        self.entry_2 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_2.pack(side = 'top')
+
+        self.entry_3 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_3.pack(side = 'top', pady = general_pady)
+
+        self.entry_4 = ttk.Entry(self.entry_column, show = '*', width = self.entry_boxes_width)
+        self.entry_4.pack(side = 'top')
+
+        self.entry_5 = ttk.Entry(self.entry_column, width = self.entry_boxes_width)
+        self.entry_5.pack(side = 'top', pady = general_pady)
+
+        ################# BOTTOM BUTTONS #################
+
+        self.close_button = ttk.Button(self.bottom_buttons_frame, text = 'Cerrar', command=lambda: self.__destroy__())
+        self.close_button.pack(side = 'left', padx = general_padx)
+
+        self.dc_button = ttk.Button(self.bottom_buttons_frame, text = 'Desconectar', command=lambda: self.DB_DISCONNECT())
+        self.dc_button.pack(side = 'left')
+
+        self.verify_button = ttk.Button(self.bottom_buttons_frame, text = 'Verificar\nConexión', command=lambda: self.CHECK_CONNECTION())
+        self.verify_button.pack(side = 'left', padx = general_padx)
+
+        self.connect_button = ttk.Button(self.bottom_buttons_frame, text = 'Conectar', command=lambda: self.DB_CONNECT())
+        self.connect_button.pack(side = 'left')
+
+        if not self.is_verified:
+
+            self.connect_button["state"] = DISABLED
+
+        ################################################## TEST ########################################################
+
+        self.entry_1.insert(tk.END, 'localhost')
+        self.entry_2.insert(tk.END, '3307')
+        self.entry_3.insert(tk.END, 'radagast')
+        self.entry_4.insert(tk.END, 'Globetrotter123')
+        self.entry_5.insert(tk.END, 'networkdata')
+
+        ################################################################################################################
+
+        center(self.parent, self.frame)
+        self.frame.focus_force()
+
+    def CHECK_CONNECTION(self):
+
+        global MySQL_db
+        global cursor
+
+        self.DB_IP = self.entry_1.get()
+        self.DB_PORT = int(self.entry_2.get())
+        self.DB_ID = self.entry_3.get()
+        self.DB_PW = self.entry_4.get()
+        self.DB_NAME = self.entry_5.get()
+
+        try:
+            
+            # DB_IP = localhost || DB_ID = root || DB_PW = Globetrotter123 || DB_NAME = NetworkData
+
+            MySQL_db = mysql.connector.connect(host = self.DB_IP, port = self.DB_PORT, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
+
+            cursor = self.MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
+
+        except:
+
+            self.is_verified = False
+        
+        self.connect_button["state"] = ACTIVE
+        
+        self.is_verified = True
+
+    def DB_CONNECT(self):
+
+        global MySQL_db
+        global cursor
+
+        MySQL_db = mysql.connector.connect(host = self.DB_IP, port = self.DB_PORT, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
+
+        cursor = MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
+
+        self.__destroy__()
+
+    def DB_DISCONNECT(self):
+
+        MySQL_db.close()
+        cursor.close()
+
+        self.connect_button["state"] = DISABLED
+
+        self.__destroy__()
+
+    def __destroy__(self):
+
+        self.frame.destroy()
+
 
 class PROGRAMTASK():
 
@@ -402,7 +552,7 @@ def GET_NETWORK_NAME():
     connected_ssid = connected_ssid.replace(' ', '_')
     
     if len(connected_ssid) < 30:
-    
+
         return connected_ssid
     
     else:
@@ -652,16 +802,6 @@ def PING_TEST(logbox, test_time, direction, is_task):
 
     network_name = GET_NETWORK_NAME()
 
-    data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
-    
-    start_cut = data.last_valid_index()
-    ping_graph_start = start_cut
-
-    data = []
-
-    #start_date = datetime.datetime.now().strftime("%d-%m-%Y")  # date
-    #start_hour = datetime.datetime.now().strftime("%H-%M-%S") 
-
     for i in range(test_time):
         
         function_start_time = time.time()
@@ -720,9 +860,9 @@ def PING_TEST(logbox, test_time, direction, is_task):
         #cut_duration = cut_duration * 10**(-3)
         #acc_time+= cut_duration
             
-        a = datetime.datetime.now().strftime("%d-%m-%Y")  # date
+        a = datetime.datetime.now()  # date
         
-        b = datetime.datetime.now().strftime("%H-%M-%S")  # time
+        b = datetime.datetime.now()  # time
         
         c = round(elapsed_time + 1, 1)     # float
         
@@ -735,39 +875,49 @@ def PING_TEST(logbox, test_time, direction, is_task):
         g = round(acc_time, 2)       # float
         
         #ping_data_fieldnames = ['Fecha', 'Hora', 'Tiempo_Transcurrido_(s)', 'Ping_(ms)', '%_Paquetes_perdidos', 'Tiempo_Corte_(ms)', 'Tiempo_de_Fallo_Acumulado_(ms)']
-        
-        data_info = {
-            ping_data_fieldnames[0] : a,
-            ping_data_fieldnames[1] : b,
-            ping_data_fieldnames[2] : c,
-            ping_data_fieldnames[3] : d,
-            ping_data_fieldnames[4] : e,
-            ping_data_fieldnames[5] : f,
-            ping_data_fieldnames[6] : g
-            }
 
-        #data = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, index_col = None)
-        
-        with open(data_route + network_name + '_' + ping_csv_route, 'a', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = ping_data_fieldnames)
-        
-            csv_writer.writerow(data_info)
-        
-        #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+        cursor.execute("SELECT * FROM network_name")
+        aux = cursor.fetchall()
+        last_auto_increment = len(aux)
 
-        #end_cut = data.last_valid_index()
+        cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
 
-        #ping_data = data['Ping_(ms)']
-        #ping_data = ping_data[start_cut + 1 : end_cut + 1]
-        
-        #jitter, lost_packets = GET_JITTER(ping_data, start_cut + 2, end_cut + 1)
+        if network_name != 'Ethernet':
+
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = (network_name, 'WiFi')
+
+        else:
+
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = ('Ethernet', 'Ethernet')
+
+        try:
+
+            cursor.execute(sql, data)
+            MySQL_db.commit()
+
+        except: pass
+
+        cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
+        aux = cursor.fetchall()
+        network_name_id = int(aux[0][0])
+
+        sql = "INSERT INTO ping_data (`PING_DATE`, `PING_TIME`, `PING_ELAPSED_TIME`, `PING_VALUE`, `PING_PACKET_LOSS`, `PING_CUT_DURATION`, `PING_ACC_FAILURE_TIME`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, network_name_id)
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
         jitter = 'Null'
         lost_packets = 'Null'
 
         try:
             
-            logbox.insert(tk.END, f"\n\n Fecha: {a}, Hora: {b}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}, Jitter: {jitter}")
+            date_aux = a.strftime("%Y-%m-%d")
+            time_aux = b.strftime("%H:%M:%S")
+
+            logbox.insert(tk.END, f"\n\n Fecha: {date_aux}, Hora: {time_aux}, Tiempo_Transcurrido_(s): {c}, Ping_(ms): {d}, %_Paquetes_perdidos: {e}, Tiempo_Corte_(ms): {f}, 'Tiempo_de_Fallo_Acumulado_(ms): {g}, Jitter: {jitter}")
             logbox.see("end")
         
         except: pass
@@ -787,46 +937,6 @@ def PING_TEST(logbox, test_time, direction, is_task):
         else:
         
             time.sleep(ping_test_interval)
-        
-    data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
-    
-    ping_data = data['Ping_(ms)']
-    
-    start = ping_data.size - elapsed_time + 1
-    finish = ping_data.size
-    #print(start, finish)
-    
-    #print(ping_data.size, test_time)
-    
-    ping_data = ping_data[ping_data.size - elapsed_time:]
-    
-    #print(ping_data)
-    
-    jitter, lost_packets = GET_JITTER(ping_data, start, finish)
-    
-    #ping_results_fieldnames = ['Nombre_de_conexion', 'Servidor', 'Duracion_(s)', 'Ping_minimo', 'Ping_maximo', 'Ping_Promedio', 'Jitter', 'Paquetes_enviados', 'Paquetes_perdidos']
-    
-    results_info = {
-        ping_results_fieldnames[0] : network_name,
-        ping_results_fieldnames[1] : direction,
-        ping_results_fieldnames[2] : test_time,
-        ping_results_fieldnames[3] : min(ping_data),
-        ping_results_fieldnames[4] : max(ping_data),
-        ping_results_fieldnames[5] : round(ping_data.mean(), 2),
-        ping_results_fieldnames[6] : jitter,
-        ping_results_fieldnames[7] : test_time,
-        ping_results_fieldnames[8] : lost_packets
-        }
-    
-    with open(results_route + network_name + '_' + ping_csv_results_route, 'a', newline = '') as csv_file:
-        
-        csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
-    
-        csv_writer.writerow(results_info)
-
-    
-    logbox.insert(tk.END, '\n\n Ping mínimo: ' + str(min(ping_data)) + ' ms.\n\n Ping máximo: ' + str(max(ping_data)) +' ms.\n\n Ping Promedio: ' + str(round(ping_data.mean(), 2)) + ' ms.\n\n Jitter: ' + str(jitter) + ' ms.\n\n Paquetes perdidos: ' + str(lost_packets) + '/' + str(finish - start + 1) +  '.')
-    logbox.see("end")
     
     logbox.insert(tk.END, '\n\n Prueba finalizada con exito...')
     logbox.see("end")
@@ -854,6 +964,12 @@ def PING_TEST_STOP():
 def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
     
     global RUNNING_PING_TEST
+
+    if MySQL_db == None or cursor == None:
+
+        db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+
+        return
     
     if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox_value)):
         
@@ -998,6 +1114,12 @@ def PACKETLOSS_TEST_STOP():
 def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
     
     global RUNNING_PACKET_TEST
+
+    if MySQL_db == None or cursor == None:
+
+        db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+        
+        return
     
     if not VALIDATE_ENTRY_BOX_VALUE(entrybox.get()):
         
@@ -1080,21 +1202,12 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
             RUNNING_SPEED_TEST = False
 
             return
-
-    data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
-    
-    start_cut = data.last_valid_index()
-    speed_graph_start = start_cut
-
-    data = []
     
     # Muestra velocidad en Megabytes
     #speed_trans_unit = 1048576
     
     # Muestra velocidad en Megabits
     speed_trans_unit = 10**(6)
-
-    speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
 
     #for i in range(int(wait_time)):
 
@@ -1113,66 +1226,63 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
 
         a = time.time()
         
-        fecha = datetime.datetime.now().strftime("%d-%m-%Y")
-        hora = datetime.datetime.now().strftime("%H-%M-%S")
+        fecha = datetime.datetime.now()
+        hora = datetime.datetime.now()
         downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
         upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
         
-        info = {
-            'Fecha' : fecha,
-            'Hora' : hora,
-            'Velocidad_Bajada' : downspeed,
-            'Velocidad_Subida' : upspeed
-            }
+        cursor.execute("SELECT * FROM network_name")
+        aux = cursor.fetchall()
+        last_auto_increment = len(aux)
+
+        cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
+
+        if network_name != 'Ethernet':
+
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = (network_name, 'WiFi')
+
+        else:
+
+            sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+            data = ('Ethernet', 'Ethernet')
+
+        try:
+
+            cursor.execute(sql, data)
+            MySQL_db.commit()
+
+        except: pass
+
+        cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
+        aux = cursor.fetchall()
+        network_name_id = int(aux[0][0])
+
+        sql = "INSERT INTO speed_data (`SPEED_DATE`, `SPEED_TIME`, `SPEED_DOWNLOAD`, `SPEED_UPLOAD`, `SPEED_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s)"
+        data = (fecha.strftime("%Y-%m-%d"), hora.strftime("%H:%M:%S"), downspeed, upspeed, network_name_id)
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
+        date_aux = fecha.strftime("%d-%m-%Y")
+        time_aux = hora.strftime("%H-%M-%S")
         
-        with open(data_route + network_name + '_' + speed_test_csv_route, mode='a', newline='') as speedcsv:
-            
-            csv_writer = csv.DictWriter(speedcsv, fieldnames = speed_test_data_fieldnames)
-            csv_writer.writerow(info)
-        
-        logbox.insert(tk.END, f"\n\n Fecha: {fecha}, Hora: {hora}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
+        logbox.insert(tk.END, f"\n\n Fecha: {date_aux}, Hora: {time_aux}, Bajada: {downspeed} Mb/s, Subida: {upspeed} Mb/s")
         logbox.see("end")
-        
-        #speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
-        
-        results_info = {
-            speed_test_results_fieldnames[0] : fecha,
-            speed_test_results_fieldnames[1] : hora,
-            speed_test_results_fieldnames[2] : option,
-            speed_test_results_fieldnames[3] : downspeed,
-            speed_test_results_fieldnames[4] : upspeed
-            }
-        
-        with open(results_route + network_name + '_' + speed_test_csv_results_route, 'a', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
-        
-            csv_writer.writerow(results_info)
 
         b = time.time()
 
         sleep_time = round(60 - (b - a), 2)
         
-        time.sleep(sleep_time)
-        
         if run_cont == (int(wait_time) - 1):
             
             RUNNING_SPEED_TEST = False
 
-            data = pd.read_csv('Data/' + network_name + '_' + speed_test_csv_route, index_col = None)
-    
-            vbajada = data['Velocidad_Bajada']
-            vbajada = vbajada[start_cut + 1 :]
-
-            vsubida = data['Velocidad_Subida']
-            vsubida = vsubida[start_cut + 1 :]
-            
-            logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n D. Estandar Bajada: {round(vbajada.std(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n D. Estandar Subida: {round(vsubida.std(), 2)}\n\n Prueba finalizada con exito...\n")
-            #logbox.insert(tk.END, f"\n\n Promedio Bajada: {round(vbajada.mean(), 2)}\n\n Promedio Subida: {round(vsubida.mean(), 2)}\n\n Prueba finalizada con exito...\n")
-            logbox.see("end")
-            return
+            break
 
         run_cont+= 1
+
+        time.sleep(sleep_time)
             
     logbox.insert(tk.END, "\n\n Prueba finalizada con exito...\n")
     logbox.see("end")         
@@ -1216,6 +1326,12 @@ def VALIDATE_COMBOBOX_VALUE(combobox):
 def SPEED_TEST_BEGIN(entrybox, logbox, combobox, is_task):
     
     global RUNNING_SPEED_TEST
+
+    if MySQL_db == None or cursor == None:
+
+        db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+    
+        return
 
     if not VALIDATE_ENTRY_BOX_VALUE(str(entrybox)) or not VALIDATE_COMBOBOX_VALUE(combobox) and is_task == 'normal':
         
@@ -1323,6 +1439,13 @@ def EXIT_APP(root):
     #RUNNING_PROGRAMMER = False
     RESOURCES = False
 
+    try:
+
+        MySQL_db.close()
+        cursor.close()
+
+    except: pass
+
     plt.close("all")
     
     time.sleep(1.5)
@@ -1368,6 +1491,7 @@ def GUI():
     global ping_direction_combobox
     global packet_loss_log_box
     global speed_log_box
+    global root
 
     root = Tk()
     root.title('Connection Monitor V1.0')
@@ -1472,6 +1596,8 @@ def GUI():
     
     duration_entrybox = ttk.Entry(button_pack_frame_1)
     duration_entrybox.pack(side = 'top')
+
+    duration_entrybox.insert(tk.END, '0')
     
     #9223372036854775807
     
@@ -1533,6 +1659,8 @@ def GUI():
     packet_loss_entrybox = ttk.Entry(pl_subdivition_1)
     packet_loss_entrybox.pack(side = 'top', expand = True)
 
+    packet_loss_entrybox.insert(tk.END, '0')
+
     ############################################################################################
     sub_top_buttons_pl_1 = ttk.Frame(pl_subdivition_1)
     sub_top_buttons_pl_1.pack(side = 'top')
@@ -1558,8 +1686,8 @@ def GUI():
 
     ######################################## Conectar a Base de Datos ########################################
 
-    #db_connection = ttk.Button(pl_subdivition_2, text = 'Conexión a BD', command=lambda:DBLOGIN(root))
-    #db_connection.pack(side = 'top')
+    db_connection = ttk.Button(pl_subdivition_2, text = 'Conexión a BD', command=lambda:DBLOGIN(root).DB_GUI())
+    db_connection.pack(side = 'top')
     
     ################################### SPEED TESTS ###################################
     ##### Buttons and labels for  button_pack_frame_3 #####
@@ -1618,6 +1746,8 @@ def GUI():
 
     speedtest_entrybox = ttk.Entry(button_pack_frame_3)
     speedtest_entrybox.pack(side = 'top', expand = True)
+
+    speedtest_entrybox.insert(tk.END, '0')
     
     ########## Sub divitions #############
 
@@ -1743,7 +1873,7 @@ if __name__ == '__main__':
     program_csv_route = 'test_program.csv'
 
     #thread_count = multiprocessing.cpu_count()
-    thread_count = 4
+    thread_count = 2
     
     #infinite = '9223372036854775807'
     
@@ -1877,6 +2007,16 @@ if __name__ == '__main__':
     pl_test = None
 
     ######################################################################
+
+    ################################# SQL ################################
+
+    MySQL_db = None
+
+    cursor = None
+
+    ######################################################################
+
+    root = None
 
     ctypes.windll.user32.ShowWindow( ctypes.windll.kernel32.GetConsoleWindow(), 0)
     
