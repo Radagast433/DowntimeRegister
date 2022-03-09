@@ -1256,9 +1256,9 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
         upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
         
-        cursor.execute("SELECT * FROM network_name")
-        aux = cursor.fetchall()
-        last_auto_increment = len(aux)
+        cursor.execute("SELECT COUNT(*) FROM network_name")
+        last_auto_increment = cursor.fetchall()
+        last_auto_increment = last_auto_increment[0][0]
 
         cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
 
