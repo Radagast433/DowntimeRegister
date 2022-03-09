@@ -155,7 +155,7 @@ class DBLOGIN():
 
             MySQL_db = mysql.connector.connect(host = self.DB_IP, port = self.DB_PORT, user = self.DB_ID, passwd = self.DB_PW, db = self.DB_NAME)
 
-            cursor = self.MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
+            cursor = MySQL_db.cursor(mysql.connector.cursor.MySQLCursorDict)
 
         except:
 
