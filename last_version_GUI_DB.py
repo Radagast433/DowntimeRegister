@@ -1057,6 +1057,8 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
     
     result = result[len(result) - 4 : len(result) - 2]
     result = result[0].strip() + result[1].strip()
+
+    network_name = GET_NETWORK_NAME()
     
     #result = result[result.find('(') + 1 : result.find('%') + 1]
     #print(result)
@@ -1078,7 +1080,9 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
     
     #g = result[result.find('(') + 1 : result.find('%')]
     
-    g = str(round((int(f) / int(d)) * 100, 2))
+    g = round((int(f) / int(d)) * 100, 2)
+
+    h = direction
     
     data_info = {
         'Fecha' : a,
@@ -1090,30 +1094,38 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
         '%_de_perdida' : g
         }
     
-    logbox.insert(tk.END, '\n\n Duración del test: ' + str(c) + '\n Cantidad_de_paquetes_enviados: ' + str(d) + '\n Cantidad_de_paquetes_recibidos: ' + str(e) + '\n Cantidad_de_paquetes_perdidos: ' + str(f) + '\n %_de_perdida: ' + str(g) + '%')
-    logbox.see("end")
-    #print(info)
-    
-    with open(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route, 'a', newline = '') as csv_file:
-        
-        csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_data_fieldnames)
-        csv_writer.writerow(data_info)
-        
-    #packet_loss_results_fieldnames = ['Duracion', 'Cantidad_de_paquetes_enviados', 'Cantidad_de_paquetes_recibidos', 'Cantidad_de_paquetes_perdidos', '%_de_perdida']
-    
-    results_info = {
-        packet_loss_results_fieldnames[0] : c,
-        packet_loss_results_fieldnames[1] : d,
-        packet_loss_results_fieldnames[2] : e,
-        packet_loss_results_fieldnames[3] : f,
-        packet_loss_results_fieldnames[4] : g
-        }
-    
-    with open(results_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_results_route, 'a', newline = '') as csv_file:
-        
-        csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_results_fieldnames)
-    
-        csv_writer.writerow(results_info)
+    cursor.execute("SELECT COUNT(*) FROM network_name")
+    last_auto_increment = cursor.fetchall()
+    last_auto_increment = last_auto_increment[0][0]
+
+    cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
+
+    if network_name != 'Ethernet':
+
+        sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+        data = (network_name, 'WiFi')
+
+    else:
+
+        sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+        data = ('Ethernet', 'Ethernet')
+
+    try:
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
+    except: pass
+
+    cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
+    aux = cursor.fetchall()
+    network_name_id = int(aux[0][0])
+
+    sql = "INSERT INTO packet_loss_data (`PACKET_LOSS_DATE`, `PACKET_LOSS_TIME`, `PACKET_LOSS_TEST_DURATION`, `PACKET_LOSS_SENT_PACKETS`, `PACKET_LOSS_RECEIVED_PACKETS`, `PACKET_LOSS_TOTAL_LOSS`, `PACKET_LOSS_PERCENTAGE`, `PACKET_LOSS_NETWORK_NAME`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, h)
+
+    cursor.execute(sql, data)
+    MySQL_db.commit()
     
         
 def PACKETLOSS_TEST_STOP():
