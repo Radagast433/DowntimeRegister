@@ -190,6 +190,12 @@ class PROGRAMTASK():
 
     def __init__(self, parent):
 
+        if MySQL_db == None or cursor == None:
+
+            db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+
+            return
+
         self.frame = Toplevel()
         #self.frame.geometry("+10+10")
 
@@ -876,9 +882,9 @@ def PING_TEST(logbox, test_time, direction, is_task):
         
         #ping_data_fieldnames = ['Fecha', 'Hora', 'Tiempo_Transcurrido_(s)', 'Ping_(ms)', '%_Paquetes_perdidos', 'Tiempo_Corte_(ms)', 'Tiempo_de_Fallo_Acumulado_(ms)']
 
-        cursor.execute("SELECT * FROM network_name")
-        aux = cursor.fetchall()
-        last_auto_increment = len(aux)
+        cursor.execute("SELECT COUNT(*) FROM network_name")
+        last_auto_increment = cursor.fetchall()
+        last_auto_increment = last_auto_increment[0][0]
 
         cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
 
@@ -1439,12 +1445,10 @@ def EXIT_APP(root):
     #RUNNING_PROGRAMMER = False
     RESOURCES = False
 
-    try:
+    if MySQL_db != None or cursor != None:
 
         MySQL_db.close()
         cursor.close()
-
-    except: pass
 
     plt.close("all")
     
