@@ -137,6 +137,7 @@ class DBLOGIN():
 
         center(self.parent, self.frame)
         self.frame.focus_force()
+        self.frame.grab_set()
 
     def CHECK_CONNECTION(self):
 
@@ -199,6 +200,7 @@ class DBLOGIN():
 
     def __destroy__(self):
 
+        self.frame.grab_release()
         self.frame.destroy()
 
 
@@ -925,8 +927,8 @@ def PING_TEST(logbox, test_time, direction, is_task):
         aux = cursor.fetchall()
         network_name_id = int(aux[0][0])
 
-        sql = "INSERT INTO ping_data (`PING_DATE`, `PING_TIME`, `PING_ELAPSED_TIME`, `PING_VALUE`, `PING_PACKET_LOSS`, `PING_CUT_DURATION`, `PING_ACC_FAILURE_TIME`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, network_name_id)
+        sql = "INSERT INTO ping_data (`PING_DATE`, `PING_TIME`, `PING_ELAPSED_TIME`, `PING_VALUE`, `PING_PACKET_LOSS`, `PING_CUT_DURATION`, `PING_ACC_FAILURE_TIME`, `PING_DIRECTION`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, direction, network_name_id)
 
         cursor.execute(sql, data)
         MySQL_db.commit()
@@ -1242,8 +1244,15 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         #if round((b - a), 0) % 60 == 0:
 
         if is_task == 'task':
-        
-            best_sv = s.get_best_server()
+            
+            try:
+
+                best_sv = SELECT_BEST_SERVER_LOOP()
+
+            except:
+
+                best_sv = SELECT_BEST_SERVER_LOOP()
+            
             option = best_sv['host']
 
         a = time.time()
@@ -1280,8 +1289,8 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         aux = cursor.fetchall()
         network_name_id = int(aux[0][0])
 
-        sql = "INSERT INTO speed_data (`SPEED_DATE`, `SPEED_TIME`, `SPEED_DOWNLOAD`, `SPEED_UPLOAD`, `SPEED_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s)"
-        data = (fecha.strftime("%Y-%m-%d"), hora.strftime("%H:%M:%S"), downspeed, upspeed, network_name_id)
+        sql = "INSERT INTO speed_data (`SPEED_DATE`, `SPEED_TIME`, `SPEED_DOWNLOAD`, `SPEED_UPLOAD`, `SPEED_TEST_HOST`, `SPEED_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s)"
+        data = (fecha.strftime("%Y-%m-%d"), hora.strftime("%H:%M:%S"), downspeed, upspeed, option, network_name_id)
 
         cursor.execute(sql, data)
         MySQL_db.commit()
@@ -1482,6 +1491,12 @@ def SELECT_BEST_SERVER(combobox):
     best_sv = s.get_best_server()
 
     combobox.set(best_sv['sponsor'] + '-' + best_sv['name'] + '-(' + best_sv['id'] + ')')
+
+def SELECT_BEST_SERVER_LOOP():
+
+    best_sv = s.get_best_server()
+
+    return best_sv
 
 def GET_SERVERS_LIST(combobox):
 
