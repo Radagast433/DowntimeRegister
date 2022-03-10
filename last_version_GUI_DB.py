@@ -566,7 +566,7 @@ class PROGRAMTASK():
 
                     for i in range(7):
 
-                        self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
+                        tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
 
                     #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PACKET_LOSS_TEST_BEGIN, int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task')
 
@@ -582,7 +582,7 @@ class PROGRAMTASK():
 
                     for i in range(7):
 
-                        self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
+                        tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
 
                     #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(SPEED_TEST_BEGIN, int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task')
 
