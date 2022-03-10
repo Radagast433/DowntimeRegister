@@ -28,7 +28,7 @@ import psutil
 import matplotlib.animation as animation
 from tkinter import messagebox
 import sched
-#import pyautogui
+import schedule
 
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -310,17 +310,17 @@ class PROGRAMTASK():
         self.label_3 = ttk.Label(self.sub_gf2_2_1, text = 'Ingrese Hora:')
         self.label_3.pack(side = 'top')
      
-        self.hours = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 23, wrap = True, width = 3, state = "readonly", justify = CENTER)
+        self.hours = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 23, wrap = True, width = 4, justify = CENTER)  # state = "readonly"
         self.hours.pack(side = 'left')
 
         self.hours.set(int(self.actual_date_hour))
 
-        self.minutes = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 3, state = "readonly", justify = CENTER)
+        self.minutes = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 4, justify = CENTER)
         self.minutes.pack(side = 'left')
 
         self.minutes.set(int(self.actual_date_minutes))
 
-        self.seconds = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 3, state = "readonly", justify = CENTER)
+        self.seconds = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 4, justify = CENTER)
         self.seconds.pack(side = 'left')
 
         self.seconds.set(int(self.actual_date_seconds))
@@ -333,7 +333,13 @@ class PROGRAMTASK():
         ##############################################################################################
 
         self.interval_label = ttk.Label(self.general_frame_3, text = 'Ingrese Inicio', background = 'green', foreground = 'white')
-        self.interval_label.pack(side = 'top')
+        self.interval_label.pack(side = 'left', padx = general_padx)
+
+        self.checkbox_value = tk.BooleanVar()
+        #self.checkbox_value.set(False)
+
+        self.every_day_box = ttk.Checkbutton(self.general_frame_3, text = 'Todos los Dias', variable = self.checkbox_value, command=lambda:self.SET_EVERY_DAY())
+        self.every_day_box.pack(side = 'left')
 
         ###############################################################################################
 
@@ -351,6 +357,22 @@ class PROGRAMTASK():
 
         self.frame.focus_force()
         center(self.parent, self.frame)
+
+    def SET_EVERY_DAY(self):
+
+        global EVERY_DAY
+
+        if self.checkbox_value.get():
+
+            EVERY_DAY = True
+
+            return
+        
+        else:
+
+            EVERY_DAY = False
+
+            return
 
     def ADD(self):
 
@@ -504,21 +526,39 @@ class PROGRAMTASK():
             self.time_list = self.rows_list[i][1].split('-')
 
             if self.rows_list[i][4] == 'Prueba_de_Ping' and not RUNNING_PING_TEST:#, 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
+                
+                if not EVERY_DAY:
 
-                self.event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
+                    self.event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
+                
+                elif EVERY_DAY:
+                    
+                    schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PING_TEST_BEGIN, int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task')
 
                 RUNNING_PROGRAMMER = True
 
             elif self.rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
 
-                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
-            
+                if not EVERY_DAY:
+
+                    self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
+
+                elif EVERY_DAY:
+
+                    schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PACKET_LOSS_TEST_BEGIN, int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task')
+
                 RUNNING_PROGRAMMER = True
 
             elif self.rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
 
-                self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
-            
+                if not EVERY_DAY:
+
+                    self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
+
+                elif EVERY_DAY:
+
+                    schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(SPEED_TEST_BEGIN, int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task')
+
                 RUNNING_PROGRAMMER = True
 
             self.programmed_thread = threading.Thread(name = 'ProgramThread', target = self.RUN_PROGRAM, daemon=True)
@@ -529,6 +569,14 @@ class PROGRAMTASK():
     def RUN_PROGRAM(self):
 
         tasks_scheduler.run()
+
+        if EVERY_DAY:
+
+            while EVERY_DAY:
+
+                schedule.run_pending()
+
+                time.sleep(1)
 
 
 def center(parent, actual):                     # Funcion para centrar ventanas
@@ -1513,6 +1561,7 @@ def EXIT_APP(root):
     global RUNNING_PING_TEST
     global RUNNING_SPEED_TEST
     global RUNNING_PROGRAMMER
+    global EVERY_DAY
 
     if RUNNING_PROGRAMMER:
 
@@ -1525,6 +1574,7 @@ def EXIT_APP(root):
     RUNNING_SPEED_TEST = False
     #RUNNING_PROGRAMMER = False
     RESOURCES = False
+    EVERY_DAY = False
 
     if MySQL_db != None or cursor != None:
 
@@ -2112,6 +2162,8 @@ if __name__ == '__main__':
     cursor = None
 
     ######################################################################
+
+    EVERY_DAY = False
 
     root = None
 
