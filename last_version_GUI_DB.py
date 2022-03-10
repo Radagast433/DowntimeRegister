@@ -1066,33 +1066,23 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
     
     RUNNING_PACKET_TEST = False
     
-    a = datetime.datetime.now().strftime("%d-%m-%Y")
+    a = datetime.datetime.now()
     
-    b = datetime.datetime.now().strftime("%H-%M-%S")
+    b = datetime.datetime.now()
     
-    c = round(end_time - start_time, 2)
+    c = round(end_time - start_time, 2)      # Tiempo de ejecucion
     
-    d = n_packets
+    d = n_packets       # Paquetes enviados
     
-    e = result[result.find('recibidos = ') + 12 : result.find('perdidos = ') - 2]
+    e = result[result.find('recibidos = ') + 12 : result.find('perdidos = ') - 2]     # Paquetes recibidos
     
-    f = result[result.find('perdidos = ') + 11 : result.find('(')]
+    f = result[result.find('perdidos = ') + 11 : result.find('(')]    # Paquetes perdidos
     
     #g = result[result.find('(') + 1 : result.find('%')]
     
-    g = round((int(f) / int(d)) * 100, 2)
+    g = round((int(f) / int(d)) * 100, 2)   # Porcentaje
 
-    h = direction
-    
-    data_info = {
-        'Fecha' : a,
-        'Hora' : b,
-        'Duracion_(s)' : c,
-        'Cantidad_de_paquetes_enviados' : d,
-        'Cantidad_de_paquetes_recibidos' : e,
-        'Cantidad_de_paquetes_perdidos' : f,
-        '%_de_perdida' : g
-        }
+    h = direction    # Direccion de ping
     
     cursor.execute("SELECT COUNT(*) FROM network_name")
     last_auto_increment = cursor.fetchall()
@@ -1121,8 +1111,13 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
     aux = cursor.fetchall()
     network_name_id = int(aux[0][0])
 
-    sql = "INSERT INTO packet_loss_data (`PACKET_LOSS_DATE`, `PACKET_LOSS_TIME`, `PACKET_LOSS_TEST_DURATION`, `PACKET_LOSS_SENT_PACKETS`, `PACKET_LOSS_RECEIVED_PACKETS`, `PACKET_LOSS_TOTAL_LOSS`, `PACKET_LOSS_PERCENTAGE`, `PACKET_LOSS_NETWORK_NAME`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, h)
+    sql = "INSERT INTO packet_loss_data (`PACKET_LOSS_DATE`, `PACKET_LOSS_TIME`, `PACKET_LOSS_TEST_DURATION`, `PACKET_LOSS_SENT_PACKETS`, `PACKET_LOSS_RECEIVED_PACKETS`, `PACKET_LOSS_TOTAL_LOSS`, `PACKET_LOSS_PERCENTAGE`, `PACKET_LOSS_DIRECTION`, `PACKET_LOSS_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, h, network_name_id)
+
+    logbox.insert(tk.END, "\n Prueba finalizada con exito...\n")
+    logbox.see("end")
+
+    RUNNING_PACKET_TEST = False
 
     cursor.execute(sql, data)
     MySQL_db.commit()
