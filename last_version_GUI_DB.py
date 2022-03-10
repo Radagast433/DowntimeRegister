@@ -28,7 +28,6 @@ import psutil
 import matplotlib.animation as animation
 from tkinter import messagebox
 import sched
-import schedule
 
 from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -338,7 +337,7 @@ class PROGRAMTASK():
         self.checkbox_value = tk.BooleanVar()
         #self.checkbox_value.set(False)
 
-        self.every_day_box = ttk.Checkbutton(self.general_frame_3, text = 'Todos los Dias', variable = self.checkbox_value, command=lambda:self.SET_EVERY_DAY())
+        self.every_day_box = ttk.Checkbutton(self.general_frame_3, text = 'Por 7 Dias', variable = self.checkbox_value, command=lambda:self.SET_EVERY_DAY())
         self.every_day_box.pack(side = 'left')
 
         ###############################################################################################
@@ -395,27 +394,43 @@ class PROGRAMTASK():
 
             self.iterator = False
 
-            self.date_finish = self.calendar.get_date().strftime("%d") + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+            '''self.date_finish = self.calendar.get_date().strftime("%d") + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
             self.time_finish = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
             
             self.duration = datetime.datetime.strptime(self.date_finish + ' ' + self.time_finish, '%d-%m-%Y %H-%M-%S') - datetime.datetime.strptime(self.date_start + ' ' + self.time_start, '%d-%m-%Y %H-%M-%S')
-            self.duration = int(round(self.duration / datetime.timedelta(minutes = 1)))
+            self.duration = int(round(self.duration / datetime.timedelta(minutes = 1)))'''
     
             #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
 
-            data_info = {
-                'Fecha_Inicio' : self.date_start,
-                'Hora_Inicio' : self.time_start,
-                'Fecha_Termino' : self.date_finish,
-                'Hora_Termino' : self.time_finish,
-                'Prueba' : self.test_combobox.get(),
-                'Duracion' : str(self.duration)
-                }
-            
-            with open(program_route + program_csv_route, 'a', newline = '') as csv_file:
+            days = 1
+
+            if EVERY_DAY:
+
+                days = 7
+
+            for i in range(days):
+
+                self.date_start = str(int(self.calendar.get_date().strftime("%d")) + i) + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+
+                self.date_finish = str(int(self.calendar.get_date().strftime("%d")) + i) + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+                self.time_finish = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
                 
-                csv_writer = csv.DictWriter(csv_file, fieldnames = program_data_fieldnames)
-                csv_writer.writerow(data_info)
+                self.duration = datetime.datetime.strptime(self.date_finish + ' ' + self.time_finish, '%d-%m-%Y %H-%M-%S') - datetime.datetime.strptime(self.date_start + ' ' + self.time_start, '%d-%m-%Y %H-%M-%S')
+                self.duration = int(round(self.duration / datetime.timedelta(minutes = 1)))
+
+                data_info = {
+                    'Fecha_Inicio' : self.date_start,
+                    'Hora_Inicio' : self.time_start,
+                    'Fecha_Termino' : self.date_finish,
+                    'Hora_Termino' : self.time_finish,
+                    'Prueba' : self.test_combobox.get(),
+                    'Duracion' : str(self.duration)
+                    }
+                
+                with open(program_route + program_csv_route, 'a', newline = '') as csv_file:
+                    
+                    csv_writer = csv.DictWriter(csv_file, fieldnames = program_data_fieldnames)
+                    csv_writer.writerow(data_info)
 
             return
 
@@ -532,8 +547,12 @@ class PROGRAMTASK():
                     self.event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
                 
                 elif EVERY_DAY:
+
+                    for i in range(7):
+
+                        tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
                     
-                    schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PING_TEST_BEGIN, int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task')
+                    #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PING_TEST_BEGIN, int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task')
 
                 RUNNING_PROGRAMMER = True
 
@@ -545,7 +564,11 @@ class PROGRAMTASK():
 
                 elif EVERY_DAY:
 
-                    schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PACKET_LOSS_TEST_BEGIN, int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task')
+                    for i in range(7):
+
+                        self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
+
+                    #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PACKET_LOSS_TEST_BEGIN, int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task')
 
                 RUNNING_PROGRAMMER = True
 
@@ -557,7 +580,11 @@ class PROGRAMTASK():
 
                 elif EVERY_DAY:
 
-                    schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(SPEED_TEST_BEGIN, int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task')
+                    for i in range(7):
+
+                        self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
+
+                    #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(SPEED_TEST_BEGIN, int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task')
 
                 RUNNING_PROGRAMMER = True
 
@@ -569,15 +596,6 @@ class PROGRAMTASK():
     def RUN_PROGRAM(self):
 
         tasks_scheduler.run()
-
-        if EVERY_DAY:
-
-            while EVERY_DAY:
-
-                schedule.run_pending()
-
-                time.sleep(1)
-
 
 def center(parent, actual):                     # Funcion para centrar ventanas
     

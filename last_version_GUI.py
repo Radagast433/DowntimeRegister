@@ -136,17 +136,17 @@ class PROGRAMTASK():
         self.label_3 = ttk.Label(self.sub_gf2_2_1, text = 'Ingrese Hora:')
         self.label_3.pack(side = 'top')
      
-        self.hours = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 23, wrap = True, width = 3, state = "readonly", justify = CENTER)
+        self.hours = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 23, wrap = True, width = 4, justify = CENTER)  # state = "readonly"
         self.hours.pack(side = 'left')
 
         self.hours.set(int(self.actual_date_hour))
 
-        self.minutes = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 3, state = "readonly", justify = CENTER)
+        self.minutes = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 4, justify = CENTER)
         self.minutes.pack(side = 'left')
 
         self.minutes.set(int(self.actual_date_minutes))
 
-        self.seconds = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 3, state = "readonly", justify = CENTER)
+        self.seconds = ttk.Spinbox(self.sub_gf2_2_2, from_= 0, to = 59, wrap = True, width = 4, justify = CENTER)
         self.seconds.pack(side = 'left')
 
         self.seconds.set(int(self.actual_date_seconds))
