@@ -826,6 +826,33 @@ def PING_TEST(logbox, test_time, direction, is_task):
 
     network_name = GET_NETWORK_NAME()
 
+    cursor.execute("SELECT COUNT(*) FROM network_name")
+    last_auto_increment = cursor.fetchall()
+    last_auto_increment = last_auto_increment[0][0]
+
+    cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
+
+    if network_name != 'Ethernet':
+
+        sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+        data = (network_name, 'WiFi')
+
+    else:
+
+        sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+        data = ('Ethernet', 'Ethernet')
+
+    try:
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
+    except: pass
+
+    cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
+    aux = cursor.fetchall()
+    network_name_id = int(aux[0][0])
+
     for i in range(test_time):
         
         function_start_time = time.time()
@@ -900,7 +927,7 @@ def PING_TEST(logbox, test_time, direction, is_task):
         
         #ping_data_fieldnames = ['Fecha', 'Hora', 'Tiempo_Transcurrido_(s)', 'Ping_(ms)', '%_Paquetes_perdidos', 'Tiempo_Corte_(ms)', 'Tiempo_de_Fallo_Acumulado_(ms)']
 
-        cursor.execute("SELECT COUNT(*) FROM network_name")
+        '''cursor.execute("SELECT COUNT(*) FROM network_name")
         last_auto_increment = cursor.fetchall()
         last_auto_increment = last_auto_increment[0][0]
 
@@ -925,7 +952,7 @@ def PING_TEST(logbox, test_time, direction, is_task):
 
         cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
         aux = cursor.fetchall()
-        network_name_id = int(aux[0][0])
+        network_name_id = int(aux[0][0])'''
 
         sql = "INSERT INTO ping_data (`PING_DATE`, `PING_TIME`, `PING_ELAPSED_TIME`, `PING_VALUE`, `PING_PACKET_LOSS`, `PING_CUT_DURATION`, `PING_ACC_FAILURE_TIME`, `PING_DIRECTION`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, direction, network_name_id)
@@ -1059,31 +1086,7 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
     result = result[0].strip() + result[1].strip()
 
     network_name = GET_NETWORK_NAME()
-    
-    #result = result[result.find('(') + 1 : result.find('%') + 1]
-    #print(result)
-    #print(n_packets, round(end_time - start_time, 2))
-    
-    RUNNING_PACKET_TEST = False
-    
-    a = datetime.datetime.now()
-    
-    b = datetime.datetime.now()
-    
-    c = round(end_time - start_time, 2)      # Tiempo de ejecucion
-    
-    d = n_packets       # Paquetes enviados
-    
-    e = result[result.find('recibidos = ') + 12 : result.find('perdidos = ') - 2]     # Paquetes recibidos
-    
-    f = result[result.find('perdidos = ') + 11 : result.find('(')]    # Paquetes perdidos
-    
-    #g = result[result.find('(') + 1 : result.find('%')]
-    
-    g = round((int(f) / int(d)) * 100, 2)   # Porcentaje
 
-    h = direction    # Direccion de ping
-    
     cursor.execute("SELECT COUNT(*) FROM network_name")
     last_auto_increment = cursor.fetchall()
     last_auto_increment = last_auto_increment[0][0]
@@ -1110,6 +1113,31 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
     cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
     aux = cursor.fetchall()
     network_name_id = int(aux[0][0])
+    
+    #result = result[result.find('(') + 1 : result.find('%') + 1]
+    #print(result)
+    #print(n_packets, round(end_time - start_time, 2))
+    
+    RUNNING_PACKET_TEST = False
+    
+    a = datetime.datetime.now()
+    
+    b = datetime.datetime.now()
+    
+    c = round(end_time - start_time, 2)      # Tiempo de ejecucion
+    
+    d = n_packets       # Paquetes enviados
+    
+    e = result[result.find('recibidos = ') + 12 : result.find('perdidos = ') - 2]     # Paquetes recibidos
+    
+    f = result[result.find('perdidos = ') + 11 : result.find('(')]    # Paquetes perdidos
+    
+    #g = result[result.find('(') + 1 : result.find('%')]
+    
+    g = round((int(f) / int(d)) * 100, 2)   # Porcentaje
+
+    h = direction    # Direccion de ping
+    
 
     sql = "INSERT INTO packet_loss_data (`PACKET_LOSS_DATE`, `PACKET_LOSS_TIME`, `PACKET_LOSS_TEST_DURATION`, `PACKET_LOSS_SENT_PACKETS`, `PACKET_LOSS_RECEIVED_PACKETS`, `PACKET_LOSS_TOTAL_LOSS`, `PACKET_LOSS_PERCENTAGE`, `PACKET_LOSS_DIRECTION`, `PACKET_LOSS_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, h, network_name_id)
@@ -1240,6 +1268,33 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
     # Muestra velocidad en Megabits
     speed_trans_unit = 10**(6)
 
+    cursor.execute("SELECT COUNT(*) FROM network_name")
+    last_auto_increment = cursor.fetchall()
+    last_auto_increment = last_auto_increment[0][0]
+
+    cursor.execute("ALTER TABLE network_name AUTO_INCREMENT=" + str(last_auto_increment + 1))
+
+    if network_name != 'Ethernet':
+
+        sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+        data = (network_name, 'WiFi')
+
+    else:
+
+        sql = "INSERT INTO network_name (`NAME`, `CONNECTION_TYPE`) VALUES (%s, %s)"
+        data = ('Ethernet', 'Ethernet')
+
+    try:
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
+    except: pass
+
+    cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
+    aux = cursor.fetchall()
+    network_name_id = int(aux[0][0])
+
     #for i in range(int(wait_time)):
 
     while RUNNING_SPEED_TEST:
@@ -1263,7 +1318,7 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         downspeed = round((round(s.download(threads = thread_count)) / speed_trans_unit), 2)
         upspeed = round((round(s.upload(threads=thread_count, pre_allocate=False)) / speed_trans_unit), 2)
         
-        cursor.execute("SELECT COUNT(*) FROM network_name")
+        '''cursor.execute("SELECT COUNT(*) FROM network_name")
         last_auto_increment = cursor.fetchall()
         last_auto_increment = last_auto_increment[0][0]
 
@@ -1288,7 +1343,7 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
 
         cursor.execute("SELECT idNETWORK_NAME FROM network_name WHERE NAME=" + '"' + network_name + '"')
         aux = cursor.fetchall()
-        network_name_id = int(aux[0][0])
+        network_name_id = int(aux[0][0])'''
 
         sql = "INSERT INTO speed_data (`SPEED_DATE`, `SPEED_TIME`, `SPEED_DOWNLOAD`, `SPEED_UPLOAD`, `SPEED_TEST_HOST`, `SPEED_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s)"
         data = (fecha.strftime("%Y-%m-%d"), hora.strftime("%H:%M:%S"), downspeed, upspeed, option, network_name_id)
