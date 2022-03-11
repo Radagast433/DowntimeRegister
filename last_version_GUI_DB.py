@@ -33,6 +33,7 @@ from matplotlib import style
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from tkcalendar import DateEntry
+import calendar
 
 import mysql.connector
 
@@ -219,6 +220,7 @@ class PROGRAMTASK():
         self.parent = parent
 
         self.iterator = False
+        self.total_running_days = 1
 
         self.date_start = ''
         self.time_start = ''
@@ -351,7 +353,7 @@ class PROGRAMTASK():
         self.cancel_button = ttk.Button(self.gf4_sub_3, text = 'Cerrar', command=lambda:self.CANCEL())
         self.cancel_button.pack(side = 'top')
 
-        self.cancel_program_button = ttk.Button(self.gf4_sub_3, text = 'Detener Pruebas\nProgramadas', command=lambda:self.STOPALL())
+        self.cancel_program_button = ttk.Button(self.gf4_sub_3, text = 'Detener Pruebas\n Programadas', command=lambda:self.STOPALL())
         self.cancel_program_button.pack(side = 'top', pady = general_pady)
 
         self.frame.focus_force()
@@ -393,26 +395,45 @@ class PROGRAMTASK():
             self.interval_label.configure(text = 'Ingrese Inicio', background = 'green', foreground = 'white')
 
             self.iterator = False
-
-            '''self.date_finish = self.calendar.get_date().strftime("%d") + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
-            self.time_finish = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
-            
-            self.duration = datetime.datetime.strptime(self.date_finish + ' ' + self.time_finish, '%d-%m-%Y %H-%M-%S') - datetime.datetime.strptime(self.date_start + ' ' + self.time_start, '%d-%m-%Y %H-%M-%S')
-            self.duration = int(round(self.duration / datetime.timedelta(minutes = 1)))'''
     
             #program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
 
-            days = 1
-
             if EVERY_DAY:
 
-                days = 7
+                self.total_running_days = 7
 
-            for i in range(days):
+            if not EVERY_DAY:
 
-                self.date_start = str(int(self.calendar.get_date().strftime("%d")) + i) + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+                self.total_running_days = 1
 
-                self.date_finish = str(int(self.calendar.get_date().strftime("%d")) + i) + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+            self.current_date = datetime.datetime.now()
+            self.current_year =  self.current_date.strftime("%Y")
+            self.current_month =  self.current_date.strftime("%m")
+
+            self.last_day_of_month = calendar.monthrange(int(self.current_year), int(self.current_month))[1]
+
+            for i in range(self.total_running_days):
+
+                self.updated_day = int(self.calendar.get_date().strftime("%d")) + i
+                self.updated_month = int(self.calendar.get_date().strftime("%m"))
+                self.updated_year = int(self.calendar.get_date().strftime("%Y"))
+
+                if self.updated_day > self.last_day_of_month:
+
+                    self.updated_day-= self.last_day_of_month
+                    self.updated_month+= 1
+
+                if self.updated_month > 12:
+
+                    self.updated_month-= 12
+                    self.updated_year+= 1
+
+                self.date_start = str(self.updated_day) + '-' + str(self.updated_month) + '-' + str(self.updated_year)
+
+                #self.show_correct_day = int(self.calendar.get_date().strftime("%d")) + i
+
+                #self.date_finish = str(int(self.calendar.get_date().strftime("%d")) + i) + '-' + self.calendar.get_date().strftime("%m") + '-' + self.calendar.get_date().strftime("%Y")
+                self.date_finish = str(self.updated_day) + '-' + str(self.updated_month) + '-' + str(self.updated_year)
                 self.time_finish = self.hours.get() + '-' + self.minutes.get() + '-' + self.seconds.get()
                 
                 self.duration = datetime.datetime.strptime(self.date_finish + ' ' + self.time_finish, '%d-%m-%Y %H-%M-%S') - datetime.datetime.strptime(self.date_start + ' ' + self.time_start, '%d-%m-%Y %H-%M-%S')
@@ -540,51 +561,25 @@ class PROGRAMTASK():
             self.date_list = self.rows_list[i][0].split('-')
             self.time_list = self.rows_list[i][1].split('-')
 
+            #print(self.date_list)
+
             if self.rows_list[i][4] == 'Prueba_de_Ping' and not RUNNING_PING_TEST:#, 'Prueba_de_Perdida_de_Paquetes', 'Prueba_de_Velocidad']
-                
-                if not EVERY_DAY:
 
-                    self.event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
-                
-                elif EVERY_DAY:
-
-                    for i in range(7):
-
-                        tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
+                self.event1 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 1, PING_TEST_BEGIN, argument = (int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task'))
                     
-                    #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PING_TEST_BEGIN, int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task')
+                #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PING_TEST_BEGIN, int(self.rows_list[i][5]) * 60, ping_log_box, ping_direction_combobox, 'task')
 
                 RUNNING_PROGRAMMER = True
 
             elif self.rows_list[i][4] == 'Prueba_de_Perdida_de_Paquetes' and not RUNNING_PACKET_TEST:
 
-                if not EVERY_DAY:
-
-                    self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
-
-                elif EVERY_DAY:
-
-                    for i in range(7):
-
-                        tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
-
-                    #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(PACKET_LOSS_TEST_BEGIN, int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task')
+                self.event2 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 2, PACKET_LOSS_TEST_BEGIN, argument = (int(round(((int(self.rows_list[i][5]) * 60) + 0.9084) / 1.0123, 0)), packet_loss_log_box, ping_direction_combobox, 'task'))
 
                 RUNNING_PROGRAMMER = True
 
             elif self.rows_list[i][4] == 'Prueba_de_Velocidad' and not RUNNING_SPEED_TEST:
 
-                if not EVERY_DAY:
-
-                    self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
-
-                elif EVERY_DAY:
-
-                    for i in range(7):
-
-                        tasks_scheduler.enterabs((datetime.datetime.strptime(str(int(self.date_list[2]) + i) + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
-
-                    #schedule.every().day.at(self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2]).do(SPEED_TEST_BEGIN, int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task')
+                self.event3 = tasks_scheduler.enterabs((datetime.datetime.strptime(self.date_list[2] + '/' + self.date_list[1] + '/' + self.date_list[0] + ' ' + self.time_list[0] + ':' + self.time_list[1] + ':' + self.time_list[2], '%Y/%m/%d %H:%M:%S')).timestamp(), 3, SPEED_TEST_BEGIN, argument = (int(self.rows_list[i][5]), speed_log_box, ping_direction_combobox, 'task'))
 
                 RUNNING_PROGRAMMER = True
 
@@ -1098,7 +1093,7 @@ def PING_TEST_BEGIN(entrybox_value, logbox, direction_combobox, is_task):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST or RUNNING_PROGRAMMER:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
         
         logbox.insert(tk.END, '\n\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
@@ -1256,7 +1251,7 @@ def PACKET_LOSS_TEST_BEGIN(entrybox, logbox, combobox):
     
         return
     
-    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST or RUNNING_PROGRAMMER:
+    elif RUNNING_PACKET_TEST or RUNNING_PING_TEST:
         
         logbox.insert(tk.END, '\n Otra prueba se esta ejecutando\n Espere Por Favor...')
     
