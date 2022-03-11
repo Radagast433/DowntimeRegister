@@ -755,9 +755,11 @@ def SELECT_GRAPH(test_type, is_task):
 
         SELECT_GRAPH_DATE()
 
-        query = "SELECT * FROM networkdata WHERE ping_data BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
+        query = "SELECT ping_date, ping_time, ping_value FROM ping_data WHERE ping_date BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
 
-        print(query)
+        data = pd.read_sql(query, con = MySQL_db)
+
+        print(data)
 
         return
 
