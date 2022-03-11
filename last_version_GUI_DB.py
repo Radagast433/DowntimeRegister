@@ -2019,123 +2019,17 @@ if __name__ == '__main__':
     speed_test_time_interval = 60
     
     ping_test_interval = 1
-    
-    results_route = 'Results/'
-    
-    program_route = 'Program/'
-
-    data_route = 'Data/'
-    
-    #graphs_route = 'Graphs/'
-
-    ping_graphs_route = 'Graphs/Ping/'
-
-    packet_loss_graphs_route = 'Graphs/PacketLoss/'
-
-    speed_graphs_route = 'Graphs/Speed/'
-    
-    program_csv_route = 'test_program.csv'
 
     #thread_count = multiprocessing.cpu_count()
     thread_count = 2
     
     #infinite = '9223372036854775807'
     
-    ########## PING INFO ###########
-    
-    ping_csv_route = 'ping_data.csv'
-    
-    ping_data_fieldnames = ['Fecha', 'Hora', 'Tiempo_Transcurrido_(s)', 'Ping_(ms)', '%_Paquetes_perdidos', 'Tiempo_Corte_(ms)', 'Tiempo_de_Fallo_Acumulado_(ms)']
-    
-    ping_csv_results_route = 'ping_results.csv'
-    
-    ping_results_fieldnames = ['Nombre_de_conexion', 'Servidor', 'Duracion_(s)', 'Ping_minimo', 'Ping_maximo', 'Ping_Promedio', 'Jitter', 'Paquetes_enviados', 'Paquetes_perdidos']
-    
-    if not os.path.exists(results_route + GET_NETWORK_NAME() + '_' + ping_csv_results_route):
-    
-        with open(results_route + GET_NETWORK_NAME() + '_' + ping_csv_results_route, 'w+', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
-            csv_writer.writeheader()
-
-    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route):
-    
-        with open(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, 'w+', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = ping_results_fieldnames)
-            csv_writer.writeheader()
-    
-    elapsed_time = 0
-    
-    ping_graph_start = pd.read_csv(data_route + GET_NETWORK_NAME() + '_' + ping_csv_route, index_col = None).last_valid_index()
-
-    acc_time = 0
-    #print(screen_width, screen_height)
-    
-    ########## PACKET LOSS INFO ###########
-    
-    packet_loss_csv_route = 'pl_data.csv'
-    
-    packet_loss_data_fieldnames = ['Fecha', 'Hora', 'Duracion_(s)', 'Cantidad_de_paquetes_enviados', 'Cantidad_de_paquetes_recibidos', 'Cantidad_de_paquetes_perdidos', '%_de_perdida']
-    
-    packet_loss_csv_results_route = 'pl_results.csv'
-    
-    packet_loss_results_fieldnames = ['Duracion', 'Cantidad_de_paquetes_enviados', 'Cantidad_de_paquetes_recibidos', 'Cantidad_de_paquetes_perdidos', '%_de_perdida']
-    
-    if not os.path.exists(results_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_results_route):
-    
-        with open(results_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_results_route, 'w+', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_results_fieldnames)
-            csv_writer.writeheader()
-
-    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route):
-    
-        with open(data_route + GET_NETWORK_NAME() + '_' + packet_loss_csv_route, 'w+', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = packet_loss_results_fieldnames)
-            csv_writer.writeheader()
-    
-    ########## SPEEDTEST INFO ##########
-    
-    speed_test_csv_route = 'speedtest_data.csv'
-    
-    speed_test_data_fieldnames = ['Fecha', 'Hora', 'Velocidad_Bajada', 'Velocidad_Subida']
-    
-    speed_test_csv_results_route = 'speedtest_results.csv'
-    
-    speed_test_results_fieldnames = ['Fecha', 'Hora', 'Host', 'Bajada', 'Subida']
-    
-    if not os.path.exists(results_route + GET_NETWORK_NAME() + '_' + speed_test_csv_results_route):
-    
-        with open(results_route + GET_NETWORK_NAME() + '_' + speed_test_csv_results_route, 'w+', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
-            csv_writer.writeheader()
-
-    if not os.path.exists(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route):
-    
-        with open(data_route + GET_NETWORK_NAME() + '_' + speed_test_csv_route, 'w+', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = speed_test_results_fieldnames)
-            csv_writer.writeheader()
-    
     speed_graph_start = 0
 
     speed_graph_date = 0
 
     s = speedtest.Speedtest()
-
-    ################## Program csv data ###########################
-
-    program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
-
-    if not os.path.exists(program_route + program_csv_route):
-    
-        with open(program_route + program_csv_route, 'w+', newline = '') as csv_file:
-            
-            csv_writer = csv.DictWriter(csv_file, fieldnames = program_data_fieldnames)
-            csv_writer.writeheader()
 
     ############### Ping Reference values Entry boxes #####################
 
