@@ -127,11 +127,11 @@ class DBLOGIN():
 
         ################################################## TEST ########################################################
 
-        '''self.entry_1.insert(tk.END, 'localhost')
+        self.entry_1.insert(tk.END, 'localhost')
         self.entry_2.insert(tk.END, '3307')
         self.entry_3.insert(tk.END, 'radagast')
         self.entry_4.insert(tk.END, 'Globetrotter123')
-        self.entry_5.insert(tk.END, 'networkdata')'''
+        self.entry_5.insert(tk.END, 'networkdata')
 
         ################################################################################################################
 
@@ -647,15 +647,118 @@ def GET_NETWORK_NAME():
     else:
         
         return 'Ethernet'
+
+class SELECT_GRAPH_DATE():
+
+    def __init__(self):
+
+        cursor.execute("SELECT DISTINCT ping_date FROM ping_data")
+        self.aux_dates = cursor.fetchall()
+
+        self.total_dates_list = []
+
+        for _tuple in self.aux_dates:
+
+            self.total_dates_list.append(_tuple[0].strftime("%Y-%m-%d"))
+
+        self.GUI()
+
+    def GUI(self):
+
+        self.frame = Toplevel()
+
+        self.date_frame = ttk.Frame(self.frame)
+        self.date_frame.pack(side = 'top')
+
+        self.info_frame = ttk.Frame(self.frame)
+        self.info_frame.pack(side = 'top')
+
+        self.buttons_frame = ttk.Frame(self.frame)
+        self.buttons_frame.pack(side = 'top')
+
+        self.date_frame_div1 = ttk.Frame(self.date_frame)
+        self.date_frame_div1.pack(side = 'left')
+
+        self.spacer_label_0 = ttk.Frame(self.date_frame)
+        self.spacer_label_0.pack(side = 'left', padx = general_padx)
+
+        self.date_frame_div2 = ttk.Frame(self.date_frame)
+        self.date_frame_div2.pack(side = 'left')
+
+        self.title_label_1 = ttk.Label(self.date_frame_div1, text = 'Fecha Inicio:')
+        self.title_label_1.pack(side = 'top')
+
+        self.start_date_cmbx_1 = ttk.Combobox(self.date_frame_div1)
+        self.start_date_cmbx_1.pack(side = 'top')
+
+        self.start_date_cmbx_1['values'] = self.total_dates_list
+        self.start_date_cmbx_1.set(self.total_dates_list[0])
+
+        self.title_label_2 = ttk.Label(self.date_frame_div2, text = 'Fecha Termino:')
+        self.title_label_2.pack(side = 'top')
+
+        self.start_date_cmbx_2 = ttk.Combobox(self.date_frame_div2)
+        self.start_date_cmbx_2.pack(side = 'top')
+
+        self.start_date_cmbx_2['values'] = self.total_dates_list
+        self.start_date_cmbx_2.set(self.total_dates_list[0])
+
+        self.info_label = ttk.Label(self.info_frame, text = 'Fechas seleccionadas correctamente.', background = 'green', foreground = 'white')
+        self.info_label.pack(side = 'top', pady = general_pady)
+
+        self.close_button = ttk.Button(self.buttons_frame, text = 'Cerrar', command=lambda:self.__destroy__())
+        self.close_button.pack(side = 'left')
+
+        self.spacer_label = ttk.Label(self.buttons_frame)
+        self.spacer_label.pack(side = 'left', padx = general_padx)
+
+        self.accept_button = ttk.Button(self.buttons_frame, text = 'Aceptar', command=lambda:self.CHECK_DATES())
+        self.accept_button.pack(side = 'left')
         
-    
+        center(root, self.frame)
+        self.frame.focus_force()
+
+    def CHECK_DATES(self):
+
+        self.date_1 = time.strptime(self.start_date_cmbx_1.get(), "%Y-%m-%d")
+        self.date_2 = time.strptime(self.start_date_cmbx_2.get(), "%Y-%m-%d")
+
+        if self.date_2 < self.date_1:
+
+            self.info_label.configure(text = 'Revise las fechas seleccionadas.', background = 'red', foreground = 'white')
+
+            return
+
+        else:
+
+            self.info_label.configure(text = 'Fechas seleccionadas correctamente.', background = 'green', foreground = 'white')
+
+            time.sleep(0.5)
+            
+            self.__destroy__()
+
+
+    def __destroy__(self):
+
+        self.frame.destroy()
+
 def SELECT_GRAPH(test_type, is_task):
+
+    if MySQL_db == None or cursor == None:
+
+        db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
+
+        return
 
     network_name = GET_NETWORK_NAME()
     
     if test_type == 'ping':
 
-        data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+        SELECT_GRAPH_DATE()
+
+        return
+
+        #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
         graph_name = data.iloc[-1]
 
@@ -2066,11 +2169,34 @@ if __name__ == '__main__':
 
     ######################################################################
 
+    ping_graphs_route = 'Graphs/Ping/'
+
+    packet_loss_graphs_route = 'Graphs/PacketLoss/'
+
+    speed_graphs_route = 'Graphs/Speed/'
+
+    program_route = 'Program/'
+
+    program_csv_route = 'test_program.csv'
+
     ################################# SQL ################################
 
     MySQL_db = None
 
     cursor = None
+
+    ################## Program csv data ###########################
+
+    program_data_fieldnames = ['Fecha_Inicio', 'Hora_Inicio', 'Fecha_Termino', 'Hora_Termino', 'Prueba', 'Duracion']
+
+    if not os.path.exists(program_route + program_csv_route):
+    
+        with open(program_route + program_csv_route, 'w+', newline = '') as csv_file:
+            
+            csv_writer = csv.DictWriter(csv_file, fieldnames = program_data_fieldnames)
+            csv_writer.writeheader()
+
+    ##########################################################################################
 
     ######################################################################
 
