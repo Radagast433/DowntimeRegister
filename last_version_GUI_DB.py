@@ -648,99 +648,98 @@ def GET_NETWORK_NAME():
         
         return 'Ethernet'
 
-class SELECT_GRAPH_DATE():
+def CHECK_DATES(start_date_cmbx_1, start_date_cmbx_2, info_label, frame, var):
 
-    def __init__(self):
+    global start_date
+    global end_date
 
-        cursor.execute("SELECT DISTINCT ping_date FROM ping_data")
-        self.aux_dates = cursor.fetchall()
+    date_1 = time.strptime(start_date_cmbx_1.get(), "%Y-%m-%d")
+    date_2 = time.strptime(start_date_cmbx_2.get(), "%Y-%m-%d")
 
-        self.total_dates_list = []
+    if date_2 < date_1:
 
-        for _tuple in self.aux_dates:
+        info_label.configure(text = 'Revise las fechas seleccionadas.', background = 'red', foreground = 'white')
 
-            self.total_dates_list.append(_tuple[0].strftime("%Y-%m-%d"))
+        return
 
-        self.GUI()
+    else:
 
-    def GUI(self):
+        info_label.configure(text = 'Fechas seleccionadas correctamente.', background = 'green', foreground = 'white')
 
-        self.frame = Toplevel()
+        start_date = start_date_cmbx_1.get()
+        end_date = start_date_cmbx_2.get()
 
-        self.date_frame = ttk.Frame(self.frame)
-        self.date_frame.pack(side = 'top')
+        var.set(1)
 
-        self.info_frame = ttk.Frame(self.frame)
-        self.info_frame.pack(side = 'top')
+        frame.destroy()
 
-        self.buttons_frame = ttk.Frame(self.frame)
-        self.buttons_frame.pack(side = 'top')
+def SELECT_GRAPH_DATE():
 
-        self.date_frame_div1 = ttk.Frame(self.date_frame)
-        self.date_frame_div1.pack(side = 'left')
+    cursor.execute("SELECT DISTINCT ping_date FROM ping_data")
+    aux_dates = cursor.fetchall()
 
-        self.spacer_label_0 = ttk.Frame(self.date_frame)
-        self.spacer_label_0.pack(side = 'left', padx = general_padx)
+    var = tk.IntVar()
 
-        self.date_frame_div2 = ttk.Frame(self.date_frame)
-        self.date_frame_div2.pack(side = 'left')
+    total_dates_list = []
 
-        self.title_label_1 = ttk.Label(self.date_frame_div1, text = 'Fecha Inicio:')
-        self.title_label_1.pack(side = 'top')
+    for _tuple in aux_dates:
 
-        self.start_date_cmbx_1 = ttk.Combobox(self.date_frame_div1)
-        self.start_date_cmbx_1.pack(side = 'top')
+        total_dates_list.append(_tuple[0].strftime("%Y-%m-%d"))
 
-        self.start_date_cmbx_1['values'] = self.total_dates_list
-        self.start_date_cmbx_1.set(self.total_dates_list[0])
+    frame = Toplevel()
 
-        self.title_label_2 = ttk.Label(self.date_frame_div2, text = 'Fecha Termino:')
-        self.title_label_2.pack(side = 'top')
+    date_frame = ttk.Frame(frame)
+    date_frame.pack(side = 'top')
 
-        self.start_date_cmbx_2 = ttk.Combobox(self.date_frame_div2)
-        self.start_date_cmbx_2.pack(side = 'top')
+    info_frame = ttk.Frame(frame)
+    info_frame.pack(side = 'top')
 
-        self.start_date_cmbx_2['values'] = self.total_dates_list
-        self.start_date_cmbx_2.set(self.total_dates_list[0])
+    buttons_frame = ttk.Frame(frame)
+    buttons_frame.pack(side = 'top')
 
-        self.info_label = ttk.Label(self.info_frame, text = 'Fechas seleccionadas correctamente.', background = 'green', foreground = 'white')
-        self.info_label.pack(side = 'top', pady = general_pady)
+    date_frame_div1 = ttk.Frame(date_frame)
+    date_frame_div1.pack(side = 'left')
 
-        self.close_button = ttk.Button(self.buttons_frame, text = 'Cerrar', command=lambda:self.__destroy__())
-        self.close_button.pack(side = 'left')
+    spacer_label_0 = ttk.Frame(date_frame)
+    spacer_label_0.pack(side = 'left', padx = general_padx)
 
-        self.spacer_label = ttk.Label(self.buttons_frame)
-        self.spacer_label.pack(side = 'left', padx = general_padx)
+    date_frame_div2 = ttk.Frame(date_frame)
+    date_frame_div2.pack(side = 'left')
 
-        self.accept_button = ttk.Button(self.buttons_frame, text = 'Aceptar', command=lambda:self.CHECK_DATES())
-        self.accept_button.pack(side = 'left')
-        
-        center(root, self.frame)
-        self.frame.focus_force()
+    title_label_1 = ttk.Label(date_frame_div1, text = 'Fecha Inicio:')
+    title_label_1.pack(side = 'top')
 
-    def CHECK_DATES(self):
+    start_date_cmbx_1 = ttk.Combobox(date_frame_div1)
+    start_date_cmbx_1.pack(side = 'top')
 
-        self.date_1 = time.strptime(self.start_date_cmbx_1.get(), "%Y-%m-%d")
-        self.date_2 = time.strptime(self.start_date_cmbx_2.get(), "%Y-%m-%d")
+    start_date_cmbx_1['values'] = total_dates_list
+    start_date_cmbx_1.set(total_dates_list[0])
 
-        if self.date_2 < self.date_1:
+    title_label_2 = ttk.Label(date_frame_div2, text = 'Fecha Termino:')
+    title_label_2.pack(side = 'top')
 
-            self.info_label.configure(text = 'Revise las fechas seleccionadas.', background = 'red', foreground = 'white')
+    start_date_cmbx_2 = ttk.Combobox(date_frame_div2)
+    start_date_cmbx_2.pack(side = 'top')
 
-            return
+    start_date_cmbx_2['values'] = total_dates_list
+    start_date_cmbx_2.set(total_dates_list[0])
 
-        else:
+    info_label = ttk.Label(info_frame, text = 'Fechas seleccionadas correctamente.', background = 'green', foreground = 'white')
+    info_label.pack(side = 'top', pady = general_pady)
 
-            self.info_label.configure(text = 'Fechas seleccionadas correctamente.', background = 'green', foreground = 'white')
+    close_button = ttk.Button(buttons_frame, text = 'Cerrar', command=lambda:frame.destroy())
+    close_button.pack(side = 'left')
 
-            time.sleep(0.5)
-            
-            self.__destroy__()
+    spacer_label = ttk.Label(buttons_frame)
+    spacer_label.pack(side = 'left', padx = general_padx)
 
+    accept_button = ttk.Button(buttons_frame, text = 'Aceptar', command=lambda:CHECK_DATES(start_date_cmbx_1, start_date_cmbx_2, info_label, frame, var))
+    accept_button.pack(side = 'left')
+    
+    center(root, frame)
+    frame.focus_force()
 
-    def __destroy__(self):
-
-        self.frame.destroy()
+    accept_button.wait_variable(var)
 
 def SELECT_GRAPH(test_type, is_task):
 
@@ -756,8 +755,13 @@ def SELECT_GRAPH(test_type, is_task):
 
         SELECT_GRAPH_DATE()
 
+        query = "SELECT * FROM networkdata WHERE ping_data BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
+
+        print(query)
+
         return
 
+        cursor.execute(query)
         #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
         graph_name = data.iloc[-1]
@@ -2197,6 +2201,9 @@ if __name__ == '__main__':
             csv_writer.writeheader()
 
     ##########################################################################################
+
+    start_date = None
+    end_date = None
 
     ######################################################################
 
