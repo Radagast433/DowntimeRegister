@@ -648,13 +648,23 @@ def GET_NETWORK_NAME():
         
         return 'Ethernet'
 
-def CHECK_DATES(start_date_cmbx_1, start_date_cmbx_2, info_label, frame, var):
+def CHECK_DATES(start_date_cmbx_1, start_date_cmbx_2, names_cmbx, info_label, frame, var):
 
     global start_date
     global end_date
+    global selected_network_name
+    global cmbx_network_name
 
     date_1 = time.strptime(start_date_cmbx_1.get(), "%Y-%m-%d")
     date_2 = time.strptime(start_date_cmbx_2.get(), "%Y-%m-%d")
+
+    cmbx_network_name = names_cmbx.get()
+    
+    query = "SELECT idNETWORK_NAME from network_name WHERE NAME=" + '"' + cmbx_network_name + '"'
+    selected_network_name = pd.read_sql(query, con = MySQL_db)
+    selected_network_name = selected_network_name['idNETWORK_NAME']
+    selected_network_name.to_list()
+    selected_network_name = selected_network_name[0]
 
     if date_2 < date_1:
 
@@ -673,7 +683,16 @@ def CHECK_DATES(start_date_cmbx_1, start_date_cmbx_2, info_label, frame, var):
 
         frame.destroy()
 
+def CLOSE_SELECT_GRAPH_DATE(frame, var):
+
+    var.set(1)
+    var.set(0)
+
+    frame.destroy()
+
 def SELECT_GRAPH_DATE():
+
+    global var
 
     cursor.execute("SELECT DISTINCT ping_date FROM ping_data")
     aux_dates = cursor.fetchall()
@@ -724,16 +743,29 @@ def SELECT_GRAPH_DATE():
     start_date_cmbx_2['values'] = total_dates_list
     start_date_cmbx_2.set(total_dates_list[0])
 
+    query = "SELECT * FROM network_name"
+    network_names = pd.read_sql(query, con = MySQL_db)
+    network_names = network_names['NAME'].to_list()
+    
+    separation_label = ttk.Label(info_frame, text = 'Red:')
+    separation_label.pack(side = 'top', pady = int(general_pady//3))
+
+    names_cmbx = ttk.Combobox(info_frame, state = 'readonly')
+    names_cmbx.pack(side = 'top')
+
+    names_cmbx['values'] = network_names
+    names_cmbx.set(network_names[0])
+
     info_label = ttk.Label(info_frame, text = 'Fechas seleccionadas correctamente.', background = 'green', foreground = 'white')
     info_label.pack(side = 'top', pady = general_pady)
 
-    close_button = ttk.Button(buttons_frame, text = 'Cerrar', command=lambda:frame.destroy())
+    close_button = ttk.Button(buttons_frame, text = 'Cerrar', command=lambda:CLOSE_SELECT_GRAPH_DATE(frame, var))
     close_button.pack(side = 'left')
 
     spacer_label = ttk.Label(buttons_frame)
     spacer_label.pack(side = 'left', padx = general_padx)
 
-    accept_button = ttk.Button(buttons_frame, text = 'Aceptar', command=lambda:CHECK_DATES(start_date_cmbx_1, start_date_cmbx_2, info_label, frame, var))
+    accept_button = ttk.Button(buttons_frame, text = 'Aceptar', command=lambda:CHECK_DATES(start_date_cmbx_1, start_date_cmbx_2, names_cmbx, info_label, frame, var))
     accept_button.pack(side = 'left')
     
     center(root, frame)
@@ -748,96 +780,118 @@ def SELECT_GRAPH(test_type, is_task):
         db_alert = messagebox.showinfo(message = 'No esta conectado a una Base de Datos,\nPor Favor verifique la conexión.', title = '¡ADVERTENCIA!')
 
         return
-
-    network_name = GET_NETWORK_NAME()
     
     if test_type == 'ping':
 
         SELECT_GRAPH_DATE()
 
-        query = "SELECT ping_date, ping_time, ping_value FROM ping_data WHERE ping_date BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
+        if var.get() == 1:
 
-        data = pd.read_sql(query, con = MySQL_db)
+            x = []
 
-        print(data)
+            query = "SELECT ping_date, ping_time, ping_value FROM ping_data WHERE ping_network_name=" + str(selected_network_name) + " AND ping_date BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
 
-        return
+            data = pd.read_sql(query, con = MySQL_db)
 
-        cursor.execute(query)
-        #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
+            if len(data) < 1:
 
-        graph_name = data.iloc[-1]
+                db_alert = messagebox.showinfo(message = 'No existen datos que correspondan\na la información solicitada.', title = '¡ADVERTENCIA!')
 
-        graph_name_p1 = graph_name['Fecha']
-        #graph_name_p1.replace('-', '_')
+                return
+            #cursor.execute(query)
+            #data = pd.read_csv(data_route + network_name + '_' + ping_csv_route, index_col = None)
 
-        graph_name_p2 = graph_name['Hora']
-        #graph_name_p2.replace('-', '_')
+            graph_name = data.iloc[-1]
 
-        graph_name = graph_name_p1 + '_' + graph_name_p2
-        #graph_name = graph_name.to_string(index = False)
+            graph_name_p1 = graph_name['ping_date'].strftime("%Y-%m-%d")
+            #graph_name_p1.replace('-', '_')
+
+            graph_name_p2 = str(graph_name['ping_time'])
+            graph_name_p2 = graph_name_p2.replace('-', '_')
+            graph_name_p2 = graph_name_p2.replace(' ', '_')
+            graph_name_p2 = graph_name_p2.replace(':', '_')
+
+            graph_name = graph_name_p1 + '_' + graph_name_p2
+            #graph_name = graph_name.to_string(index = False)
+
+            '''xdata = data['ping_time']
+
+            for i in range(len(xdata)):
+
+                aux = str(xdata[i])
+                aux = aux[ 7 : ]
+
+                aux = aux.replace('-', '_')
+                aux = aux.replace(' ', '_')
+                aux = aux.replace(':', '_')
+                
+                x.append(str(data['ping_date'][i].strftime("%Y-%m-%d") + '_' + aux))
         
-        y = data['Ping_(ms)']
-        y = y[ping_graph_start + 1 : ]
+            #y = y[ping_graph_start + 1 : ]'''
             
-        x = [ i for i in range(0 , y.size)]
+            y = data['ping_value']
 
-        graph_length = round(len(y) / 36, 0)
-        font_size = round((-0.41 * graph_length) + 42.5, 1)
+            x = [ i for i in range(0 , y.size)]
 
-        if graph_length < 50:
+            graph_length = round(len(y) / 36, 0)
+            font_size = round((-0.41 * graph_length) + 42.5, 1)
 
-            graph_length = 50
-            font_size = 12
+            if graph_length < 50:
 
-        elif graph_length > 100:
+                graph_length = 50
+                font_size = 12
 
-            graph_length = 100
-            font_size = 1.5
-        
-        plt.rcParams['font.size'] = str(font_size)
-        plt.figure(figsize = (graph_length, 15))
-        plt.xticks(rotation=45, ha="right")
-        #plt.plot(x, y, label='download', color='r')
-        #plt.scatter(x, y)
+            elif graph_length > 100:
 
-        plt.margins(0)
-        plt.plot(x, y, linewidth = 1.0, color = 'b', label = 'Ping Red: ' + network_name)
+                graph_length = 100
+                font_size = 1.5
+            
+            plt.rcParams['font.size'] = str(font_size)
+            plt.figure(figsize = (graph_length, 15))
+            plt.xticks(rotation=45, ha="right")
+            #plt.plot(x, y, label='download', color='r')
+            #plt.scatter(x, y)
 
-        if VALIDATE_ENTRY_BOX_VALUE(sub_1_ping_min_entry.get()):
+            plt.margins(0)
 
-            plt.axhline(y=float(sub_1_ping_min_entry.get()), color='r', linestyle='solid', label = 'Ping Minimo Usuario')
+            network_name = cmbx_network_name
 
-        if VALIDATE_ENTRY_BOX_VALUE(sub_2_ping_max_entry.get()):
+            plt.plot(x, y, linewidth = 1.0, color = 'b', label = 'Ping Red: ' + network_name)
 
-            plt.axhline(y=float(sub_2_ping_max_entry.get()), color='g', linestyle='solid', label = 'Ping Maximo Usuario')
-        
-        x_ticks = 10.0
+            if VALIDATE_ENTRY_BOX_VALUE(sub_1_ping_min_entry.get()):
 
-        if len(x) < 30:
+                plt.axhline(y=float(sub_1_ping_min_entry.get()), color='r', linestyle='solid', label = 'Ping Minimo Usuario')
 
-            x_ticks = 1.0
+            if VALIDATE_ENTRY_BOX_VALUE(sub_2_ping_max_entry.get()):
 
-        plt.xticks(np.arange(0, max(x) + 1, x_ticks))
-        
-        plt.yticks(np.arange(min(y) - 5, max(y) + 5, 5.0))
-        
-        plt.xlabel('Tiempo Transcurrido (s)')
-        plt.ylabel('Ping (ms)')
-        plt.title("Ping (www.google.com)")
+                plt.axhline(y=float(sub_2_ping_max_entry.get()), color='g', linestyle='solid', label = 'Ping Maximo Usuario')
+            
+            x_ticks = 10.0
 
-        #plt.axhline(y=9.36, color='green', linestyle='-', label = 'Ping Promedio Red: LaRosa')
-        #plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
+            if len(x) < 30:
 
-        plt.legend()
-        graph_route = ping_graphs_route + network_name + '_ping_graph_' + graph_name + '.png'
-        plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
+                x_ticks = 1.0
 
-        if is_task == 'task':
+            plt.xticks(np.arange(0, max(x) + 1, x_ticks))
+            
+            plt.yticks(np.arange(min(y) - 5, max(y) + 5, 5.0))
+            
+            plt.xlabel('Tiempo Transcurrido (s)')
+            plt.ylabel('Ping (ms)')
+            plt.title("Ping (www.google.com)")
 
-            return
-        
-        GRAPH_LABEL(graph_route)
+            #plt.axhline(y=9.36, color='green', linestyle='-', label = 'Ping Promedio Red: LaRosa')
+            #plt.axhline(y=round(y.mean(), 2), color='red', linestyle='-', label = 'Ping Promedio Red: ' + network_name)
+
+            plt.legend()
+            graph_route = ping_graphs_route + network_name + '_ping_graph_' + graph_name + '.png'
+            plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
+
+            if is_task == 'task':
+
+                return
+            
+            GRAPH_LABEL(graph_route)
         
     elif test_type == 'packetloss':
 
@@ -1688,6 +1742,10 @@ def EXIT_APP(root):
     global RUNNING_SPEED_TEST
     global RUNNING_PROGRAMMER
     global EVERY_DAY
+    global var
+    
+    if var != None and var.get() == 0:
+        var.set(1)
 
     if RUNNING_PROGRAMMER:
 
@@ -2208,6 +2266,12 @@ if __name__ == '__main__':
     end_date = None
 
     ######################################################################
+
+    var = None
+
+    cmbx_network_name = ''
+
+    selected_network_name = ''
 
     EVERY_DAY = False
 
