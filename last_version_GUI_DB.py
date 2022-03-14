@@ -690,11 +690,22 @@ def CLOSE_SELECT_GRAPH_DATE(frame, var):
 
     frame.destroy()
 
-def SELECT_GRAPH_DATE():
+def SELECT_GRAPH_DATE(test_type):
 
     global var
 
-    cursor.execute("SELECT DISTINCT ping_date FROM ping_data")
+    if test_type == 'ping':
+    
+        cursor.execute("SELECT DISTINCT ping_date FROM ping_data")
+
+    elif test_type == 'packetloss':
+
+        cursor.execute("SELECT DISTINCT packet_loss_date FROM packet_loss_data")
+
+    elif test_type == 'speed':
+
+        cursor.execute("SELECT DISTINCT speed_date FROM speed_data")
+
     aux_dates = cursor.fetchall()
 
     var = tk.IntVar()
@@ -783,7 +794,7 @@ def SELECT_GRAPH(test_type, is_task):
     
     if test_type == 'ping':
 
-        SELECT_GRAPH_DATE()
+        SELECT_GRAPH_DATE('ping')
 
         if var.get() == 1:
 
@@ -813,21 +824,6 @@ def SELECT_GRAPH(test_type, is_task):
 
             graph_name = graph_name_p1 + '_' + graph_name_p2
             #graph_name = graph_name.to_string(index = False)
-
-            '''xdata = data['ping_time']
-
-            for i in range(len(xdata)):
-
-                aux = str(xdata[i])
-                aux = aux[ 7 : ]
-
-                aux = aux.replace('-', '_')
-                aux = aux.replace(' ', '_')
-                aux = aux.replace(':', '_')
-                
-                x.append(str(data['ping_date'][i].strftime("%Y-%m-%d") + '_' + aux))
-        
-            #y = y[ping_graph_start + 1 : ]'''
             
             y = data['ping_value']
 
@@ -895,20 +891,23 @@ def SELECT_GRAPH(test_type, is_task):
         
     elif test_type == 'packetloss':
 
-        data = pd.read_csv(data_route + network_name + '_' + packet_loss_csv_route, index_col = None)
+        query = "SELECT packet_loss_date, packet_loss_time, packet_loss_sent_packets, packet_loss_total_loss FROM packet_loss_data WHERE packet_loss_network_name=" + str(selected_network_name) + " AND packet_loss_date BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
+
+        data = pd.read_sql(query, con = MySQL_db)
         
         graph_name = data.iloc[-1]
 
-        graph_name_p1 = graph_name['Fecha']
-        #graph_name_p1.replace('-', '_')
+        graph_name_p1 = graph_name['packet_loss_date'].strftime("%Y-%m-%d")
 
-        graph_name_p2 = graph_name['Hora']
-        #graph_name_p2.replace('-', '_')
+        graph_name_p2 = str(graph_name['packet_loss_time'])
+        graph_name_p2 = graph_name_p2.replace('-', '_')
+        graph_name_p2 = graph_name_p2.replace(' ', '_')
+        graph_name_p2 = graph_name_p2.replace(':', '_')
 
         graph_name = graph_name_p1 + '_' + graph_name_p2
 
-        sendp_data = data['Cantidad_de_paquetes_enviados'].sum()
-        recievedp_data = data['Cantidad_de_paquetes_perdidos'].sum()
+        sendp_data = data['packet_loss_sent_packets'].sum()
+        recievedp_data = data['packet_loss_total_loss'].sum()
         
         data = [sendp_data, recievedp_data]
         
@@ -916,6 +915,8 @@ def SELECT_GRAPH(test_type, is_task):
         
         fig = plt.figure(figsize =(10, 7))
         plt.pie(data, labels = description_list)
+
+        network_name = cmbx_network_name
         
         graph_route = packet_loss_graphs_route + network_name + '_packetloss_graph_' + graph_name + '.png'
         
@@ -925,54 +926,77 @@ def SELECT_GRAPH(test_type, is_task):
         
     elif test_type == 'speed':
         
-        data = pd.read_csv(data_route + network_name + '_' + speed_test_csv_route, index_col = None)
-        
-        graph_name = data.iloc[-1]
+        SELECT_GRAPH_DATE('speed')
 
-        graph_name_p1 = graph_name['Fecha']
-        #graph_name_p1.replace('-', '_')
+        if var.get() == 1:
 
-        graph_name_p2 = graph_name['Hora']
-        #graph_name_p2.replace('-', '_')
+            fplush = []
 
-        graph_name = graph_name_p1 + '_' + graph_name_p2
-        #graph_name = graph_name.to_string(index = False)
+            query = "SELECT speed_date, speed_time, speed_download, speed_upload FROM speed_data WHERE speed_network_name=" + str(selected_network_name) + " AND speed_date BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
 
-        fecha = data['Fecha']
-        fecha = fecha[speed_graph_start + 1 : ]
+            data = pd.read_sql(query, con = MySQL_db)
 
-        hora = data['Hora']
-        hora = hora[speed_graph_start + 1 : ]
+            if len(data) < 1:
 
-        download = data['Velocidad_Bajada']
-        download = download[speed_graph_start + 1 : ]
+                    db_alert = messagebox.showinfo(message = 'No existen datos que correspondan\na la información solicitada.', title = '¡ADVERTENCIA!')
 
-        upload = data['Velocidad_Subida']
-        upload = upload[speed_graph_start +1 : ]
+                    return
             
-        plt.figure(figsize = (50, 15))
-        plt.xlabel('Fecha')
-        plt.ylabel('Velocidad en Mb/s')
-        plt.title("Velocidad Internet")
-        plt.margins(0)
+            graph_name = data.iloc[-1]
 
-        if VALIDATE_ENTRY_BOX_VALUE(sub_1_speed_up_entry_speed.get()):
+            graph_name_p1 = graph_name['speed_date'].strftime("%Y-%m-%d")
 
-            plt.axhline(y=float(sub_1_speed_up_entry_speed.get()), color='black', linestyle='solid', label = 'Velocidad Subida Usuario')
+            graph_name_p2 = str(graph_name['speed_time'])
+            graph_name_p2 = graph_name_p2.replace('-', '_')
+            graph_name_p2 = graph_name_p2.replace(' ', '_')
+            graph_name_p2 = graph_name_p2.replace(':', '_')
 
-        if VALIDATE_ENTRY_BOX_VALUE(sub_2_speed_down_entry_speed.get()):
+            graph_name = graph_name_p1 + '_' + graph_name_p2
 
-            plt.axhline(y=float(sub_2_speed_down_entry_speed.get()), color='g', linestyle='solid', label = 'Velocidad Bajada Usuario')
+            fecha = data['speed_date']
+            fecha = fecha.to_list()
 
-        plt.xticks(rotation=30, ha="right")
-        plt.plot(fecha + ' ' + hora, download, label='Bajada (Mbps)', color='r')
-        plt.plot(fecha + ' ' + hora, upload, label='Subida (Mbps)', color='b')
-        plt.legend()
-        graph_route = speed_graphs_route + network_name + '_speed_graph_' + graph_name + '.png'
-        plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
-        #plt.show()
-        
-        GRAPH_LABEL(graph_route)
+            hora = data['speed_time']
+            hora = hora.to_list()
+
+            for i in range(len(fecha)):
+
+                fecha[i] = fecha[i].strftime("%Y-%m-%d")
+                hora[i] = str(hora[i])
+                hora[i] = hora[i].replace(':', '_')
+                hora[i] = hora[i][ 7 : ]
+
+                fplush.append(fecha[i] + ' ' + hora[i])
+
+            download = data['speed_download']
+
+            upload = data['speed_upload']
+
+            network_name = cmbx_network_name
+                
+            plt.figure(figsize = (50, 15))
+            plt.xlabel('Fecha')
+            plt.ylabel('Velocidad en Mb/s')
+            plt.title("Velocidad Internet (" + network_name + ")")
+            plt.margins(0)
+
+            if VALIDATE_ENTRY_BOX_VALUE(sub_1_speed_up_entry_speed.get()):
+
+                plt.axhline(y=float(sub_1_speed_up_entry_speed.get()), color='black', linestyle='solid', label = 'Velocidad Subida Usuario')
+
+            if VALIDATE_ENTRY_BOX_VALUE(sub_2_speed_down_entry_speed.get()):
+
+                plt.axhline(y=float(sub_2_speed_down_entry_speed.get()), color='g', linestyle='solid', label = 'Velocidad Bajada Usuario')
+
+            plt.xticks(rotation=30, ha="right")
+            plt.plot(fplush, download, label='Bajada (Mbps)', color='r')
+            plt.plot(fplush, upload, label='Subida (Mbps)', color='b')
+            plt.legend()
+            graph_route = speed_graphs_route + network_name + '_speed_graph_' + graph_name + '.png'
+            plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
+            #plt.show()
+            
+            GRAPH_LABEL(graph_route)
     
 
 def VALIDATE_ENTRY_BOX_VALUE(value):
