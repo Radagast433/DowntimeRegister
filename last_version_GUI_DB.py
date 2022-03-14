@@ -891,38 +891,42 @@ def SELECT_GRAPH(test_type, is_task):
         
     elif test_type == 'packetloss':
 
-        query = "SELECT packet_loss_date, packet_loss_time, packet_loss_sent_packets, packet_loss_total_loss FROM packet_loss_data WHERE packet_loss_network_name=" + str(selected_network_name) + " AND packet_loss_date BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
+        SELECT_GRAPH_DATE('packetloss')
 
-        data = pd.read_sql(query, con = MySQL_db)
-        
-        graph_name = data.iloc[-1]
+        if var.get() == 1:
 
-        graph_name_p1 = graph_name['packet_loss_date'].strftime("%Y-%m-%d")
+            query = "SELECT packet_loss_date, packet_loss_time, packet_loss_sent_packets, packet_loss_total_loss FROM packet_loss_data WHERE packet_loss_network_name=" + str(selected_network_name) + " AND packet_loss_date BETWEEN " + "'" + start_date + "'" + " AND " + "'" + end_date + "'"
 
-        graph_name_p2 = str(graph_name['packet_loss_time'])
-        graph_name_p2 = graph_name_p2.replace('-', '_')
-        graph_name_p2 = graph_name_p2.replace(' ', '_')
-        graph_name_p2 = graph_name_p2.replace(':', '_')
+            data = pd.read_sql(query, con = MySQL_db)
+            
+            graph_name = data.iloc[-1]
 
-        graph_name = graph_name_p1 + '_' + graph_name_p2
+            graph_name_p1 = graph_name['packet_loss_date'].strftime("%Y-%m-%d")
 
-        sendp_data = data['packet_loss_sent_packets'].sum()
-        recievedp_data = data['packet_loss_total_loss'].sum()
-        
-        data = [sendp_data, recievedp_data]
-        
-        description_list = ['Cantidad_de_paquetes_enviados', 'Cantidad_de_paquetes_perdidos']
-        
-        fig = plt.figure(figsize =(10, 7))
-        plt.pie(data, labels = description_list)
+            graph_name_p2 = str(graph_name['packet_loss_time'])
+            graph_name_p2 = graph_name_p2.replace('-', '_')
+            graph_name_p2 = graph_name_p2.replace(' ', '_')
+            graph_name_p2 = graph_name_p2.replace(':', '_')
 
-        network_name = cmbx_network_name
-        
-        graph_route = packet_loss_graphs_route + network_name + '_packetloss_graph_' + graph_name + '.png'
-        
-        plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
-        
-        GRAPH_LABEL(graph_route)
+            graph_name = graph_name_p1 + '_' + graph_name_p2
+
+            sendp_data = data['packet_loss_sent_packets'].sum()
+            recievedp_data = data['packet_loss_total_loss'].sum()
+            
+            data = [sendp_data, recievedp_data]
+            
+            description_list = ['Cantidad_de_paquetes_enviados', 'Cantidad_de_paquetes_perdidos']
+            
+            fig = plt.figure(figsize =(10, 7))
+            plt.pie(data, labels = description_list)
+
+            network_name = cmbx_network_name
+            
+            graph_route = packet_loss_graphs_route + network_name + '_packetloss_graph_' + graph_name + '.png'
+            
+            plt.savefig(graph_route, bbox_inches='tight', dpi = 300)
+            
+            GRAPH_LABEL(graph_route)
         
     elif test_type == 'speed':
         
