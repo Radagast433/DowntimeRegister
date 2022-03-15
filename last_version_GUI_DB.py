@@ -127,11 +127,11 @@ class DBLOGIN():
 
         ################################################## TEST ########################################################
 
-        self.entry_1.insert(tk.END, 'localhost')
+        '''self.entry_1.insert(tk.END, 'localhost')
         self.entry_2.insert(tk.END, '3307')
         self.entry_3.insert(tk.END, 'radagast')
         self.entry_4.insert(tk.END, 'Globetrotter123')
-        self.entry_5.insert(tk.END, 'networkdata')
+        self.entry_5.insert(tk.END, 'networkdata')'''
 
         ################################################################################################################
 
@@ -696,15 +696,15 @@ def SELECT_GRAPH_DATE(test_type):
 
     if test_type == 'ping':
     
-        cursor.execute("SELECT DISTINCT ping_date FROM ping_data")
+        cursor.execute("SELECT DISTINCT ping_date FROM ping_data ORDER BY ping_date ASC")
 
     elif test_type == 'packetloss':
 
-        cursor.execute("SELECT DISTINCT packet_loss_date FROM packet_loss_data")
+        cursor.execute("SELECT DISTINCT packet_loss_date FROM packet_loss_data ORDER BY packet_loss_date ASC")
 
     elif test_type == 'speed':
 
-        cursor.execute("SELECT DISTINCT speed_date FROM speed_data")
+        cursor.execute("SELECT DISTINCT speed_date FROM speed_data ORDER BY speed_date ASC")
 
     aux_dates = cursor.fetchall()
 
