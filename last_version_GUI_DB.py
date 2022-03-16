@@ -127,11 +127,11 @@ class DBLOGIN():
 
         ################################################## TEST ########################################################
 
-        '''self.entry_1.insert(tk.END, 'localhost')
+        self.entry_1.insert(tk.END, 'localhost')
         self.entry_2.insert(tk.END, '3307')
         self.entry_3.insert(tk.END, 'radagast')
         self.entry_4.insert(tk.END, 'Globetrotter123')
-        self.entry_5.insert(tk.END, 'networkdata')'''
+        self.entry_5.insert(tk.END, 'networkdata')
 
         ################################################################################################################
 
@@ -1551,7 +1551,11 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
     aux = cursor.fetchall()
     network_name_id = int(aux[0][0])
 
-    #for i in range(int(wait_time)):
+    if is_task == 'task':
+
+            best_sv = SELECT_BEST_SERVER_LOOP()
+            
+            option = best_sv['host']
 
     while RUNNING_SPEED_TEST:
         
@@ -1561,11 +1565,11 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         
         #if round((b - a), 0) % 60 == 0:
 
-        if is_task == 'task':
+        '''if is_task == 'task':
 
             best_sv = SELECT_BEST_SERVER_LOOP()
             
-            option = best_sv['host']
+            option = best_sv['host']'''
 
         a = time.time()
         

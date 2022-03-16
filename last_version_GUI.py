@@ -1159,20 +1159,16 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
 
     speed_graph_date = datetime.datetime.now().strftime("%d-%m-%Y") + '_' + datetime.datetime.now().strftime("%H-%M-%S")
 
-    #for i in range(int(wait_time)):
+    if is_task == 'task':
+        
+        best_sv = s.get_best_server()
+        option = best_sv['host']
 
     while RUNNING_SPEED_TEST:
         
         if not RUNNING_SPEED_TEST:
             
             break
-        
-        #if round((b - a), 0) % 60 == 0:
-
-        if is_task == 'task':
-        
-            best_sv = s.get_best_server()
-            option = best_sv['host']
 
         a = time.time()
         
