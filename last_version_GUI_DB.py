@@ -1153,7 +1153,7 @@ def PING_TEST(logbox, test_time, direction, is_task):
 
         msLine = result[-1].strip()
     
-        total_ms = msLine[len(msLine) - 4: len(msLine) - 2]
+        total_ms = msLine[len(msLine) - 4 : len(msLine) - 2]
             
         if total_ms == 'os':
             
