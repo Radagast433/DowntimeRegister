@@ -127,12 +127,11 @@ class DBLOGIN():
 
         ################################################## TEST ########################################################
 
-        '''self.entry_1.insert(tk.END, 'localhost')
+        self.entry_1.insert(tk.END, 'localhost')
         self.entry_2.insert(tk.END, '3307')
         self.entry_3.insert(tk.END, 'radagast')
         self.entry_4.insert(tk.END, 'Globetrotter123')
-        self.entry_5.insert(tk.END, 'networkdata')'''
-
+        self.entry_5.insert(tk.END, 'networkdata')
         ################################################################################################################
 
         center(self.parent, self.frame)
@@ -1213,8 +1212,12 @@ def PING_TEST(logbox, test_time, direction, is_task):
         sql = "INSERT INTO ping_data (`PING_DATE`, `PING_TIME`, `PING_ELAPSED_TIME`, `PING_VALUE`, `PING_PACKET_LOSS`, `PING_CUT_DURATION`, `PING_ACC_FAILURE_TIME`, `PING_DIRECTION`, `PING_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         data = (a.strftime("%Y-%m-%d"), b.strftime("%H:%M:%S"), c, d, e, f, g, direction, network_name_id)
 
-        cursor.execute(sql, data)
-        MySQL_db.commit()
+        try:
+
+            cursor.execute(sql, data)
+            MySQL_db.commit()
+
+        except: pass
 
         jitter = 'Null'
         lost_packets = 'Null'
@@ -1403,8 +1406,12 @@ def PACKET_LOSS_TEST(n_packets, logbox, direction):
 
     RUNNING_PACKET_TEST = False
 
-    cursor.execute(sql, data)
-    MySQL_db.commit()
+    try:
+
+        cursor.execute(sql, data)
+        MySQL_db.commit()
+
+    except: pass
     
         
 def PACKETLOSS_TEST_STOP():
@@ -1608,8 +1615,12 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         sql = "INSERT INTO speed_data (`SPEED_DATE`, `SPEED_TIME`, `SPEED_DOWNLOAD`, `SPEED_UPLOAD`, `SPEED_TEST_HOST`, `SPEED_NETWORK_NAME`) VALUES (%s, %s, %s, %s, %s, %s)"
         data = (fecha.strftime("%Y-%m-%d"), hora.strftime("%H:%M:%S"), downspeed, upspeed, option, network_name_id)
 
-        cursor.execute(sql, data)
-        MySQL_db.commit()
+        try:
+
+            cursor.execute(sql, data)
+            MySQL_db.commit()
+
+        except: pass
 
         date_aux = fecha.strftime("%d-%m-%Y")
         time_aux = hora.strftime("%H-%M-%S")
@@ -2219,7 +2230,7 @@ if __name__ == '__main__':
     
     ping_test_interval = 1
 
-    thread_count = multiprocessing.cpu_count()
+    thread_count = int(multiprocessing.cpu_count() // 2)
     #thread_count = 2
     
     #infinite = '9223372036854775807'
