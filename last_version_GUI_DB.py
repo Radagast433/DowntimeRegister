@@ -127,11 +127,11 @@ class DBLOGIN():
 
         ################################################## TEST ########################################################
 
-        self.entry_1.insert(tk.END, 'localhost')
+        '''self.entry_1.insert(tk.END, 'localhost')
         self.entry_2.insert(tk.END, '3307')
         self.entry_3.insert(tk.END, 'radagast')
         self.entry_4.insert(tk.END, 'Globetrotter123')
-        self.entry_5.insert(tk.END, 'networkdata')
+        self.entry_5.insert(tk.END, 'networkdata')'''
 
         ################################################################################################################
 
@@ -2219,8 +2219,8 @@ if __name__ == '__main__':
     
     ping_test_interval = 1
 
-    #thread_count = multiprocessing.cpu_count()
-    thread_count = 2
+    thread_count = multiprocessing.cpu_count()
+    #thread_count = 2
     
     #infinite = '9223372036854775807'
     

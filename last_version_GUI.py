@@ -1211,8 +1211,10 @@ def SPEED_TEST(wait_time, logbox, combobox, is_task):
         b = time.time()
 
         sleep_time = round(60 - (b - a), 2)
+
+        if sleep_time > 0:
         
-        time.sleep(sleep_time)
+            time.sleep(sleep_time)
         
         if run_cont == (int(wait_time) - 1):
             
@@ -1803,8 +1805,8 @@ if __name__ == '__main__':
     
     program_csv_route = 'test_program.csv'
 
-    #thread_count = multiprocessing.cpu_count()
-    thread_count = 4
+    thread_count = multiprocessing.cpu_count()
+    #thread_count = 4
     
     #infinite = '9223372036854775807'
     
