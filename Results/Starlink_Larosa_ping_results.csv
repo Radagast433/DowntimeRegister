@@ -112,6 +112,7 @@ Starlink_Larosa,www.google.com,3600,0,99,36.46,7.91,3600,18
 Starlink_Larosa,www.google.com,5280,0,99,38.63,9.9,5280,37
 Starlink_Larosa,www.google.com,7200,0,99,35.91,8.04,7200,50
 Starlink_Larosa,www.google.com,60,31,85,39.23,8.05,60,0
+<<<<<<< Updated upstream
 Starlink_Larosa,www.google.com,3600,0,99,39.61,9.81,3600,21
 Starlink_Larosa,www.google.com,5400,0,99,38.14,9.84,5400,31
 Starlink_Larosa,www.google.com,7200,0,99,37.7,10.13,7200,52
@@ -127,3 +128,8 @@ Starlink_Larosa,www.google.com,3600,0,99,51.24,10.99,3600,13
 Starlink_Larosa,www.google.com,5400,0,99,65.56,17.29,5400,60
 Starlink_Larosa,www.google.com,3600,0,99,63.24,11.46,3600,18
 Starlink_Larosa,www.google.com,7200,0,99,45.11,8.97,7200,31
+=======
+Starlink_Larosa,www.google.com,3600,0,99,38.29,9.06,3600,37
+Starlink_Larosa,www.google.com,7200,0,99,36.38,8.85,7200,57
+Starlink_Larosa,www.google.com,3600,0,99,37.46,9.35,3600,23
+>>>>>>> Stashed changes
